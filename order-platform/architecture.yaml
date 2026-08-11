@@ -1,7 +1,7 @@
 version: "0.1"
 metadata:
   name: order-platform-benchmark
-  description: Five-component baseline for ArchLoop Phase 1.
+  description: Five-component baseline for ArchSync Phase 1.
   owners:
     - architecture-team
   tags:

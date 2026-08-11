@@ -1,17 +1,17 @@
 {
-  "name": "archloop-benchmark",
+  "name": "archsync-benchmark",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.16.0",
   "scripts": {
-    "validate:model": "archloop validate order-platform/architecture.yaml",
+    "validate:model": "archsync validate order-platform/architecture.yaml",
     "validate:ground-truth": "node scripts/validate-ground-truth.mjs",
     "validate:patches": "node scripts/validate-patches.mjs",
     "verify": "pnpm validate:model && pnpm validate:ground-truth && pnpm validate:patches"
   },
   "dependencies": {
-    "@archloop/core": "git+https://github.com/Little-Boy-s-ArchSync/archloop-core.git",
+    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git",
     "yaml": "^2.8.1"
   }
 }

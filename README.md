@@ -1,6 +1,6 @@
-# ArchLoop Benchmark
+# ArchSync Benchmark
 
-Ground-truth datasets and reproducible architecture-change scenarios for ArchLoop.
+Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
 **Phase 1 status:** complete. `ground-truth.json` is the canonical benchmark manifest.
 
@@ -23,4 +23,4 @@ pnpm install --frozen-lockfile
 pnpm verify
 ```
 
-Verification checks the Architecture Model through `@archloop/core`, validates the ground-truth distribution and confirms that all ten patches apply to the baseline without `--recount` or fuzzy repair.
+Verification checks the Architecture Model through `@archsync/core`, validates the ground-truth distribution and confirms that all ten patches apply to the baseline without `--recount` or fuzzy repair.
