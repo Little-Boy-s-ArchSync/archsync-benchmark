@@ -4,16 +4,21 @@ import { parse } from "yaml";
 
 const repositoryRoot = new URL("..", import.meta.url);
 const groundTruth = parse(
-  await readFile(new URL("../order-platform/ground-truth.yaml", import.meta.url), "utf8"),
+  await readFile(new URL("../order-platform/ground-truth.json", import.meta.url), "utf8"),
 );
 
 for (const scenario of groundTruth.cases) {
   const patchPath = `order-platform/${scenario.patch}`;
   const patchSource = await readFile(new URL(`../${patchPath}`, import.meta.url), "utf8");
-  for (const changedFile of scenario.changed_files) {
-    if (!patchSource.includes(`b/${changedFile}`)) {
-      throw new Error(`${scenario.id}: patch does not mention ${changedFile}`);
-    }
+  const patchFiles = [...patchSource.matchAll(/^\+\+\+ b\/(.+)$/gm)]
+    .map((match) => match[1])
+    .sort();
+  const declaredFiles = [...scenario.changed_files].sort();
+  if (JSON.stringify(patchFiles) !== JSON.stringify(declaredFiles)) {
+    throw new Error(
+      `${scenario.id}: changed_files ${JSON.stringify(declaredFiles)} ` +
+      `do not match patch files ${JSON.stringify(patchFiles)}`,
+    );
   }
 
   const result = spawnSync(
@@ -27,4 +32,3 @@ for (const scenario of groundTruth.cases) {
 }
 
 console.log(`VALID PATCHES (${groundTruth.cases.length}/10 apply cleanly)`);
-
