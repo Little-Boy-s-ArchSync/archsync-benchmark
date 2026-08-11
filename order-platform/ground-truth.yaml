@@ -1,0 +1,228 @@
+version: "0.1"
+benchmark:
+  id: order-platform
+  architecture: architecture.yaml
+  repository: repository
+  stack: TypeScript/Node.js
+  expected_distribution:
+    no-impact: 5
+    violation: 3
+    evolution: 2
+cases:
+  - id: case-01
+    title: Refactor order pricing
+    owner: order-team
+    category: no-impact
+    risk: low
+    description: Internal calculation is simplified without changing dependencies.
+    patch: changes/case-01.patch
+    changed_files:
+      - order-service/src/pricing.ts
+    delta: {}
+    expected:
+      classification: no-impact
+      findings: []
+      approval_required: false
+
+  - id: case-02
+    title: Strengthen order validation
+    owner: order-team
+    category: no-impact
+    risk: low
+    description: Validation behavior changes inside Order Service only.
+    patch: changes/case-02.patch
+    changed_files:
+      - order-service/src/validation.ts
+    delta: {}
+    expected:
+      classification: no-impact
+      findings: []
+      approval_required: false
+
+  - id: case-03
+    title: Format frontend currency
+    owner: frontend-team
+    category: no-impact
+    risk: low
+    description: Presentation-only change in the frontend.
+    patch: changes/case-03.patch
+    changed_files:
+      - frontend/src/format.ts
+    delta: {}
+    expected:
+      classification: no-impact
+      findings: []
+      approval_required: false
+
+  - id: case-04
+    title: Adjust payment retry policy
+    owner: payment-team
+    category: no-impact
+    risk: low
+    description: Retry timing changes inside Payment Service.
+    patch: changes/case-04.patch
+    changed_files:
+      - payment-service/src/retry.ts
+    delta: {}
+    expected:
+      classification: no-impact
+      findings: []
+      approval_required: false
+
+  - id: case-05
+    title: Add gateway request context
+    owner: platform-team
+    category: no-impact
+    risk: low
+    description: Logging context changes without a new runtime dependency.
+    patch: changes/case-05.patch
+    changed_files:
+      - gateway/src/logger.ts
+    delta: {}
+    expected:
+      classification: no-impact
+      findings: []
+      approval_required: false
+
+  - id: case-06
+    title: Frontend bypasses order flow
+    owner: frontend-team
+    category: violation
+    risk: high
+    description: Frontend calls Payment Service directly and violates ARCH-001.
+    patch: changes/case-06.patch
+    changed_files:
+      - frontend/src/app.ts
+    delta:
+      relationships_added:
+        - from: frontend
+          to: payment-service
+          type: http
+    expected:
+      classification: violation
+      findings:
+        - id: ARCH-001
+          kind: deny-rule
+          severity: error
+          from: frontend
+          to: payment-service
+      approval_required: false
+
+  - id: case-07
+    title: Frontend opens a direct database connection
+    owner: frontend-team
+    category: violation
+    risk: high
+    description: Frontend accesses PostgreSQL directly and violates ARCH-002.
+    patch: changes/case-07.patch
+    changed_files:
+      - frontend/src/app.ts
+    delta:
+      relationships_added:
+        - from: frontend
+          to: postgres
+          type: data
+    expected:
+      classification: violation
+      findings:
+        - id: ARCH-002
+          kind: deny-rule
+          severity: critical
+          from: frontend
+          to: postgres
+      approval_required: false
+
+  - id: case-08
+    title: Order Service stops orchestrating payment
+    owner: order-team
+    category: violation
+    risk: high
+    description: Required Order Service to Payment Service relationship is removed.
+    patch: changes/case-08.patch
+    changed_files:
+      - order-service/src/service.ts
+    delta:
+      relationships_removed:
+        - from: order-service
+          to: payment-service
+          type: http
+    expected:
+      classification: violation
+      findings:
+        - id: ARCH-004
+          kind: required-edge
+          severity: error
+          from: order-service
+          to: payment-service
+      approval_required: false
+
+  - id: case-09
+    title: Add Redis order cache
+    owner: order-team
+    category: evolution
+    risk: medium
+    description: A cache is intentionally added to meet the latency goal.
+    patch: changes/case-09.patch
+    changed_files:
+      - order-service/src/service.ts
+      - order-service/src/cache.ts
+    delta:
+      components_added:
+        redis:
+          name: Redis Cache
+          type: cache
+          layer: data
+          technology: Redis
+      relationships_added:
+        - from: order-service
+          to: redis
+          type: data
+    expected:
+      classification: evolution
+      findings:
+        - id: EVOLUTION-001
+          kind: architecture-evolution
+          severity: warning
+          from: order-service
+          to: redis
+      approval_required: true
+
+  - id: case-10
+    title: Introduce asynchronous order processing
+    owner: platform-team
+    category: evolution
+    risk: high
+    description: Order events and a worker introduce a new asynchronous topology.
+    patch: changes/case-10.patch
+    changed_files:
+      - order-service/src/service.ts
+      - order-service/src/events.ts
+      - order-worker/src/worker.ts
+    delta:
+      components_added:
+        order-events:
+          name: Order Event Queue
+          type: queue
+          layer: integration
+          technology: RabbitMQ
+        order-worker:
+          name: Order Worker
+          type: worker
+          layer: domain
+          technology: Node.js
+      relationships_added:
+        - from: order-service
+          to: order-events
+          type: async
+        - from: order-events
+          to: order-worker
+          type: async
+    expected:
+      classification: evolution
+      findings:
+        - id: EVOLUTION-002
+          kind: architecture-evolution
+          severity: warning
+          from: order-service
+          to: order-events
+      approval_required: true

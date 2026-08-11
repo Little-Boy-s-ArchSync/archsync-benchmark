@@ -1,0 +1,19 @@
+diff --git a/order-service/src/service.ts b/order-service/src/service.ts
+--- a/order-service/src/service.ts
++++ b/order-service/src/service.ts
+@@ -1,15 +1,7 @@
+-const paymentServiceUrl = process.env.PAYMENT_SERVICE_URL ?? "http://payment-service:3002";
+-
+ export async function createOrder(order: unknown): Promise<void> {
+   await saveOrder(order);
+-  await fetch(`${paymentServiceUrl}/payments`, {
+-    method: "POST",
+-    headers: { "content-type": "application/json" },
+-    body: JSON.stringify(order),
+-  });
+ }
+ 
+ async function saveOrder(_order: unknown): Promise<void> {
+   // Represents Order Service -> PostgreSQL.
+ }
+-

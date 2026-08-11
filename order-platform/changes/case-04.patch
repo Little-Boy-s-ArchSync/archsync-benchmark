@@ -1,0 +1,7 @@
+diff --git a/payment-service/src/retry.ts b/payment-service/src/retry.ts
+--- a/payment-service/src/retry.ts
++++ b/payment-service/src/retry.ts
+@@ -1,2 +1 @@
+-export const retryDelaysMs = [100, 300, 900] as const;
+-
++export const retryDelaysMs = [100, 250, 500, 1000] as const;

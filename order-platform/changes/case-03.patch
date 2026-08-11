@@ -1,0 +1,11 @@
+diff --git a/frontend/src/format.ts b/frontend/src/format.ts
+--- a/frontend/src/format.ts
++++ b/frontend/src/format.ts
+@@ -1,3 +1,5 @@
+ export function formatCurrency(amount: number): string {
+-  return `$${amount.toFixed(2)}`;
++  return new Intl.NumberFormat("en-US", {
++    style: "currency", currency: "USD",
++  }).format(amount);
+ }
+

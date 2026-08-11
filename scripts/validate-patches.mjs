@@ -1,0 +1,30 @@
+import { spawnSync } from "node:child_process";
+import { readFile } from "node:fs/promises";
+import { parse } from "yaml";
+
+const repositoryRoot = new URL("..", import.meta.url);
+const groundTruth = parse(
+  await readFile(new URL("../order-platform/ground-truth.yaml", import.meta.url), "utf8"),
+);
+
+for (const scenario of groundTruth.cases) {
+  const patchPath = `order-platform/${scenario.patch}`;
+  const patchSource = await readFile(new URL(`../${patchPath}`, import.meta.url), "utf8");
+  for (const changedFile of scenario.changed_files) {
+    if (!patchSource.includes(`b/${changedFile}`)) {
+      throw new Error(`${scenario.id}: patch does not mention ${changedFile}`);
+    }
+  }
+
+  const result = spawnSync(
+    "git",
+    ["apply", "--check", "--directory=order-platform/repository", patchPath],
+    { cwd: repositoryRoot, encoding: "utf8", shell: false },
+  );
+  if (result.status !== 0) {
+    throw new Error(`${scenario.id}: patch does not apply cleanly\n${result.stderr}`);
+  }
+}
+
+console.log(`VALID PATCHES (${groundTruth.cases.length}/10 apply cleanly)`);
+
