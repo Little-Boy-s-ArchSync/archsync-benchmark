@@ -10,8 +10,12 @@ This lab starts with exactly five architectural components:
 
 `ground-truth.json` defines ten labeled changes. Patch files are evidence fixtures for the Phase 2 Code Analyzer and are not applied during Phase 1 validation.
 
+Each case includes an owner, explicit graph delta, acceptance criteria, expected classification/finding and source evidence location. The verifier checks that each evidence location falls inside the corresponding patch hunk.
+
 The expected distribution is:
 
 - 5 no-impact cases
 - 3 architecture violations
 - 2 valid architecture evolutions that require approval
+
+See [`../EVIDENCE.md`](../EVIDENCE.md) for the complete case matrix and reproducibility gates.

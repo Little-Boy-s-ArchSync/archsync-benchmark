@@ -9,6 +9,14 @@
       "no-impact": 5,
       "violation": 3,
       "evolution": 2
+    },
+    "integrity": {
+      "algorithm": "sha256",
+      "architecture_sha256": "9f3d7602d5e0e950a8431d3077f0c34314cd305590d5b247584221d4b8ca745f",
+      "baseline_tree_sha256": "2979bd2b423cdd47ea34d2b0343149875e475f3f6263e6b9e86b752251aeb67a",
+      "baseline_files": 9,
+      "patch_set_sha256": "b69db47a3703dae04815fafa1d00cb8a7db32ca1110948bde6ff61acaa04c069",
+      "patch_files": 10
     }
   },
   "cases": [
@@ -24,9 +32,19 @@
         "order-service/src/pricing.ts"
       ],
       "delta": {},
+      "acceptance_criteria": [
+        "The Expected Architecture Graph remains unchanged and no finding is emitted."
+      ],
       "expected": {
         "classification": "no-impact",
         "findings": [],
+        "evidence": [
+          {
+            "file": "order-service/src/pricing.ts",
+            "line": 2,
+            "kind": "source-location"
+          }
+        ],
         "approval_required": false
       }
     },
@@ -42,9 +60,19 @@
         "order-service/src/validation.ts"
       ],
       "delta": {},
+      "acceptance_criteria": [
+        "The validation change remains internal to Order Service and produces no topology delta."
+      ],
       "expected": {
         "classification": "no-impact",
         "findings": [],
+        "evidence": [
+          {
+            "file": "order-service/src/validation.ts",
+            "line": 2,
+            "kind": "source-location"
+          }
+        ],
         "approval_required": false
       }
     },
@@ -60,9 +88,19 @@
         "frontend/src/format.ts"
       ],
       "delta": {},
+      "acceptance_criteria": [
+        "The presentation-only change produces no component or relationship change."
+      ],
       "expected": {
         "classification": "no-impact",
         "findings": [],
+        "evidence": [
+          {
+            "file": "frontend/src/format.ts",
+            "line": 2,
+            "kind": "source-location"
+          }
+        ],
         "approval_required": false
       }
     },
@@ -78,9 +116,19 @@
         "payment-service/src/retry.ts"
       ],
       "delta": {},
+      "acceptance_criteria": [
+        "The retry policy remains inside Payment Service and produces no topology delta."
+      ],
       "expected": {
         "classification": "no-impact",
         "findings": [],
+        "evidence": [
+          {
+            "file": "payment-service/src/retry.ts",
+            "line": 1,
+            "kind": "source-location"
+          }
+        ],
         "approval_required": false
       }
     },
@@ -96,9 +144,19 @@
         "gateway/src/logger.ts"
       ],
       "delta": {},
+      "acceptance_criteria": [
+        "The logging change introduces no runtime dependency between architecture components."
+      ],
       "expected": {
         "classification": "no-impact",
         "findings": [],
+        "evidence": [
+          {
+            "file": "gateway/src/logger.ts",
+            "line": 1,
+            "kind": "source-location"
+          }
+        ],
         "approval_required": false
       }
     },
@@ -122,6 +180,9 @@
           }
         ]
       },
+      "acceptance_criteria": [
+        "ARCH-001 is reported at error severity for frontend -> payment-service."
+      ],
       "expected": {
         "classification": "violation",
         "findings": [
@@ -131,6 +192,13 @@
             "severity": "error",
             "from": "frontend",
             "to": "payment-service"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "frontend/src/app.ts",
+            "line": 2,
+            "kind": "source-location"
           }
         ],
         "approval_required": false
@@ -156,6 +224,9 @@
           }
         ]
       },
+      "acceptance_criteria": [
+        "ARCH-002 is reported at critical severity for frontend -> postgres."
+      ],
       "expected": {
         "classification": "violation",
         "findings": [
@@ -165,6 +236,13 @@
             "severity": "critical",
             "from": "frontend",
             "to": "postgres"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "frontend/src/app.ts",
+            "line": 1,
+            "kind": "source-location"
           }
         ],
         "approval_required": false
@@ -190,6 +268,9 @@
           }
         ]
       },
+      "acceptance_criteria": [
+        "ARCH-004 is reported when the required order-service -> payment-service edge is removed."
+      ],
       "expected": {
         "classification": "violation",
         "findings": [
@@ -199,6 +280,13 @@
             "severity": "error",
             "from": "order-service",
             "to": "payment-service"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "order-service/src/service.ts",
+            "line": 1,
+            "kind": "source-location"
           }
         ],
         "approval_required": false
@@ -233,6 +321,9 @@
           }
         ]
       },
+      "acceptance_criteria": [
+        "Redis and order-service -> redis appear as an architecture evolution that requires approval."
+      ],
       "expected": {
         "classification": "evolution",
         "findings": [
@@ -242,6 +333,13 @@
             "severity": "warning",
             "from": "order-service",
             "to": "redis"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "order-service/src/cache.ts",
+            "line": 1,
+            "kind": "source-location"
           }
         ],
         "approval_required": true
@@ -288,6 +386,9 @@
           }
         ]
       },
+      "acceptance_criteria": [
+        "The queue, worker and asynchronous edges appear as an evolution that requires approval."
+      ],
       "expected": {
         "classification": "evolution",
         "findings": [
@@ -297,6 +398,13 @@
             "severity": "warning",
             "from": "order-service",
             "to": "order-events"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "order-service/src/service.ts",
+            "line": 1,
+            "kind": "source-location"
           }
         ],
         "approval_required": true

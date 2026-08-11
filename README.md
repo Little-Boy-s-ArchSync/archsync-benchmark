@@ -24,3 +24,10 @@ pnpm verify
 ```
 
 Verification checks the Architecture Model through `@archsync/core`, validates the ground-truth distribution and confirms that all ten patches apply to the baseline without `--recount` or fuzzy repair.
+
+Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
+
+```bash
+pnpm integrity:update
+pnpm verify
+```
