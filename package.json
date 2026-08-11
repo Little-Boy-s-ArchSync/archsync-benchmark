@@ -15,6 +15,6 @@
     "verify": "pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm integrity:verify && pnpm test"
   },
   "dependencies": {
-    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#6689197da6d5572b27442e1db4cc158ee0772198"
+    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#c09df4a5ea20c7c279cbfe991f7c1b87513bcdc9"
   }
 }
