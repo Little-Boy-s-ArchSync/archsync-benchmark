@@ -33,6 +33,18 @@ VALID PHASE 2 BENCHMARK EVIDENCE (10/10 cases, exact source evidence)
 
 The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-edge precision/recall/F1, classification accuracy, exact file/line evidence and determinism for every case.
 
+## Demo from source code
+
+```bash
+# Forbidden frontend -> payment-service call with ARCH-001 and file/line evidence
+pnpm demo:case06
+
+# Redis topology evolution requiring review
+pnpm demo:case09
+```
+
+Each command copies the clean baseline to a temporary directory, applies one real patch, scans the resulting TypeScript source and checks the predicted classification against ground truth. The temporary directory is removed afterward.
+
 Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
 
 ```bash
