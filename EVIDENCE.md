@@ -40,14 +40,16 @@ The gate proves:
 - mutation tests reject corrupted ground truth.
 - Guardian reconstructs the five-node/five-edge baseline from TypeScript source.
 - all ten patches are analyzed independently through the pinned Guardian package;
-- full-graph and changed-edge precision, recall and F1 are recorded;
+- full-graph and changed-graph node/edge precision, recall and F1 are recorded;
 - classification, rule ID, evidence file, exact evidence line and determinism gates are enforced.
 
 ## Phase 2 measured result
 
 The canonical result is [`evidence/phase-2-results.json`](evidence/phase-2-results.json):
 
+- full-graph node precision/recall/F1: `1.000 / 1.000 / 1.000`;
 - full-graph edge precision/recall/F1: `1.000 / 1.000 / 1.000`;
+- changed-node precision/recall/F1: `1.000 / 1.000 / 1.000`;
 - changed-edge precision/recall/F1: `1.000 / 1.000 / 1.000`;
 - classification accuracy: `1.000`;
 - expected evidence file and exact-line accuracy: `1.000 / 1.000`;

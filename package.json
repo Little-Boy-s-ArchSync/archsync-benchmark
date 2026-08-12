@@ -20,7 +20,7 @@
     "verify": "pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm integrity:verify && pnpm test && pnpm phase2:verify"
   },
   "dependencies": {
-    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6",
-    "@archsync/guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8d806c9836b76ba701f629f0e6fe63ba5f3f8a67"
+    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#304f4ac48137e011ec5f7fd85071a89502c02ada",
+    "@archsync/guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910"
   }
 }

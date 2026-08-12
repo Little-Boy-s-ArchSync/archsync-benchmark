@@ -12,8 +12,12 @@ const packageJson = JSON.parse(await readFile(new URL("package.json", root), "ut
 const result = await evaluatePhase2Benchmark(fileURLToPath(manifest));
 assert.equal(result.valid, true, result.issues.join("\n"));
 assert.equal(result.cases.length, 10);
+assert.ok(result.metrics.full_graph_nodes.precision >= 0.85);
+assert.ok(result.metrics.full_graph_nodes.recall >= 0.85);
 assert.ok(result.metrics.full_graph_edges.precision >= 0.85);
 assert.ok(result.metrics.full_graph_edges.recall >= 0.85);
+assert.ok(result.metrics.changed_nodes.precision >= 0.85);
+assert.ok(result.metrics.changed_nodes.recall >= 0.85);
 assert.ok(result.metrics.changed_edges.precision >= 0.85);
 assert.ok(result.metrics.changed_edges.recall >= 0.85);
 assert.equal(result.metrics.classification_accuracy, 1);

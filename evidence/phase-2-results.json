@@ -1,7 +1,7 @@
 {
   "phase": 2,
   "release": "v0.1",
-  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8d806c9836b76ba701f629f0e6fe63ba5f3f8a67",
+  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910",
   "result": {
     "contract_version": "0.1",
     "benchmark": "order-platform",
@@ -14,8 +14,24 @@
       "classification": "no-impact"
     },
     "metrics": {
+      "full_graph_nodes": {
+        "true_positive": 53,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      },
       "full_graph_edges": {
         "true_positive": 54,
+        "false_positive": 0,
+        "false_negative": 0,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1
+      },
+      "changed_nodes": {
+        "true_positive": 3,
         "false_positive": 0,
         "false_negative": 0,
         "precision": 1,
@@ -45,6 +61,10 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [],
         "actual_added_edges": [],
         "expected_removed_edges": [],
@@ -68,6 +88,10 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [],
         "actual_added_edges": [],
         "expected_removed_edges": [],
@@ -91,6 +115,10 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [],
         "actual_added_edges": [],
         "expected_removed_edges": [],
@@ -114,6 +142,10 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [],
         "actual_added_edges": [],
         "expected_removed_edges": [],
@@ -137,6 +169,10 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [],
         "actual_added_edges": [],
         "expected_removed_edges": [],
@@ -164,6 +200,10 @@
           "ARCH-001"
         ],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [
           "frontend|http|payment-service"
         ],
@@ -205,6 +245,10 @@
           "ARCH-002"
         ],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [
           "frontend|data|postgres"
         ],
@@ -246,6 +290,10 @@
           "ARCH-004"
         ],
         "rule_match": true,
+        "expected_added_nodes": [],
+        "actual_added_nodes": [],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [],
         "actual_added_edges": [],
         "expected_removed_edges": [
@@ -283,6 +331,14 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [
+          "redis"
+        ],
+        "actual_added_nodes": [
+          "redis"
+        ],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [
           "order-service|data|redis"
         ],
@@ -329,6 +385,16 @@
         "expected_rule_ids": [],
         "actual_rule_ids": [],
         "rule_match": true,
+        "expected_added_nodes": [
+          "order-events",
+          "order-worker"
+        ],
+        "actual_added_nodes": [
+          "order-events",
+          "order-worker"
+        ],
+        "expected_removed_nodes": [],
+        "actual_removed_nodes": [],
         "expected_added_edges": [
           "order-events|async|order-worker",
           "order-service|async|order-events"

@@ -31,7 +31,7 @@ Expected Phase 2 result:
 VALID PHASE 2 BENCHMARK EVIDENCE (10/10 cases, exact source evidence)
 ```
 
-The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-edge precision/recall/F1, classification accuracy, exact file/line evidence and determinism for every case.
+The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification accuracy, exact file/line evidence and determinism for every case.
 
 ## Demo from source code
 
