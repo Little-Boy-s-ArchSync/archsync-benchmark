@@ -1,9 +1,15 @@
 diff --git a/order-service/src/service.ts b/order-service/src/service.ts
 --- a/order-service/src/service.ts
 +++ b/order-service/src/service.ts
-@@ -1,7 +1,11 @@
+@@ -1,5 +1,7 @@
 +import { getCachedOrder, setCachedOrder } from "./cache.js";
 +
+ import { Client } from "pg";
+ 
+ const database = new Client({
+   connectionString: process.env.DATABASE_URL ?? "postgres://postgres:5432/orders",
+ });
+@@ -6,7 +8,9 @@ const database = new Client({
  const paymentServiceUrl = process.env.PAYMENT_SERVICE_URL ?? "http://payment-service:3002";
  
  export async function createOrder(order: unknown): Promise<void> {
@@ -13,19 +19,16 @@ diff --git a/order-service/src/service.ts b/order-service/src/service.ts
    await fetch(`${paymentServiceUrl}/payments`, {
      method: "POST",
      headers: { "content-type": "application/json" },
-@@ -12,4 +16,3 @@ export async function createOrder(order: unknown): Promise<void> {
- async function saveOrder(_order: unknown): Promise<void> {
-   // Represents Order Service -> PostgreSQL.
- }
--
 diff --git a/order-service/src/cache.ts b/order-service/src/cache.ts
 new file mode 100644
 --- /dev/null
 +++ b/order-service/src/cache.ts
-@@ -0,0 +1,11 @@
+@@ -0,0 +1,13 @@
 +import { createClient } from "redis";
 +
-+const redis = createClient({ url: process.env.REDIS_URL });
++const redis = createClient({
++  url: process.env.REDIS_URL ?? "redis://redis:6379",
++});
 +
 +export async function getCachedOrder(order: unknown): Promise<boolean> {
 +  return (await redis.get(JSON.stringify(order))) !== null;

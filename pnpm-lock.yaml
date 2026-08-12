@@ -11,6 +11,9 @@ importers:
       '@archsync/core':
         specifier: git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6
         version: git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6
+      '@archsync/guardian':
+        specifier: git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea
+        version: git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea(@archsync/core@git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6)
 
 packages:
 
@@ -19,6 +22,14 @@ packages:
     version: 0.1.0
     engines: {node: '>=22'}
     hasBin: true
+
+  '@archsync/guardian@git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea':
+    resolution: {commit: 9d218040f9fefecc5786d28a63cc996f59c375ea, repo: https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git, type: git}
+    version: 0.1.0
+    engines: {node: '>=22'}
+    hasBin: true
+    peerDependencies:
+      '@archsync/core': ^0.1.0
 
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
@@ -36,6 +47,11 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
 
+  typescript@5.9.3:
+    resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
+    engines: {node: '>=14.17'}
+    hasBin: true
+
   yaml@2.9.0:
     resolution: {integrity: sha512-2AvhNX3mb8zd6Zy7INTtSpl1F15HW6Wnqj0srWlkKLcpYl/gMIMJiyuGq2KeI2YFxUPjdlB+3Lc10seMLtL4cA==}
     engines: {node: '>= 14.6'}
@@ -47,6 +63,11 @@ snapshots:
     dependencies:
       ajv: 8.20.0
       yaml: 2.9.0
+
+  '@archsync/guardian@git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea(@archsync/core@git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6)':
+    dependencies:
+      '@archsync/core': git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6
+      typescript: 5.9.3
 
   ajv@8.20.0:
     dependencies:
@@ -62,5 +83,7 @@ snapshots:
   json-schema-traverse@1.0.0: {}
 
   require-from-string@2.0.2: {}
+
+  typescript@5.9.3: {}
 
   yaml@2.9.0: {}

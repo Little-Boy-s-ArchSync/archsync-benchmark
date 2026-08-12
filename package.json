@@ -12,9 +12,13 @@
     "validate:patches": "node scripts/validate-patches.mjs",
     "integrity:update": "node scripts/benchmark-integrity.mjs --write",
     "integrity:verify": "node scripts/benchmark-integrity.mjs",
-    "verify": "pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm integrity:verify && pnpm test"
+    "phase2:update": "node scripts/phase2-evidence.mjs --write",
+    "phase2:verify": "node scripts/phase2-evidence.mjs",
+    "phase2:snapshot": "node scripts/validate-phase2-snapshot.mjs",
+    "verify": "pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm integrity:verify && pnpm test && pnpm phase2:verify"
   },
   "dependencies": {
-    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6"
+    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6",
+    "@archsync/guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea"
   }
 }

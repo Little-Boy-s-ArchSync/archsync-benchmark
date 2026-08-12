@@ -2,13 +2,13 @@
 
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
-**Phase 1 status:** complete. `ground-truth.json` is the canonical benchmark manifest.
+**Phase 1 status:** complete. **Phase 2 analyzer gate:** active and reproducible. `ground-truth.json` is the canonical benchmark manifest.
 
 ## Order Platform lab
 
 The baseline has exactly five components: frontend, gateway, order-service, payment-service and postgres.
 
-`order-platform/ground-truth.json` defines ten labeled changes. Every patch must apply independently to the clean baseline repository and is reserved as evidence for the Phase 2 Code Analyzer.
+`order-platform/ground-truth.json` defines ten labeled changes. Every patch is applied independently to the clean baseline and analyzed by the pinned `@archsync/guardian` package.
 
 The expected distribution is:
 
@@ -23,11 +23,20 @@ pnpm install --frozen-lockfile
 pnpm verify
 ```
 
-Verification checks the Architecture Model through `@archsync/core`, validates the ground-truth distribution and confirms that all ten patches apply to the baseline without `--recount` or fuzzy repair.
+Verification checks the Architecture Model through `@archsync/core`, validates the ground-truth distribution, confirms that all ten patches apply cleanly and reruns the Guardian analyzer against all cases.
+
+Expected Phase 2 result:
+
+```text
+VALID PHASE 2 BENCHMARK EVIDENCE (10/10 cases, exact source evidence)
+```
+
+The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-edge precision/recall/F1, classification accuracy, exact file/line evidence and determinism for every case.
 
 Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
 
 ```bash
 pnpm integrity:update
+pnpm phase2:update
 pnpm verify
 ```

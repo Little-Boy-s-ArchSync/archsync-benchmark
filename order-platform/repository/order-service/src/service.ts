@@ -1,3 +1,8 @@
+import { Client } from "pg";
+
+const database = new Client({
+  connectionString: process.env.DATABASE_URL ?? "postgres://postgres:5432/orders",
+});
 const paymentServiceUrl = process.env.PAYMENT_SERVICE_URL ?? "http://payment-service:3002";
 
 export async function createOrder(order: unknown): Promise<void> {
@@ -10,6 +15,5 @@ export async function createOrder(order: unknown): Promise<void> {
 }
 
 async function saveOrder(_order: unknown): Promise<void> {
-  // Represents Order Service -> PostgreSQL.
+  await database.query("insert into orders(payload) values ($1)", [JSON.stringify(_order)]);
 }
-

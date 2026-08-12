@@ -25,3 +25,5 @@ jobs:
         run: node scripts/validate-patches.mjs
       - name: Verify fixture integrity hashes
         run: node scripts/benchmark-integrity.mjs
+      - name: Verify committed Phase 2 result snapshot
+        run: node scripts/validate-phase2-snapshot.mjs
