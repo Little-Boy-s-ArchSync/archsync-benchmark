@@ -2,7 +2,7 @@
 
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
-**Phase 1 status:** complete. **Phase 2 analyzer gate:** active and reproducible. `ground-truth.json` is the canonical benchmark manifest.
+**Phase 1 status:** complete. **Phase 2 analyzer gate:** complete and reproducible. `ground-truth.json` is the canonical benchmark manifest.
 
 ## Order Platform lab
 
