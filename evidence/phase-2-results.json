@@ -1,7 +1,7 @@
 {
   "phase": 2,
   "release": "v0.1",
-  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea",
+  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8d806c9836b76ba701f629f0e6fe63ba5f3f8a67",
   "result": {
     "contract_version": "0.1",
     "benchmark": "order-platform",

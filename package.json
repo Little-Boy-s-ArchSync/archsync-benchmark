@@ -21,6 +21,6 @@
   },
   "dependencies": {
     "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#f2ffb1ae72f02822b2f8d39c5c6a8d5c0acf98c6",
-    "@archsync/guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#9d218040f9fefecc5786d28a63cc996f59c375ea"
+    "@archsync/guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8d806c9836b76ba701f629f0e6fe63ba5f3f8a67"
   }
 }
