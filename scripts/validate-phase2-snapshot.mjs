@@ -1,12 +1,46 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 
 const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
-const groundTruth = JSON.parse(await readFile(new URL("../order-platform/ground-truth.json", import.meta.url), "utf8"));
+const groundTruthSource = await readFile(new URL("../order-platform/ground-truth.json", import.meta.url), "utf8");
+const groundTruth = JSON.parse(groundTruthSource);
 const evidence = JSON.parse(await readFile(new URL("../evidence/phase-2-results.json", import.meta.url), "utf8"));
 const result = evidence.result;
+const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 
 assert.equal(evidence.guardian_dependency, packageJson.dependencies["@archsync/guardian"]);
+assert.deepEqual(evidence.dependencies, {
+  core: packageJson.dependencies["@archsync/core"],
+  guardian: packageJson.dependencies["@archsync/guardian"],
+});
+assert.deepEqual(evidence.evaluation_protocol, {
+  patch_isolation: "Each patch is applied independently to a fresh copy of the unchanged baseline.",
+  baseline_analyses: 2,
+  analyses_per_case: 2,
+  total_analyzer_executions: 22,
+  classification_cases: 10,
+  violation_rule_cases: 3,
+  source_evidence_cases: 5,
+});
+assert.deepEqual(evidence.provenance, {
+  manifest_sha256: sha256(groundTruthSource),
+  architecture_sha256: groundTruth.benchmark.integrity.architecture_sha256,
+  baseline_tree_sha256: groundTruth.benchmark.integrity.baseline_tree_sha256,
+  patch_set_sha256: groundTruth.benchmark.integrity.patch_set_sha256,
+  result_sha256: sha256(JSON.stringify(result)),
+});
+assert.deepEqual(evidence.outcome_counts, {
+  classification_matches: 10,
+  classification_cases: 10,
+  violation_rule_set_matches: 3,
+  violation_rule_cases: 3,
+  evidence_file_matches: 5,
+  evidence_exact_line_matches: 5,
+  source_evidence_cases: 5,
+  deterministic_cases: 10,
+  deterministic_cases_total: 10,
+});
 assert.equal(result.valid, true);
 assert.deepEqual(result.cases.map(({ id }) => id), groundTruth.cases.map(({ id }) => id));
 assert.ok(result.metrics.full_graph_nodes.precision >= 0.85);

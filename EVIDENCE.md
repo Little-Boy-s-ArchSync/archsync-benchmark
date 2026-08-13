@@ -52,8 +52,15 @@ The canonical result is [`evidence/phase-2-results.json`](evidence/phase-2-resul
 - changed-node precision/recall/F1: `1.000 / 1.000 / 1.000`;
 - changed-edge precision/recall/F1: `1.000 / 1.000 / 1.000`;
 - classification accuracy: `1.000`;
-- expected evidence file and exact-line accuracy: `1.000 / 1.000`;
+- classification agreement: `10/10` cases;
+- exact violation rule-set agreement: `3/3` violation cases;
+- expected evidence file and exact-line agreement: `5/5` finding-bearing cases for each measure;
 - deterministic replay: `10/10` cases.
+
+The evidence artifact records the denominators above rather than presenting a bare
+`1.000`. It also binds the result to the exact manifest, architecture, baseline tree,
+patch set, pinned Core and Guardian revisions, and the two executions performed for
+the baseline and for every case (`22` analyzer executions in one evaluation).
 
 Regenerate and verify after an intentional analyzer, fixture or ground-truth change:
 

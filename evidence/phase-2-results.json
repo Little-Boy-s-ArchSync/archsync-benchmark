@@ -1,7 +1,38 @@
 {
   "phase": 2,
   "release": "v0.1",
+  "dependencies": {
+    "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#304f4ac48137e011ec5f7fd85071a89502c02ada",
+    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910"
+  },
   "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910",
+  "evaluation_protocol": {
+    "patch_isolation": "Each patch is applied independently to a fresh copy of the unchanged baseline.",
+    "baseline_analyses": 2,
+    "analyses_per_case": 2,
+    "total_analyzer_executions": 22,
+    "classification_cases": 10,
+    "violation_rule_cases": 3,
+    "source_evidence_cases": 5
+  },
+  "provenance": {
+    "manifest_sha256": "807c4b25c896276096478ed798bd1519beab572d3f6f85de42b2274dd1896e7e",
+    "architecture_sha256": "9f3d7602d5e0e950a8431d3077f0c34314cd305590d5b247584221d4b8ca745f",
+    "baseline_tree_sha256": "4f4d4045682401c93085c2c4afa3672c81a6fae5745bc867dcb100014b088e12",
+    "patch_set_sha256": "a4d216d807523aae03b4bd452644a2f1ee787804eb296ae0429fa1ca7adde768",
+    "result_sha256": "381564ef31dc5f1b26f27a91251121d47636d4c95e35157ce6f9953d9856a86c"
+  },
+  "outcome_counts": {
+    "classification_matches": 10,
+    "classification_cases": 10,
+    "violation_rule_set_matches": 3,
+    "violation_rule_cases": 3,
+    "evidence_file_matches": 5,
+    "evidence_exact_line_matches": 5,
+    "source_evidence_cases": 5,
+    "deterministic_cases": 10,
+    "deterministic_cases_total": 10
+  },
   "result": {
     "contract_version": "0.1",
     "benchmark": "order-platform",
