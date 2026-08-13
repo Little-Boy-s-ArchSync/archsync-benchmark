@@ -38,6 +38,7 @@ The gate proves:
 - all 10 patches apply independently to the clean baseline;
 - SHA-256 integrity binds the model, 9-file baseline tree and 10-file patch set;
 - mutation tests reject corrupted ground truth.
+- the vendored Core and Guardian package bytes match their declared SHA-256 hashes and source commit pins;
 - Guardian reconstructs the five-node/five-edge baseline from TypeScript source.
 - all ten patches are analyzed independently through the pinned Guardian package;
 - full-graph and changed-graph node/edge precision, recall and F1 are recorded;
@@ -69,4 +70,4 @@ pnpm phase2:update
 pnpm verify
 ```
 
-The self-contained evidence subset (`node --test`, ground-truth, patch, integrity and committed Phase 2 snapshot verification) also runs in [GitHub Actions](.github/workflows/evidence.yml) without credentials to another private repository. Rerunning the analyzer itself requires authenticated access to the pinned private Core and Guardian repositories and is enforced by local/clean-clone `pnpm verify`.
+The complete gate, including all `22` analyzer executions, runs from clean checkouts on both `ubuntu-latest` and `windows-latest` in [GitHub Actions](.github/workflows/evidence.yml). The workflow installs SHA-256-verified package artifacts built from the pinned private Core and Guardian revisions, so it requires no cross-repository credentials.

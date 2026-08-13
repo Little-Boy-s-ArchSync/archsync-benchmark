@@ -9,21 +9,31 @@ permissions:
   contents: read
 
 jobs:
-  verify-evidence:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
+  verify:
+    name: full benchmark (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.16.0
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Test ground-truth invariants
-        run: node --test
-      - name: Validate ground truth
-        run: node scripts/validate-ground-truth.mjs
-      - name: Prove all patches apply cleanly
-        run: node scripts/validate-patches.mjs
-      - name: Verify fixture integrity hashes
-        run: node scripts/benchmark-integrity.mjs
-      - name: Verify committed Phase 2 result snapshot
-        run: node scripts/validate-phase2-snapshot.mjs
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm verify
+      - name: Ensure committed evidence is current
+        run: git diff --exit-code -- evidence
+      - name: Upload Phase 2 benchmark evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase-2-benchmark-${{ matrix.os }}
+          if-no-files-found: error
+          path: evidence/phase-2-results.json

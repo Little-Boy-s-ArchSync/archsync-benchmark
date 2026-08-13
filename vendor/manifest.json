@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "artifacts": {
+    "core": {
+      "package": "@archsync/core",
+      "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-core.git",
+      "source_commit": "304f4ac48137e011ec5f7fd85071a89502c02ada",
+      "file": "vendor/archsync-core-0.1.0-304f4ac.tgz",
+      "sha256": "ea2727f9d5646b85385b67f60b83d5eed8ee39af590667722e197873b23d5a2e"
+    },
+    "guardian": {
+      "package": "@archsync/guardian",
+      "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
+      "source_commit": "e1cd989568568d88849b80254dda73403f3aa910",
+      "file": "vendor/archsync-guardian-0.1.0-e1cd989.tgz",
+      "sha256": "2fd7a085e33859d9155a68660aa4a1a33d4c4a1797f9212fafef54f640382f9f"
+    }
+  }
+}

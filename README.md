@@ -23,7 +23,7 @@ pnpm install --frozen-lockfile
 pnpm verify
 ```
 
-Verification checks the Architecture Model through `@archsync/core`, validates the ground-truth distribution, confirms that all ten patches apply cleanly and reruns the Guardian analyzer against all cases.
+Verification checks the SHA-256 of the vendored packages built from the pinned Core and Guardian revisions, validates the Architecture Model and ground-truth distribution, confirms that all ten patches apply cleanly and reruns the Guardian analyzer against all cases. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
 Expected Phase 2 result:
 
@@ -31,7 +31,7 @@ Expected Phase 2 result:
 VALID PHASE 2 BENCHMARK EVIDENCE (10/10 cases, exact source evidence)
 ```
 
-The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification agreement (`10/10`), violation rule-set agreement (`3/3`), exact file/line evidence agreement (`5/5` finding-bearing cases), and deterministic replay (`10/10`). SHA-256 provenance binds the result to the exact manifest, model, baseline tree and patch set.
+The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification agreement (`10/10`), violation rule-set agreement (`3/3`), exact file/line evidence agreement (`5/5` finding-bearing cases), and deterministic replay (`10/10`). SHA-256 provenance binds the result to the exact manifest, model, baseline tree, patch set and runtime package artifacts. GitHub Actions reruns the complete gate on both `ubuntu-latest` and `windows-latest`.
 
 ## Demo from source code
 

@@ -1,19 +1,31 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
+import { validateVendorArtifacts } from "./validate-vendor-artifacts.mjs";
 
-const packageJson = JSON.parse(await readFile(new URL("../package.json", import.meta.url), "utf8"));
+const root = new URL("../", import.meta.url);
+const vendorManifest = await validateVendorArtifacts(root);
+const sourcePin = ({ source_repository, source_commit }) =>
+  `git+${source_repository}#${source_commit}`;
+const dependencyPins = Object.fromEntries(
+  Object.entries(vendorManifest.artifacts).map(([name, artifact]) => [name, sourcePin(artifact)]),
+);
+const runtimeArtifacts = Object.fromEntries(
+  Object.entries(vendorManifest.artifacts).map(([name, artifact]) => [name, {
+    package: artifact.package,
+    file: artifact.file,
+    sha256: artifact.sha256,
+  }]),
+);
 const groundTruthSource = await readFile(new URL("../order-platform/ground-truth.json", import.meta.url), "utf8");
 const groundTruth = JSON.parse(groundTruthSource);
 const evidence = JSON.parse(await readFile(new URL("../evidence/phase-2-results.json", import.meta.url), "utf8"));
 const result = evidence.result;
 const sha256 = (value) => createHash("sha256").update(value).digest("hex");
 
-assert.equal(evidence.guardian_dependency, packageJson.dependencies["@archsync/guardian"]);
-assert.deepEqual(evidence.dependencies, {
-  core: packageJson.dependencies["@archsync/core"],
-  guardian: packageJson.dependencies["@archsync/guardian"],
-});
+assert.equal(evidence.guardian_dependency, dependencyPins.guardian);
+assert.deepEqual(evidence.dependencies, dependencyPins);
+assert.deepEqual(evidence.runtime_artifacts, runtimeArtifacts);
 assert.deepEqual(evidence.evaluation_protocol, {
   patch_isolation: "Each patch is applied independently to a fresh copy of the unchanged baseline.",
   baseline_analyses: 2,

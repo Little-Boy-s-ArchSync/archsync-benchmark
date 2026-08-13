@@ -6,6 +6,18 @@
     "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910"
   },
   "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910",
+  "runtime_artifacts": {
+    "core": {
+      "package": "@archsync/core",
+      "file": "vendor/archsync-core-0.1.0-304f4ac.tgz",
+      "sha256": "ea2727f9d5646b85385b67f60b83d5eed8ee39af590667722e197873b23d5a2e"
+    },
+    "guardian": {
+      "package": "@archsync/guardian",
+      "file": "vendor/archsync-guardian-0.1.0-e1cd989.tgz",
+      "sha256": "2fd7a085e33859d9155a68660aa4a1a33d4c4a1797f9212fafef54f640382f9f"
+    }
+  },
   "evaluation_protocol": {
     "patch_isolation": "Each patch is applied independently to a fresh copy of the unchanged baseline.",
     "baseline_analyses": 2,

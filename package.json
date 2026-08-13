@@ -8,6 +8,7 @@
     "test": "node --test",
     "validate:model": "archsync validate order-platform/architecture.yaml",
     "validate:benchmark": "archsync benchmark order-platform/ground-truth.json",
+    "validate:vendor": "node scripts/validate-vendor-artifacts.mjs",
     "validate:ground-truth": "node scripts/validate-ground-truth.mjs",
     "validate:patches": "node scripts/validate-patches.mjs",
     "integrity:update": "node scripts/benchmark-integrity.mjs --write",
@@ -17,10 +18,10 @@
     "phase2:snapshot": "node scripts/validate-phase2-snapshot.mjs",
     "demo:case06": "node scripts/demo-case.mjs case-06",
     "demo:case09": "node scripts/demo-case.mjs case-09",
-    "verify": "pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm integrity:verify && pnpm test && pnpm phase2:verify"
+    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm integrity:verify && pnpm test && pnpm phase2:verify"
   },
   "dependencies": {
-    "@archsync/core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#304f4ac48137e011ec5f7fd85071a89502c02ada",
-    "@archsync/guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#e1cd989568568d88849b80254dda73403f3aa910"
+    "@archsync/core": "file:vendor/archsync-core-0.1.0-304f4ac.tgz",
+    "@archsync/guardian": "file:vendor/archsync-guardian-0.1.0-e1cd989.tgz"
   }
 }

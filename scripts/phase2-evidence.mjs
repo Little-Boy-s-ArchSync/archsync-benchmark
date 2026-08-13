@@ -4,12 +4,25 @@ import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 
 import { evaluatePhase2Benchmark } from "@archsync/guardian";
+import { validateVendorArtifacts } from "./validate-vendor-artifacts.mjs";
 
 const root = new URL("..", import.meta.url);
 const manifest = new URL("../order-platform/ground-truth.json", import.meta.url);
 const evidencePath = new URL("../evidence/phase-2-results.json", import.meta.url);
 const writeMode = process.argv.includes("--write");
-const packageJson = JSON.parse(await readFile(new URL("package.json", root), "utf8"));
+const vendorManifest = await validateVendorArtifacts(root);
+const sourcePin = ({ source_repository, source_commit }) =>
+  `git+${source_repository}#${source_commit}`;
+const dependencyPins = Object.fromEntries(
+  Object.entries(vendorManifest.artifacts).map(([name, artifact]) => [name, sourcePin(artifact)]),
+);
+const runtimeArtifacts = Object.fromEntries(
+  Object.entries(vendorManifest.artifacts).map(([name, artifact]) => [name, {
+    package: artifact.package,
+    file: artifact.file,
+    sha256: artifact.sha256,
+  }]),
+);
 const groundTruthSource = await readFile(manifest, "utf8");
 const groundTruth = JSON.parse(groundTruthSource);
 const result = await evaluatePhase2Benchmark(fileURLToPath(manifest));
@@ -46,11 +59,9 @@ const serializedResult = JSON.stringify(result);
 const evidence = {
   phase: 2,
   release: "v0.1",
-  dependencies: {
-    core: packageJson.dependencies["@archsync/core"],
-    guardian: packageJson.dependencies["@archsync/guardian"],
-  },
-  guardian_dependency: packageJson.dependencies["@archsync/guardian"],
+  dependencies: dependencyPins,
+  guardian_dependency: dependencyPins.guardian,
+  runtime_artifacts: runtimeArtifacts,
   evaluation_protocol: {
     patch_isolation: "Each patch is applied independently to a fresh copy of the unchanged baseline.",
     baseline_analyses: 2,
