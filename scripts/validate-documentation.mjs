@@ -52,6 +52,8 @@ const evidenceClaims = [
   `\`${d1.total_analyzer_executions}\` analyzer executions in one D1 evaluation`,
   `merge-decision agreement: \`${phase3Outcomes.decision_matches}/${phase3Outcomes.total_cases}\` cases`,
   `changed-file agreement: \`${phase3Outcomes.changed_file_matches}/${phase3Outcomes.total_cases}\` cases`,
+  `architecture-delta agreement: \`${phase3Outcomes.architecture_delta_matches}/${phase3Outcomes.total_cases}\` cases`,
+  `incremental/full-scan equivalence: \`${phase3Outcomes.incremental_full_scan_matches}/${phase3Outcomes.total_cases}\` cases`,
   `baseline-cache hits on the repeated run: \`${phase3Outcomes.cache_hits_on_repeat}/${phase3Outcomes.total_cases}\` cases`,
   `component-incremental parsing: \`${phase3.incremental_scope.parsed_typescript_files}/${phase3.incremental_scope.head_typescript_files}\` TypeScript file instances`,
   `Cold median/p95 was \`${phase3.performance.cold_median_ms.toFixed(2)}/${phase3.performance.cold_p95_ms.toFixed(2)} ms\``,
@@ -83,5 +85,5 @@ for (const claim of orderReadmeClaims) {
 }
 
 console.log(
-  `VALID DOCUMENTATION (${groundTruth.cases.length} cases, ${d2.positive_signals + d2.negative_signals} signals, ${d1.total_analyzer_executions} D1 analyzer executions, ${phase3.protocol.analyses_per_case * phase3.protocol.cases} Phase 3 executions)`,
+  `VALID DOCUMENTATION (${groundTruth.cases.length} cases, ${d2.positive_signals + d2.negative_signals} signals, ${d1.total_analyzer_executions} D1 analyzer executions, ${phase3.protocol.analyses_per_case * phase3.protocol.cases} Phase 3 checks, ${phase3.protocol.analyzer_calls_per_case * phase3.protocol.cases} Phase 3 analyzer calls)`,
 );

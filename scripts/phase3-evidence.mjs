@@ -7,7 +7,11 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { loadArchitecture } from "@archsync/core";
-import { checkRepositoryDiff } from "@archsync/guardian";
+import {
+  analyzeTypeScriptRepository,
+  checkRepositoryDiff,
+  evaluateObservedArchitecture,
+} from "@archsync/guardian";
 import { validateVendorArtifacts } from "./validate-vendor-artifacts.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
@@ -53,6 +57,29 @@ function asArray(value) {
   return Array.isArray(value) ? value : [value];
 }
 
+function stableFinding(finding) {
+  return {
+    id: finding.id,
+    kind: finding.kind,
+    ...(finding.rule_id ? { rule_id: finding.rule_id } : {}),
+    ...(finding.edge ? { edge: finding.edge.key } : {}),
+    ...(finding.component ? { component: finding.component } : {}),
+    ...(finding.change ? { change: finding.change } : {}),
+    source_evidence: finding.source_evidence.map(({ file, line, column, detector }) => ({
+      file,
+      line,
+      column,
+      detector,
+    })),
+  };
+}
+
+function stableFindings(findings) {
+  return findings.map(stableFinding).sort((a, b) =>
+    JSON.stringify(a).localeCompare(JSON.stringify(b)),
+  );
+}
+
 function stableResult(result) {
   return {
     classification: result.classification,
@@ -60,20 +87,7 @@ function stableResult(result) {
     changed_files: result.changed_files,
     affected_components: result.affected_components,
     architecture_delta: result.architecture_delta,
-    introduced_findings: result.introduced_findings.map((finding) => ({
-      id: finding.id,
-      kind: finding.kind,
-      ...(finding.rule_id ? { rule_id: finding.rule_id } : {}),
-      ...(finding.edge ? { edge: finding.edge.key } : {}),
-      ...(finding.component ? { component: finding.component } : {}),
-      ...(finding.change ? { change: finding.change } : {}),
-      source_evidence: finding.source_evidence.map(({ file, line, column, detector }) => ({
-        file,
-        line,
-        column,
-        detector,
-      })),
-    })),
+    introduced_findings: stableFindings(result.introduced_findings),
     resolved_findings: result.resolved_findings.map((finding) => ({
       id: finding.id,
       kind: finding.kind,
@@ -92,6 +106,23 @@ function stableResult(result) {
 
 function sameSet(actual, expected) {
   return JSON.stringify([...new Set(actual)].sort()) === JSON.stringify([...new Set(expected)].sort());
+}
+
+function expectedArchitectureDelta(scenario) {
+  const edgeKeys = (values = []) => values
+    .map(({ from, to, type }) => `${from}|${type}|${to}`)
+    .sort();
+  return {
+    added_nodes: Object.keys(scenario.delta?.components_added ?? {}).sort(),
+    removed_nodes: Object.keys(scenario.delta?.components_removed ?? {}).sort(),
+    changed_nodes: Object.keys(scenario.delta?.components_changed ?? {}).sort(),
+    added_edges: edgeKeys(scenario.delta?.relationships_added),
+    removed_edges: edgeKeys(scenario.delta?.relationships_removed),
+  };
+}
+
+function sameJson(actual, expected) {
+  return JSON.stringify(actual) === JSON.stringify(expected);
 }
 
 function evidenceMatch(result, expectedEvidence) {
@@ -127,11 +158,15 @@ for (const scenario of manifest.cases) {
   try {
     const cold = await checkRepositoryDiff(expectedArchitecture, repository, { base_ref: "." });
     const warm = await checkRepositoryDiff(expectedArchitecture, repository, { base_ref: "." });
+    const fullObserved = await analyzeTypeScriptRepository(repository, expectedArchitecture);
+    const full = evaluateObservedArchitecture(expectedArchitecture, fullObserved);
     const coldStable = stableResult(cold);
     const warmStable = stableResult(warm);
     assert.deepEqual(warmStable, coldStable, `${scenario.id}: output changed after cache warm-up`);
     assert.equal(cold.cache.hit, false, `${scenario.id}: first baseline load must be cold`);
     assert.equal(warm.cache.hit, true, `${scenario.id}: repeated baseline load must hit cache`);
+    assert.equal(cold.baseline.classification, "no-impact", `${scenario.id}: benchmark baseline must be clean`);
+    assert.equal(cold.baseline.findings, 0, `${scenario.id}: benchmark baseline must have no findings`);
 
     const expectedFindings = asArray(scenario.expected.findings);
     const expectedRuleIds = expectedFindings
@@ -147,6 +182,15 @@ for (const scenario of manifest.cases) {
         : "PASS";
     const actualChangedFiles = cold.changed_files.map(({ path }) => path).sort();
     const expectedChangedFiles = [...scenario.changed_files].sort();
+    const expectedDelta = expectedArchitectureDelta(scenario);
+    const architectureDeltaMatch = sameJson(cold.architecture_delta, expectedDelta);
+    const fullScanMatch =
+      cold.head.classification === full.classification &&
+      cold.head.decision === full.decision &&
+      cold.head.findings === full.findings.length &&
+      cold.analysis.head_scanned_files === full.observed.metadata.scanned_files &&
+      sameJson(cold.architecture_delta, full.diff) &&
+      sameJson(stableFindings(cold.introduced_findings), stableFindings(full.findings));
 
     caseResults.push({
       id: scenario.id,
@@ -158,6 +202,8 @@ for (const scenario of manifest.cases) {
       classification_match: cold.classification === scenario.category,
       decision_match: cold.decision === expectedDecision,
       changed_files_match: JSON.stringify(actualChangedFiles) === JSON.stringify(expectedChangedFiles),
+      architecture_delta_match: architectureDeltaMatch,
+      incremental_full_scan_match: fullScanMatch,
       expected_rule_ids: expectedRuleIds.sort(),
       actual_rule_ids: [...new Set(actualRuleIds)].sort(),
       rule_match: scenario.category !== "violation" || sameSet(actualRuleIds, expectedRuleIds),
@@ -171,6 +217,7 @@ for (const scenario of manifest.cases) {
       introduced_findings: coldStable.introduced_findings,
       incremental_scanned_files: cold.analysis.incremental_scanned_files,
       head_scanned_files: cold.analysis.head_scanned_files,
+      full_scan_scanned_files: full.observed.metadata.scanned_files,
       cold_total_ms: cold.analysis.total_ms,
       warm_total_ms: warm.analysis.total_ms,
     });
@@ -197,6 +244,8 @@ const staticEvidence = {
     cases: caseResults.length,
     patch_isolation: "Each patch is applied to a fresh Git repository committed from the unchanged Order Platform baseline.",
     analyses_per_case: 2,
+    full_scan_oracles_per_case: 1,
+    analyzer_calls_per_case: 4,
     merge_base: "HEAD baseline versus patched working tree",
     cache_protocol: "First execution must miss; identical second execution must hit and produce the same normalized result.",
   },
@@ -212,6 +261,8 @@ const staticEvidence = {
     classification_matches: caseResults.filter(({ classification_match }) => classification_match).length,
     decision_matches: caseResults.filter(({ decision_match }) => decision_match).length,
     changed_file_matches: caseResults.filter(({ changed_files_match }) => changed_files_match).length,
+    architecture_delta_matches: caseResults.filter(({ architecture_delta_match }) => architecture_delta_match).length,
+    incremental_full_scan_matches: caseResults.filter(({ incremental_full_scan_match }) => incremental_full_scan_match).length,
     violation_rule_set_matches: violationCases.filter(({ rule_match }) => rule_match).length,
     violation_rule_cases: violationCases.length,
     evidence_file_matches: findingCases.filter(({ evidence_file_match }) => evidence_file_match).length,
@@ -233,6 +284,8 @@ const staticEvidence = {
 assert.equal(staticEvidence.outcome_counts.classification_matches, manifest.cases.length);
 assert.equal(staticEvidence.outcome_counts.decision_matches, manifest.cases.length);
 assert.equal(staticEvidence.outcome_counts.changed_file_matches, manifest.cases.length);
+assert.equal(staticEvidence.outcome_counts.architecture_delta_matches, manifest.cases.length);
+assert.equal(staticEvidence.outcome_counts.incremental_full_scan_matches, manifest.cases.length);
 assert.equal(staticEvidence.outcome_counts.violation_rule_set_matches, violationCases.length);
 assert.equal(staticEvidence.outcome_counts.evidence_file_matches, findingCases.length);
 assert.equal(staticEvidence.outcome_counts.evidence_exact_line_matches, findingCases.length);
@@ -270,9 +323,14 @@ if (writeMode) {
   assert.equal(performance.warm_total_ms.length, manifest.cases.length);
   assert.ok(performance.cold_total_ms.every((value) => value > 0));
   assert.ok(performance.warm_total_ms.every((value) => value > 0));
+  assert.equal(performance.cold_median_ms, percentile(performance.cold_total_ms, 0.5));
+  assert.equal(performance.cold_p95_ms, percentile(performance.cold_total_ms, 0.95));
+  assert.equal(performance.warm_median_ms, percentile(performance.warm_total_ms, 0.5));
+  assert.equal(performance.warm_p95_ms, percentile(performance.warm_total_ms, 0.95));
   console.log(
     `VALID PHASE 3 BENCHMARK EVIDENCE ` +
     `(${manifest.cases.length}/${manifest.cases.length} decisions, ` +
+    `${manifest.cases.length}/${manifest.cases.length} incremental/full-scan equivalence, ` +
     `${findingCases.length}/${findingCases.length} exact evidence, ` +
     `${staticEvidence.incremental_scope.parsed_typescript_files}/${staticEvidence.incremental_scope.head_typescript_files} files parsed)`,
   );

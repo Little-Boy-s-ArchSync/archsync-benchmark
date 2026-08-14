@@ -9,6 +9,8 @@
     "cases": 20,
     "patch_isolation": "Each patch is applied to a fresh Git repository committed from the unchanged Order Platform baseline.",
     "analyses_per_case": 2,
+    "full_scan_oracles_per_case": 1,
+    "analyzer_calls_per_case": 4,
     "merge_base": "HEAD baseline versus patched working tree",
     "cache_protocol": "First execution must miss; identical second execution must hit and produce the same normalized result."
   },
@@ -18,12 +20,14 @@
     "baseline_tree_sha256": "4f4d4045682401c93085c2c4afa3672c81a6fae5745bc867dcb100014b088e12",
     "patch_set_sha256": "4d2fbe2d0dcbd61f33999d1960ee10cce3b0e11f0ae3201d17b89050b703640d",
     "guardian_artifact_sha256": "7e8375276af06f29967f7246bd039f6a09143abcf597eca5d30a337726f09743",
-    "normalized_results_sha256": "97139aae7c3c1d724499f3a636a435a484fdc93f6ec94a06bee89530d99fb7b8"
+    "normalized_results_sha256": "9dfede4e4274ed435ff286b35639b1d429834a8d8c87ae22631b17dcbd6a1712"
   },
   "outcome_counts": {
     "classification_matches": 20,
     "decision_matches": 20,
     "changed_file_matches": 20,
+    "architecture_delta_matches": 20,
+    "incremental_full_scan_matches": 20,
     "violation_rule_set_matches": 7,
     "violation_rule_cases": 7,
     "evidence_file_matches": 11,
@@ -50,6 +54,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -83,7 +89,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 3,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-02",
@@ -95,6 +102,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -128,7 +137,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 3,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-03",
@@ -140,6 +150,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -173,7 +185,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-04",
@@ -185,6 +198,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -218,7 +233,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-05",
@@ -230,6 +246,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -263,7 +281,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-06",
@@ -275,6 +294,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-001"
       ],
@@ -347,7 +368,8 @@
         }
       ],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-07",
@@ -359,6 +381,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-002"
       ],
@@ -431,7 +455,8 @@
         }
       ],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-08",
@@ -443,6 +468,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-004"
       ],
@@ -506,7 +533,8 @@
         }
       ],
       "incremental_scanned_files": 3,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-09",
@@ -518,6 +546,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -610,7 +640,8 @@
         }
       ],
       "incremental_scanned_files": 4,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     },
     {
       "id": "case-10",
@@ -622,6 +653,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -747,7 +780,8 @@
         }
       ],
       "incremental_scanned_files": 5,
-      "head_scanned_files": 11
+      "head_scanned_files": 11,
+      "full_scan_scanned_files": 11
     },
     {
       "id": "case-11",
@@ -759,6 +793,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -792,7 +828,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 3,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     },
     {
       "id": "case-12",
@@ -804,6 +841,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -837,7 +876,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 4,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     },
     {
       "id": "case-13",
@@ -849,6 +889,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -882,7 +924,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 4,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     },
     {
       "id": "case-14",
@@ -894,6 +937,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -927,7 +972,8 @@
       },
       "introduced_findings": [],
       "incremental_scanned_files": 3,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     },
     {
       "id": "case-15",
@@ -939,6 +985,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-003",
         "ARCH-005"
@@ -1027,7 +1075,8 @@
         }
       ],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-16",
@@ -1039,6 +1088,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-005"
       ],
@@ -1107,7 +1158,8 @@
         }
       ],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-17",
@@ -1119,6 +1171,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-006"
       ],
@@ -1186,7 +1240,8 @@
         }
       ],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-18",
@@ -1198,6 +1253,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [
         "ARCH-002"
       ],
@@ -1270,7 +1327,8 @@
         }
       ],
       "incremental_scanned_files": 2,
-      "head_scanned_files": 9
+      "head_scanned_files": 9,
+      "full_scan_scanned_files": 9
     },
     {
       "id": "case-19",
@@ -1282,6 +1340,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -1364,7 +1424,8 @@
         }
       ],
       "incremental_scanned_files": 4,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     },
     {
       "id": "case-20",
@@ -1376,6 +1437,8 @@
       "classification_match": true,
       "decision_match": true,
       "changed_files_match": true,
+      "architecture_delta_match": true,
+      "incremental_full_scan_match": true,
       "expected_rule_ids": [],
       "actual_rule_ids": [],
       "rule_match": true,
@@ -1458,7 +1521,8 @@
         }
       ],
       "incremental_scanned_files": 3,
-      "head_scanned_files": 10
+      "head_scanned_files": 10,
+      "full_scan_scanned_files": 10
     }
   ],
   "environment": {
@@ -1470,53 +1534,53 @@
   },
   "performance": {
     "samples_per_mode": 20,
-    "cold_median_ms": 549.3,
-    "cold_p95_ms": 561.91,
-    "warm_median_ms": 255.89,
-    "warm_p95_ms": 262.68,
+    "cold_median_ms": 540,
+    "cold_p95_ms": 571.6,
+    "warm_median_ms": 249.75,
+    "warm_p95_ms": 278.27,
     "cold_total_ms": [
-      572.86,
-      540.2,
-      543.6,
-      557.71,
-      548.24,
-      549.28,
-      546.34,
-      552.6,
-      559,
-      549.79,
-      545.22,
-      548.91,
-      549.3,
-      553,
-      551.69,
-      546.53,
-      546.22,
-      561.91,
-      558.11,
-      550
+      571.6,
+      528.7,
+      551.84,
+      563.65,
+      612.51,
+      540.8,
+      538.63,
+      551.34,
+      565.18,
+      540,
+      532.01,
+      534.17,
+      539.54,
+      552.63,
+      530.05,
+      525.9,
+      533.49,
+      538.54,
+      567.98,
+      548.74
     ],
     "warm_total_ms": [
-      264.65,
-      251.71,
-      253.44,
-      253.82,
-      256.03,
-      261.41,
-      249.85,
-      256.7,
-      257.61,
-      258.78,
-      256.56,
-      253.77,
-      252.23,
-      252.9,
-      259.68,
-      262.68,
-      258.62,
-      251.22,
-      254.59,
-      255.89
+      255.64,
+      237.36,
+      250.32,
+      252.25,
+      280.45,
+      278.27,
+      244.71,
+      247.59,
+      242.66,
+      255.07,
+      251.76,
+      249.37,
+      249.89,
+      234.97,
+      244.6,
+      260.77,
+      237.89,
+      249.75,
+      240.63,
+      256.74
     ]
   }
 }

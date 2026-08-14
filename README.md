@@ -41,12 +41,12 @@ Expected Phase 2 result:
 ```text
 VALID PHASE 2 BENCHMARK EVIDENCE (20/20 cases, exact source evidence)
 VALID TYPESCRIPT PATTERN EVIDENCE (20/20 positive, 20/20 hard-negative signals)
-VALID PHASE 3 BENCHMARK EVIDENCE (20/20 decisions, 11/11 exact evidence, 57/189 files parsed)
+VALID PHASE 3 BENCHMARK EVIDENCE (20/20 decisions, 20/20 incremental/full-scan equivalence, 11/11 exact evidence, 57/189 files parsed)
 ```
 
 The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification agreement (`20/20`), violation rule-set agreement (`7/7`), exact file/line evidence agreement (`11/11` finding-bearing cases), and deterministic replay (`20/20`). [`evidence/typescript-pattern-baseline-v0.1.json`](evidence/typescript-pattern-baseline-v0.1.json) freezes the v0.1 analyzer result on the later challenge corpus; the v0.2 result is stored separately in `evidence/typescript-pattern-results.json`. SHA-256 provenance binds results to their manifests, sources and runtime artifacts. GitHub Actions reruns the complete gate on both `ubuntu-latest` and `windows-latest`.
 
-The Phase 3 artifact [`evidence/phase-3-results.json`](evidence/phase-3-results.json) applies the same 20 patches as real Git working-tree diffs. It records `20/20` classification and merge-decision matches, `20/20` changed-file matches, `7/7` violation rule-set matches, `11/11` exact evidence lines, deterministic cold/warm replay and `20/20` baseline-cache hits. Component-incremental analysis parsed 57 of 189 TypeScript file instances across the 20 head repositories (`0.3016`). On the recorded Windows machine, cold median/p95 latency was `549.30/561.91 ms` and warm median/p95 latency was `255.89/262.68 ms`. These timing values are environment-specific measurements, not general performance estimates.
+The Phase 3 artifact [`evidence/phase-3-results.json`](evidence/phase-3-results.json) applies the same 20 patches as real Git working-tree diffs. It records `20/20` classification and merge-decision matches, `20/20` changed-file matches, `20/20` exact architecture-delta matches, `20/20` incremental/full-scan equivalence checks, `7/7` violation rule-set matches, `11/11` exact evidence lines, deterministic cold/warm replay and `20/20` baseline-cache hits. Each incremental result is checked against a separate full scan of the same patched head, preventing a stable but incorrect incremental merge from satisfying the gate. Component-incremental analysis parsed 57 of 189 TypeScript file instances across the 20 head repositories (`0.3016`). On the recorded Windows machine, cold median/p95 latency was `540.00/571.60 ms` and warm median/p95 latency was `249.75/278.27 ms`. These timing values are environment-specific measurements, not general performance estimates.
 
 ## Demo from source code
 
