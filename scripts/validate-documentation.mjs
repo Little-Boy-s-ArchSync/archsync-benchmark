@@ -4,13 +4,16 @@ import { readFile } from "node:fs/promises";
 const readJson = async (relativePath) =>
   JSON.parse(await readFile(new URL(relativePath, import.meta.url), "utf8"));
 
-const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme, phase3Audit, phaseAudit] =
+const [groundTruth, phase2, phase3, patterns, baseline, packageManifest, benchmarkReadme, demoReadme, evidence, orderReadme, phase3Audit, phaseAudit] =
   await Promise.all([
     readJson("../order-platform/ground-truth.json"),
     readJson("../evidence/phase-2-results.json"),
     readJson("../evidence/phase-3-results.json"),
     readJson("../evidence/typescript-pattern-results.json"),
     readJson("../evidence/typescript-pattern-baseline-v0.1.json"),
+    readJson("../package.json"),
+    readFile(new URL("../README.md", import.meta.url), "utf8"),
+    readFile(new URL("../README-DEMO.md", import.meta.url), "utf8"),
     readFile(new URL("../EVIDENCE.md", import.meta.url), "utf8"),
     readFile(new URL("../order-platform/README.md", import.meta.url), "utf8"),
     readFile(new URL("../PHASE3-AUDIT.md", import.meta.url), "utf8"),
@@ -124,6 +127,26 @@ for (const claim of orderReadmeClaims) {
     orderReadme.includes(claim),
     `order-platform/README.md is missing: ${claim}`,
   );
+}
+
+const requiredDemoScripts = ["demo", "demo:pass", "demo:block", "demo:review"];
+for (const script of requiredDemoScripts) {
+  assert.ok(packageManifest.scripts[script], `package.json is missing ${script}`);
+}
+const demoDocumentationClaims = [
+  "pnpm demo",
+  "PASS",
+  "BLOCK",
+  "REVIEW",
+  "MISS -> HIT",
+  "Windows",
+  "macOS",
+];
+for (const claim of demoDocumentationClaims) {
+  assert.ok(demoReadme.includes(claim), `README-DEMO.md is missing: ${claim}`);
+}
+for (const claim of ["pnpm demo", "macos-latest", "README-DEMO.md"]) {
+  assert.ok(benchmarkReadme.includes(claim), `README.md is missing: ${claim}`);
 }
 
 console.log(

@@ -44,11 +44,23 @@ cd archsync-benchmark
 corepack enable
 corepack prepare pnpm@11.16.0 --activate
 pnpm install --frozen-lockfile
-pnpm demo:phase3
+pnpm demo
 pnpm phase3:verify
 ```
 
-`demo:phase3` executes one real `PASS`, one `BLOCK`, and one `REVIEW` patch. The clean GitHub Actions jobs execute the full verifier and this same demo command on both Ubuntu and Windows, providing the reproducible-machine check for the roadmap's 15-minute quickstart gate. Shared-runner duration is operational evidence for those runs, not a universal installation-time guarantee.
+`pnpm demo` executes one real `PASS`, one `BLOCK`, and one `REVIEW` patch with concise presentation output. It verifies the actual classification, decision, changed-file set and cold `MISS` to warm `HIT` cache transition. The runner uses Node child processes with `shell: false`, so it does not depend on Bash or PowerShell syntax. The clean GitHub Actions jobs execute the full verifier and this same demo command on Ubuntu, Windows and macOS, providing a cross-platform reproducible-machine check. Shared-runner duration is operational evidence for those runs, not a universal installation-time guarantee.
+
+Run a single decision or reveal the complete technical gate output when needed:
+
+```bash
+pnpm demo:pass
+pnpm demo:block
+pnpm demo:review
+pnpm demo --scenario block --verbose
+pnpm demo --scenario all --json
+```
+
+See [`README-DEMO.md`](README-DEMO.md) for the short Vietnamese presentation script and the boundary between demo output and research evidence.
 
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
@@ -60,7 +72,7 @@ VALID TYPESCRIPT PATTERN EVIDENCE (20/20 positive, 20/20 hard-negative signals)
 VALID PHASE 3 BENCHMARK EVIDENCE (20/20 decisions, 20/20 incremental/full-scan equivalence, 11/11 exact evidence, 57/189 files parsed)
 ```
 
-The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification agreement (`20/20`), violation rule-set agreement (`7/7`), exact file/line evidence agreement (`11/11` finding-bearing cases), and deterministic replay (`20/20`). [`evidence/typescript-pattern-baseline-v0.1.json`](evidence/typescript-pattern-baseline-v0.1.json) freezes the v0.1 analyzer result on the later challenge corpus; the v0.2 result is stored separately in `evidence/typescript-pattern-results.json`. SHA-256 provenance binds results to their manifests, sources and runtime artifacts. GitHub Actions reruns the complete gate on both `ubuntu-latest` and `windows-latest`.
+The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification agreement (`20/20`), violation rule-set agreement (`7/7`), exact file/line evidence agreement (`11/11` finding-bearing cases), and deterministic replay (`20/20`). [`evidence/typescript-pattern-baseline-v0.1.json`](evidence/typescript-pattern-baseline-v0.1.json) freezes the v0.1 analyzer result on the later challenge corpus; the v0.2 result is stored separately in `evidence/typescript-pattern-results.json`. SHA-256 provenance binds results to their manifests, sources and runtime artifacts. GitHub Actions reruns the complete gate on `ubuntu-latest`, `windows-latest` and `macos-latest`.
 
 The Phase 3 artifact [`evidence/phase-3-results.json`](evidence/phase-3-results.json) applies the same 20 patches as real Git working-tree diffs. It records `20/20` classification and merge-decision matches, `20/20` changed-file matches, `20/20` exact architecture-delta matches, `20/20` incremental/full-scan equivalence checks, `7/7` violation rule-set matches, `11/11` exact evidence lines, deterministic cold/warm replay and `20/20` baseline-cache hits. Each incremental result is checked against a separate full scan of the same patched head, preventing a stable but incorrect incremental merge from satisfying the gate. Component-incremental analysis parsed 57 of 189 TypeScript file instances across the 20 head repositories (`0.3016`). On the recorded Windows machine, cold median/p95 latency was `540.00/571.60 ms` and warm median/p95 latency was `249.75/278.27 ms`. These timing values are environment-specific measurements, not general performance estimates.
 
@@ -81,6 +93,12 @@ Each command copies the clean baseline to a temporary directory, applies one rea
 Phase 3 Git-diff demo commands create a temporary Git baseline, apply the same real patches, run the cold and cache-hit incremental checks, and return success only when the merge decision matches ground truth:
 
 ```bash
+pnpm demo
+pnpm demo:pass
+pnpm demo:block
+pnpm demo:review
+
+# Compatibility commands retained for exact legacy case reproduction
 pnpm demo:phase3:pass
 pnpm demo:phase3:block
 pnpm demo:phase3:review

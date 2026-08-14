@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest]
+        os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v7
       - uses: pnpm/action-setup@v6
@@ -29,7 +29,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm verify
       - name: Reproduce PASS, BLOCK and REVIEW demo
-        run: pnpm demo:phase3
+        run: pnpm demo
       - name: Ensure committed evidence is current
         run: git diff --exit-code -- evidence
       - name: Upload benchmark evidence
