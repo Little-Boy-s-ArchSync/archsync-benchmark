@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 const readJson = async (relativePath) =>
   JSON.parse(await readFile(new URL(relativePath, import.meta.url), "utf8"));
 
-const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme] =
+const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme, phase3Audit] =
   await Promise.all([
     readJson("../order-platform/ground-truth.json"),
     readJson("../evidence/phase-2-results.json"),
@@ -13,6 +13,7 @@ const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme] =
     readJson("../evidence/typescript-pattern-baseline-v0.1.json"),
     readFile(new URL("../EVIDENCE.md", import.meta.url), "utf8"),
     readFile(new URL("../order-platform/README.md", import.meta.url), "utf8"),
+    readFile(new URL("../PHASE3-AUDIT.md", import.meta.url), "utf8"),
   ]);
 
 const counts = groundTruth.cases.reduce(
@@ -69,6 +70,18 @@ const evidenceClaims = [
 ];
 for (const claim of evidenceClaims) {
   assert.ok(evidence.includes(claim), `EVIDENCE.md is missing: ${claim}`);
+}
+
+const auditClaims = [
+  "Classification, decision, changed-file, architecture-delta, and incremental/full-scan agreement: 20/20 each.",
+  "Violation rule-set agreement: 7/7.",
+  "Exact evidence file and line agreement: 11/11 finding-bearing cases.",
+  "Incremental analysis scope: 57/189 TypeScript file instances, or 0.3016.",
+  "Recorded Windows cold median/p95: 540.00/571.60 ms.",
+  "Recorded Windows warm median/p95: 249.75/278.27 ms.",
+];
+for (const claim of auditClaims) {
+  assert.ok(phase3Audit.includes(claim), `PHASE3-AUDIT.md is missing: ${claim}`);
 }
 
 const orderReadmeClaims = [

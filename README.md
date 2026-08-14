@@ -64,6 +64,8 @@ The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) r
 
 The Phase 3 artifact [`evidence/phase-3-results.json`](evidence/phase-3-results.json) applies the same 20 patches as real Git working-tree diffs. It records `20/20` classification and merge-decision matches, `20/20` changed-file matches, `20/20` exact architecture-delta matches, `20/20` incremental/full-scan equivalence checks, `7/7` violation rule-set matches, `11/11` exact evidence lines, deterministic cold/warm replay and `20/20` baseline-cache hits. Each incremental result is checked against a separate full scan of the same patched head, preventing a stable but incorrect incremental merge from satisfying the gate. Component-incremental analysis parsed 57 of 189 TypeScript file instances across the 20 head repositories (`0.3016`). On the recorded Windows machine, cold median/p95 latency was `540.00/571.60 ms` and warm median/p95 latency was `249.75/278.27 ms`. These timing values are environment-specific measurements, not general performance estimates.
 
+The requirement-by-requirement completion decision, evidence inventory, exit gates, and remaining governance boundary are recorded in [`PHASE3-AUDIT.md`](PHASE3-AUDIT.md).
+
 ## Demo from source code
 
 ```bash
