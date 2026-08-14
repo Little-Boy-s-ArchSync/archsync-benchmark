@@ -24,7 +24,7 @@ This audit maps every Phase 1--3 roadmap requirement to executable evidence. A f
 | One-stack, five-component benchmark | Order Platform baseline with frontend, gateway, order-service, payment-service and postgres | Proven |
 | Initial ten cases preserve the planned 5/3/2 distribution | Cases 01--10 contain 5 no-impact, 3 violation and 2 evolution cases | Proven |
 | Every benchmark case has an owner and expected delta | Ground-truth verifier covers all 20 contiguous cases and all patches apply independently | Proven |
-| Reproducible Core quality gate | 84/84 tests, 13/13 CLI smoke checks, 98.41% statements and 91.73% branches | Proven |
+| Reproducible Core quality gate | 100/100 tests, 13/13 built-CLI smoke checks and 100% statement/branch/function/line coverage | Proven |
 | Evidence is tied to the implementation and inputs | Core Phase 1 manifest binds source, tests, fixture tree, verifier configuration and lockfile by SHA-256 | Proven |
 
 Roadmap Phase 1 seed: 5 no-impact / 3 violation / 2 evolution in cases 01--10. The expanded research dataset contains 20 cases with a 9/7/4 distribution; this expansion does not replace or relabel the original seed.
@@ -42,8 +42,9 @@ Roadmap Phase 1 seed: 5 no-impact / 3 violation / 2 evolution in cases 01--10. T
 | Precision and recall are at least 0.85 | D1 full and changed graph node/edge precision and recall are 1.0 | Proven on D1 |
 | Detector challenge regression | v0.2 has 20 TP, 0 FP, 0 FN and 20 TN on D2 | Proven on D2 |
 | Determinism | 20/20 D1 replays plus repeated D2 analysis | Proven |
-| Reproducible Guardian quality gate | 34/34 tests, 10/10 CLI smoke checks, 97.31% statements and 88.34% branches | Proven |
+| Reproducible Guardian quality gate | 58/58 tests, 22/22 built-CLI smoke checks and 100% statement/branch/function/line coverage for deterministic engine, doctor and model-command modules | Proven |
 | Evidence is tied to the implementation and inputs | Guardian Phase 2 manifest binds source, complete fixture tree, verifier configuration, lockfile and vendored Core artifact by SHA-256 | Proven |
+| Reproducible benchmark validation gate | 55/55 tests and 100% line/branch/function coverage for deterministic benchmark validation libraries, plus real 20-case and 40-signal integration runs | Proven |
 
 The roadmap name for the initial analyzer milestone is v0.1. The benchmark keeps that frozen baseline. The strengthened provenance-aware analyzer is v0.2, while Guardian package v0.3 adds the Phase 3 Git/CI layer without replacing the deterministic Phase 2 semantics.
 
@@ -70,7 +71,7 @@ Phase 3 benchmark: 20/20 merge decisions, 20/20 changed-file sets, 20/20 archite
 2. Guardian Phase 2 and Phase 3 evidence bind the analyzers, controlled fixtures, verifier and pinned Core artifact.
 3. Benchmark integrity binds the model, baseline source tree and all 20 patches.
 4. Phase 2, detector-pattern and Phase 3 results bind the datasets and pinned runtime packages to normalized results.
-5. CI reruns the same repository gates on Windows and Ubuntu; the paper reports only fields recoverable from these JSON artifacts or the corresponding coverage summaries.
+5. CI reruns the same repository gates on Windows, Ubuntu and macOS; the paper reports only fields recoverable from these JSON artifacts or the corresponding coverage summaries.
 
 ## Paper claim audit
 
@@ -80,7 +81,7 @@ The paper may claim only the following within the evaluated scope:
 - exact D1 graph, classification, rule and evidence measurements recorded in `evidence/phase-2-results.json`;
 - exact D2 detector counts recorded in the baseline and v0.2 pattern result files;
 - exact Git-diff decisions, cache behavior, incremental/full-scan equivalence and recorded timings in `evidence/phase-3-results.json`;
-- Core and Guardian test/coverage results reproduced by their repository gates.
+- Core, Guardian and benchmark validation test/coverage results reproduced by their repository gates.
 
 It must not generalize corpus-bound 1.0 scores to arbitrary TypeScript repositories, describe the timing sample as universal performance, claim an independent external holdout, claim multi-language support, or claim enforced merge protection on the current private repository plan.
 

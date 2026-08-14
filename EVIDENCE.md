@@ -47,7 +47,8 @@ The gate proves:
 - every evidence location falls inside its patch hunk;
 - all 20 patches apply independently to the clean baseline;
 - SHA-256 integrity binds the model, 9-file baseline tree and 20-file patch set;
-- mutation tests reject corrupted ground truth;
+- 55 detailed tests reject corrupted ground truth, integrity and pattern-corpus inputs;
+- deterministic benchmark validation libraries enforce 100% line, branch and function coverage, bound in `evidence/unit-coverage.json`;
 - the vendored Core and Guardian package bytes match their declared SHA-256 hashes and source commit pins;
 - Guardian reconstructs the five-node/five-edge baseline from TypeScript source;
 - all 20 patches are analyzed independently through the pinned Guardian package;
@@ -94,7 +95,7 @@ The canonical Git-diff result is [`evidence/phase-3-results.json`](evidence/phas
 - baseline-cache hits on the repeated run: `20/20` cases;
 - component-incremental parsing: `57/189` TypeScript file instances (`0.3016`).
 
-The protocol executes two Git-diff checks plus one independent full-scan oracle per case. This produces 40 pull-request checks and 80 analyzer calls: the cold check performs baseline and incremental analysis, the warm check performs incremental analysis with a cached baseline, and the oracle performs a full head scan. The committed performance samples were measured on the environment recorded in the artifact. Cold median/p95 was `540.00/571.60 ms`; warm median/p95 was `249.75/278.27 ms` across 20 cases per mode. These numbers include Git diff discovery, cache load or reconstruction, incremental AST analysis and conformance evaluation. They are evidence for this controlled machine and corpus only; the full-scan oracle is outside the timed PR-check samples.
+The protocol executes two Git-diff checks plus one independent full-scan oracle per case. This produces 40 pull-request checks and 80 analyzer calls: the cold check performs baseline and incremental analysis, the warm check performs incremental analysis with a cached baseline, and the oracle performs a full head scan. The committed performance samples were measured on the environment recorded in the artifact. Cold median/p95 was `518.51/531.05 ms`; warm median/p95 was `242.62/249.30 ms` across 20 cases per mode. These numbers include Git diff discovery, cache load or reconstruction, incremental AST analysis and conformance evaluation. They are evidence for this controlled machine and corpus only; the full-scan oracle is outside the timed PR-check samples.
 
 ## Detector challenge result
 

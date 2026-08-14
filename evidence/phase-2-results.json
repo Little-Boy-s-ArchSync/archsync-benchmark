@@ -2,20 +2,20 @@
   "phase": 2,
   "release": "v0.2",
   "dependencies": {
-    "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#304f4ac48137e011ec5f7fd85071a89502c02ada",
-    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#97109c8acab1a34722b0ec0e7511ded2c5362d4a"
+    "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#2affbbb0da859a32b9b9079b4bf718fc7b14993b",
+    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8779bf7965b3bd15f25834f17ca5321c85ae3f43"
   },
-  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#97109c8acab1a34722b0ec0e7511ded2c5362d4a",
+  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8779bf7965b3bd15f25834f17ca5321c85ae3f43",
   "runtime_artifacts": {
     "core": {
       "package": "@archsync/core",
-      "file": "vendor/archsync-core-0.1.0-304f4ac.tgz",
-      "sha256": "ea2727f9d5646b85385b67f60b83d5eed8ee39af590667722e197873b23d5a2e"
+      "file": "vendor/archsync-core-0.1.0-2affbbb.tgz",
+      "sha256": "015c9bbb0cf42ae4945c6f19866096d2833b9118c43c4574ce74cf9526b87176"
     },
     "guardian": {
       "package": "@archsync/guardian",
-      "file": "vendor/archsync-guardian-0.3.0.tgz",
-      "sha256": "7e8375276af06f29967f7246bd039f6a09143abcf597eca5d30a337726f09743"
+      "file": "vendor/archsync-guardian-0.3.1-8779bf7.tgz",
+      "sha256": "d7b1a431c2a5d9d4deefcbb6229e909eca9ed444d8bd5792a1521da77b1bdc75"
     }
   },
   "evaluation_protocol": {

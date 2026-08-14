@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "scope": {
+    "kind": "deterministic benchmark validation libraries",
+    "include": "scripts/lib/*.mjs",
+    "excluded_orchestration": "Top-level evidence/demo processes are exercised by the complete integration gate."
+  },
+  "command": "node --test --experimental-test-coverage --test-coverage-include=scripts/lib/*.mjs --test-coverage-lines=100 --test-coverage-functions=100 --test-coverage-branches=100",
+  "enforced_thresholds_percent": {
+    "lines": 100,
+    "branches": 100,
+    "functions": 100
+  },
+  "measured_coverage_percent": {
+    "lines_percent": 100,
+    "branches_percent": 100,
+    "functions_percent": 100
+  },
+  "tests": {
+    "total": 55,
+    "passed": 55,
+    "failed": 0
+  },
+  "provenance": {
+    "files": [
+      {
+        "file": "scripts/lib/ground-truth.mjs",
+        "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
+      },
+      {
+        "file": "scripts/lib/integrity.mjs",
+        "sha256": "6cbbb9f7249d3d67b17169245604cee815fec6384fef8eb9d39773fb549e2c74"
+      },
+      {
+        "file": "scripts/lib/pattern-corpus.mjs",
+        "sha256": "32c43414da08cdf77ff996d4a0817ee6c765433f663ed894517af5365a8558b4"
+      },
+      {
+        "file": "scripts/unit-coverage-evidence.mjs",
+        "sha256": "d51185c2cd9a0f5c36c007b8a36c719dff8cf0d6280dd50bcddd829efbad4055"
+      },
+      {
+        "file": "test/ground-truth.test.mjs",
+        "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
+      },
+      {
+        "file": "test/integrity.test.mjs",
+        "sha256": "797ae4524c0102cdbcccf894541d2511e96626c9db16ba28ad2646284bbd2cb2"
+      },
+      {
+        "file": "test/pattern-corpus.test.mjs",
+        "sha256": "556f474d175a13329d2ab96ffe6e90b598610e1c596355301b69e9ee27fd0923"
+      },
+      {
+        "file": "package.json",
+        "sha256": "de03b0b36394d94a4b14e26a06b265a8bf0589b64fb9194920b0960b088796fe"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "sha256": "ac08537ee786bf7e6f1e5b1474d22712759fc4171c90d44def88ba4a61c0e299"
+      },
+      {
+        "file": "vendor/manifest.json",
+        "sha256": "56d42c69cf58246f458c672e8f18e9ef1350f005a6e7de8728e5356d570ff2dd"
+      }
+    ],
+    "manifest_sha256": "4071170a3b4c2ace6040f9b4de7b2be6e96f6acf464c1677c570478c57115536"
+  }
+}

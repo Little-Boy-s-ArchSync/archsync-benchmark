@@ -98,8 +98,8 @@ const auditClaims = [
   "Violation rule-set agreement: 7/7.",
   "Exact evidence file and line agreement: 11/11 finding-bearing cases.",
   "Incremental analysis scope: 57/189 TypeScript file instances, or 0.3016.",
-  "Recorded Windows cold median/p95: 540.00/571.60 ms.",
-  "Recorded Windows warm median/p95: 249.75/278.27 ms.",
+  "Recorded Windows cold median/p95: 518.51/531.05 ms.",
+  "Recorded Windows warm median/p95: 242.62/249.30 ms.",
 ];
 for (const claim of auditClaims) {
   assert.ok(phase3Audit.includes(claim), `PHASE3-AUDIT.md is missing: ${claim}`);
@@ -107,8 +107,9 @@ for (const claim of auditClaims) {
 
 const completeAuditClaims = [
   "Roadmap Phase 1 seed: 5 no-impact / 3 violation / 2 evolution in cases 01--10.",
-  "84/84 tests, 13/13 CLI smoke checks, 98.41% statements and 91.73% branches",
-  "34/34 tests, 10/10 CLI smoke checks, 97.31% statements and 88.34% branches",
+  "100/100 tests, 13/13 built-CLI smoke checks and 100% statement/branch/function/line coverage",
+  "58/58 tests, 22/22 built-CLI smoke checks and 100% statement/branch/function/line coverage",
+  "55/55 tests and 100% line/branch/function coverage for deterministic benchmark validation libraries",
   "Phase 3 benchmark: 20/20 merge decisions, 20/20 changed-file sets, 20/20 architecture deltas, 20/20 incremental/full-scan equivalence checks, 20/20 repeated cache hits, 7/7 violation rule sets and 11/11 exact evidence locations.",
   "The private GitHub organization plan currently rejects branch-protection and repository-ruleset APIs.",
 ];

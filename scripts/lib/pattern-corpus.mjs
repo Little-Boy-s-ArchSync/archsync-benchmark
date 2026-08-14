@@ -41,16 +41,19 @@ export async function validatePatternCorpus(manifestPath) {
     }
     if (detectors.has(group.detector)) issues.push(`Duplicate detector group '${group.detector}'`);
     detectors.add(group.detector);
-    if (!safeRelativePath(group.file)) issues.push(`${group.detector}: unsafe fixture path`);
+    const fixturePathIsSafe = safeRelativePath(group.file);
+    if (!fixturePathIsSafe) issues.push(`${group.detector}: unsafe fixture path`);
     if (typeof group.edge !== "string" || group.edge.split("|").length !== 3) {
       issues.push(`${group.detector}: canonical edge key is required`);
     }
-    const sourcePath = resolve(baseDirectory, manifest.benchmark.repository, group.file);
     let sourceLines = [];
-    try {
-      sourceLines = (await readFile(sourcePath, "utf8")).split(/\r?\n/);
-    } catch {
-      issues.push(`${group.detector}: missing fixture '${group.file}'`);
+    if (fixturePathIsSafe) {
+      const sourcePath = resolve(baseDirectory, manifest.benchmark.repository, group.file);
+      try {
+        sourceLines = (await readFile(sourcePath, "utf8")).split(/\r?\n/);
+      } catch {
+        issues.push(`${group.detector}: missing fixture '${group.file}'`);
+      }
     }
 
     for (const category of ["positive", "negative"]) {
@@ -98,4 +101,3 @@ export async function validatePatternCorpus(manifestPath) {
 
   return { valid: issues.length === 0, issues, manifest, counts, baseDirectory };
 }
-

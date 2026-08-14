@@ -37,6 +37,7 @@ This audit maps the Phase 3 roadmap requirements to executable evidence. A green
 - End-to-end Phase 2: `evidence/phase-2-results.json` and frozen snapshot validation.
 - Detector regression: `evidence/typescript-pattern-baseline-v0.1.json` and `evidence/typescript-pattern-results.json`.
 - Git-diff Phase 3: `evidence/phase-3-results.json`; binds the manifest, model, source tree, patches, Guardian package, and normalized results.
+- Benchmark validation coverage: `evidence/unit-coverage.json`; binds 55/55 tests and 100% line, branch and function coverage to validation-library and test hashes.
 
 The Phase 3 benchmark now rejects all of the following: a wrong decision, wrong changed-file set, wrong architecture delta, wrong violation rule set, wrong evidence file or line, a cold/warm replay difference, a missing cache hit, or any difference between the incremental result and a separate full scan of the same patched head.
 
@@ -47,8 +48,8 @@ The Phase 3 benchmark now rejects all of the following: a wrong decision, wrong 
 - Exact evidence file and line agreement: 11/11 finding-bearing cases.
 - Repeated cache hits and deterministic replay: 20/20 each.
 - Incremental analysis scope: 57/189 TypeScript file instances, or 0.3016.
-- Recorded Windows cold median/p95: 540.00/571.60 ms.
-- Recorded Windows warm median/p95: 249.75/278.27 ms.
+- Recorded Windows cold median/p95: 518.51/531.05 ms.
+- Recorded Windows warm median/p95: 242.62/249.30 ms.
 
 ## Boundaries that must remain explicit
 

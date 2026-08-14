@@ -9,23 +9,23 @@ importers:
   .:
     dependencies:
       '@archsync/core':
-        specifier: file:vendor/archsync-core-0.1.0-304f4ac.tgz
-        version: file:vendor/archsync-core-0.1.0-304f4ac.tgz
+        specifier: file:vendor/archsync-core-0.1.0-2affbbb.tgz
+        version: file:vendor/archsync-core-0.1.0-2affbbb.tgz
       '@archsync/guardian':
-        specifier: file:vendor/archsync-guardian-0.3.0.tgz
-        version: file:vendor/archsync-guardian-0.3.0.tgz(@archsync/core@file:vendor/archsync-core-0.1.0-304f4ac.tgz)
+        specifier: file:vendor/archsync-guardian-0.3.1-8779bf7.tgz
+        version: file:vendor/archsync-guardian-0.3.1-8779bf7.tgz(@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz)
 
 packages:
 
-  '@archsync/core@file:vendor/archsync-core-0.1.0-304f4ac.tgz':
-    resolution: {integrity: sha512-WtGZT+Xl2nsblEmZbFNMfEOKyPu+exWBlYksFWyeEFHoCu6MzfJr/eRINKvzW1Vgvw5fQ0IaDkZaNyAZ/l4Rkg==, tarball: file:vendor/archsync-core-0.1.0-304f4ac.tgz}
+  '@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz':
+    resolution: {integrity: sha512-haIminTHW+CDy/zF5HNR2KinVXJLXyFIzQPXP4SyWeZl48GW72CtUP8cVBdB/K8ONrDmFsOxson28gDqLaf2EQ==, tarball: file:vendor/archsync-core-0.1.0-2affbbb.tgz}
     version: 0.1.0
     engines: {node: '>=22'}
     hasBin: true
 
-  '@archsync/guardian@file:vendor/archsync-guardian-0.3.0.tgz':
-    resolution: {integrity: sha512-drDimOi+lwgJhSQDGz9a1+NE5U3J5eQ/fdpXUNg/8zi9mk+gAUM8JcpQbO1kVv8p2htUpe4x2Ys9CRK+pAkPWw==, tarball: file:vendor/archsync-guardian-0.3.0.tgz}
-    version: 0.3.0
+  '@archsync/guardian@file:vendor/archsync-guardian-0.3.1-8779bf7.tgz':
+    resolution: {integrity: sha512-q5ziaCAi6CbkefeAQ10wOgdBxmztOxJXnpdtwDGSXwlj5fHHB7flCdzapJioqL0PJYu4IozuwKS6wwm+dt+UPA==, tarball: file:vendor/archsync-guardian-0.3.1-8779bf7.tgz}
+    version: 0.3.1
     engines: {node: '>=22'}
     hasBin: true
     peerDependencies:
@@ -59,14 +59,14 @@ packages:
 
 snapshots:
 
-  '@archsync/core@file:vendor/archsync-core-0.1.0-304f4ac.tgz':
+  '@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz':
     dependencies:
       ajv: 8.20.0
       yaml: 2.9.0
 
-  '@archsync/guardian@file:vendor/archsync-guardian-0.3.0.tgz(@archsync/core@file:vendor/archsync-core-0.1.0-304f4ac.tgz)':
+  '@archsync/guardian@file:vendor/archsync-guardian-0.3.1-8779bf7.tgz(@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz)':
     dependencies:
-      '@archsync/core': file:vendor/archsync-core-0.1.0-304f4ac.tgz
+      '@archsync/core': file:vendor/archsync-core-0.1.0-2affbbb.tgz
       typescript: 5.9.3
 
   ajv@8.20.0:
