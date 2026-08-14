@@ -70,6 +70,12 @@ pnpm demo:phase3:review
 
 The three commands demonstrate the complete pull-request contract without leaving temporary repositories or generated reports in the workspace.
 
+## Pull-request gate
+
+The repository includes [`.github/workflows/architecture-gate.yml`](.github/workflows/architecture-gate.yml) as a live consumer of Guardian v0.3. For a pull request that changes the Order Platform model, source tree, or pinned Guardian artifact, the workflow fetches full Git history, restores the baseline graph cache, checks the proposed source against the merge base, emits GitHub annotations, and uploads the Markdown decision report.
+
+Configure this workflow as a required status check. The approved model must also be protected with CODEOWNERS or an equivalent architecture-owner policy. ArchSync never rewrites or self-approves `architecture.yaml`; without repository approval policy, a contributor could change code and contract together and bypass the intended governance boundary.
+
 Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
 
 ```bash

@@ -1,0 +1,58 @@
+name: ArchSync architecture gate
+
+on:
+  pull_request:
+    paths:
+      - "order-platform/architecture.yaml"
+      - "order-platform/repository/**"
+      - "package.json"
+      - "pnpm-lock.yaml"
+      - "vendor/archsync-guardian-0.3.0.tgz"
+
+permissions:
+  contents: read
+
+jobs:
+  architecture:
+    name: Order Platform architecture decision
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 11.16.0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: Restore baseline graph cache
+        uses: actions/cache@v5
+        with:
+          path: .git/archsync-cache
+          key: >-
+            archsync-order-platform-${{ runner.os }}-${{ github.event.pull_request.base.sha }}-${{ hashFiles('order-platform/architecture.yaml', 'vendor/archsync-guardian-0.3.0.tgz') }}
+
+      - name: Check architecture impact
+        run: >-
+          pnpm exec archsync-guardian check
+          order-platform/architecture.yaml
+          order-platform/repository
+          --diff origin/${{ github.base_ref }}
+          --github
+          --report archsync-pr-report.md
+
+      - name: Upload architecture report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: archsync-pr-report
+          if-no-files-found: error
+          path: archsync-pr-report.md
