@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 const readJson = async (relativePath) =>
   JSON.parse(await readFile(new URL(relativePath, import.meta.url), "utf8"));
 
-const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme, phase3Audit] =
+const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme, phase3Audit, phaseAudit] =
   await Promise.all([
     readJson("../order-platform/ground-truth.json"),
     readJson("../evidence/phase-2-results.json"),
@@ -14,6 +14,7 @@ const [groundTruth, phase2, phase3, patterns, baseline, evidence, orderReadme, p
     readFile(new URL("../EVIDENCE.md", import.meta.url), "utf8"),
     readFile(new URL("../order-platform/README.md", import.meta.url), "utf8"),
     readFile(new URL("../PHASE3-AUDIT.md", import.meta.url), "utf8"),
+    readFile(new URL("../PHASE1-3-AUDIT.md", import.meta.url), "utf8"),
   ]);
 
 const counts = groundTruth.cases.reduce(
@@ -30,6 +31,23 @@ const phase3Outcomes = phase3.outcome_counts;
 const d2 = patterns.result.metrics.overall;
 const d2Baseline = baseline.result.metrics.overall;
 const matrixRows = evidence.match(/^\| case-\d{2} \|/gm) ?? [];
+const roadmapSeedCounts = groundTruth.cases.slice(0, 10).reduce(
+  (actual, benchmarkCase) => {
+    actual[benchmarkCase.expected.classification] += 1;
+    return actual;
+  },
+  { "no-impact": 0, violation: 0, evolution: 0 },
+);
+
+assert.deepEqual(
+  roadmapSeedCounts,
+  { "no-impact": 5, violation: 3, evolution: 2 },
+  "Cases 01--10 no longer preserve the roadmap's 5/3/2 seed distribution",
+);
+for (const benchmarkCase of groundTruth.cases) {
+  assert.ok(benchmarkCase.owner, `${benchmarkCase.id} is missing its owner`);
+  assert.ok(Object.hasOwn(benchmarkCase, "delta"), `${benchmarkCase.id} is missing its delta`);
+}
 
 assert.equal(
   matrixRows.length,
@@ -82,6 +100,17 @@ const auditClaims = [
 ];
 for (const claim of auditClaims) {
   assert.ok(phase3Audit.includes(claim), `PHASE3-AUDIT.md is missing: ${claim}`);
+}
+
+const completeAuditClaims = [
+  "Roadmap Phase 1 seed: 5 no-impact / 3 violation / 2 evolution in cases 01--10.",
+  "84/84 tests, 13/13 CLI smoke checks, 98.41% statements and 91.73% branches",
+  "34/34 tests, 10/10 CLI smoke checks, 97.31% statements and 88.34% branches",
+  "Phase 3 benchmark: 20/20 merge decisions, 20/20 changed-file sets, 20/20 architecture deltas, 20/20 incremental/full-scan equivalence checks, 20/20 repeated cache hits, 7/7 violation rule sets and 11/11 exact evidence locations.",
+  "The private GitHub organization plan currently rejects branch-protection and repository-ruleset APIs.",
+];
+for (const claim of completeAuditClaims) {
+  assert.ok(phaseAudit.includes(claim), `PHASE1-3-AUDIT.md is missing: ${claim}`);
 }
 
 const orderReadmeClaims = [
