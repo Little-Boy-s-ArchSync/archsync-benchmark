@@ -60,6 +60,16 @@ pnpm demo:case09
 
 Each command copies the clean baseline to a temporary directory, applies one real patch, scans the resulting TypeScript source and checks the predicted classification against ground truth. The temporary directory is removed afterward.
 
+Phase 3 Git-diff demo commands create a temporary Git baseline, apply the same real patches, run the cold and cache-hit incremental checks, and return success only when the merge decision matches ground truth:
+
+```bash
+pnpm demo:phase3:pass
+pnpm demo:phase3:block
+pnpm demo:phase3:review
+```
+
+The three commands demonstrate the complete pull-request contract without leaving temporary repositories or generated reports in the workspace.
+
 Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
 
 ```bash
