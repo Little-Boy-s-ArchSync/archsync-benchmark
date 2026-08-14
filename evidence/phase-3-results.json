@@ -1,0 +1,1522 @@
+{
+  "phase": 3,
+  "release": "v0.3",
+  "dependencies": {
+    "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#304f4ac48137e011ec5f7fd85071a89502c02ada",
+    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#97109c8acab1a34722b0ec0e7511ded2c5362d4a"
+  },
+  "protocol": {
+    "cases": 20,
+    "patch_isolation": "Each patch is applied to a fresh Git repository committed from the unchanged Order Platform baseline.",
+    "analyses_per_case": 2,
+    "merge_base": "HEAD baseline versus patched working tree",
+    "cache_protocol": "First execution must miss; identical second execution must hit and produce the same normalized result."
+  },
+  "provenance": {
+    "manifest_sha256": "5d3ce2976dfcce59796dd58cee60dce51233e0f44fde8c41bd89b013e7f23e92",
+    "architecture_sha256": "4987b08851c2cbc55eaa1ba2c4d9ec3bd70480f19cec7aed747aeaeaac3cf4a5",
+    "baseline_tree_sha256": "4f4d4045682401c93085c2c4afa3672c81a6fae5745bc867dcb100014b088e12",
+    "patch_set_sha256": "4d2fbe2d0dcbd61f33999d1960ee10cce3b0e11f0ae3201d17b89050b703640d",
+    "guardian_artifact_sha256": "7e8375276af06f29967f7246bd039f6a09143abcf597eca5d30a337726f09743",
+    "normalized_results_sha256": "97139aae7c3c1d724499f3a636a435a484fdc93f6ec94a06bee89530d99fb7b8"
+  },
+  "outcome_counts": {
+    "classification_matches": 20,
+    "decision_matches": 20,
+    "changed_file_matches": 20,
+    "violation_rule_set_matches": 7,
+    "violation_rule_cases": 7,
+    "evidence_file_matches": 11,
+    "evidence_exact_line_matches": 11,
+    "source_evidence_cases": 11,
+    "deterministic_cases": 20,
+    "cache_hits_on_repeat": 20,
+    "total_cases": 20
+  },
+  "incremental_scope": {
+    "parsed_typescript_files": 57,
+    "head_typescript_files": 189,
+    "parsed_fraction": 0.3016,
+    "affected_components_total": 21
+  },
+  "cases": [
+    {
+      "id": "case-01",
+      "title": "Refactor order pricing",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/pricing.ts",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 1,
+          "changed_lines": [
+            {
+              "start": 2,
+              "end": 4
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 3,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-02",
+      "title": "Strengthen order validation",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/validation.ts",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 1,
+          "changed_lines": [
+            {
+              "start": 2,
+              "end": 5
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 3,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-03",
+      "title": "Format frontend currency",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "frontend/src/format.ts",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 1,
+          "changed_lines": [
+            {
+              "start": 2,
+              "end": 4
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "frontend"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-04",
+      "title": "Adjust payment retry policy",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "payment-service/src/retry.ts",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 2,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 1
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "payment-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-05",
+      "title": "Add gateway request context",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "gateway/src/logger.ts",
+          "status": "modified",
+          "additions": 6,
+          "deletions": 2,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 6
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "gateway"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-06",
+      "title": "Frontend bypasses order flow",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-001"
+      ],
+      "actual_rule_ids": [
+        "ARCH-001"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "frontend/src/app.ts",
+          "status": "modified",
+          "additions": 9,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 2,
+              "end": 2
+            },
+            {
+              "start": 13,
+              "end": 20
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "frontend"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "frontend|http|payment-service"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-001",
+          "kind": "deny-rule",
+          "rule_id": "ARCH-001",
+          "edge": "frontend|http|payment-service",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 14,
+              "column": 26,
+              "detector": "typescript-fetch"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "frontend|http|payment-service",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 14,
+              "column": 26,
+              "detector": "typescript-fetch"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-07",
+      "title": "Frontend opens a direct database connection",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-002"
+      ],
+      "actual_rule_ids": [
+        "ARCH-002"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "frontend/src/app.ts",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 4,
+              "end": 9
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "frontend"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "frontend|data|postgres"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-002",
+          "kind": "deny-rule",
+          "rule_id": "ARCH-002",
+          "edge": "frontend|data|postgres",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "frontend|data|postgres",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-08",
+      "title": "Order Service stops orchestrating payment",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-004"
+      ],
+      "actual_rule_ids": [
+        "ARCH-004"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/service.ts",
+          "status": "modified",
+          "additions": 0,
+          "deletions": 6,
+          "changed_lines": []
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": [
+          "order-service|http|payment-service"
+        ]
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-004",
+          "kind": "required-edge",
+          "rule_id": "ARCH-004",
+          "edge": "order-service|http|payment-service",
+          "source_evidence": [
+            {
+              "file": "order-service/src/service.ts",
+              "line": 8,
+              "column": 3,
+              "detector": "component-root"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "order-service|http|payment-service",
+          "change": "removed",
+          "source_evidence": [
+            {
+              "file": "order-service/src/service.ts",
+              "line": 8,
+              "column": 3,
+              "detector": "component-root"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 3,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-09",
+      "title": "Add Redis order cache",
+      "expected_classification": "evolution",
+      "actual_classification": "evolution",
+      "expected_decision": "REVIEW",
+      "actual_decision": "REVIEW",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/cache.ts",
+          "status": "added",
+          "additions": 13,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 13
+            }
+          ]
+        },
+        {
+          "path": "order-service/src/service.ts",
+          "status": "modified",
+          "additions": 4,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 11,
+              "end": 11
+            },
+            {
+              "start": 13,
+              "end": 13
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [
+          "redis"
+        ],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "order-service|data|redis"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "component": "redis",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-service/src/cache.ts",
+              "line": 12,
+              "column": 9,
+              "detector": "typescript-redis"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-002",
+          "kind": "architecture-evolution",
+          "edge": "order-service|data|redis",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-service/src/cache.ts",
+              "line": 12,
+              "column": 9,
+              "detector": "typescript-redis"
+            },
+            {
+              "file": "order-service/src/cache.ts",
+              "line": 8,
+              "column": 17,
+              "detector": "typescript-redis"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 4,
+      "head_scanned_files": 10
+    },
+    {
+      "id": "case-10",
+      "title": "Introduce asynchronous order processing",
+      "expected_classification": "evolution",
+      "actual_classification": "evolution",
+      "expected_decision": "REVIEW",
+      "actual_decision": "REVIEW",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/events.ts",
+          "status": "added",
+          "additions": 11,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 11
+            }
+          ]
+        },
+        {
+          "path": "order-service/src/service.ts",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 12,
+              "end": 12
+            }
+          ]
+        },
+        {
+          "path": "order-worker/src/worker.ts",
+          "status": "added",
+          "additions": 14,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 14
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service",
+        "order-worker"
+      ],
+      "architecture_delta": {
+        "added_nodes": [
+          "order-events",
+          "order-worker"
+        ],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "order-events|async|order-worker",
+          "order-service|async|order-events"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "component": "order-events",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-worker/src/worker.ts",
+              "line": 8,
+              "column": 9,
+              "detector": "typescript-amqp-consume"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-002",
+          "kind": "architecture-evolution",
+          "component": "order-worker",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-worker/src/worker.ts",
+              "line": 6,
+              "column": 3,
+              "detector": "component-root"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-003",
+          "kind": "architecture-evolution",
+          "edge": "order-events|async|order-worker",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-worker/src/worker.ts",
+              "line": 8,
+              "column": 9,
+              "detector": "typescript-amqp-consume"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-004",
+          "kind": "architecture-evolution",
+          "edge": "order-service|async|order-events",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-service/src/events.ts",
+              "line": 8,
+              "column": 3,
+              "detector": "typescript-amqp-publish"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 5,
+      "head_scanned_files": 11
+    },
+    {
+      "id": "case-11",
+      "title": "Document a forbidden endpoint without calling it",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "frontend/src/notes.ts",
+          "status": "added",
+          "additions": 4,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 4
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "frontend"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 3,
+      "head_scanned_files": 10
+    },
+    {
+      "id": "case-12",
+      "title": "Import a PostgreSQL type without opening a connection",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/db-types.ts",
+          "status": "added",
+          "additions": 3,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 3
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 4,
+      "head_scanned_files": 10
+    },
+    {
+      "id": "case-13",
+      "title": "Use an in-memory cache with a Redis import present",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/local-cache.ts",
+          "status": "added",
+          "additions": 8,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 8
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 4,
+      "head_scanned_files": 10
+    },
+    {
+      "id": "case-14",
+      "title": "Publish to a local logger with AMQP imported",
+      "expected_classification": "no-impact",
+      "actual_classification": "no-impact",
+      "expected_decision": "PASS",
+      "actual_decision": "PASS",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "gateway/src/events-log.ts",
+          "status": "added",
+          "additions": 8,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 8
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "gateway"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": []
+      },
+      "introduced_findings": [],
+      "incremental_scanned_files": 3,
+      "head_scanned_files": 10
+    },
+    {
+      "id": "case-15",
+      "title": "Gateway queries PostgreSQL directly",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-003",
+        "ARCH-005"
+      ],
+      "actual_rule_ids": [
+        "ARCH-003",
+        "ARCH-005"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "gateway/src/server.ts",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 4,
+              "end": 9
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "gateway"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "gateway|data|postgres"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-003",
+          "kind": "deny-rule",
+          "rule_id": "ARCH-003",
+          "edge": "gateway|data|postgres",
+          "source_evidence": [
+            {
+              "file": "gateway/src/server.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        },
+        {
+          "id": "ARCH-005",
+          "kind": "allow-rule",
+          "rule_id": "ARCH-005",
+          "edge": "gateway|data|postgres",
+          "source_evidence": [
+            {
+              "file": "gateway/src/server.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "gateway|data|postgres",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "gateway/src/server.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-16",
+      "title": "Gateway bypasses the allowed downstream service",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-005"
+      ],
+      "actual_rule_ids": [
+        "ARCH-005"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "gateway/src/server.ts",
+          "status": "modified",
+          "additions": 5,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 2,
+              "end": 6
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "gateway"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "gateway|http|payment-service"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-005",
+          "kind": "allow-rule",
+          "rule_id": "ARCH-005",
+          "edge": "gateway|http|payment-service",
+          "source_evidence": [
+            {
+              "file": "gateway/src/server.ts",
+              "line": 5,
+              "column": 10,
+              "detector": "typescript-fetch"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "gateway|http|payment-service",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "gateway/src/server.ts",
+              "line": 5,
+              "column": 10,
+              "detector": "typescript-fetch"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-17",
+      "title": "Frontend loses every path to Order Service",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-006"
+      ],
+      "actual_rule_ids": [
+        "ARCH-006"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "frontend/src/app.ts",
+          "status": "modified",
+          "additions": 1,
+          "deletions": 8,
+          "changed_lines": [
+            {
+              "start": 2,
+              "end": 2
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "frontend"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [],
+        "removed_edges": [
+          "frontend|http|gateway"
+        ]
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-006",
+          "kind": "required-path",
+          "rule_id": "ARCH-006",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 2,
+              "column": 3,
+              "detector": "component-root"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "frontend|http|gateway",
+          "change": "removed",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 2,
+              "column": 3,
+              "detector": "component-root"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-18",
+      "title": "Frontend accesses PostgreSQL through an aliased Pool",
+      "expected_classification": "violation",
+      "actual_classification": "violation",
+      "expected_decision": "BLOCK",
+      "actual_decision": "BLOCK",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [
+        "ARCH-002"
+      ],
+      "actual_rule_ids": [
+        "ARCH-002"
+      ],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "frontend/src/app.ts",
+          "status": "modified",
+          "additions": 8,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 4,
+              "end": 9
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "frontend"
+      ],
+      "architecture_delta": {
+        "added_nodes": [],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "frontend|data|postgres"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "ARCH-002",
+          "kind": "deny-rule",
+          "rule_id": "ARCH-002",
+          "edge": "frontend|data|postgres",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "edge": "frontend|data|postgres",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "frontend/src/app.ts",
+              "line": 7,
+              "column": 24,
+              "detector": "typescript-pg"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 2,
+      "head_scanned_files": 9
+    },
+    {
+      "id": "case-19",
+      "title": "Add a Fraud Service integration",
+      "expected_classification": "evolution",
+      "actual_classification": "evolution",
+      "expected_decision": "REVIEW",
+      "actual_decision": "REVIEW",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "order-service/src/fraud.ts",
+          "status": "added",
+          "additions": 7,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 7
+            }
+          ]
+        },
+        {
+          "path": "order-service/src/service.ts",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 12,
+              "end": 12
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "order-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [
+          "fraud-service"
+        ],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "order-service|http|fraud-service"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "component": "fraud-service",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-service/src/fraud.ts",
+              "line": 4,
+              "column": 9,
+              "detector": "typescript-fetch"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-002",
+          "kind": "architecture-evolution",
+          "edge": "order-service|http|fraud-service",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "order-service/src/fraud.ts",
+              "line": 4,
+              "column": 9,
+              "detector": "typescript-fetch"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 4,
+      "head_scanned_files": 10
+    },
+    {
+      "id": "case-20",
+      "title": "Add a payment risk cache with a Redis hash",
+      "expected_classification": "evolution",
+      "actual_classification": "evolution",
+      "expected_decision": "REVIEW",
+      "actual_decision": "REVIEW",
+      "classification_match": true,
+      "decision_match": true,
+      "changed_files_match": true,
+      "expected_rule_ids": [],
+      "actual_rule_ids": [],
+      "rule_match": true,
+      "evidence_file_match": true,
+      "evidence_exact_line_match": true,
+      "deterministic": true,
+      "cache_hit_on_repeat": true,
+      "changed_files": [
+        {
+          "path": "payment-service/src/risk-cache.ts",
+          "status": "added",
+          "additions": 7,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 7
+            }
+          ]
+        },
+        {
+          "path": "payment-service/src/service.ts",
+          "status": "modified",
+          "additions": 3,
+          "deletions": 0,
+          "changed_lines": [
+            {
+              "start": 1,
+              "end": 2
+            },
+            {
+              "start": 10,
+              "end": 10
+            }
+          ]
+        }
+      ],
+      "affected_components": [
+        "payment-service"
+      ],
+      "architecture_delta": {
+        "added_nodes": [
+          "payment-cache"
+        ],
+        "removed_nodes": [],
+        "changed_nodes": [],
+        "added_edges": [
+          "payment-service|data|payment-cache"
+        ],
+        "removed_edges": []
+      },
+      "introduced_findings": [
+        {
+          "id": "EVOLUTION-001",
+          "kind": "architecture-evolution",
+          "component": "payment-cache",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "payment-service/src/risk-cache.ts",
+              "line": 6,
+              "column": 9,
+              "detector": "typescript-redis"
+            }
+          ]
+        },
+        {
+          "id": "EVOLUTION-002",
+          "kind": "architecture-evolution",
+          "edge": "payment-service|data|payment-cache",
+          "change": "added",
+          "source_evidence": [
+            {
+              "file": "payment-service/src/risk-cache.ts",
+              "line": 6,
+              "column": 9,
+              "detector": "typescript-redis"
+            }
+          ]
+        }
+      ],
+      "incremental_scanned_files": 3,
+      "head_scanned_files": 10
+    }
+  ],
+  "environment": {
+    "platform": "win32",
+    "os_release": "10.0.26200",
+    "node": "v22.16.0",
+    "cpu": "13th Gen Intel(R) Core(TM) i7-13650HX",
+    "logical_cpus": 20
+  },
+  "performance": {
+    "samples_per_mode": 20,
+    "cold_median_ms": 549.3,
+    "cold_p95_ms": 561.91,
+    "warm_median_ms": 255.89,
+    "warm_p95_ms": 262.68,
+    "cold_total_ms": [
+      572.86,
+      540.2,
+      543.6,
+      557.71,
+      548.24,
+      549.28,
+      546.34,
+      552.6,
+      559,
+      549.79,
+      545.22,
+      548.91,
+      549.3,
+      553,
+      551.69,
+      546.53,
+      546.22,
+      561.91,
+      558.11,
+      550
+    ],
+    "warm_total_ms": [
+      264.65,
+      251.71,
+      253.44,
+      253.82,
+      256.03,
+      261.41,
+      249.85,
+      256.7,
+      257.61,
+      258.78,
+      256.56,
+      253.77,
+      252.23,
+      252.9,
+      259.68,
+      262.68,
+      258.62,
+      251.22,
+      254.59,
+      255.89
+    ]
+  }
+}

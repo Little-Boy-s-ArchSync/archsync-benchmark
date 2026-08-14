@@ -3,9 +3,9 @@
   "release": "v0.2",
   "dependencies": {
     "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#304f4ac48137e011ec5f7fd85071a89502c02ada",
-    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#6677c462c685c9eb54a266c07cd43d0a7f6a1a77"
+    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#97109c8acab1a34722b0ec0e7511ded2c5362d4a"
   },
-  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#6677c462c685c9eb54a266c07cd43d0a7f6a1a77",
+  "guardian_dependency": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#97109c8acab1a34722b0ec0e7511ded2c5362d4a",
   "runtime_artifacts": {
     "core": {
       "package": "@archsync/core",
@@ -14,8 +14,8 @@
     },
     "guardian": {
       "package": "@archsync/guardian",
-      "file": "vendor/archsync-guardian-0.2.0-6677c46.tgz",
-      "sha256": "05da612cdaca2b91965667f6c59d8ac50098b5e2e1bd7dd4706b6f096878bc41"
+      "file": "vendor/archsync-guardian-0.3.0.tgz",
+      "sha256": "7e8375276af06f29967f7246bd039f6a09143abcf597eca5d30a337726f09743"
     }
   },
   "evaluation_protocol": {

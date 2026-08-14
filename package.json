@@ -1,6 +1,6 @@
 {
   "name": "archsync-benchmark",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@11.16.0",
@@ -18,15 +18,17 @@
     "phase2:update": "node scripts/phase2-evidence.mjs --write",
     "phase2:verify": "node scripts/phase2-evidence.mjs",
     "phase2:snapshot": "node scripts/validate-phase2-snapshot.mjs",
+    "phase3:update": "node scripts/phase3-evidence.mjs --write",
+    "phase3:verify": "node scripts/phase3-evidence.mjs",
     "patterns:update": "node scripts/pattern-corpus-evidence.mjs --write",
     "patterns:baseline:verify": "node scripts/validate-pattern-baseline.mjs",
     "patterns:verify": "node scripts/pattern-corpus-evidence.mjs",
     "demo:case06": "node scripts/demo-case.mjs case-06",
     "demo:case09": "node scripts/demo-case.mjs case-09",
-    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify"
+    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify"
   },
   "dependencies": {
     "@archsync/core": "file:vendor/archsync-core-0.1.0-304f4ac.tgz",
-    "@archsync/guardian": "file:vendor/archsync-guardian-0.2.0-6677c46.tgz"
+    "@archsync/guardian": "file:vendor/archsync-guardian-0.3.0.tgz"
   }
 }

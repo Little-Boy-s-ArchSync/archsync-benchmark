@@ -1,6 +1,6 @@
-# Phase 1-2 benchmark evidence
+# Phase 1-3 benchmark evidence
 
-This evidence pack proves the benchmark properties required by the ArchSync Phase 1 and Phase 2 exit gates. The canonical machine-readable records are [`order-platform/ground-truth.json`](order-platform/ground-truth.json), [`evidence/phase-2-results.json`](evidence/phase-2-results.json), and the detector-corpus results under [`evidence/`](evidence/).
+This evidence pack proves the benchmark properties required by the ArchSync Phase 1, Phase 2 and Phase 3 exit gates. The canonical machine-readable records are [`order-platform/ground-truth.json`](order-platform/ground-truth.json), [`evidence/phase-2-results.json`](evidence/phase-2-results.json), [`evidence/phase-3-results.json`](evidence/phase-3-results.json), and the detector-corpus results under [`evidence/`](evidence/).
 
 ## Case matrix
 
@@ -55,6 +55,9 @@ The gate proves:
 - classification, rule ID, evidence file, exact evidence line and determinism gates are enforced;
 - the 40-signal detector corpus validates both positive signals and hard negatives;
 - the frozen v0.1 result is provenance-bound and checked without being rewritten.
+- the same 20 patches run as isolated Git diffs with cold and cache-hit baseline graph checks;
+- all Git-diff decisions, changed-file sets, violation rule sets and finding evidence match ground truth;
+- each repeated Git-diff result is structurally identical and uses component-incremental analysis.
 
 ## Phase 2 measured result
 
@@ -75,6 +78,21 @@ The evidence artifact records the denominators above rather than presenting a ba
 patch set, pinned Core and Guardian revisions, and the two executions performed for
 the baseline and for every case (`42` analyzer executions in one D1 evaluation).
 
+## Phase 3 measured result
+
+The canonical Git-diff result is [`evidence/phase-3-results.json`](evidence/phase-3-results.json):
+
+- classification agreement: `20/20` cases;
+- merge-decision agreement: `20/20` cases;
+- changed-file agreement: `20/20` cases;
+- exact violation rule-set agreement: `7/7` violation cases;
+- expected evidence file and exact-line agreement: `11/11` finding-bearing cases;
+- deterministic cold/warm replay: `20/20` cases;
+- baseline-cache hits on the repeated run: `20/20` cases;
+- component-incremental parsing: `57/189` TypeScript file instances (`0.3016`).
+
+The committed performance samples were measured on the environment recorded in the artifact. Cold median/p95 was `549.30/561.91 ms`; warm median/p95 was `255.89/262.68 ms` across 20 cases per mode. These numbers include Git diff discovery, cache load or reconstruction, incremental AST analysis and conformance evaluation. They are evidence for this controlled machine and corpus only.
+
 ## Detector challenge result
 
 The controlled TypeScript detector corpus contains five detector groups with four
@@ -91,6 +109,7 @@ Regenerate and verify after an intentional analyzer, fixture or ground-truth cha
 
 ```bash
 pnpm phase2:update
+pnpm phase3:update
 pnpm verify
 ```
 
