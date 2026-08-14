@@ -28,6 +28,7 @@
     "demo:phase3:pass": "node scripts/demo-phase3.mjs case-01",
     "demo:phase3:block": "node scripts/demo-phase3.mjs case-06",
     "demo:phase3:review": "node scripts/demo-phase3.mjs case-09",
+    "demo:phase3": "pnpm demo:phase3:pass && pnpm demo:phase3:block && pnpm demo:phase3:review",
     "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify"
   },
   "dependencies": {

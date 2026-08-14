@@ -34,6 +34,22 @@ pnpm install --frozen-lockfile
 pnpm verify
 ```
 
+## Clean-checkout quickstart
+
+The Phase 3 MVP can be reproduced from this repository alone because Core and Guardian are pinned as SHA-256-verified package artifacts. On a machine with Git and Node.js 22 or later:
+
+```bash
+git clone https://github.com/Little-Boy-s-ArchSync/archsync-benchmark.git
+cd archsync-benchmark
+corepack enable
+corepack prepare pnpm@11.16.0 --activate
+pnpm install --frozen-lockfile
+pnpm demo:phase3
+pnpm phase3:verify
+```
+
+`demo:phase3` executes one real `PASS`, one `BLOCK`, and one `REVIEW` patch. The clean GitHub Actions jobs execute the full verifier and this same demo command on both Ubuntu and Windows, providing the reproducible-machine check for the roadmap's 15-minute quickstart gate. Shared-runner duration is operational evidence for those runs, not a universal installation-time guarantee.
+
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
 Expected Phase 2 result:
@@ -74,7 +90,7 @@ The three commands demonstrate the complete pull-request contract without leavin
 
 The repository includes [`.github/workflows/architecture-gate.yml`](.github/workflows/architecture-gate.yml) as a live consumer of Guardian v0.3. For a pull request that changes the Order Platform model, source tree, or pinned Guardian artifact, the workflow fetches full Git history, restores the baseline graph cache, checks the proposed source against the merge base, emits GitHub annotations, and uploads the Markdown decision report.
 
-Configure this workflow as a required status check. The approved model must also be protected with CODEOWNERS or an equivalent architecture-owner policy. ArchSync never rewrites or self-approves `architecture.yaml`; without repository approval policy, a contributor could change code and contract together and bypass the intended governance boundary.
+Configure this workflow as a required status check when the repository plan supports branch protection. [`.github/CODEOWNERS`](.github/CODEOWNERS) assigns the current architecture contract to a real repository owner so model changes request review. ArchSync never rewrites or self-approves `architecture.yaml`; without an enforced repository approval policy, a contributor with merge authority could still change code and contract together and bypass the intended governance boundary.
 
 Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
 

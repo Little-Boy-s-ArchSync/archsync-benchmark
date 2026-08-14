@@ -28,6 +28,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm verify
+      - name: Reproduce PASS, BLOCK and REVIEW demo
+        run: pnpm demo:phase3
       - name: Ensure committed evidence is current
         run: git diff --exit-code -- evidence
       - name: Upload benchmark evidence
