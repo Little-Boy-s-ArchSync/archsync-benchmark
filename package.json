@@ -10,6 +10,7 @@
     "validate:benchmark": "archsync benchmark order-platform/ground-truth.json",
     "validate:vendor": "node scripts/validate-vendor-artifacts.mjs",
     "validate:ground-truth": "node scripts/validate-ground-truth.mjs",
+    "validate:docs": "node scripts/validate-documentation.mjs",
     "validate:patches": "node scripts/validate-patches.mjs",
     "validate:patterns": "node scripts/validate-pattern-corpus.mjs",
     "integrity:update": "node scripts/benchmark-integrity.mjs --write",
@@ -22,7 +23,7 @@
     "patterns:verify": "node scripts/pattern-corpus-evidence.mjs",
     "demo:case06": "node scripts/demo-case.mjs case-06",
     "demo:case09": "node scripts/demo-case.mjs case-09",
-    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify"
+    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify"
   },
   "dependencies": {
     "@archsync/core": "file:vendor/archsync-core-0.1.0-304f4ac.tgz",
