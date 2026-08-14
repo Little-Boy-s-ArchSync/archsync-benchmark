@@ -1,0 +1,14 @@
+diff --git a/gateway/src/events-log.ts b/gateway/src/events-log.ts
+new file mode 100644
+--- /dev/null
++++ b/gateway/src/events-log.ts
+@@ -0,0 +1,8 @@
++import { connect } from "amqplib";
++
++const auditLogger = { publish: (message: string) => console.info(message) };
++
++export function logEvent(message: string): void {
++  void connect;
++  auditLogger.publish(message);
++}
+

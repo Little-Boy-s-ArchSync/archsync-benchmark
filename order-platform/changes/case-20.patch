@@ -1,0 +1,29 @@
+diff --git a/payment-service/src/service.ts b/payment-service/src/service.ts
+--- a/payment-service/src/service.ts
++++ b/payment-service/src/service.ts
+@@ -1,3 +1,5 @@
++import { rememberPaymentRisk } from "./risk-cache.js";
++
+ import { Client } from "pg";
+ 
+ const database = new Client({
+@@ -5,6 +7,7 @@ const database = new Client({
+ });
+ 
+ export async function capturePayment(payment: unknown): Promise<void> {
++  await rememberPaymentRisk("latest", payment);
+   await savePayment(payment);
+ }
+ 
+diff --git a/payment-service/src/risk-cache.ts b/payment-service/src/risk-cache.ts
+new file mode 100644
+--- /dev/null
++++ b/payment-service/src/risk-cache.ts
+@@ -0,0 +1,7 @@
++import { createClient } from "redis";
++
++const paymentCache = createClient({ url: "redis://payment-cache:6379" });
++
++export async function rememberPaymentRisk(id: string, value: unknown): Promise<void> {
++  await paymentCache.hSet("risk", id, JSON.stringify(value));
++}

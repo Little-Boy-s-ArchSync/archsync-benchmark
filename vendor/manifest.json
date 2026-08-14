@@ -11,9 +11,9 @@
     "guardian": {
       "package": "@archsync/guardian",
       "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
-      "source_commit": "e1cd989568568d88849b80254dda73403f3aa910",
-      "file": "vendor/archsync-guardian-0.1.0-e1cd989.tgz",
-      "sha256": "2fd7a085e33859d9155a68660aa4a1a33d4c4a1797f9212fafef54f640382f9f"
+      "source_commit": "6677c462c685c9eb54a266c07cd43d0a7f6a1a77",
+      "file": "vendor/archsync-guardian-0.2.0-6677c46.tgz",
+      "sha256": "05da612cdaca2b91965667f6c59d8ac50098b5e2e1bd7dd4706b6f096878bc41"
     }
   }
 }

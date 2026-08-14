@@ -16,14 +16,14 @@ function mutate(callback) {
 
 test("canonical ground truth satisfies the Phase 1 contract", () => {
   assert.deepEqual(validateGroundTruth(canonical), {
-    "no-impact": 5,
-    violation: 3,
-    evolution: 2,
+    "no-impact": 9,
+    violation: 7,
+    evolution: 4,
   });
 });
 
 const mutations = [
-  ["case count", (value) => value.cases.pop(), /exactly 10 cases/],
+  ["case count", (value) => value.cases.pop(), /distribution total differs/],
   ["duplicate id", (value) => { value.cases[1].id = "case-01"; }, /Duplicate case id/],
   ["classification", (value) => { value.cases[0].expected.classification = "violation"; }, /category differs/],
   ["owner", (value) => { value.cases[0].owner = ""; }, /owner, patch and changed_files/],

@@ -70,4 +70,4 @@ for (const scenario of groundTruth.cases) {
   }
 }
 
-console.log(`VALID PATCHES (${groundTruth.cases.length}/10 apply cleanly)`);
+console.log(`VALID PATCHES (${groundTruth.cases.length}/${groundTruth.cases.length} apply cleanly)`);

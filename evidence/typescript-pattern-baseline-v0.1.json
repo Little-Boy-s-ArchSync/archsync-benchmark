@@ -1,0 +1,150 @@
+{
+  "phase": 2,
+  "release": "v0.1-baseline",
+  "purpose": "Frozen v0.1 analyzer result on the later TypeScript detector challenge corpus",
+  "runtime_artifact": {
+    "package": "@archsync/guardian",
+    "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
+    "source_commit": "e1cd989568568d88849b80254dda73403f3aa910",
+    "file": "vendor/archsync-guardian-0.1.0-e1cd989.tgz",
+    "sha256": "2fd7a085e33859d9155a68660aa4a1a33d4c4a1797f9212fafef54f640382f9f"
+  },
+  "provenance": {
+    "manifest_sha256": "cf87bd2d9f6ea48b75b8c31fdd52a1c671ba707425e6fbfcabd3673f1198af69",
+    "architecture_sha256": "0093826b90af149b48104e3716be4b7e5c418e7769721724ece5bdbbb1e4c75f",
+    "repository_tree_sha256": "8437870e87a033632557484cfa854b83271dab97c493adda620deb1041e62876",
+    "result_sha256": "01e56ed04d63118b789d16fb203fc6a1d11d890b61afced8bd21dc16911684c8"
+  },
+  "result": {
+    "contract_version": "0.1",
+    "benchmark": "typescript-detector-patterns",
+    "valid": false,
+    "analyzer_executions": 2,
+    "scanned_files": 5,
+    "deterministic": true,
+    "metrics": {
+      "overall": {
+        "positive_signals": 20,
+        "negative_signals": 20,
+        "true_positive": 18,
+        "false_positive": 4,
+        "false_negative": 2,
+        "true_negative": 16,
+        "precision": 0.818182,
+        "recall": 0.9,
+        "f1": 0.857143,
+        "specificity": 0.8
+      },
+      "by_detector": {
+        "typescript-fetch": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "typescript-pg": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 1,
+          "false_negative": 0,
+          "true_negative": 3,
+          "precision": 0.8,
+          "recall": 1,
+          "f1": 0.888889,
+          "specificity": 0.75
+        },
+        "typescript-redis": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 2,
+          "false_positive": 0,
+          "false_negative": 2,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 0.5,
+          "f1": 0.666667,
+          "specificity": 1
+        },
+        "typescript-amqp-publish": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 2,
+          "false_negative": 0,
+          "true_negative": 2,
+          "precision": 0.666667,
+          "recall": 1,
+          "f1": 0.8,
+          "specificity": 0.5
+        },
+        "typescript-amqp-consume": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 1,
+          "false_negative": 0,
+          "true_negative": 3,
+          "precision": 0.8,
+          "recall": 1,
+          "f1": 0.888889,
+          "specificity": 0.75
+        }
+      }
+    },
+    "unexpected_detections": [
+      {
+        "edge": "order-events|async|worker",
+        "detector": "typescript-amqp-consume",
+        "file": "worker/src/amqp-consume-patterns.ts",
+        "line": 19,
+        "column": 9
+      },
+      {
+        "edge": "service|async|order-events",
+        "detector": "typescript-amqp-publish",
+        "file": "service/src/amqp-publish-patterns.ts",
+        "line": 20,
+        "column": 3
+      },
+      {
+        "edge": "service|async|order-events",
+        "detector": "typescript-amqp-publish",
+        "file": "service/src/amqp-publish-patterns.ts",
+        "line": 21,
+        "column": 3
+      },
+      {
+        "edge": "service|data|postgres",
+        "detector": "typescript-pg",
+        "file": "service/src/pg-patterns.ts",
+        "line": 17,
+        "column": 9
+      }
+    ],
+    "missed_detections": [
+      {
+        "id": "redis-p02",
+        "edge": "service|data|redis",
+        "detector": "typescript-redis",
+        "file": "service/src/redis-patterns.ts",
+        "line": 12,
+        "pattern": "Redis hash operation"
+      },
+      {
+        "id": "redis-p03",
+        "edge": "service|data|redis",
+        "detector": "typescript-redis",
+        "file": "service/src/redis-patterns.ts",
+        "line": 13,
+        "pattern": "namespace list operation"
+      }
+    ]
+  }
+}

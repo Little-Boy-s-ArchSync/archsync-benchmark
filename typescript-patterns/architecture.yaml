@@ -1,0 +1,41 @@
+version: "0.1"
+metadata:
+  name: typescript-detector-patterns
+  description: Controlled positive and hard-negative signals for the ArchSync TypeScript analyzer.
+  owners:
+    - research-team
+  tags:
+    - benchmark
+    - typescript
+    - detector-corpus
+components:
+  frontend:
+    type: frontend
+    layer: experience
+    technology: TypeScript
+  service:
+    type: service
+    layer: domain
+    technology: TypeScript
+  worker:
+    type: worker
+    layer: domain
+    technology: TypeScript
+  gateway:
+    type: gateway
+    layer: edge
+    technology: Node.js
+  postgres:
+    type: database
+    layer: data
+    technology: PostgreSQL
+  redis:
+    type: cache
+    layer: data
+    technology: Redis
+  order-events:
+    type: queue
+    layer: integration
+    technology: RabbitMQ
+relationships: []
+

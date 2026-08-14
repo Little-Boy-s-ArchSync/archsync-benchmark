@@ -30,10 +30,10 @@ assert.deepEqual(evidence.evaluation_protocol, {
   patch_isolation: "Each patch is applied independently to a fresh copy of the unchanged baseline.",
   baseline_analyses: 2,
   analyses_per_case: 2,
-  total_analyzer_executions: 22,
-  classification_cases: 10,
-  violation_rule_cases: 3,
-  source_evidence_cases: 5,
+  total_analyzer_executions: 42,
+  classification_cases: 20,
+  violation_rule_cases: 7,
+  source_evidence_cases: 11,
 });
 assert.deepEqual(evidence.provenance, {
   manifest_sha256: sha256(groundTruthSource),
@@ -43,15 +43,15 @@ assert.deepEqual(evidence.provenance, {
   result_sha256: sha256(JSON.stringify(result)),
 });
 assert.deepEqual(evidence.outcome_counts, {
-  classification_matches: 10,
-  classification_cases: 10,
-  violation_rule_set_matches: 3,
-  violation_rule_cases: 3,
-  evidence_file_matches: 5,
-  evidence_exact_line_matches: 5,
-  source_evidence_cases: 5,
-  deterministic_cases: 10,
-  deterministic_cases_total: 10,
+  classification_matches: 20,
+  classification_cases: 20,
+  violation_rule_set_matches: 7,
+  violation_rule_cases: 7,
+  evidence_file_matches: 11,
+  evidence_exact_line_matches: 11,
+  source_evidence_cases: 11,
+  deterministic_cases: 20,
+  deterministic_cases_total: 20,
 });
 assert.equal(result.valid, true);
 assert.deepEqual(result.cases.map(({ id }) => id), groundTruth.cases.map(({ id }) => id));
@@ -71,4 +71,4 @@ assert.equal(result.cases.every(({ classification_match, rule_match, evidence_fi
   classification_match && rule_match && evidence_file_match && evidence_line_match && deterministic,
 ), true);
 
-console.log("VALID PHASE 2 SNAPSHOT (10/10 cases, node/edge precision/recall and exact evidence gates)");
+console.log("VALID PHASE 2 SNAPSHOT (20/20 cases, node/edge precision/recall and exact evidence gates)");

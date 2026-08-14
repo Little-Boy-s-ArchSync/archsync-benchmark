@@ -1,0 +1,14 @@
+diff --git a/order-service/src/local-cache.ts b/order-service/src/local-cache.ts
+new file mode 100644
+--- /dev/null
++++ b/order-service/src/local-cache.ts
+@@ -0,0 +1,8 @@
++import { createClient } from "redis";
++
++const localCache = new Map<string, string>();
++
++export function readLocal(key: string): string | undefined {
++  void createClient;
++  return localCache.get(key);
++}
+

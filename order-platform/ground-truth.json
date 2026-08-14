@@ -6,17 +6,17 @@
     "repository": "repository",
     "stack": "TypeScript/Node.js",
     "expected_distribution": {
-      "no-impact": 5,
-      "violation": 3,
-      "evolution": 2
+      "no-impact": 9,
+      "violation": 7,
+      "evolution": 4
     },
     "integrity": {
       "algorithm": "sha256",
-      "architecture_sha256": "9f3d7602d5e0e950a8431d3077f0c34314cd305590d5b247584221d4b8ca745f",
+      "architecture_sha256": "4987b08851c2cbc55eaa1ba2c4d9ec3bd70480f19cec7aed747aeaeaac3cf4a5",
       "baseline_tree_sha256": "4f4d4045682401c93085c2c4afa3672c81a6fae5745bc867dcb100014b088e12",
       "baseline_files": 9,
-      "patch_set_sha256": "a4d216d807523aae03b4bd452644a2f1ee787804eb296ae0429fa1ca7adde768",
-      "patch_files": 10
+      "patch_set_sha256": "4d2fbe2d0dcbd61f33999d1960ee10cce3b0e11f0ae3201d17b89050b703640d",
+      "patch_files": 20
     }
   },
   "cases": [
@@ -404,6 +404,407 @@
           {
             "file": "order-service/src/events.ts",
             "line": 8,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": true
+      }
+    },
+    {
+      "id": "case-11",
+      "title": "Document a forbidden endpoint without calling it",
+      "owner": "frontend-team",
+      "category": "no-impact",
+      "risk": "low",
+      "description": "A URL and fetch-like text appear only as documentation and must not create an edge.",
+      "patch": "changes/case-11.patch",
+      "changed_files": [
+        "frontend/src/notes.ts"
+      ],
+      "delta": {},
+      "acceptance_criteria": [
+        "String literals and comments without an executable fetch call do not change the observed graph."
+      ],
+      "expected": {
+        "classification": "no-impact",
+        "findings": [],
+        "evidence": [
+          {
+            "file": "frontend/src/notes.ts",
+            "line": 1,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-12",
+      "title": "Import a PostgreSQL type without opening a connection",
+      "owner": "order-team",
+      "category": "no-impact",
+      "risk": "low",
+      "description": "A type-only pg import must not be mistaken for database access.",
+      "patch": "changes/case-12.patch",
+      "changed_files": [
+        "order-service/src/db-types.ts"
+      ],
+      "delta": {},
+      "acceptance_criteria": [
+        "Importing a pg type without constructing a client or calling query leaves the graph unchanged."
+      ],
+      "expected": {
+        "classification": "no-impact",
+        "findings": [],
+        "evidence": [
+          {
+            "file": "order-service/src/db-types.ts",
+            "line": 3,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-13",
+      "title": "Use an in-memory cache with a Redis import present",
+      "owner": "order-team",
+      "category": "no-impact",
+      "risk": "low",
+      "description": "A local Map get call must not be attributed to an unused Redis factory import.",
+      "patch": "changes/case-13.patch",
+      "changed_files": [
+        "order-service/src/local-cache.ts"
+      ],
+      "delta": {},
+      "acceptance_criteria": [
+        "Only operations on a value returned by the Redis factory create Redis relationships."
+      ],
+      "expected": {
+        "classification": "no-impact",
+        "findings": [],
+        "evidence": [
+          {
+            "file": "order-service/src/local-cache.ts",
+            "line": 7,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-14",
+      "title": "Publish to a local logger with AMQP imported",
+      "owner": "platform-team",
+      "category": "no-impact",
+      "risk": "low",
+      "description": "An unrelated publish method must not become an AMQP relationship.",
+      "patch": "changes/case-14.patch",
+      "changed_files": [
+        "gateway/src/events-log.ts"
+      ],
+      "delta": {},
+      "acceptance_criteria": [
+        "AMQP edges require a channel derived from an amqplib connection, not only a publish-shaped method."
+      ],
+      "expected": {
+        "classification": "no-impact",
+        "findings": [],
+        "evidence": [
+          {
+            "file": "gateway/src/events-log.ts",
+            "line": 7,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-15",
+      "title": "Gateway queries PostgreSQL directly",
+      "owner": "platform-team",
+      "category": "violation",
+      "risk": "high",
+      "description": "Gateway database access violates both the explicit deny rule and its outbound allow-list.",
+      "patch": "changes/case-15.patch",
+      "changed_files": [
+        "gateway/src/server.ts"
+      ],
+      "delta": {
+        "relationships_added": [
+          {
+            "from": "gateway",
+            "to": "postgres",
+            "type": "data"
+          }
+        ]
+      },
+      "acceptance_criteria": [
+        "ARCH-003 and ARCH-005 are both reported for gateway -> postgres with exact source evidence."
+      ],
+      "expected": {
+        "classification": "violation",
+        "findings": [
+          {
+            "id": "ARCH-003",
+            "kind": "deny-rule",
+            "severity": "critical",
+            "from": "gateway",
+            "to": "postgres"
+          },
+          {
+            "id": "ARCH-005",
+            "kind": "allow-rule",
+            "severity": "error",
+            "from": "gateway",
+            "to": "postgres"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "gateway/src/server.ts",
+            "line": 7,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-16",
+      "title": "Gateway bypasses the allowed downstream service",
+      "owner": "platform-team",
+      "category": "violation",
+      "risk": "high",
+      "description": "Gateway calls Payment Service directly, outside its outbound allow-list.",
+      "patch": "changes/case-16.patch",
+      "changed_files": [
+        "gateway/src/server.ts"
+      ],
+      "delta": {
+        "relationships_added": [
+          {
+            "from": "gateway",
+            "to": "payment-service",
+            "type": "http"
+          }
+        ]
+      },
+      "acceptance_criteria": [
+        "ARCH-005 reports gateway -> payment-service as outside the allowed target set."
+      ],
+      "expected": {
+        "classification": "violation",
+        "findings": [
+          {
+            "id": "ARCH-005",
+            "kind": "allow-rule",
+            "severity": "error",
+            "from": "gateway",
+            "to": "payment-service"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "gateway/src/server.ts",
+            "line": 5,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-17",
+      "title": "Frontend loses every path to Order Service",
+      "owner": "frontend-team",
+      "category": "violation",
+      "risk": "high",
+      "description": "Removing the frontend-to-gateway edge breaks a required multi-hop HTTP path.",
+      "patch": "changes/case-17.patch",
+      "changed_files": [
+        "frontend/src/app.ts"
+      ],
+      "delta": {
+        "relationships_removed": [
+          {
+            "from": "frontend",
+            "to": "gateway",
+            "type": "http"
+          }
+        ]
+      },
+      "acceptance_criteria": [
+        "ARCH-006 reports the missing frontend-to-order-service HTTP path."
+      ],
+      "expected": {
+        "classification": "violation",
+        "findings": [
+          {
+            "id": "ARCH-006",
+            "kind": "required-path",
+            "severity": "error",
+            "from": "frontend",
+            "to": "order-service"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "frontend/src/app.ts",
+            "line": 2,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-18",
+      "title": "Frontend accesses PostgreSQL through an aliased Pool",
+      "owner": "frontend-team",
+      "category": "violation",
+      "risk": "high",
+      "description": "An aliased pg Pool still represents direct frontend database access.",
+      "patch": "changes/case-18.patch",
+      "changed_files": [
+        "frontend/src/app.ts"
+      ],
+      "delta": {
+        "relationships_added": [
+          {
+            "from": "frontend",
+            "to": "postgres",
+            "type": "data"
+          }
+        ]
+      },
+      "acceptance_criteria": [
+        "ARCH-002 is reported for an aliased pg Pool and the query line is retained as evidence."
+      ],
+      "expected": {
+        "classification": "violation",
+        "findings": [
+          {
+            "id": "ARCH-002",
+            "kind": "deny-rule",
+            "severity": "critical",
+            "from": "frontend",
+            "to": "postgres"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "frontend/src/app.ts",
+            "line": 7,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": false
+      }
+    },
+    {
+      "id": "case-19",
+      "title": "Add a Fraud Service integration",
+      "owner": "order-team",
+      "category": "evolution",
+      "risk": "medium",
+      "description": "Order Service introduces a new synchronous Fraud Service dependency for review.",
+      "patch": "changes/case-19.patch",
+      "changed_files": [
+        "order-service/src/service.ts",
+        "order-service/src/fraud.ts"
+      ],
+      "delta": {
+        "components_added": {
+          "fraud-service": {
+            "name": "Fraud Service",
+            "type": "service",
+            "layer": "domain",
+            "technology": "Node.js"
+          }
+        },
+        "relationships_added": [
+          {
+            "from": "order-service",
+            "to": "fraud-service",
+            "type": "http"
+          }
+        ]
+      },
+      "acceptance_criteria": [
+        "Fraud Service and order-service -> fraud-service are surfaced as an evolution requiring review."
+      ],
+      "expected": {
+        "classification": "evolution",
+        "findings": [
+          {
+            "id": "EVOLUTION-001",
+            "kind": "architecture-evolution",
+            "severity": "warning",
+            "from": "order-service",
+            "to": "fraud-service"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "order-service/src/fraud.ts",
+            "line": 4,
+            "kind": "source-location"
+          }
+        ],
+        "approval_required": true
+      }
+    },
+    {
+      "id": "case-20",
+      "title": "Add a payment risk cache with a Redis hash",
+      "owner": "payment-team",
+      "category": "evolution",
+      "risk": "medium",
+      "description": "Payment Service introduces a dedicated Redis cache through hSet.",
+      "patch": "changes/case-20.patch",
+      "changed_files": [
+        "payment-service/src/service.ts",
+        "payment-service/src/risk-cache.ts"
+      ],
+      "delta": {
+        "components_added": {
+          "payment-cache": {
+            "name": "Payment Risk Cache",
+            "type": "cache",
+            "layer": "data",
+            "technology": "Redis"
+          }
+        },
+        "relationships_added": [
+          {
+            "from": "payment-service",
+            "to": "payment-cache",
+            "type": "data"
+          }
+        ]
+      },
+      "acceptance_criteria": [
+        "Payment cache topology is detected from hSet and surfaced for architecture approval."
+      ],
+      "expected": {
+        "classification": "evolution",
+        "findings": [
+          {
+            "id": "EVOLUTION-001",
+            "kind": "architecture-evolution",
+            "severity": "warning",
+            "from": "payment-service",
+            "to": "payment-cache"
+          }
+        ],
+        "evidence": [
+          {
+            "file": "payment-service/src/risk-cache.ts",
+            "line": 6,
             "kind": "source-location"
           }
         ],

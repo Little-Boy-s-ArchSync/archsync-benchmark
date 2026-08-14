@@ -1,0 +1,99 @@
+{
+  "version": "0.1",
+  "benchmark": {
+    "id": "typescript-detector-patterns",
+    "architecture": "architecture.yaml",
+    "repository": "repository",
+    "expected_distribution": {
+      "positive": 20,
+      "negative": 20
+    }
+  },
+  "groups": [
+    {
+      "detector": "typescript-fetch",
+      "file": "frontend/src/fetch-patterns.ts",
+      "edge": "frontend|http|gateway",
+      "positive": [
+        { "id": "fetch-p01", "line": 8, "pattern": "HTTP URL literal", "contains": "fetch(\"http://gateway" },
+        { "id": "fetch-p02", "line": 9, "pattern": "environment fallback in template", "contains": "fetch(`${environmentGateway}" },
+        { "id": "fetch-p03", "line": 10, "pattern": "aliased endpoint with concatenation", "contains": "fetch(aliasedGateway +" },
+        { "id": "fetch-p04", "line": 11, "pattern": "parenthesized HTTPS endpoint", "contains": "fetch((secureGateway))" }
+      ],
+      "negative": [
+        { "id": "fetch-n01", "line": 13, "pattern": "URL string without call", "contains": "documentationOnly" },
+        { "id": "fetch-n02", "line": 14, "pattern": "fetch-shaped custom function", "contains": "customFetch" },
+        { "id": "fetch-n03", "line": 15, "pattern": "unsupported URL protocol", "contains": "mailto:" },
+        { "id": "fetch-n04", "line": 16, "pattern": "commented-out fetch", "contains": "documentation only" }
+      ]
+    },
+    {
+      "detector": "typescript-pg",
+      "file": "service/src/pg-patterns.ts",
+      "edge": "service|data|postgres",
+      "positive": [
+        { "id": "pg-p01", "line": 12, "pattern": "aliased Client query", "contains": "client.query" },
+        { "id": "pg-p02", "line": 13, "pattern": "Pool query through DATABASE_URL", "contains": "pool.query" },
+        { "id": "pg-p03", "line": 14, "pattern": "namespace Client query", "contains": "namespaceClient.query" },
+        { "id": "pg-p04", "line": 15, "pattern": "repeated query evidence", "contains": "client.query" }
+      ],
+      "negative": [
+        { "id": "pg-n01", "line": 17, "pattern": "unrelated client query", "contains": "fakeDatabase.query" },
+        { "id": "pg-n02", "line": 18, "pattern": "standalone query function", "contains": "await query" },
+        { "id": "pg-n03", "line": 19, "pattern": "constructed client without query", "contains": "unusedClient" },
+        { "id": "pg-n04", "line": 20, "pattern": "query text inside a string", "contains": "database.query" }
+      ]
+    },
+    {
+      "detector": "typescript-redis",
+      "file": "service/src/redis-patterns.ts",
+      "edge": "service|data|redis",
+      "positive": [
+        { "id": "redis-p01", "line": 11, "pattern": "aliased factory get", "contains": "cache.get" },
+        { "id": "redis-p02", "line": 12, "pattern": "Redis hash operation", "contains": "cache.hSet" },
+        { "id": "redis-p03", "line": 13, "pattern": "namespace list operation", "contains": "namespaceCache.lPush" },
+        { "id": "redis-p04", "line": 14, "pattern": "namespace multi-get operation", "contains": "namespaceCache.mGet" }
+      ],
+      "negative": [
+        { "id": "redis-n01", "line": 16, "pattern": "Map get lookalike", "contains": "localCache.get" },
+        { "id": "redis-n02", "line": 17, "pattern": "logger set lookalike", "contains": "logger.set" },
+        { "id": "redis-n03", "line": 18, "pattern": "client lifecycle call", "contains": "cache.connect" },
+        { "id": "redis-n04", "line": 19, "pattern": "Redis URL without operation", "contains": "redisDocumentation" }
+      ]
+    },
+    {
+      "detector": "typescript-amqp-publish",
+      "file": "service/src/amqp-publish-patterns.ts",
+      "edge": "service|async|order-events",
+      "positive": [
+        { "id": "amqp-publish-p01", "line": 15, "pattern": "aliased connector publish", "contains": "channel.publish" },
+        { "id": "amqp-publish-p02", "line": 16, "pattern": "aliased connector sendToQueue", "contains": "channel.sendToQueue" },
+        { "id": "amqp-publish-p03", "line": 17, "pattern": "namespace connector publish", "contains": "namespaceChannel.publish" },
+        { "id": "amqp-publish-p04", "line": 18, "pattern": "namespace connector sendToQueue", "contains": "namespaceChannel.sendToQueue" }
+      ],
+      "negative": [
+        { "id": "amqp-publish-n01", "line": 20, "pattern": "logger publish lookalike", "contains": "logger.publish" },
+        { "id": "amqp-publish-n02", "line": 21, "pattern": "local queue lookalike", "contains": "localQueue.sendToQueue" },
+        { "id": "amqp-publish-n03", "line": 22, "pattern": "connection lifecycle call", "contains": "connection.close" },
+        { "id": "amqp-publish-n04", "line": 23, "pattern": "publish text inside a string", "contains": "documentation" }
+      ]
+    },
+    {
+      "detector": "typescript-amqp-consume",
+      "file": "worker/src/amqp-consume-patterns.ts",
+      "edge": "order-events|async|worker",
+      "positive": [
+        { "id": "amqp-consume-p01", "line": 14, "pattern": "aliased connector first consumer", "contains": "channel.consume" },
+        { "id": "amqp-consume-p02", "line": 15, "pattern": "aliased connector second consumer", "contains": "channel.consume" },
+        { "id": "amqp-consume-p03", "line": 16, "pattern": "namespace connector first consumer", "contains": "namespaceChannel.consume" },
+        { "id": "amqp-consume-p04", "line": 17, "pattern": "namespace connector second consumer", "contains": "namespaceChannel.consume" }
+      ],
+      "negative": [
+        { "id": "amqp-consume-n01", "line": 19, "pattern": "subscriber consume lookalike", "contains": "subscriber.consume" },
+        { "id": "amqp-consume-n02", "line": 20, "pattern": "channel acknowledgement", "contains": "channel.ack" },
+        { "id": "amqp-consume-n03", "line": 21, "pattern": "commented-out consume", "contains": "ignored" },
+        { "id": "amqp-consume-n04", "line": 22, "pattern": "consume text inside a string", "contains": "documentation" }
+      ]
+    }
+  ]
+}

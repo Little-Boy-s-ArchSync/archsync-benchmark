@@ -1,0 +1,13 @@
+diff --git a/gateway/src/server.ts b/gateway/src/server.ts
+--- a/gateway/src/server.ts
++++ b/gateway/src/server.ts
+@@ -1,4 +1,9 @@
+ const orderServiceUrl = process.env.ORDER_SERVICE_URL ?? "http://order-service:3001";
++const paymentServiceUrl = process.env.PAYMENT_SERVICE_URL ?? "http://payment-service:3002";
++
++export async function forwardPayment(payload: unknown): Promise<Response> {
++  return fetch(`${paymentServiceUrl}/payments`, { method: "POST", body: JSON.stringify(payload) });
++}
+ 
+ export async function forwardOrder(payload: unknown): Promise<Response> {
+   return fetch(`${orderServiceUrl}/orders`, {

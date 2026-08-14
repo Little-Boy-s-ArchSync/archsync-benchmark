@@ -27,7 +27,8 @@ const groundTruthSource = await readFile(manifest, "utf8");
 const groundTruth = JSON.parse(groundTruthSource);
 const result = await evaluatePhase2Benchmark(fileURLToPath(manifest));
 assert.equal(result.valid, true, result.issues.join("\n"));
-assert.equal(result.cases.length, 10);
+assert.equal(result.cases.length, groundTruth.cases.length);
+assert.ok(result.cases.length >= 20, "Expanded Phase 2 benchmark must contain at least 20 cases");
 assert.ok(result.metrics.full_graph_nodes.precision >= 0.85);
 assert.ok(result.metrics.full_graph_nodes.recall >= 0.85);
 assert.ok(result.metrics.full_graph_edges.precision >= 0.85);
@@ -39,7 +40,7 @@ assert.ok(result.metrics.changed_edges.recall >= 0.85);
 assert.equal(result.metrics.classification_accuracy, 1);
 assert.equal(result.metrics.evidence_file_accuracy, 1);
 assert.equal(result.metrics.evidence_line_accuracy, 1);
-assert.equal(result.metrics.deterministic_cases, 10);
+assert.equal(result.metrics.deterministic_cases, groundTruth.cases.length);
 
 const findingCaseIds = new Set(
   groundTruth.cases
@@ -58,7 +59,7 @@ const serializedResult = JSON.stringify(result);
 
 const evidence = {
   phase: 2,
-  release: "v0.1",
+  release: "v0.2",
   dependencies: dependencyPins,
   guardian_dependency: dependencyPins.guardian,
   runtime_artifacts: runtimeArtifacts,
@@ -101,5 +102,5 @@ if (writeMode) {
     serialized,
     "Phase 2 benchmark evidence is stale; run 'pnpm phase2:update' and commit the result",
   );
-  console.log("VALID PHASE 2 BENCHMARK EVIDENCE (10/10 cases, exact source evidence)");
+  console.log(`VALID PHASE 2 BENCHMARK EVIDENCE (${groundTruth.cases.length}/${groundTruth.cases.length} cases, exact source evidence)`);
 }

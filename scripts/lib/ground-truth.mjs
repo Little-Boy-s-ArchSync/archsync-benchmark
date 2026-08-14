@@ -1,4 +1,3 @@
-const expectedDistribution = { "no-impact": 5, violation: 3, evolution: 2 };
 const allowedDeltaKeys = new Set([
   "components_added",
   "components_removed",
@@ -18,8 +17,18 @@ export function validateGroundTruth(groundTruth) {
   if (!isObject(groundTruth) || !isObject(groundTruth.benchmark)) {
     throw new Error("Ground truth must contain benchmark metadata");
   }
-  if (!Array.isArray(groundTruth.cases) || groundTruth.cases.length !== 10) {
-    throw new Error("Ground truth must contain exactly 10 cases");
+  if (!Array.isArray(groundTruth.cases) || groundTruth.cases.length === 0) {
+    throw new Error("Ground truth must contain at least one case");
+  }
+  const expectedDistribution = groundTruth.benchmark.expected_distribution;
+  if (!isObject(expectedDistribution) ||
+      Object.keys(actual).some((category) => !Number.isInteger(expectedDistribution[category]) || expectedDistribution[category] < 0) ||
+      Object.keys(expectedDistribution).some((category) => !(category in actual))) {
+    throw new Error("Benchmark metadata must declare a non-negative distribution for every category");
+  }
+  const declaredTotal = Object.values(expectedDistribution).reduce((sum, count) => sum + count, 0);
+  if (declaredTotal !== groundTruth.cases.length) {
+    throw new Error("Benchmark metadata distribution total differs from the number of cases");
   }
 
   for (const scenario of groundTruth.cases) {
@@ -87,18 +96,14 @@ export function validateGroundTruth(groundTruth) {
   }
 
   const expectedIds = Array.from(
-    { length: 10 },
+    { length: groundTruth.cases.length },
     (_, index) => `case-${String(index + 1).padStart(2, "0")}`,
   );
   if (JSON.stringify([...ids].sort()) !== JSON.stringify(expectedIds)) {
-    throw new Error("Case ids must be contiguous from case-01 through case-10");
+    throw new Error(`Case ids must be contiguous from case-01 through case-${String(groundTruth.cases.length).padStart(2, "0")}`);
   }
   if (JSON.stringify(actual) !== JSON.stringify(expectedDistribution)) {
     throw new Error(`Unexpected distribution: ${JSON.stringify(actual)}`);
   }
-  if (JSON.stringify(groundTruth.benchmark.expected_distribution) !== JSON.stringify(expectedDistribution)) {
-    throw new Error("Benchmark metadata distribution differs from the required 5/3/2 split");
-  }
-
   return actual;
 }

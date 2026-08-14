@@ -1,0 +1,104 @@
+{
+  "phase": 2,
+  "release": "v0.2",
+  "purpose": "Controlled positive and hard-negative TypeScript detector challenge corpus",
+  "runtime_artifact": {
+    "package": "@archsync/guardian",
+    "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
+    "source_commit": "6677c462c685c9eb54a266c07cd43d0a7f6a1a77",
+    "file": "vendor/archsync-guardian-0.2.0-6677c46.tgz",
+    "sha256": "05da612cdaca2b91965667f6c59d8ac50098b5e2e1bd7dd4706b6f096878bc41"
+  },
+  "provenance": {
+    "manifest_sha256": "cf87bd2d9f6ea48b75b8c31fdd52a1c671ba707425e6fbfcabd3673f1198af69",
+    "architecture_sha256": "0093826b90af149b48104e3716be4b7e5c418e7769721724ece5bdbbb1e4c75f",
+    "repository_tree_sha256": "8437870e87a033632557484cfa854b83271dab97c493adda620deb1041e62876",
+    "result_sha256": "d9f41f722925665c76ce54b3f77ab9ff655bde8b5bb978a9531b50ffe013f3e8"
+  },
+  "result": {
+    "contract_version": "0.1",
+    "benchmark": "typescript-detector-patterns",
+    "valid": true,
+    "analyzer_executions": 2,
+    "scanned_files": 5,
+    "deterministic": true,
+    "metrics": {
+      "overall": {
+        "positive_signals": 20,
+        "negative_signals": 20,
+        "true_positive": 20,
+        "false_positive": 0,
+        "false_negative": 0,
+        "true_negative": 20,
+        "precision": 1,
+        "recall": 1,
+        "f1": 1,
+        "specificity": 1
+      },
+      "by_detector": {
+        "typescript-fetch": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "typescript-pg": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "typescript-redis": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "typescript-amqp-publish": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "typescript-amqp-consume": {
+          "positive_signals": 4,
+          "negative_signals": 4,
+          "true_positive": 4,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 4,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        }
+      }
+    },
+    "unexpected_detections": [],
+    "missed_detections": []
+  }
+}

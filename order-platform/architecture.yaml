@@ -79,6 +79,19 @@ rules:
     relationship_type: http
     severity: error
     rationale: Payment orchestration belongs to Order Service.
+  - id: ARCH-005
+    type: allow
+    from: gateway
+    to: order-service
+    severity: error
+    rationale: Gateway traffic may only be forwarded to Order Service.
+  - id: ARCH-006
+    type: require-path
+    from: frontend
+    to: order-service
+    relationship_type: http
+    severity: error
+    rationale: Every frontend request path must reach Order Service through the gateway.
 quality_goals:
   - id: PERF-001
     attribute: performance
