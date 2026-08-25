@@ -1,0 +1,8 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [
+    { "canonical_id": "data/ambiguous-a", "namespace": "any", "aliases": ["ambiguous-db"] },
+    { "canonical_id": "data/ambiguous-b", "namespace": "any", "aliases": ["ambiguous-db"] }
+  ]
+}

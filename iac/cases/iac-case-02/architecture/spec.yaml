@@ -1,0 +1,4 @@
+component: orders-cache
+kind: cache
+exposure: private
+trust_boundary: data

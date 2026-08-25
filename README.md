@@ -4,6 +4,17 @@ Ground-truth datasets and reproducible architecture-change scenarios for ArchSyn
 
 **Phase 1 foundation:** model, graph and conformance contracts are executable. **Phase 2 analyzer gate:** strengthened and reproducible as v0.2. **Phase 3 PR gate:** Git-diff decisions, baseline caching and component-incremental analysis are reproducible as v0.3. `ground-truth.json` is the canonical end-to-end benchmark manifest.
 
+**Phase 5 preparation:** [`iac/`](iac/) contains a 20-case Terraform,
+Kubernetes, identity, conflict, and security corpus pinned to Guardian commit
+`de11e48a8f69fbe5cd32f052489a323e1c81eab3`. The preparatory verifier runs it
+twice, checks exact source evidence and per-rule metrics, hashes every input and
+runtime artifact, and proves the corpus is not modified. This is not a final
+research freeze: P4-120, Phase 5 ADR acceptance, independent Security approval,
+and human ground-truth freeze remain explicit blockers. `pnpm iac:gate` therefore
+fails closed even when `pnpm iac:verify` confirms the technical bundle.
+The requirement-by-requirement record is in
+[`PHASE5-IAC-AUDIT.md`](PHASE5-IAC-AUDIT.md).
+
 ## Order Platform lab
 
 The baseline has exactly five components: frontend, gateway, order-service, payment-service and postgres.

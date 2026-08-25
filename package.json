@@ -22,6 +22,9 @@
     "phase2:snapshot": "node scripts/validate-phase2-snapshot.mjs",
     "phase3:update": "node scripts/phase3-evidence.mjs --write",
     "phase3:verify": "node scripts/phase3-evidence.mjs",
+    "iac:update": "node scripts/iac-evidence.mjs --write",
+    "iac:verify": "node scripts/iac-evidence.mjs",
+    "iac:gate": "node scripts/iac-evidence.mjs --require-closed",
     "patterns:update": "node scripts/pattern-corpus-evidence.mjs --write",
     "patterns:baseline:verify": "node scripts/validate-pattern-baseline.mjs",
     "patterns:verify": "node scripts/pattern-corpus-evidence.mjs",
@@ -35,10 +38,11 @@
     "demo:phase3:block": "node scripts/demo-phase3.mjs case-06",
     "demo:phase3:review": "node scripts/demo-phase3.mjs case-09",
     "demo:phase3": "pnpm demo:phase3:pass && pnpm demo:phase3:block && pnpm demo:phase3:review",
-    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify"
+    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify && pnpm iac:verify"
   },
   "dependencies": {
     "@archsync/core": "file:vendor/archsync-core-0.1.0-2affbbb.tgz",
-    "@archsync/guardian": "file:vendor/archsync-guardian-0.3.1-8779bf7.tgz"
+    "@archsync/guardian": "file:vendor/archsync-guardian-0.3.1-8779bf7.tgz",
+    "@archsync/guardian-phase5": "file:vendor/archsync-guardian-0.3.3.tgz"
   }
 }

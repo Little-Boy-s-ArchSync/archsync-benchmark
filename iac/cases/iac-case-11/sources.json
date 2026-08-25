@@ -1,0 +1,5 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "data/orders-cache", "namespace": "any", "aliases": ["orders-cache"] }]
+}

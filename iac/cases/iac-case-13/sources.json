@@ -1,0 +1,8 @@
+{
+  "observations": [
+    { "source": "spec", "native_id": "spec-orders-worker", "name": "orders-worker", "namespace": "architecture", "aliases": ["orders-worker"], "kind": "service", "exposure": "internal", "approved": true, "trust_boundary": "application", "attributes": {}, "evidence": { "file": "architecture/spec.yaml", "line": 1, "snippet": "component: orders-worker", "detector": "benchmark-spec-fixture" } },
+    { "source": "code", "native_id": "code-orders-worker", "name": "orders-worker", "namespace": "repository", "aliases": ["orders-worker"], "kind": "service", "exposure": "internal", "approved": true, "trust_boundary": "application", "attributes": {}, "evidence": { "file": "repository/worker.ts", "line": 1, "snippet": "export const component = 'orders-worker';", "detector": "benchmark-code-fixture" } }
+  ],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "application/orders-worker", "namespace": "any", "aliases": ["orders-worker"] }]
+}

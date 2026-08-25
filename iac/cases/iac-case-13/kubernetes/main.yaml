@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: orders-worker
+  namespace: orders
+  annotations:
+    archsync.io/approved: "true"
+    archsync.io/trust-boundary: application
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: orders-worker
+    spec:
+      containers:
+        - name: worker
+          image: example.invalid/orders-worker:v1

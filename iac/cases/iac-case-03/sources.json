@@ -1,0 +1,8 @@
+{
+  "observations": [
+    { "source": "spec", "native_id": "spec-orders-events", "name": "orders-events", "namespace": "architecture", "aliases": ["orders-events"], "kind": "broker", "exposure": "private", "approved": true, "trust_boundary": "integration", "attributes": {}, "evidence": { "file": "architecture/spec.yaml", "line": 1, "snippet": "component: orders-events", "detector": "benchmark-spec-fixture" } },
+    { "source": "code", "native_id": "code-orders-events", "name": "orders-events", "namespace": "repository", "aliases": ["orders-events"], "kind": "broker", "exposure": "private", "approved": true, "trust_boundary": "integration", "attributes": {}, "evidence": { "file": "repository/broker.ts", "line": 1, "snippet": "export const component = 'orders-events';", "detector": "benchmark-code-fixture" } }
+  ],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "integration/orders-events", "namespace": "any", "aliases": ["orders-events"] }]
+}
