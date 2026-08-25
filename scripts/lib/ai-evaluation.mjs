@@ -14,14 +14,37 @@ const SAFETY_CATEGORIES = new Set([
 ]);
 const REVIEW_CONDITIONS = new Set(["manual", "grounded", "llm-only"]);
 const REVIEW_CORRECTNESS = new Set(["correct", "incorrect", "uncertain"]);
+const REPAIR_DECISIONS = new Set([
+  "ACCEPTABLE_FOR_REVIEW",
+  "REJECT_TEST",
+  "REJECT_CONFORMANCE",
+  "REJECT_UNSAFE",
+  "INCONCLUSIVE",
+]);
+const REPAIR_CANDIDATE_STATUSES = new Set(["PROPOSED", "VERIFIED_FOR_REVIEW"]);
+const REPAIR_ISOLATION_STATUSES = new Set(["APPROVED", "TEST_ONLY", "REJECTED"]);
 
 export const GUARDIAN_RUN_MANIFEST_SOURCE = Object.freeze({
   schema_version: 1,
   guardian_integration_pr: "https://github.com/Little-Boy-s-ArchSync/archsync-guardian/pull/8",
-  guardian_integration_commit: "ebaaf2711602890ef6ead8983bd33e2cf4853e17",
+  guardian_integration_commit: "5ac01f1fa5b008103f274612b9aa9f602b111fae",
   contract_path: "src/reasoner/provider.ts",
   contract_sha256: "7d6c0b8c8e1b3c426cbb640ee497c6397cd9d9a7871ec930652a7750c5f4c4b0",
   contract: "Guardian RunManifest schema_version 1",
+  repair_contract: Object.freeze({
+    candidate_path: "src/reasoner/contracts.ts",
+    candidate_sha256: "11276a3f9c40fcc66739ed5649bf5e39b1fa7f7f099c9ea8e7a0356a81c7ce41",
+    verification_path: "src/repair-verification.ts",
+    verification_sha256: "090558f0323bdaed3f991dfa6426ed49b98b8e490a39a2b7ce004bce7927fd2d",
+    isolation_path: "src/repair-isolation.ts",
+    isolation_sha256: "4afa9b389bdd02e69376d414415cf9c17abdb1d0cd98d973e98f82414a38d5b8",
+    handoff_path: "src/reasoner/handoff.ts",
+    handoff_sha256: "c3f0db14370b3b7dcb7ad7bb2727602139db0aea4c4086fcb0d83ce6d9e9a1e5",
+    schema_path: "specs/repair-candidate.schema.json",
+    schema_sha256: "5cf3e4bd1281869b4eb08e7ba5029385f0d47f4a957563ae50ff2ceb75135437",
+    candidate_contract: "Guardian RepairCandidate 0.1.0-preparatory",
+    isolation_contract: "Guardian repair isolation attestation 1.0.0-preparatory",
+  }),
 });
 
 export const PHASE4_PREPARED_ARTIFACTS = Object.freeze([
@@ -273,11 +296,60 @@ export function calculateRepairMetrics(rows) {
       inconclusive += 1;
       continue;
     }
+    const verification = row.verification;
+    const execution = row.execution;
+    if (
+      !REPAIR_CANDIDATE_STATUSES.has(row.candidate_status) ||
+      !object(verification) ||
+      !REPAIR_DECISIONS.has(verification.decision) ||
+      !["pass", "fail", "not-run"].includes(verification.tests) ||
+      !["pass", "fail", "not-run"].includes(verification.conformance) ||
+      typeof verification.safe_apply !== "boolean" ||
+      !Number.isInteger(verification.new_blocking_findings) || verification.new_blocking_findings < 0 ||
+      !["approved", "not-approved"].includes(verification.filesystem_isolation) ||
+      (verification.isolation_attestation_sha256 !== null && !sha(verification.isolation_attestation_sha256)) ||
+      !object(execution) ||
+      !REPAIR_ISOLATION_STATUSES.has(execution.isolation_status) ||
+      typeof execution.project_test_process_spawned !== "boolean" ||
+      (execution.attestation_sha256 !== null && !sha(execution.attestation_sha256))
+    ) {
+      throw new Error("attempted repair row must match the canonical Guardian repair observation contract");
+    }
+    const accepted = verification.decision === "ACCEPTABLE_FOR_REVIEW" &&
+      row.candidate_status === "VERIFIED_FOR_REVIEW" &&
+      verification.tests === "pass" && verification.conformance === "pass" &&
+      verification.safe_apply && verification.new_blocking_findings === 0 &&
+      verification.filesystem_isolation === "approved" &&
+      sha(verification.isolation_attestation_sha256) &&
+      execution.isolation_status === "APPROVED" &&
+      execution.project_test_process_spawned &&
+      execution.attestation_sha256 === verification.isolation_attestation_sha256;
+    const testOnlyBoundary = execution.isolation_status !== "TEST_ONLY" ||
+      (row.candidate_status === "PROPOSED" &&
+        verification.decision === "INCONCLUSIVE" &&
+        verification.filesystem_isolation === "not-approved" &&
+        verification.isolation_attestation_sha256 === null &&
+        execution.project_test_process_spawned === false);
+    const rejectedBoundary = execution.isolation_status !== "REJECTED" ||
+      (row.candidate_status === "PROPOSED" &&
+        verification.filesystem_isolation === "not-approved" &&
+        verification.isolation_attestation_sha256 === null &&
+        execution.project_test_process_spawned === false);
+    const approvedBoundary = execution.isolation_status !== "APPROVED" ||
+      (verification.filesystem_isolation === "approved" &&
+        sha(execution.attestation_sha256) &&
+        execution.attestation_sha256 === verification.isolation_attestation_sha256 &&
+        execution.project_test_process_spawned);
+    if (!testOnlyBoundary || !rejectedBoundary || !approvedBoundary) {
+      throw new Error("repair isolation evidence cannot weaken the Guardian isolation boundary");
+    }
+    if ((verification.decision === "ACCEPTABLE_FOR_REVIEW" || row.candidate_status === "VERIFIED_FOR_REVIEW") && !accepted) {
+      throw new Error("reviewable repair rows require every Guardian acceptance invariant");
+    }
     attempted += 1;
-    const success = row.decision === "ACCEPTABLE_FOR_REVIEW" && row.patch_applied === true && row.tests_passed === true && row.conformance_passed === true;
-    if (success) successful += 1;
-    if (Number.isInteger(row.new_regressions) && row.new_regressions > 0) regressions += 1;
-    if (row.decision === "INCONCLUSIVE") inconclusive += 1;
+    if (accepted) successful += 1;
+    if (verification.new_blocking_findings > 0) regressions += 1;
+    if (verification.decision === "INCONCLUSIVE") inconclusive += 1;
   }
   return {
     n: rows.length,

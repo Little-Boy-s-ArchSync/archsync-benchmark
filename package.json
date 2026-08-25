@@ -66,7 +66,7 @@
   },
   "dependencies": {
     "@archsync/core": "file:vendor/archsync-core-0.1.1-global-503b5fe.tgz",
-    "@archsync/guardian": "file:vendor/archsync-guardian-0.3.3-global-ebaaf27.tgz",
+    "@archsync/guardian": "file:vendor/archsync-guardian-0.3.3-global-5ac01f1.tgz",
     "@archsync/guardian-phase5": "file:vendor/archsync-guardian-0.3.3.tgz"
   }
 }

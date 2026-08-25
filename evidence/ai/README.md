@@ -2,7 +2,9 @@
 
 Status: **synthetic/provisional technical preparation only**. No real-provider output, credential, human rating, manual-baseline result, frozen configuration, final ablation, security approval, or Phase 4 result exists here.
 
-The run template follows the canonical Guardian `RunManifest` contract at the exact integration commit recorded in `guardian-run-manifest-source.json`. Benchmark-only fields are nested under `benchmark`; they cannot replace or weaken Guardian request, retry, usage, failure, redaction, or raw-artifact provenance. Configuration hashes are summarized separately, so incompatible provider/prompt/sampling configurations are never pooled.
+The run template follows the canonical Guardian `RunManifest` contract at the exact integration commit recorded in `guardian-run-manifest-source.json`. That source record also pins the candidate, verification, filesystem-isolation, human-handoff, and JSON Schema contracts. Benchmark-only fields are nested under `benchmark`; they cannot replace or weaken Guardian request, retry, usage, failure, redaction, or raw-artifact provenance. Configuration hashes are summarized separately, so incompatible provider/prompt/sampling configurations are never pooled.
+
+Repair measurements follow Guardian's mandatory filesystem-isolation boundary. A `TEST_ONLY` adapter observation must remain `INCONCLUSIVE` and `PROPOSED`, carries no approved attestation, and cannot claim that a project test process was spawned. Only an `APPROVED` isolation observation bound to an attestation, an actual project-test process, the exact `ACCEPTABLE_FOR_REVIEW` invariants, and a `VERIFIED_FOR_REVIEW` candidate can enter the repair-success numerator. This repository does not provide or claim such an approved isolator.
 
 `claim-review.template.jsonl` is the P4-123 rubric surface: correctness, completeness, actionability, citation quality, unsupported-claim status, blind/manual-boundary flags, and exact manual timing. It is deliberately incomplete. Two blind human reviewers and immutable disagreement adjudication remain required for real evidence.
 
