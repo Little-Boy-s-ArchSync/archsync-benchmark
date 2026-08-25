@@ -2,8 +2,8 @@
   "phase": 3,
   "release": "v0.3",
   "dependencies": {
-    "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#2affbbb0da859a32b9b9079b4bf718fc7b14993b",
-    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#8779bf7965b3bd15f25834f17ca5321c85ae3f43"
+    "core": "git+https://github.com/Little-Boy-s-ArchSync/archsync-core.git#783716d7961690b1e8c1cda4acb956777977a853",
+    "guardian": "git+https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git#dee449e7b9ff8e173458f4fb4e0d5bc1ab42e899"
   },
   "protocol": {
     "cases": 20,
@@ -19,7 +19,7 @@
     "architecture_sha256": "4987b08851c2cbc55eaa1ba2c4d9ec3bd70480f19cec7aed747aeaeaac3cf4a5",
     "baseline_tree_sha256": "4f4d4045682401c93085c2c4afa3672c81a6fae5745bc867dcb100014b088e12",
     "patch_set_sha256": "4d2fbe2d0dcbd61f33999d1960ee10cce3b0e11f0ae3201d17b89050b703640d",
-    "guardian_artifact_sha256": "d7b1a431c2a5d9d4deefcbb6229e909eca9ed444d8bd5792a1521da77b1bdc75",
+    "guardian_artifact_sha256": "bb08ef07a691c2fa6a48d98e8fccd87ba922186d7166fc9c3d9f5ac762e1edd7",
     "normalized_results_sha256": "9dfede4e4274ed435ff286b35639b1d429834a8d8c87ae22631b17dcbd6a1712"
   },
   "outcome_counts": {

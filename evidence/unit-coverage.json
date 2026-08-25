@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 75,
-    "passed": 75,
+    "total": 77,
+    "passed": 77,
     "failed": 0
   },
   "provenance": {
@@ -48,8 +48,12 @@
         "sha256": "32c43414da08cdf77ff996d4a0817ee6c765433f663ed894517af5365a8558b4"
       },
       {
+        "file": "scripts/lib/runtime-provenance.mjs",
+        "sha256": "9b5e22f39b7a20f12b2a9abc4931beec94583ac600f70f903a2bbbdaebb1b6d7"
+      },
+      {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "022bd0ce9f4de1e934ae3cf369e545831d43c67df1483cc83c1646ea204a69c2"
+        "sha256": "d4df08c9c9557912e63fa2fce1e1ad76ab99e782fc1660fe20687f25933180d6"
       },
       {
         "file": "test/ai-evaluation.test.mjs",
@@ -76,18 +80,22 @@
         "sha256": "556f474d175a13329d2ab96ffe6e90b598610e1c596355301b69e9ee27fd0923"
       },
       {
+        "file": "test/runtime-provenance.test.mjs",
+        "sha256": "11d521158e89b582447f877744d00ba27ffb662729c5075da99462830f32b951"
+      },
+      {
         "file": "package.json",
-        "sha256": "0e81ee2c8e855131ce2e10964dec1aa0c20f63d08542d7057885eec1bef0e817"
+        "sha256": "ba399bcf9a4a8e193a4c7dc64032b74b8b001dad724a16cbc802bb481d565e88"
       },
       {
         "file": "pnpm-lock.yaml",
-        "sha256": "ac08537ee786bf7e6f1e5b1474d22712759fc4171c90d44def88ba4a61c0e299"
+        "sha256": "6eb55d68edcd883940c88ff40a64ea73d6faceec101f5b6ac1a7e4f0d96c2709"
       },
       {
         "file": "vendor/manifest.json",
-        "sha256": "56d42c69cf58246f458c672e8f18e9ef1350f005a6e7de8728e5356d570ff2dd"
+        "sha256": "baed9ad5ac1a92069409e78414f5e040c499794d9b353814e7d1d6addc6b51d7"
       }
     ],
-    "manifest_sha256": "07a9233b57d8c24278a7b1e1c6be3e3b15e0a4f04babda4b6ce3acbb00971d58"
+    "manifest_sha256": "84e25ada3d0af7104de7c6bb473cc5fcd97bd6daff2f76331dbab1c62c848f2a"
   }
 }

@@ -1,0 +1,12 @@
+{
+  "environment": "phase6-fixture",
+  "window": {
+    "start_unix_nano": "1787702400000000000",
+    "end_unix_nano": "1787703300000000000"
+  },
+  "sampling": {
+    "strategy": "fixture-replay",
+    "rate": 1
+  },
+  "retention_days": 14
+}

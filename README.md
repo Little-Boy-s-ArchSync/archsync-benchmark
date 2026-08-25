@@ -4,6 +4,8 @@ The proposed D3 independent-holdout protocol, blind-review handbook, immutable t
 
 The Phase 4 evaluation and Phase 7 measurement-study technical foundations now include a 12-case AI safety regression corpus, provenance/run-manifest validation, blind unsupported-claim review calculations, repair and ablation metrics, A–D task/instrumentation contracts, freeze-gated study manifests, multi-source ablation design and hash-bound analysis normalization. Run `pnpm ai-eval:verify` and `pnpm study:verify`. These assets contain no real-provider, participant, pilot, final-study or human-review results; their documentation names the remaining security, protocol, ethics, data and Lead gates.
 
+The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record; it does not claim ADR approval, architecture acceptance or experimental validation.
+
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
 **Phase 1 foundation:** model, graph and conformance contracts are executable. **Phase 2 analyzer gate:** strengthened and reproducible as v0.2. **Phase 3 PR gate:** Git-diff decisions, baseline caching and component-incremental analysis are reproducible as v0.3. `ground-truth.json` is the canonical end-to-end benchmark manifest.
@@ -68,7 +70,7 @@ See [`README-DEMO.md`](README-DEMO.md) for the short Vietnamese presentation scr
 
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
-The benchmark's deterministic validation libraries are covered by 75 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
+The benchmark's deterministic validation libraries are covered by 77 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
 
 Expected Phase 2 result:
 

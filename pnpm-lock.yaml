@@ -9,27 +9,27 @@ importers:
   .:
     dependencies:
       '@archsync/core':
-        specifier: file:vendor/archsync-core-0.1.0-2affbbb.tgz
-        version: file:vendor/archsync-core-0.1.0-2affbbb.tgz
+        specifier: file:vendor/archsync-core-0.1.1-p6-783716d.tgz
+        version: file:vendor/archsync-core-0.1.1-p6-783716d.tgz
       '@archsync/guardian':
-        specifier: file:vendor/archsync-guardian-0.3.1-8779bf7.tgz
-        version: file:vendor/archsync-guardian-0.3.1-8779bf7.tgz(@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz)
+        specifier: file:vendor/archsync-guardian-0.3.3-p6-dee449e.tgz
+        version: file:vendor/archsync-guardian-0.3.3-p6-dee449e.tgz
 
 packages:
 
-  '@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz':
-    resolution: {integrity: sha512-haIminTHW+CDy/zF5HNR2KinVXJLXyFIzQPXP4SyWeZl48GW72CtUP8cVBdB/K8ONrDmFsOxson28gDqLaf2EQ==, tarball: file:vendor/archsync-core-0.1.0-2affbbb.tgz}
-    version: 0.1.0
+  '@archsync/core@file:vendor/archsync-core-0.1.1-p6-783716d.tgz':
+    resolution: {integrity: sha512-0b4DAF26mUa8ItO8RDSnzdufywp3IhLrhThA9DiefN6Mznhr0HP2t6o2ZFJRgEn8mgKJTnRu+pNp8kCQVdHa1Q==, tarball: file:vendor/archsync-core-0.1.1-p6-783716d.tgz}
+    version: 0.1.1
     engines: {node: '>=22'}
     hasBin: true
 
-  '@archsync/guardian@file:vendor/archsync-guardian-0.3.1-8779bf7.tgz':
-    resolution: {integrity: sha512-q5ziaCAi6CbkefeAQ10wOgdBxmztOxJXnpdtwDGSXwlj5fHHB7flCdzapJioqL0PJYu4IozuwKS6wwm+dt+UPA==, tarball: file:vendor/archsync-guardian-0.3.1-8779bf7.tgz}
-    version: 0.3.1
+  '@archsync/guardian@file:vendor/archsync-guardian-0.3.3-p6-dee449e.tgz':
+    resolution: {integrity: sha512-RUgwaivFIT8SD2JIvR29hkWL399Y8HskOXl72eOYyczdjRPfxePFXLOwtSVKTYfiPALx4izVfRME0H1SI3IZnA==, tarball: file:vendor/archsync-guardian-0.3.3-p6-dee449e.tgz}
+    version: 0.3.3
     engines: {node: '>=22'}
     hasBin: true
-    peerDependencies:
-      '@archsync/core': ^0.1.0
+    bundledDependencies:
+      - '@archsync/core'
 
   ajv@8.20.0:
     resolution: {integrity: sha512-Thbli+OlOj+iMPYFBVBfJ3OmCAnaSyNn4M1vz9T6Gka5Jt9ba/HIR56joy65tY6kx/FCF5VXNB819Y7/GUrBGA==}
@@ -59,14 +59,13 @@ packages:
 
 snapshots:
 
-  '@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz':
+  '@archsync/core@file:vendor/archsync-core-0.1.1-p6-783716d.tgz':
     dependencies:
       ajv: 8.20.0
       yaml: 2.9.0
 
-  '@archsync/guardian@file:vendor/archsync-guardian-0.3.1-8779bf7.tgz(@archsync/core@file:vendor/archsync-core-0.1.0-2affbbb.tgz)':
+  '@archsync/guardian@file:vendor/archsync-guardian-0.3.3-p6-dee449e.tgz':
     dependencies:
-      '@archsync/core': file:vendor/archsync-core-0.1.0-2affbbb.tgz
       typescript: 5.9.3
 
   ajv@8.20.0:
