@@ -50,14 +50,18 @@ function sha256(value) {
 }
 
 const provenanceFiles = [
+  "scripts/lib/ai-evaluation.mjs",
   "scripts/lib/ground-truth.mjs",
   "scripts/lib/holdout.mjs",
   "scripts/lib/integrity.mjs",
+  "scripts/lib/measurement-study.mjs",
   "scripts/lib/pattern-corpus.mjs",
   "scripts/unit-coverage-evidence.mjs",
+  "test/ai-evaluation.test.mjs",
   "test/ground-truth.test.mjs",
   "test/holdout.test.mjs",
   "test/integrity.test.mjs",
+  "test/measurement-study.test.mjs",
   "test/pattern-corpus.test.mjs",
   "package.json",
   "pnpm-lock.yaml",

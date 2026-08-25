@@ -17,12 +17,16 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 63,
-    "passed": 63,
+    "total": 75,
+    "passed": 75,
     "failed": 0
   },
   "provenance": {
     "files": [
+      {
+        "file": "scripts/lib/ai-evaluation.mjs",
+        "sha256": "590e41574df98a078e8f0a2bf3a1be4987ef38f1e97694e32b9d8fe72d19f938"
+      },
       {
         "file": "scripts/lib/ground-truth.mjs",
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
@@ -36,12 +40,20 @@
         "sha256": "6cbbb9f7249d3d67b17169245604cee815fec6384fef8eb9d39773fb549e2c74"
       },
       {
+        "file": "scripts/lib/measurement-study.mjs",
+        "sha256": "ce9e60babeeb6bea4f8fd5e559555a39d35e21f8e564cd0a2fe2e710db5b02fa"
+      },
+      {
         "file": "scripts/lib/pattern-corpus.mjs",
         "sha256": "32c43414da08cdf77ff996d4a0817ee6c765433f663ed894517af5365a8558b4"
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "204f9223625c0cdffe0e02cbd48c09fa54567dadee626c581a92633011b81adf"
+        "sha256": "022bd0ce9f4de1e934ae3cf369e545831d43c67df1483cc83c1646ea204a69c2"
+      },
+      {
+        "file": "test/ai-evaluation.test.mjs",
+        "sha256": "f38a624347bf826c7b36e95afc1ae74848bdf7f39c8a22df9d533d83fa606acb"
       },
       {
         "file": "test/ground-truth.test.mjs",
@@ -56,12 +68,16 @@
         "sha256": "797ae4524c0102cdbcccf894541d2511e96626c9db16ba28ad2646284bbd2cb2"
       },
       {
+        "file": "test/measurement-study.test.mjs",
+        "sha256": "8c845fd005901285a4e2665ba5beec7d551dce9e5ab11ff3d8436f997dc1e350"
+      },
+      {
         "file": "test/pattern-corpus.test.mjs",
         "sha256": "556f474d175a13329d2ab96ffe6e90b598610e1c596355301b69e9ee27fd0923"
       },
       {
         "file": "package.json",
-        "sha256": "a2bb53351ffc1e1fe3b67065c1daa79325f874ec5a9993b1fcc70ef9cf1cef88"
+        "sha256": "0e81ee2c8e855131ce2e10964dec1aa0c20f63d08542d7057885eec1bef0e817"
       },
       {
         "file": "pnpm-lock.yaml",
@@ -72,6 +88,6 @@
         "sha256": "56d42c69cf58246f458c672e8f18e9ef1350f005a6e7de8728e5356d570ff2dd"
       }
     ],
-    "manifest_sha256": "2c3618ad3b087ae80a3eff438e4fa813bd490e295c54f7f8bbee653ac0bdd9f9"
+    "manifest_sha256": "07a9233b57d8c24278a7b1e1c6be3e3b15e0a4f04babda4b6ce3acbb00971d58"
   }
 }
