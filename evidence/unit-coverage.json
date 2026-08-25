@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 110,
-    "passed": 110,
+    "total": 115,
+    "passed": 115,
     "failed": 0
   },
   "provenance": {
@@ -38,6 +38,10 @@
       {
         "file": "scripts/lib/ground-truth.mjs",
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
+      },
+      {
+        "file": "scripts/lib/holdout-candidates.mjs",
+        "sha256": "1d95f28f3875e896bb190cabed6c715bfebea1ede97dd81aaf9c7adf629a6a04"
       },
       {
         "file": "scripts/lib/holdout.mjs",
@@ -77,7 +81,11 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "a198ecf08e24c494e07ff8a6aa067ebbc26a18e7e2017efe65c253344c0eb068"
+        "sha256": "f3d3060f737db2b432e2a125e041d58dd57dcc89a1430d871cbf0d1d55ec652a"
+      },
+      {
+        "file": "scripts/validate-holdout-candidates.mjs",
+        "sha256": "d0690dbdf3197f0eabfdd5f994f9aac8d4942add2fda494b47532d78ed2b3f41"
       },
       {
         "file": "test/ablation-evidence.test.mjs",
@@ -94,6 +102,10 @@
       {
         "file": "test/ground-truth.test.mjs",
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
+      },
+      {
+        "file": "test/holdout-candidates.test.mjs",
+        "sha256": "dfce92aa62664b443ca8a4bd74c98e6685e6bcb7eb3c6b6ccc4de6a7e3e19b10"
       },
       {
         "file": "test/holdout.test.mjs",
@@ -133,7 +145,7 @@
       },
       {
         "file": "package.json",
-        "sha256": "e403f3e9571fb0319b99c7239f4520837b2ad1d9fd33339d46ba75e5c01deab4"
+        "sha256": "47fafbb7dd84b999af439e3ae934e4d294ae4bd93c1eb16e7f31560cb3ab22d5"
       },
       {
         "file": "pnpm-lock.yaml",
@@ -142,8 +154,20 @@
       {
         "file": "vendor/manifest.json",
         "sha256": "beb49774b96353e3259043ea4be05576ce2b27aa2d2f086c144d447d510da970"
+      },
+      {
+        "file": "holdout/candidate-inventory.schema.json",
+        "sha256": "5a369bee676ad44435b9f6257562f49250767178d9e4c3f8da2bdc46ef10943c"
+      },
+      {
+        "file": "holdout/candidates.eval-102.json",
+        "sha256": "189d5efc2f487ce2bb8f6990dc543ee1952bd1be4beb6f2e4051f0d2c37e33f3"
+      },
+      {
+        "file": "evidence/holdout/eval-102-candidates.validation.json",
+        "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "7c172a9d7d1a9feff8e2d45bf0a3f7791eade77a48007f24a229341c6f765d6c"
+    "manifest_sha256": "15eb189c540f41dcd0207b30a6f8ec6f2a361418b5501cb54dff18ed4d9a9fcd"
   }
 }

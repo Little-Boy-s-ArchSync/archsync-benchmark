@@ -54,6 +54,7 @@ const provenanceFiles = [
   "scripts/lib/ai-evaluation.mjs",
   "scripts/lib/analysis-pipeline.mjs",
   "scripts/lib/ground-truth.mjs",
+  "scripts/lib/holdout-candidates.mjs",
   "scripts/lib/holdout.mjs",
   "scripts/lib/iac-benchmark.mjs",
   "scripts/lib/integrity.mjs",
@@ -64,10 +65,12 @@ const provenanceFiles = [
   "scripts/lib/reproducibility-audit.mjs",
   "scripts/lib/runtime-provenance.mjs",
   "scripts/unit-coverage-evidence.mjs",
+  "scripts/validate-holdout-candidates.mjs",
   "test/ablation-evidence.test.mjs",
   "test/ai-evaluation.test.mjs",
   "test/analysis-pipeline.test.mjs",
   "test/ground-truth.test.mjs",
+  "test/holdout-candidates.test.mjs",
   "test/holdout.test.mjs",
   "test/iac-benchmark.test.mjs",
   "test/integrity.test.mjs",
@@ -80,6 +83,9 @@ const provenanceFiles = [
   "package.json",
   "pnpm-lock.yaml",
   "vendor/manifest.json",
+  "holdout/candidate-inventory.schema.json",
+  "holdout/candidates.eval-102.json",
+  "evidence/holdout/eval-102-candidates.validation.json",
 ];
 const provenance = [];
 for (const file of provenanceFiles) {

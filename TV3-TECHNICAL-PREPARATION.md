@@ -4,6 +4,7 @@ Status: **technical preparation only**. This record does not claim a real reposi
 
 | Task | Deterministic artifact/check | Current state and external boundary |
 | --- | --- | --- |
+| EVAL-102 | Ranked inventory of exactly ten live TypeScript/Node system candidates with exact GitHub heads, permissive-license provenance, activity/topology snapshots and immutable architecture evidence; strict candidate-only validator | Automated discovery complete; final 2–3 selection, leakage review, scope and freeze remain human-gated |
 | EVAL-103 | Repository URL/full commit/scope/tree/license/environment validator plus injected clone/inspect materialization adapter | Implemented and unit-tested; no final repository selected or cloned |
 | EVAL-106 | Two-review annotation and adjudication validator preserves original IDs/labels, agreement and human rationale/time | Implemented; templates intentionally incomplete and no human adjudication claimed |
 | EVAL-108 | Frozen artifact, repository-pin and Core/Guardian package-bound full replay exactly twice, retaining failures and normalized hashes | Implemented; real D3 execution blocked by freeze and approval |

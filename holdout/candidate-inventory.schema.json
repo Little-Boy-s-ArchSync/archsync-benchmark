@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/holdout/candidate-inventory.schema.json",
+  "title": "EVAL-102 ranked candidate-only inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "task_id",
+    "artifact_kind",
+    "status",
+    "snapshot_completed_at",
+    "selection_authorized",
+    "freeze_authorized",
+    "ground_truth_collected",
+    "ranking_method",
+    "automation_status",
+    "blockers",
+    "candidates"
+  ],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "task_id": { "const": "EVAL-102" },
+    "artifact_kind": { "const": "ranked-candidate-inventory" },
+    "status": { "const": "candidate-only-not-selected" },
+    "snapshot_completed_at": { "$ref": "#/$defs/utcTimestamp" },
+    "selection_authorized": { "const": false },
+    "freeze_authorized": { "const": false },
+    "ground_truth_collected": { "const": false },
+    "ranking_method": { "$ref": "#/$defs/nonEmptyString" },
+    "automation_status": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["github_api_access", "billing_blocked", "billing_note"],
+      "properties": {
+        "github_api_access": { "const": "completed-authenticated" },
+        "billing_blocked": { "const": false },
+        "billing_note": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "blockers": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/nonEmptyString" }
+    },
+    "candidates": {
+      "type": "array",
+      "minItems": 10,
+      "maxItems": 10,
+      "items": { "$ref": "#/$defs/candidate" }
+    }
+  },
+  "$defs": {
+    "nonEmptyString": { "type": "string", "minLength": 1 },
+    "fullSha": { "type": "string", "pattern": "^[0-9a-f]{40}$" },
+    "utcTimestamp": { "type": "string", "format": "date-time", "pattern": "Z$" },
+    "githubUrl": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+$" },
+    "githubSnapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["size_kib_approx", "stars", "forks", "open_issues", "pushed_at", "updated_at", "default_branch_commit_committed_at", "archived", "disabled", "fork"],
+      "properties": {
+        "size_kib_approx": { "type": "integer", "minimum": 0 },
+        "stars": { "type": "integer", "minimum": 0 },
+        "forks": { "type": "integer", "minimum": 0 },
+        "open_issues": { "type": "integer", "minimum": 0 },
+        "pushed_at": { "$ref": "#/$defs/utcTimestamp" },
+        "updated_at": { "$ref": "#/$defs/utcTimestamp" },
+        "default_branch_commit_committed_at": { "$ref": "#/$defs/utcTimestamp" },
+        "archived": { "const": false },
+        "disabled": { "const": false },
+        "fork": { "const": false }
+      }
+    },
+    "license": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["spdx_id", "api_url", "path", "blob_sha", "file_url"],
+      "properties": {
+        "spdx_id": { "enum": ["Apache-2.0", "BSD-2-Clause", "BSD-3-Clause", "ISC", "MIT"] },
+        "api_url": { "type": "string", "pattern": "^https://api.github\\.com/repos/[^/]+/[^/]+/license$" },
+        "path": { "$ref": "#/$defs/nonEmptyString" },
+        "blob_sha": { "$ref": "#/$defs/fullSha" },
+        "file_url": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/blob/[0-9a-f]{40}/.+$" }
+      }
+    },
+    "packageTopology": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["package_manager", "monorepo", "signals", "manifest_urls"],
+      "properties": {
+        "package_manager": { "type": "string", "pattern": "^(npm|pnpm|yarn)@\\S+$" },
+        "monorepo": { "const": true },
+        "signals": { "$ref": "#/$defs/nonEmptyString" },
+        "manifest_urls": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/blob/[0-9a-f]{40}/.+$" }
+        }
+      }
+    },
+    "architectureEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "source_url", "source_blob_sha", "observation"],
+      "properties": {
+        "kind": { "enum": ["http", "data", "cache", "message"] },
+        "source_url": { "type": "string", "pattern": "^https://github\\.com/[^/]+/[^/]+/blob/[0-9a-f]{40}/.+$" },
+        "source_blob_sha": { "$ref": "#/$defs/fullSha" },
+        "observation": { "$ref": "#/$defs/nonEmptyString" }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank",
+        "id",
+        "name",
+        "canonical_url",
+        "github_api_repository_url",
+        "github_api_head_url",
+        "default_branch",
+        "observed_default_branch_commit_sha",
+        "retrieved_at",
+        "primary_language",
+        "github_snapshot",
+        "license",
+        "package_topology",
+        "architecture_evidence",
+        "rationale",
+        "risks",
+        "prior_tuning_leakage_status",
+        "selection_decision"
+      ],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "id": { "type": "string", "pattern": "^[^/]+/[^/]+$" },
+        "name": { "$ref": "#/$defs/nonEmptyString" },
+        "canonical_url": { "$ref": "#/$defs/githubUrl" },
+        "github_api_repository_url": { "type": "string", "pattern": "^https://api.github\\.com/repos/[^/]+/[^/]+$" },
+        "github_api_head_url": { "type": "string", "pattern": "^https://api.github\\.com/repos/[^/]+/[^/]+/commits/.+$" },
+        "default_branch": { "$ref": "#/$defs/nonEmptyString" },
+        "observed_default_branch_commit_sha": { "$ref": "#/$defs/fullSha" },
+        "retrieved_at": { "$ref": "#/$defs/utcTimestamp" },
+        "primary_language": { "const": "TypeScript" },
+        "github_snapshot": { "$ref": "#/$defs/githubSnapshot" },
+        "license": { "$ref": "#/$defs/license" },
+        "package_topology": { "$ref": "#/$defs/packageTopology" },
+        "architecture_evidence": {
+          "type": "array",
+          "minItems": 2,
+          "items": { "$ref": "#/$defs/architectureEvidence" }
+        },
+        "rationale": { "$ref": "#/$defs/nonEmptyString" },
+        "risks": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "#/$defs/nonEmptyString" }
+        },
+        "prior_tuning_leakage_status": { "const": "unknown-needs-human-check" },
+        "selection_decision": { "const": "not-evaluated-human-gated" }
+      }
+    }
+  }
+}

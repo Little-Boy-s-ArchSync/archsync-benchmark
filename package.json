@@ -31,6 +31,8 @@
     "patterns:update": "node scripts/pattern-corpus-evidence.mjs --write",
     "patterns:baseline:verify": "node scripts/validate-pattern-baseline.mjs",
     "patterns:verify": "node scripts/pattern-corpus-evidence.mjs",
+    "holdout:candidates:update": "node scripts/validate-holdout-candidates.mjs --write",
+    "holdout:candidates:verify": "node scripts/validate-holdout-candidates.mjs",
     "holdout:verify": "node scripts/validate-holdout-scaffold.mjs",
     "holdout:gate": "node scripts/validate-holdout-scaffold.mjs --require-runnable",
     "ai-eval:update": "node scripts/validate-ai-evaluation.mjs --write",
@@ -59,7 +61,7 @@
     "demo:phase3:block": "node scripts/demo-phase3.mjs case-06",
     "demo:phase3:review": "node scripts/demo-phase3.mjs case-09",
     "demo:phase3": "pnpm demo:phase3:pass && pnpm demo:phase3:block && pnpm demo:phase3:review",
-    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm holdout:verify && pnpm ai-eval:verify && pnpm study:verify && pnpm analysis:verify && pnpm repl:verify && pnpm pilot:verify && pnpm ablation:verify && pnpm pr-history:verify && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify && pnpm runtime:verify && pnpm iac:verify"
+    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm holdout:candidates:verify && pnpm holdout:verify && pnpm ai-eval:verify && pnpm study:verify && pnpm analysis:verify && pnpm repl:verify && pnpm pilot:verify && pnpm ablation:verify && pnpm pr-history:verify && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify && pnpm runtime:verify && pnpm iac:verify"
   },
   "dependencies": {
     "@archsync/core": "file:vendor/archsync-core-0.1.1-global-503b5fe.tgz",
