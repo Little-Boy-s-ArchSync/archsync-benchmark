@@ -1,0 +1,63 @@
+[
+  {
+    "contract_version": "0.2",
+    "id": "LAT-001",
+    "attribute": "latency",
+    "scope": "order-service",
+    "metric": "p95_latency",
+    "operator": "<=",
+    "target": 200,
+    "unit": "ms",
+    "window": { "value": 15, "unit": "minute" },
+    "priority": "high",
+    "description": "Order path p95 latency target for the proposed fixture window."
+  },
+  {
+    "contract_version": "0.2",
+    "id": "AVL-001",
+    "attribute": "availability",
+    "scope": "order-service",
+    "metric": "availability_ratio",
+    "operator": ">=",
+    "target": 0.99,
+    "unit": "ratio",
+    "window": { "value": 15, "unit": "minute" },
+    "priority": "high"
+  },
+  {
+    "contract_version": "0.2",
+    "id": "SEC-001",
+    "attribute": "security",
+    "scope": "order-service",
+    "metric": "security_violation_count",
+    "operator": "<=",
+    "target": 0,
+    "unit": "count",
+    "window": { "value": 15, "unit": "minute" },
+    "priority": "critical"
+  },
+  {
+    "contract_version": "0.2",
+    "id": "COST-001",
+    "attribute": "cost",
+    "scope": "order-service",
+    "metric": "estimated_cost",
+    "operator": "<=",
+    "target": 400,
+    "unit": "usd",
+    "window": { "value": 15, "unit": "minute" },
+    "priority": "medium"
+  },
+  {
+    "contract_version": "0.2",
+    "id": "CPLX-001",
+    "attribute": "complexity",
+    "scope": "order-service",
+    "metric": "component_count",
+    "operator": "<=",
+    "target": 4,
+    "unit": "count",
+    "window": { "value": 15, "unit": "minute" },
+    "priority": "medium"
+  }
+]

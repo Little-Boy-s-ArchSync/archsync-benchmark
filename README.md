@@ -1,5 +1,7 @@
 # ArchSync Benchmark
 
+The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record; it does not claim ADR approval, architecture acceptance or experimental validation.
+
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
 **Phase 1 foundation:** model, graph and conformance contracts are executable. **Phase 2 analyzer gate:** strengthened and reproducible as v0.2. **Phase 3 PR gate:** Git-diff decisions, baseline caching and component-incremental analysis are reproducible as v0.3. `ground-truth.json` is the canonical end-to-end benchmark manifest.

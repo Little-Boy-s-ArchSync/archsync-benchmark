@@ -1,0 +1,180 @@
+{
+  "contract_version": "0.1",
+  "collector": {
+    "id": "archsync-otlp-json",
+    "version": "0.1.0-foundation"
+  },
+  "provenance": {
+    "input_sha256": "a1e830a4848bf6f698417c876064b1e2bce8fe98b7aac331bf37e23544047927",
+    "options_sha256": "80556290795313b505261ca99ed5292238e8dd6dcd9177beb4cbe71701986d6f"
+  },
+  "environment": "phase6-fixture",
+  "window": {
+    "start_unix_nano": "1787702400000000000",
+    "end_unix_nano": "1787703300000000000"
+  },
+  "sampling": {
+    "strategy": "fixture-replay",
+    "rate": 1
+  },
+  "retention_days": 14,
+  "privacy": {
+    "stored_attribute_allowlist": [
+      "archsync.goal.id",
+      "db.system",
+      "deployment.environment.name",
+      "http.request.method",
+      "messaging.destination.name",
+      "messaging.system",
+      "peer.service",
+      "rpc.system",
+      "server.address",
+      "service.name"
+    ],
+    "sensitive_attributes_rejected": true,
+    "raw_payload_retained": false
+  },
+  "services": [
+    "api-gateway",
+    "order-service",
+    "postgres",
+    "redis"
+  ],
+  "spans": [
+    {
+      "evidence_id": "span:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:aaaaaaaaaaaaaaaa",
+      "trace_id": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "span_id": "aaaaaaaaaaaaaaaa",
+      "service": "order-service",
+      "direction": "inbound",
+      "relationship_type": "http",
+      "start_unix_nano": "1787702460000000000",
+      "end_unix_nano": "1787702460070000000",
+      "duration_ms": 70,
+      "error": false,
+      "peer_service": "api-gateway"
+    },
+    {
+      "evidence_id": "span:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb:bbbbbbbbbbbbbbbb",
+      "trace_id": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "span_id": "bbbbbbbbbbbbbbbb",
+      "service": "order-service",
+      "direction": "inbound",
+      "relationship_type": "http",
+      "start_unix_nano": "1787702500000000000",
+      "end_unix_nano": "1787702500075000000",
+      "duration_ms": 75,
+      "error": false,
+      "peer_service": "api-gateway"
+    },
+    {
+      "evidence_id": "span:cccccccccccccccccccccccccccccccc:cccccccccccccccc",
+      "trace_id": "cccccccccccccccccccccccccccccccc",
+      "span_id": "cccccccccccccccc",
+      "service": "order-service",
+      "direction": "outbound",
+      "relationship_type": "data",
+      "start_unix_nano": "1787702580000000000",
+      "end_unix_nano": "1787702580180000000",
+      "duration_ms": 180,
+      "error": false,
+      "peer_service": "postgres"
+    },
+    {
+      "evidence_id": "span:dddddddddddddddddddddddddddddddd:dddddddddddddddd",
+      "trace_id": "dddddddddddddddddddddddddddddddd",
+      "span_id": "dddddddddddddddd",
+      "service": "order-service",
+      "direction": "outbound",
+      "relationship_type": "data",
+      "start_unix_nano": "1787702640000000000",
+      "end_unix_nano": "1787702640190000000",
+      "duration_ms": 190,
+      "error": false,
+      "peer_service": "postgres"
+    },
+    {
+      "evidence_id": "span:eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee:eeeeeeeeeeeeeeee",
+      "trace_id": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+      "span_id": "eeeeeeeeeeeeeeee",
+      "service": "order-service",
+      "direction": "outbound",
+      "relationship_type": "data",
+      "start_unix_nano": "1787702700000000000",
+      "end_unix_nano": "1787702700010000000",
+      "duration_ms": 10,
+      "error": false,
+      "peer_service": "redis"
+    },
+    {
+      "evidence_id": "span:ffffffffffffffffffffffffffffffff:ffffffffffffffff",
+      "trace_id": "ffffffffffffffffffffffffffffffff",
+      "span_id": "ffffffffffffffff",
+      "service": "order-service",
+      "direction": "outbound",
+      "relationship_type": "data",
+      "start_unix_nano": "1787702760000000000",
+      "end_unix_nano": "1787702760012000000",
+      "duration_ms": 12,
+      "error": false,
+      "peer_service": "redis"
+    }
+  ],
+  "measurements": [
+    {
+      "evidence_id": "metric:109124d37e6d940f2e61a137c616adec2413e80af0729ee62f4a59ebd7bf9854",
+      "source": "otel-metric",
+      "goal_id": "CPLX-001",
+      "service": "order-service",
+      "metric": "archsync.goal.component_count",
+      "unit": "count",
+      "value": 5,
+      "time_unix_nano": "1787703240000000004",
+      "confidence": 1
+    },
+    {
+      "evidence_id": "metric:5bdc556c023fa39e1e8048e99e197e56261c5c10cc3108b7121bd35e6090e7b2",
+      "source": "otel-metric",
+      "goal_id": "COST-001",
+      "service": "order-service",
+      "metric": "archsync.goal.estimated_cost",
+      "unit": "usd",
+      "value": 450,
+      "time_unix_nano": "1787703240000000003",
+      "confidence": 1
+    },
+    {
+      "evidence_id": "metric:5fc8f351cab6472514437edbe9f1569a71f71fa75f49d14998f14d3de39627cb",
+      "source": "otel-metric",
+      "goal_id": "SEC-001",
+      "service": "order-service",
+      "metric": "archsync.goal.security_violation_count",
+      "unit": "count",
+      "value": 0,
+      "time_unix_nano": "1787703240000000002",
+      "confidence": 1
+    },
+    {
+      "evidence_id": "metric:dcd8f47297ae9a131ed9a1a35e601ed96657e0dd03cdfc72bf157b896d7cd3eb",
+      "source": "otel-metric",
+      "goal_id": "AVL-001",
+      "service": "order-service",
+      "metric": "archsync.goal.availability_ratio",
+      "unit": "ratio",
+      "value": 0.999,
+      "time_unix_nano": "1787703240000000001",
+      "confidence": 1
+    },
+    {
+      "evidence_id": "metric:dde68219d78f4a44fdae128a7ecb668db8ba808a8e9b5e65a1f56dba21fcf85f",
+      "source": "otel-metric",
+      "goal_id": "LAT-001",
+      "service": "order-service",
+      "metric": "archsync.goal.p95_latency",
+      "unit": "ms",
+      "value": 190,
+      "time_unix_nano": "1787703240000000000",
+      "confidence": 1
+    }
+  ]
+}

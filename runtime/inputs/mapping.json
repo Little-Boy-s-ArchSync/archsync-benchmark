@@ -1,0 +1,28 @@
+{
+  "contract_version": "0.1",
+  "minimum_edge_samples": 2,
+  "services": {
+    "api-gateway": ["api-gateway"],
+    "order-service": ["order-service"],
+    "postgres": ["postgres"],
+    "redis": ["redis"]
+  },
+  "expected_components": [
+    "api-gateway",
+    "order-service",
+    "postgres",
+    "redis"
+  ],
+  "expected_edges": [
+    {
+      "from": "api-gateway",
+      "to": "order-service",
+      "type": "http"
+    },
+    {
+      "from": "order-service",
+      "to": "postgres",
+      "type": "data"
+    }
+  ]
+}

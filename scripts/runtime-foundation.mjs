@@ -1,0 +1,146 @@
+import assert from "node:assert/strict";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
+
+import { validateQualityGoal } from "@archsync/core";
+import {
+  buildObservedRuntimeGraph,
+  collectRuntimeEvidence,
+  createEvolutionScorecard,
+  createPendingApprovalRecord,
+  sha256Canonical,
+  validateApprovalRecord,
+} from "@archsync/guardian";
+
+import { createRuntimeFoundationManifest } from "./lib/runtime-provenance.mjs";
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const writeMode = process.argv.includes("--write");
+const inputDirectory = join(root, "runtime", "inputs");
+const evidenceDirectory = join(root, "runtime", "evidence");
+const inputFiles = {
+  "package.json": join(root, "package.json"),
+  "pnpm-lock.yaml": join(root, "pnpm-lock.yaml"),
+  "runtime/inputs/baseline.otlp.json": join(inputDirectory, "baseline.otlp.json"),
+  "runtime/inputs/redis-candidate.otlp.json": join(inputDirectory, "redis-candidate.otlp.json"),
+  "runtime/inputs/mapping.json": join(inputDirectory, "mapping.json"),
+  "runtime/inputs/options.json": join(inputDirectory, "options.json"),
+  "runtime/inputs/quality-goals.json": join(inputDirectory, "quality-goals.json"),
+  "scripts/lib/runtime-provenance.mjs": join(root, "scripts", "lib", "runtime-provenance.mjs"),
+  "scripts/runtime-foundation.mjs": fileURLToPath(import.meta.url),
+  "vendor/manifest.json": join(root, "vendor", "manifest.json"),
+};
+
+async function readInputs() {
+  const text = Object.fromEntries(await Promise.all(
+    Object.entries(inputFiles).map(async ([name, path]) => [name, await readFile(path, "utf8")]),
+  ));
+  return {
+    text,
+    baseline: JSON.parse(text["runtime/inputs/baseline.otlp.json"]),
+    candidate: JSON.parse(text["runtime/inputs/redis-candidate.otlp.json"]),
+    mapping: JSON.parse(text["runtime/inputs/mapping.json"]),
+    options: JSON.parse(text["runtime/inputs/options.json"]),
+    goals: JSON.parse(text["runtime/inputs/quality-goals.json"]),
+  };
+}
+
+function serialize(value) {
+  return `${JSON.stringify(value, null, 2)}\n`;
+}
+
+const inputs = await readInputs();
+for (const goal of inputs.goals) {
+  const result = await validateQualityGoal(goal);
+  assert.equal(result.valid, true, `Invalid quality goal ${goal.id}: ${JSON.stringify(result.issues)}`);
+}
+
+const baselineSnapshot = collectRuntimeEvidence(inputs.baseline, inputs.options);
+const candidateSnapshot = collectRuntimeEvidence(inputs.candidate, inputs.options);
+assert.deepEqual(
+  collectRuntimeEvidence(inputs.baseline, inputs.options),
+  baselineSnapshot,
+  "baseline OTLP replay changed normalized output",
+);
+assert.deepEqual(
+  collectRuntimeEvidence(inputs.candidate, inputs.options),
+  candidateSnapshot,
+  "candidate OTLP replay changed normalized output",
+);
+
+const baselineGraph = buildObservedRuntimeGraph(baselineSnapshot, inputs.mapping);
+const candidateGraph = buildObservedRuntimeGraph(candidateSnapshot, inputs.mapping);
+const scorecard = createEvolutionScorecard(inputs.goals, baselineSnapshot, candidateSnapshot);
+assert.deepEqual(
+  Object.fromEntries(scorecard.rows.map((row) => [row.goal_id, row.change])),
+  {
+    "AVL-001": "improvement",
+    "COST-001": "regression",
+    "CPLX-001": "regression",
+    "LAT-001": "improvement",
+    "SEC-001": "unchanged",
+  },
+  "fixture trade-off directions changed",
+);
+assert.ok(
+  candidateGraph.signals.some((signal) =>
+    signal.code === "RUNTIME_UNDECLARED_EDGE" && signal.subject === "order-service|data|redis"
+  ),
+  "Redis candidate must remain an explicit model conflict",
+);
+
+const pendingApproval = createPendingApprovalRecord({
+  record_id: "redis-runtime-candidate-001",
+  risk_level: "high",
+  evidence_snapshot_sha256: sha256Canonical({ baselineSnapshot, candidateSnapshot }),
+  scorecard,
+  rationale: "Latency and availability improve while cost and complexity regress; prerequisites and human review remain open.",
+  rollback_plan: "Retain the current baseline and remove the Redis candidate deployment; no baseline update is authorized.",
+});
+assert.deepEqual(validateApprovalRecord(pendingApproval), { valid: true, issues: [] });
+assert.equal(pendingApproval.decision, "pending");
+assert.equal("approver" in pendingApproval, false);
+
+const outputValues = {
+  "runtime/evidence/approval.pending.json": pendingApproval,
+  "runtime/evidence/baseline.graph.json": baselineGraph,
+  "runtime/evidence/baseline.snapshot.json": baselineSnapshot,
+  "runtime/evidence/redis-candidate.graph.json": candidateGraph,
+  "runtime/evidence/redis-candidate.snapshot.json": candidateSnapshot,
+  "runtime/evidence/scorecard.json": scorecard,
+};
+const outputText = Object.fromEntries(
+  Object.entries(outputValues).map(([name, value]) => [name, serialize(value)]),
+);
+const manifest = createRuntimeFoundationManifest({
+  inputs: inputs.text,
+  outputs: outputText,
+  coreCommit: "783716d7961690b1e8c1cda4acb956777977a853",
+  guardianCommit: "dee449e7b9ff8e173458f4fb4e0d5bc1ab42e899",
+  collectorVersion: baselineSnapshot.collector.version,
+  runtimeContractVersion: baselineSnapshot.contract_version,
+  window: inputs.options.window,
+});
+const allOutputs = {
+  ...outputText,
+  "runtime/evidence/manifest.json": serialize(manifest),
+};
+
+await mkdir(evidenceDirectory, { recursive: true });
+for (const [name, content] of Object.entries(allOutputs)) {
+  const path = join(root, name);
+  if (writeMode) {
+    await writeFile(path, content, "utf8");
+  } else {
+    assert.equal(
+      await readFile(path, "utf8"),
+      content,
+      `${name} is stale; run 'pnpm runtime:update' and review the exact diff`,
+    );
+  }
+}
+
+console.log(
+  `${writeMode ? "WROTE" : "VALID"} RUNTIME FOUNDATION (${Object.keys(allOutputs).length} artifacts; pending human gate; no experimental claim)`,
+);

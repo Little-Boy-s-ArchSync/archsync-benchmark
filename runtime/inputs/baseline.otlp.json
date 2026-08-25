@@ -1,0 +1,91 @@
+{
+  "resourceSpans": [
+    {
+      "resource": {
+        "attributes": [
+          { "key": "service.name", "value": { "stringValue": "order-service" } },
+          { "key": "deployment.environment.name", "value": { "stringValue": "phase6-fixture" } }
+        ]
+      },
+      "scopeSpans": [
+        {
+          "spans": [
+            {
+              "traceId": "11111111111111111111111111111111",
+              "spanId": "1111111111111111",
+              "name": "POST /orders",
+              "kind": 2,
+              "startTimeUnixNano": "1787702460000000000",
+              "endTimeUnixNano": "1787702460080000000",
+              "attributes": [
+                { "key": "peer.service", "value": { "stringValue": "api-gateway" } },
+                { "key": "http.request.method", "value": { "stringValue": "POST" } }
+              ],
+              "status": { "code": 1 }
+            },
+            {
+              "traceId": "22222222222222222222222222222222",
+              "spanId": "2222222222222222",
+              "name": "SELECT orders",
+              "kind": 3,
+              "startTimeUnixNano": "1787702520000000000",
+              "endTimeUnixNano": "1787702520240000000",
+              "attributes": [
+                { "key": "peer.service", "value": { "stringValue": "postgres" } },
+                { "key": "db.system", "value": { "stringValue": "postgresql" } }
+              ],
+              "status": { "code": 1 }
+            },
+            {
+              "traceId": "33333333333333333333333333333333",
+              "spanId": "3333333333333333",
+              "name": "SELECT orders",
+              "kind": 3,
+              "startTimeUnixNano": "1787702580000000000",
+              "endTimeUnixNano": "1787702580260000000",
+              "attributes": [
+                { "key": "peer.service", "value": { "stringValue": "postgres" } },
+                { "key": "db.system", "value": { "stringValue": "postgresql" } }
+              ],
+              "status": { "code": 2 }
+            },
+            {
+              "traceId": "44444444444444444444444444444444",
+              "spanId": "4444444444444444",
+              "name": "SELECT orders",
+              "kind": 3,
+              "startTimeUnixNano": "1787702640000000000",
+              "endTimeUnixNano": "1787702640220000000",
+              "attributes": [
+                { "key": "peer.service", "value": { "stringValue": "postgres" } },
+                { "key": "db.system", "value": { "stringValue": "postgresql" } }
+              ],
+              "status": { "code": 1 }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "resourceMetrics": [
+    {
+      "resource": {
+        "attributes": [
+          { "key": "service.name", "value": { "stringValue": "order-service" } },
+          { "key": "deployment.environment.name", "value": { "stringValue": "phase6-fixture" } }
+        ]
+      },
+      "scopeMetrics": [
+        {
+          "metrics": [
+            { "name": "archsync.goal.p95_latency", "unit": "ms", "gauge": { "dataPoints": [{ "timeUnixNano": "1787703240000000000", "attributes": [{ "key": "archsync.goal.id", "value": { "stringValue": "LAT-001" } }], "asDouble": 260 }] } },
+            { "name": "archsync.goal.availability_ratio", "unit": "ratio", "gauge": { "dataPoints": [{ "timeUnixNano": "1787703240000000001", "attributes": [{ "key": "archsync.goal.id", "value": { "stringValue": "AVL-001" } }], "asDouble": 0.985 }] } },
+            { "name": "archsync.goal.security_violation_count", "unit": "count", "gauge": { "dataPoints": [{ "timeUnixNano": "1787703240000000002", "attributes": [{ "key": "archsync.goal.id", "value": { "stringValue": "SEC-001" } }], "asInt": 0 }] } },
+            { "name": "archsync.goal.estimated_cost", "unit": "usd", "gauge": { "dataPoints": [{ "timeUnixNano": "1787703240000000003", "attributes": [{ "key": "archsync.goal.id", "value": { "stringValue": "COST-001" } }], "asDouble": 350 }] } },
+            { "name": "archsync.goal.component_count", "unit": "count", "gauge": { "dataPoints": [{ "timeUnixNano": "1787703240000000004", "attributes": [{ "key": "archsync.goal.id", "value": { "stringValue": "CPLX-001" } }], "asInt": 4 }] } }
+          ]
+        }
+      ]
+    }
+  ]
+}
