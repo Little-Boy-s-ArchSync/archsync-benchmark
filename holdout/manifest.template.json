@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "protocol_version": "d3-v1-proposed",
+  "status": "proposed",
+  "tuning_repository_urls": [],
+  "repositories": [],
+  "approval": null,
+  "ground_truth_sha256": null,
+  "blockers": [
+    "EXP-102 is not frozen",
+    "Lead protocol approval is missing",
+    "Final repositories and dual-review ground truth must be chosen by humans"
+  ]
+}
