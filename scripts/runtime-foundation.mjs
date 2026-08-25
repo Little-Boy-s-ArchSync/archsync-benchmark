@@ -125,7 +125,7 @@ const manifest = createRuntimeFoundationManifest({
   inputs: inputs.text,
   outputs: outputText,
   coreCommit: "503b5fe97aa39a78d5e5de80b794a94508e106cc",
-  guardianCommit: "ebaaf2711602890ef6ead8983bd33e2cf4853e17",
+  guardianCommit: "5ac01f1fa5b008103f274612b9aa9f602b111fae",
   collectorVersion: baselineSnapshot.collector.version,
   runtimeContractVersion: baselineSnapshot.contract_version,
   window: inputs.options.window,

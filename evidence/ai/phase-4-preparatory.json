@@ -21,7 +21,7 @@
     },
     {
       "file": "evidence/ai/guardian-run-manifest-source.json",
-      "sha256": "cd225fe0a9bdebdd29124140e3a519fb766e9e604814151df968d74e092b6408"
+      "sha256": "4dd51a3418060518ae80aa2eefa826ac75ab3b22cc3c977f52664be4cea98af4"
     },
     {
       "file": "evidence/ai/model-config.template.json",
@@ -33,7 +33,7 @@
     },
     {
       "file": "evidence/ai/README.md",
-      "sha256": "889e73941cee23563dd4d1f76394678e1e74ad5393f929865dd4484b8cf5964a"
+      "sha256": "7f21bb4f3510b3f7c09aedf2d3aa5696b2534933ea609b22740d06ca629ed0bf"
     },
     {
       "file": "evidence/ai/run-manifest.template.json",
@@ -41,7 +41,7 @@
     },
     {
       "file": "scripts/lib/ai-evaluation.mjs",
-      "sha256": "1a9ead7a20bc1da8629798f12a06365d90c8e1484d64629e2327cea23528852d"
+      "sha256": "2b3e78a3d08aa811bec7ec5b12a23b556bebca116b0c5ec89acc684df19b94ea"
     },
     {
       "file": "scripts/validate-ai-evaluation.mjs",
@@ -49,8 +49,8 @@
     },
     {
       "file": "test/ai-evaluation.test.mjs",
-      "sha256": "2bebd9ebec0c18b15519bc93ad7ddc11669baf1d7d20cb7f87adaee8cdeb0420"
+      "sha256": "aa2b80cefa4a942bbb26b0702504636787a66953f00a4b64656610d27efb0e21"
     }
   ],
-  "manifest_sha256": "3b428b5f4ba3ea539b8b0d379d624da34cb57de70bead78c9aa65e85f49c36c2"
+  "manifest_sha256": "8727eaf209a8a9bdad077b073ef9a581a46592fb3da69517fada6cf84dd5369b"
 }

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "core_quality_goal_foundation_commit": "503b5fe97aa39a78d5e5de80b794a94508e106cc",
-    "guardian_runtime_foundation_commit": "ebaaf2711602890ef6ead8983bd33e2cf4853e17"
+    "guardian_runtime_foundation_commit": "5ac01f1fa5b008103f274612b9aa9f602b111fae"
   },
   "contracts": {
     "collector_version": "0.1.0-foundation",
@@ -24,8 +24,8 @@
     "end_unix_nano": "1787703300000000000"
   },
   "input_sha256": {
-    "package.json": "e403f3e9571fb0319b99c7239f4520837b2ad1d9fd33339d46ba75e5c01deab4",
-    "pnpm-lock.yaml": "083ba9688825064d603def310051557e3f93c432cc9fe988cc58d4aaaa0defcb",
+    "package.json": "2d798ee410a9d04020b876f0785ed7330343136d6d924db1cd76c8655494bd55",
+    "pnpm-lock.yaml": "bc8e6b9396d395eaa4a3c5b60e118b21484dc0556ed7a213c934266e9a42a27f",
     "runtime/evidence/closure.template.json": "fd6ad41ed90b36cfc7827fb0ffca7ebc7bd686ddc09147972917af9e6e17c403",
     "runtime/inputs/baseline.otlp.json": "65e396ef37356c80068a4dc9d52f17e57b4ec13e79b11eb9849333eb856b61e8",
     "runtime/inputs/mapping.json": "dac4235af3c37de5b6e6fd513c3593b19003e2b0d34eb4a26d8d04e79870269a",
@@ -33,8 +33,8 @@
     "runtime/inputs/quality-goals.json": "a42b7457f4e177ed441857fc3dad045b18ff32433c8d610ca08d3acc961f4524",
     "runtime/inputs/redis-candidate.otlp.json": "74a1c9f5a28fcdf41d9d196b0899a2097ca198c2d021fa9f9731b70cac5082c9",
     "scripts/lib/runtime-provenance.mjs": "ed663a2d51d657e61fc7bce049c585bf22f9d2d364aa2f7a85a071c33ed93812",
-    "scripts/runtime-foundation.mjs": "3773d9334a69a84e20b5040c484327a407b49f399d1df1e54abf4bd1f5225e55",
-    "vendor/manifest.json": "beb49774b96353e3259043ea4be05576ce2b27aa2d2f086c144d447d510da970"
+    "scripts/runtime-foundation.mjs": "bfadbd72631dd3afea29d3a6952073d56bbc09a8a0bbeb74094a80d496af4e8f",
+    "vendor/manifest.json": "b6c6824a3e3ec90fe0f29a5c6ec858a535157dea19ac31ca85921ee6faedc2b1"
   },
   "output_sha256": {
     "runtime/evidence/approval.pending.json": "9b579e180ef9529e1bbb32a534954955fae497e7fd15d826efaab5fba946bf35",
