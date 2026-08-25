@@ -25,6 +25,8 @@
     "patterns:update": "node scripts/pattern-corpus-evidence.mjs --write",
     "patterns:baseline:verify": "node scripts/validate-pattern-baseline.mjs",
     "patterns:verify": "node scripts/pattern-corpus-evidence.mjs",
+    "ai-eval:verify": "node scripts/validate-ai-evaluation.mjs",
+    "study:verify": "node scripts/validate-measurement-scaffold.mjs",
     "demo": "node scripts/demo-cli.mjs --scenario all",
     "demo:pass": "node scripts/demo-cli.mjs --scenario pass",
     "demo:block": "node scripts/demo-cli.mjs --scenario block",
@@ -35,7 +37,7 @@
     "demo:phase3:block": "node scripts/demo-phase3.mjs case-06",
     "demo:phase3:review": "node scripts/demo-phase3.mjs case-09",
     "demo:phase3": "pnpm demo:phase3:pass && pnpm demo:phase3:block && pnpm demo:phase3:review",
-    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify"
+    "verify": "pnpm validate:vendor && pnpm validate:model && pnpm validate:benchmark && pnpm validate:ground-truth && pnpm validate:docs && pnpm validate:patches && pnpm validate:patterns && pnpm patterns:baseline:verify && pnpm integrity:verify && pnpm test && pnpm ai-eval:verify && pnpm study:verify && pnpm phase2:verify && pnpm phase2:snapshot && pnpm patterns:verify && pnpm phase3:verify"
   },
   "dependencies": {
     "@archsync/core": "file:vendor/archsync-core-0.1.0-2affbbb.tgz",

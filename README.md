@@ -1,5 +1,7 @@
 # ArchSync Benchmark
 
+The Phase 4 evaluation and Phase 7 measurement-study technical foundations now include a 12-case AI safety regression corpus, provenance/run-manifest validation, blind unsupported-claim review calculations, repair and ablation metrics, A–D task/instrumentation contracts, freeze-gated study manifests, multi-source ablation design and hash-bound analysis normalization. Run `pnpm ai-eval:verify` and `pnpm study:verify`. These assets contain no real-provider, participant, pilot, final-study or human-review results; their documentation names the remaining security, protocol, ethics, data and Lead gates.
+
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
 **Phase 1 foundation:** model, graph and conformance contracts are executable. **Phase 2 analyzer gate:** strengthened and reproducible as v0.2. **Phase 3 PR gate:** Git-diff decisions, baseline caching and component-incremental analysis are reproducible as v0.3. `ground-truth.json` is the canonical end-to-end benchmark manifest.
