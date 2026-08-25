@@ -1,0 +1,331 @@
+{
+  "schema_version": 1,
+  "benchmark": {
+    "id": "archsync-iac-pre-freeze-v0.1",
+    "status": "preparatory-awaiting-human-freeze",
+    "contract_version": "0.1",
+    "guardian_source_commit": "de11e48a8f69fbe5cd32f052489a323e1c81eab3",
+    "guardian_pull_request": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian/pull/7",
+    "expected_distribution": {
+      "baseline": 1,
+      "valid-change": 3,
+      "violation": 7,
+      "evolution": 2,
+      "hard-negative": 7
+    },
+    "governance": {
+      "p4_120_approved": false,
+      "phase5_adr_accepted": false,
+      "security_review_approved": false,
+      "ground_truth_frozen": false,
+      "approval_records": []
+    }
+  },
+  "cases": [
+    {
+      "id": "iac-case-01",
+      "title": "Aligned private AWS database baseline",
+      "category": "baseline",
+      "directory": "iac/cases/iac-case-01",
+      "targets": ["terraform", "identity", "claims"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [
+          { "subject": "data/orders-db", "property": "identity", "classification": "aligned", "values": ["code:data/orders-db", "iac:data/orders-db", "spec:data/orders-db"] },
+          { "subject": "data/orders-db", "property": "kind", "classification": "aligned", "values": ["code:database", "iac:database", "spec:database"] },
+          { "subject": "data/orders-db", "property": "exposure", "classification": "aligned", "values": ["code:private", "iac:private", "spec:private"] },
+          { "subject": "data/orders-db", "property": "trust-boundary", "classification": "aligned", "values": ["code:data", "iac:data", "spec:data"] }
+        ],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [{ "method": "explicit-alias", "canonical_id": "data/orders-db", "count": 3 }],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-02",
+      "title": "Aligned approved private cache",
+      "category": "valid-change",
+      "directory": "iac/cases/iac-case-02",
+      "targets": ["terraform", "identity", "claims", "security"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [{ "subject": "data/orders-cache", "property": "kind", "classification": "aligned", "values": ["code:cache", "iac:cache", "spec:cache"] }],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [{ "method": "explicit-alias", "canonical_id": "data/orders-cache", "count": 3 }],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-03",
+      "title": "Aligned approved private broker",
+      "category": "valid-change",
+      "directory": "iac/cases/iac-case-03",
+      "targets": ["terraform", "identity", "claims", "security"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [{ "subject": "integration/orders-events", "property": "kind", "classification": "aligned", "values": ["code:broker", "iac:broker", "spec:broker"] }],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [{ "method": "explicit-alias", "canonical_id": "integration/orders-events", "count": 3 }],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-04",
+      "title": "Approved public Kubernetes ingress and transition",
+      "category": "valid-change",
+      "directory": "iac/cases/iac-case-04",
+      "targets": ["kubernetes", "security"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [{ "method": "explicit-alias", "canonical_id": "public/orders-public", "count": 1 }],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-05",
+      "title": "Public AWS database violation",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-05",
+      "targets": ["terraform", "security", "aws"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-PUBLIC-DATABASE", "subject": "data/aws-orders-db", "edge": "", "evidence": [{ "source": "terraform", "file": "iac/cases/iac-case-05/terraform/main.tf", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": [{ "rule_id": "IAC-PUBLIC-DATABASE", "subject": "data/aws-orders-db" }]
+      }
+    },
+    {
+      "id": "iac-case-06",
+      "title": "Public Azure database violation",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-06",
+      "targets": ["terraform", "security", "azure"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-PUBLIC-DATABASE", "subject": "data/azure-orders-db", "edge": "", "evidence": [{ "source": "terraform", "file": "iac/cases/iac-case-06/terraform/main.tf", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": [{ "rule_id": "IAC-PUBLIC-DATABASE", "subject": "data/azure-orders-db" }]
+      }
+    },
+    {
+      "id": "iac-case-07",
+      "title": "Public GCP database violation",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-07",
+      "targets": ["terraform", "security", "gcp"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-PUBLIC-DATABASE", "subject": "data/gcp-orders-db", "edge": "", "evidence": [{ "source": "terraform", "file": "iac/cases/iac-case-07/terraform/main.tf", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": [{ "rule_id": "IAC-PUBLIC-DATABASE", "subject": "data/gcp-orders-db" }]
+      }
+    },
+    {
+      "id": "iac-case-08",
+      "title": "Unexpected Kubernetes ingress violation",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-08",
+      "targets": ["kubernetes", "security"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-UNEXPECTED-INGRESS", "subject": "public/orders-public", "edge": "", "evidence": [{ "source": "kubernetes", "file": "iac/cases/iac-case-08/kubernetes/main.yaml", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": [{ "rule_id": "IAC-UNEXPECTED-INGRESS", "subject": "public/orders-public" }]
+      }
+    },
+    {
+      "id": "iac-case-09",
+      "title": "Unapproved Kubernetes trust-boundary route",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-09",
+      "targets": ["kubernetes", "security"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-TRUST-BOUNDARY", "subject": "public/orders-public", "edge": "public/orders-public|routes-to|application/orders-api", "evidence": [{ "source": "kubernetes", "file": "iac/cases/iac-case-09/kubernetes/main.yaml", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-10",
+      "title": "Unapproved Terraform broker violation",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-10",
+      "targets": ["terraform", "security", "broker"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-UNAPPROVED-DATA-SERVICE", "subject": "integration/orders-events", "edge": "", "evidence": [{ "source": "terraform", "file": "iac/cases/iac-case-10/terraform/main.tf", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-11",
+      "title": "Unapproved Terraform cache violation",
+      "category": "violation",
+      "directory": "iac/cases/iac-case-11",
+      "targets": ["terraform", "security", "cache"],
+      "expected": {
+        "findings": [{ "rule_id": "IAC-UNAPPROVED-DATA-SERVICE", "subject": "data/orders-cache", "edge": "", "evidence": [{ "source": "terraform", "file": "iac/cases/iac-case-11/terraform/main.tf", "line": 1 }] }],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-12",
+      "title": "Approved broker evolution missing spec and code evidence",
+      "category": "evolution",
+      "directory": "iac/cases/iac-case-12",
+      "targets": ["terraform", "claims", "evolution"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [{ "subject": "integration/new-events", "property": "kind", "classification": "missing-source", "values": ["iac:broker"], "missing_sources": ["code", "spec"] }],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-13",
+      "title": "Workload versus service kind contradiction",
+      "category": "evolution",
+      "directory": "iac/cases/iac-case-13",
+      "targets": ["kubernetes", "identity", "claims", "evolution"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [{ "subject": "application/orders-worker", "property": "kind", "classification": "contradiction", "values": ["code:service", "iac:workload", "spec:service"] }],
+        "conflict_counts": { "contradiction": 1, "identity-uncertain": 0 },
+        "identity_checks": [{ "method": "explicit-alias", "canonical_id": "application/orders-worker", "count": 3 }],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-14",
+      "title": "Private database hard negatives across providers",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-14",
+      "targets": ["terraform", "security", "aws", "azure", "gcp"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-15",
+      "title": "Approved public ingress and approved cross-boundary route hard negative",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-15",
+      "targets": ["kubernetes", "security"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-16",
+      "title": "Public-looking unsupported Terraform resource hard negative",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-16",
+      "targets": ["terraform", "security", "diagnostics"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": ["unsupported-resource"],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-17",
+      "title": "Dynamic public exposure remains unknown hard negative",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-17",
+      "targets": ["terraform", "security", "diagnostics"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": ["unsupported-dynamic-expression"],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-18",
+      "title": "Unresolved Kubernetes route cannot create a trust finding",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-18",
+      "targets": ["kubernetes", "security", "diagnostics"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": ["missing-reference"],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-19",
+      "title": "Approved cache and broker hard negatives",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-19",
+      "targets": ["terraform", "security", "cache", "broker"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 0 },
+        "identity_checks": [],
+        "public_exposures": []
+      }
+    },
+    {
+      "id": "iac-case-20",
+      "title": "Ambiguous explicit aliases remain separate",
+      "category": "hard-negative",
+      "directory": "iac/cases/iac-case-20",
+      "targets": ["terraform", "identity", "claims"],
+      "expected": {
+        "findings": [],
+        "diagnostic_codes": [],
+        "claim_checks": [],
+        "conflict_counts": { "contradiction": 0, "identity-uncertain": 4 },
+        "identity_checks": [{ "method": "ambiguous", "count": 1 }],
+        "public_exposures": []
+      }
+    }
+  ]
+}

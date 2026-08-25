@@ -1,0 +1,5 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "data/dynamic-db", "namespace": "any", "aliases": ["dynamic-db"] }]
+}

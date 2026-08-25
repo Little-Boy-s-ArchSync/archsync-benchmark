@@ -1,0 +1,14 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: missing-route
+  namespace: orders
+  annotations:
+    archsync.io/approved: "true"
+    archsync.io/trust-boundary: public
+spec:
+  defaultBackend:
+    service:
+      name: absent-service
+      port:
+        number: 80

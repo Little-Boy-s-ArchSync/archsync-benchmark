@@ -1,0 +1,5 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "data/azure-orders-db", "namespace": "any", "aliases": ["azure-orders-db"] }]
+}

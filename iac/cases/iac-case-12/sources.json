@@ -1,0 +1,5 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "integration/new-events", "namespace": "any", "aliases": ["new-events"] }]
+}

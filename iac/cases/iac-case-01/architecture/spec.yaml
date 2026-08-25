@@ -1,0 +1,4 @@
+component: orders-db
+kind: database
+exposure: private
+trust_boundary: data

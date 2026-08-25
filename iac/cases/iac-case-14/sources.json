@@ -1,0 +1,9 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [
+    { "canonical_id": "data/aws-private", "namespace": "any", "aliases": ["aws-private"] },
+    { "canonical_id": "data/azure-private", "namespace": "any", "aliases": ["azure-private"] },
+    { "canonical_id": "data/gcp-private", "namespace": "any", "aliases": ["gcp-private"] }
+  ]
+}

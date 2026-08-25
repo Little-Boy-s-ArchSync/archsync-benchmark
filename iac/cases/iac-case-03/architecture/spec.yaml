@@ -1,0 +1,4 @@
+component: orders-events
+kind: broker
+exposure: private
+trust_boundary: integration

@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 77,
-    "passed": 77,
+    "total": 85,
+    "passed": 85,
     "failed": 0
   },
   "provenance": {
@@ -34,6 +34,10 @@
       {
         "file": "scripts/lib/holdout.mjs",
         "sha256": "f49565c92425c00b03690b17e4d311acf9a3925ed4e343a696cc0d9937f92a99"
+      },
+      {
+        "file": "scripts/lib/iac-benchmark.mjs",
+        "sha256": "4b62dd17e6931d66ad2afd3f691ff5a7612a4a77db2f6b1197bc8db6c56a1b16"
       },
       {
         "file": "scripts/lib/integrity.mjs",
@@ -53,7 +57,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "d4df08c9c9557912e63fa2fce1e1ad76ab99e782fc1660fe20687f25933180d6"
+        "sha256": "08135d2e07899df026a6b7f9de5866a7b3c0978015f81a2829b7f34f887f1f25"
       },
       {
         "file": "test/ai-evaluation.test.mjs",
@@ -66,6 +70,10 @@
       {
         "file": "test/holdout.test.mjs",
         "sha256": "d0997c4c27310665bfa5791f3123040b56ea3a3304275b302311258cf2a0165a"
+      },
+      {
+        "file": "test/iac-benchmark.test.mjs",
+        "sha256": "d236bd260bcf8e22b88d2afc01ffb8dac2be96bd3f123ca0ea42cd00ec7a2b23"
       },
       {
         "file": "test/integrity.test.mjs",
@@ -85,17 +93,17 @@
       },
       {
         "file": "package.json",
-        "sha256": "ba399bcf9a4a8e193a4c7dc64032b74b8b001dad724a16cbc802bb481d565e88"
+        "sha256": "76391b898ca931fd9402266747834cab61728ddf6f18eaa89f05f425d0c6bf45"
       },
       {
         "file": "pnpm-lock.yaml",
-        "sha256": "6eb55d68edcd883940c88ff40a64ea73d6faceec101f5b6ac1a7e4f0d96c2709"
+        "sha256": "2213b89b258760ad3eb25385a4f8da1cbd25b144e5e6076c8da8f2d64b2ad8a0"
       },
       {
         "file": "vendor/manifest.json",
         "sha256": "baed9ad5ac1a92069409e78414f5e040c499794d9b353814e7d1d6addc6b51d7"
       }
     ],
-    "manifest_sha256": "84e25ada3d0af7104de7c6bb473cc5fcd97bd6daff2f76331dbab1c62c848f2a"
+    "manifest_sha256": "3c30eecfffb85744ef96d83562dfaac5d608265b595278601cdf2bfb54999cf2"
   }
 }

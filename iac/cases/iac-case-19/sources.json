@@ -1,0 +1,8 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [
+    { "canonical_id": "data/approved-cache", "namespace": "any", "aliases": ["approved-cache"] },
+    { "canonical_id": "integration/approved-events", "namespace": "any", "aliases": ["approved-events"] }
+  ]
+}
