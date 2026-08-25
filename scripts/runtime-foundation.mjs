@@ -13,10 +13,16 @@ import {
   validateApprovalRecord,
 } from "@archsync/guardian";
 
-import { createRuntimeFoundationManifest } from "./lib/runtime-provenance.mjs";
+import {
+  RUNTIME_CLOSURE_GATES,
+  assertRuntimeClosure,
+  createRuntimeFoundationManifest,
+  evaluateRuntimeClosure,
+} from "./lib/runtime-provenance.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const writeMode = process.argv.includes("--write");
+const requireClosed = process.argv.includes("--require-closed");
 const inputDirectory = join(root, "runtime", "inputs");
 const evidenceDirectory = join(root, "runtime", "evidence");
 const inputFiles = {
@@ -27,6 +33,7 @@ const inputFiles = {
   "runtime/inputs/mapping.json": join(inputDirectory, "mapping.json"),
   "runtime/inputs/options.json": join(inputDirectory, "options.json"),
   "runtime/inputs/quality-goals.json": join(inputDirectory, "quality-goals.json"),
+  "runtime/evidence/closure.template.json": join(evidenceDirectory, "closure.template.json"),
   "scripts/lib/runtime-provenance.mjs": join(root, "scripts", "lib", "runtime-provenance.mjs"),
   "scripts/runtime-foundation.mjs": fileURLToPath(import.meta.url),
   "vendor/manifest.json": join(root, "vendor", "manifest.json"),
@@ -43,6 +50,7 @@ async function readInputs() {
     mapping: JSON.parse(text["runtime/inputs/mapping.json"]),
     options: JSON.parse(text["runtime/inputs/options.json"]),
     goals: JSON.parse(text["runtime/inputs/quality-goals.json"]),
+    closure: JSON.parse(text["runtime/evidence/closure.template.json"]),
   };
 }
 
@@ -116,12 +124,19 @@ const outputText = Object.fromEntries(
 const manifest = createRuntimeFoundationManifest({
   inputs: inputs.text,
   outputs: outputText,
-  coreCommit: "783716d7961690b1e8c1cda4acb956777977a853",
-  guardianCommit: "dee449e7b9ff8e173458f4fb4e0d5bc1ab42e899",
+  coreCommit: "503b5fe97aa39a78d5e5de80b794a94508e106cc",
+  guardianCommit: "ebaaf2711602890ef6ead8983bd33e2cf4853e17",
   collectorVersion: baselineSnapshot.collector.version,
   runtimeContractVersion: baselineSnapshot.contract_version,
   window: inputs.options.window,
 });
+assert.equal(inputs.closure.status, "preparatory");
+assert.equal(inputs.closure.template_only, true);
+assert.deepEqual(Object.keys(inputs.closure.gates), RUNTIME_CLOSURE_GATES);
+const closure = evaluateRuntimeClosure(manifest, inputs.closure.gates);
+assert.equal(closure.status, "PREPARATORY");
+assert.equal(closure.closed, false);
+assert.deepEqual(closure.blockers, RUNTIME_CLOSURE_GATES);
 const allOutputs = {
   ...outputText,
   "runtime/evidence/manifest.json": serialize(manifest),
@@ -141,6 +156,8 @@ for (const [name, content] of Object.entries(allOutputs)) {
   }
 }
 
+if (requireClosed) assertRuntimeClosure(manifest, inputs.closure.gates);
+
 console.log(
-  `${writeMode ? "WROTE" : "VALID"} RUNTIME FOUNDATION (${Object.keys(allOutputs).length} artifacts; pending human gate; no experimental claim)`,
+  `${writeMode ? "WROTE" : "VALID"} RUNTIME FOUNDATION (${Object.keys(allOutputs).length} artifacts; ${closure.blockers.length} closure blockers; no experimental claim)`,
 );

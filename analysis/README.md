@@ -1,3 +1,9 @@
-# Reproducible analysis workspace
+# ANALYSIS-101 reproducible pipeline
 
-This directory is reserved for normalized tables, statistical outputs and paper figures created only after the study and ablation datasets are frozen. The deterministic normalizer is available now; no empty `results.csv`, invented estimate, notebook output or figure is committed as research evidence.
+Status: **synthetic preparatory dry run only — no research result**.
+
+`pnpm analysis:verify` deterministically transforms the hash-bound synthetic fixture into a normalized `results.csv`, Markdown table, accessible SVG figure, and output-hash manifest under `analysis/preparatory/`. Every generated surface is visibly marked “SYNTHETIC … NOT RESEARCH RESULTS”; failed and inconclusive rows remain in the CSV/table. `pnpm analysis:update` is the explicit regeneration command.
+
+The library rejects empty datasets, row/hash mismatches, duplicate run/outcome keys, malformed numerator/denominator/value triples, silent loss of failed rows, approval attached to provisional data, or synthetic data presented as frozen. The publishable path additionally requires a non-synthetic frozen dataset, frozen statistical plan, hash-bound human dataset approval, and a hash-bound reproduction record from an independent human auditor.
+
+`pnpm analysis:gate` intentionally fails with `ANALYSIS_GATE_INCOMPLETE` because `input.template.json` has no frozen data or independent audit. The committed preparatory CSV/table/figure exercise rendering and reproducibility only; their numbers must never appear as experimental estimates or paper results.

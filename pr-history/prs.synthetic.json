@@ -1,0 +1,18 @@
+[
+  {
+    "number": 1,
+    "base_commit": "1111111111111111111111111111111111111111",
+    "merged_commit": "3333333333333333333333333333333333333333",
+    "changed_files": ["src/synthetic-one.ts"],
+    "opened_at": "2026-08-21T00:00:00Z",
+    "merged_at": "2026-08-21T01:00:00Z"
+  },
+  {
+    "number": 2,
+    "base_commit": "2222222222222222222222222222222222222222",
+    "merged_commit": "4444444444444444444444444444444444444444",
+    "changed_files": ["src/synthetic-two.ts"],
+    "opened_at": "2026-08-22T00:00:00Z",
+    "merged_at": "2026-08-22T01:00:00Z"
+  }
+]

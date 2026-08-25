@@ -5,9 +5,9 @@
   "runtime_artifact": {
     "package": "@archsync/guardian",
     "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
-    "source_commit": "dee449e7b9ff8e173458f4fb4e0d5bc1ab42e899",
-    "file": "vendor/archsync-guardian-0.3.3-p6-dee449e.tgz",
-    "sha256": "bb08ef07a691c2fa6a48d98e8fccd87ba922186d7166fc9c3d9f5ac762e1edd7"
+    "source_commit": "ebaaf2711602890ef6ead8983bd33e2cf4853e17",
+    "file": "vendor/archsync-guardian-0.3.3-global-ebaaf27.tgz",
+    "sha256": "06243cdc96dbdb4e13db2a05c82fbd2b4879b72f80f20d2fc109d430446d0127"
   },
   "provenance": {
     "manifest_sha256": "cf87bd2d9f6ea48b75b8c31fdd52a1c671ba707425e6fbfcabd3673f1198af69",

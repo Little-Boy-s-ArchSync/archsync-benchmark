@@ -1,0 +1,9 @@
+{
+  "schema_version": 1,
+  "status": "synthetic-preparatory",
+  "claims_allowed": false,
+  "human_approval": null,
+  "manifest_sha256": "830a593d2631e9a82ba7e2da28325d414438c2fbbe4fa1db300391fbbf7964a1",
+  "fixture_sha256": "7852463e8a38799cb57f8b7b76e867b5ce37862577842587c004bf42261f6cf8",
+  "runner_sha256": "76daf6744c4ef55da0cff87b358e3b62f6db08c856a8998210af36a26ef1ff3a"
+}

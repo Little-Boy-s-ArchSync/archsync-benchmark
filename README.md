@@ -1,10 +1,10 @@
 # ArchSync Benchmark
 
-The proposed D3 independent-holdout protocol, blind-review handbook, immutable templates, freeze verifier, metrics/error taxonomy, and scalability/oracle tooling live in [`holdout/`](holdout/). They are technically verified by `pnpm holdout:verify` and the 100% unit-coverage gate, but final repository selection, ground truth, freeze, and inference remain blocked on EXP-102 and explicit human Lead/reviewer actions.
+The proposed D3 independent-holdout protocol, blind-review handbook, immutable templates, repository pin/tree/license verifier, adjudication checker, exact two-pass harness, explicit-denominator metrics/error taxonomy, scalability/oracle tooling and synthetic PR-history replay live in [`holdout/`](holdout/) and [`pr-history/`](pr-history/). They are technically verified by `pnpm holdout:verify`, `pnpm pr-history:verify` and the 100% unit-coverage gate. `holdout:gate` and `pr-history:gate` remain closed because final repository selection, ground truth, freeze, approval and real-system extraction require external human action.
 
-The Phase 4 evaluation and Phase 7 measurement-study technical foundations now include a 12-case AI safety regression corpus, provenance/run-manifest validation, blind unsupported-claim review calculations, repair and ablation metrics, A–D task/instrumentation contracts, freeze-gated study manifests, multi-source ablation design and hash-bound analysis normalization. Run `pnpm ai-eval:verify` and `pnpm study:verify`. These assets contain no real-provider, participant, pilot, final-study or human-review results; their documentation names the remaining security, protocol, ethics, data and Lead gates.
+The Phase 4 evaluation and Phase 7 measurement-study technical foundations now include a 12-case AI safety regression corpus, canonical Guardian run-manifest adaptation, blind P4-123 rubric/timing, unsupported-claim and repair calculations, config-separated ablation/citation metrics, non-empty A–D instrumentation, pinned STAT-101 linkage, pilot and five-condition ablation evidence schemas, a watermarked synthetic CSV/table/figure pipeline, and an independent reproduction runbook. Run `pnpm ai-eval:verify`, `pnpm study:verify`, `pnpm pilot:verify`, `pnpm ablation:verify`, `pnpm analysis:verify` and `pnpm repl:verify`. Their corresponding `:gate` commands intentionally fail until real provider, participant, pilot, freeze, security, ethics/data and independent-auditor evidence exists.
 
-The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record; it does not claim ADR approval, architecture acceptance or experimental validation.
+The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record. `pnpm runtime:gate` fails closed on eight Phase 5, governance, human, privacy/security and independent non-synthetic validation prerequisites; no ADR approval, architecture acceptance or experimental validation is claimed.
 
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
@@ -81,7 +81,7 @@ See [`README-DEMO.md`](README-DEMO.md) for the short Vietnamese presentation scr
 
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
-The benchmark's deterministic validation libraries are covered by 85 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
+The benchmark's deterministic validation libraries are covered by 110 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
 
 Expected Phase 2 result:
 
@@ -140,5 +140,11 @@ pnpm phase3:update
 pnpm patterns:update
 pnpm runtime:update
 pnpm iac:update
+pnpm ai-eval:update
+pnpm analysis:update
+pnpm pr-history:update
+pnpm coverage:update
 pnpm verify
 ```
+
+The complete TV3 preparatory task/gate mapping is recorded in [`TV3-TECHNICAL-PREPARATION.md`](TV3-TECHNICAL-PREPARATION.md).

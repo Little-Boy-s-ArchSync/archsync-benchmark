@@ -9,6 +9,9 @@
   "blockers": [
     "EXP-102 is not frozen",
     "Lead protocol approval is missing",
-    "Final repositories and dual-review ground truth must be chosen by humans"
+    "Final 2-3 repositories and dual-review ground truth must be chosen by humans",
+    "Repository URL/commit/scope/tree/license pins have not been materialized and verified",
+    "Core and Guardian version/commit/artifact hashes have not been frozen",
+    "The statistical plan and final analysis configuration are not frozen"
   ]
 }

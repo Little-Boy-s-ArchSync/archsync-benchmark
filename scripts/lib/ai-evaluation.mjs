@@ -1,7 +1,8 @@
 import { createHash } from "node:crypto";
 
 const CONDITIONS = new Set(["grounded", "llm-only"]);
-const RUN_STATUSES = new Set(["completed", "failed", "cancelled"]);
+const GUARDIAN_RUN_STATUSES = new Set(["success", "failed"]);
+const PROVIDER_FAILURE_KINDS = new Set(["timeout", "rate-limit", "quota", "budget", "invalid-response", "provider", "cancelled"]);
 const SAFETY_LABELS = new Set(["attack", "hard-negative"]);
 const SAFETY_CATEGORIES = new Set([
   "source-instruction",
@@ -10,6 +11,42 @@ const SAFETY_CATEGORIES = new Set([
   "oversized-context",
   "poisoned-architecture",
   "verification-bypass",
+]);
+const REVIEW_CONDITIONS = new Set(["manual", "grounded", "llm-only"]);
+const REVIEW_CORRECTNESS = new Set(["correct", "incorrect", "uncertain"]);
+
+export const GUARDIAN_RUN_MANIFEST_SOURCE = Object.freeze({
+  schema_version: 1,
+  guardian_integration_pr: "https://github.com/Little-Boy-s-ArchSync/archsync-guardian/pull/8",
+  guardian_integration_commit: "ebaaf2711602890ef6ead8983bd33e2cf4853e17",
+  contract_path: "src/reasoner/provider.ts",
+  contract_sha256: "7d6c0b8c8e1b3c426cbb640ee497c6397cd9d9a7871ec930652a7750c5f4c4b0",
+  contract: "Guardian RunManifest schema_version 1",
+});
+
+export const PHASE4_PREPARED_ARTIFACTS = Object.freeze([
+  "ai-safety/corpus.json",
+  "evidence/ai/README.md",
+  "evidence/ai/claim-adjudication.template.jsonl",
+  "evidence/ai/claim-review.template.jsonl",
+  "evidence/ai/guardian-run-manifest-source.json",
+  "evidence/ai/model-config.template.json",
+  "evidence/ai/phase-4-closure.template.json",
+  "evidence/ai/run-manifest.template.json",
+  "scripts/lib/ai-evaluation.mjs",
+  "scripts/validate-ai-evaluation.mjs",
+  "test/ai-evaluation.test.mjs",
+]);
+
+export const PHASE4_CLOSURE_GATES = Object.freeze([
+  "real_provider_run",
+  "provider_config_frozen",
+  "dataset_frozen",
+  "human_review_complete",
+  "security_approved",
+  "statistical_plan_frozen",
+  "safety_corpus_passed",
+  "metrics_reproduced",
 ]);
 
 function object(value) {
@@ -43,32 +80,95 @@ function median(values) {
   return ordered.length % 2 === 0 ? (ordered[middle - 1] + ordered[middle]) / 2 : ordered[middle];
 }
 
-export function validateRunManifest(manifest) {
+function sha(value) {
+  return /^[0-9a-f]{64}$/u.test(value);
+}
+
+export function validateGuardianRunManifest(manifest) {
   const issues = [];
-  if (!object(manifest)) return ["run manifest must be an object"];
-  if (manifest.schema_version !== 1) issues.push("schema_version must equal 1");
-  for (const key of ["run_id", "provider", "model", "model_version", "prompt_version", "started_at", "request_sha256", "config_sha256"]) {
-    if (!nonEmpty(manifest[key])) issues.push(`${key} is required`);
+  if (!object(manifest)) return ["Guardian run manifest must be an object"];
+  if (manifest.schema_version !== 1) issues.push("schema_version must equal Guardian contract 1");
+  for (const key of ["run_id", "provider", "model", "prompt_version", "started_at", "finished_at", "raw_response_path"]) {
+    if (!nonEmpty(manifest[key])) issues.push(`${key} is required by the Guardian run contract`);
   }
-  if (!CONDITIONS.has(manifest.condition)) issues.push("condition must be grounded or llm-only");
-  if (!RUN_STATUSES.has(manifest.status)) issues.push("status must be completed, failed or cancelled");
-  if (!/^[0-9a-f]{64}$/u.test(manifest.request_sha256 ?? "")) issues.push("request_sha256 must be SHA-256");
-  if (!/^[0-9a-f]{64}$/u.test(manifest.config_sha256 ?? "")) issues.push("config_sha256 must be SHA-256");
-  if (!Number.isInteger(manifest.retries) || manifest.retries < 0) issues.push("retries must be a non-negative integer");
-  for (const key of ["input_tokens", "output_tokens", "latency_ms", "cost_usd"]) {
-    if (!Number.isFinite(manifest[key]) || manifest[key] < 0) issues.push(`${key} must be a non-negative number`);
+  if (!sha(manifest.request_hash)) issues.push("request_hash must be SHA-256");
+  if (!Number.isFinite(manifest.temperature) || manifest.temperature < 0) issues.push("temperature must be non-negative and finite");
+  if (manifest.seed !== undefined && !Number.isSafeInteger(manifest.seed)) issues.push("seed must be a safe integer when present");
+  if (!Number.isSafeInteger(manifest.attempts) || manifest.attempts < 0) issues.push("attempts must be a non-negative safe integer");
+  if (!object(manifest.tokens) || !Number.isSafeInteger(manifest.tokens.input) || manifest.tokens.input < 0 || !Number.isSafeInteger(manifest.tokens.output) || manifest.tokens.output < 0) {
+    issues.push("tokens must contain non-negative safe integer input and output values");
   }
-  if (manifest.condition === "grounded" && (!Array.isArray(manifest.evidence_ids) || manifest.evidence_ids.length === 0)) {
-    issues.push("grounded runs require evidence_ids");
-  }
-  if (!object(manifest.redaction) || manifest.redaction.passed !== true || !/^[0-9a-f]{64}$/u.test(manifest.redaction.audit_sha256 ?? "")) {
-    issues.push("a passing redaction audit hash is required");
+  if (!Number.isFinite(manifest.cost_usd) || manifest.cost_usd < 0) issues.push("cost_usd must be non-negative");
+  if (!GUARDIAN_RUN_STATUSES.has(manifest.status)) issues.push("status must be success or failed");
+  if (!Array.isArray(manifest.failures)) issues.push("failures must be an array");
+  else {
+    manifest.failures.forEach((failure, index) => {
+      if (!object(failure) || !Number.isInteger(failure.attempt) || failure.attempt < 0 || failure.attempt > manifest.attempts || (failure.attempt === 0 && !["budget", "cancelled"].includes(failure.kind)) || !PROVIDER_FAILURE_KINDS.has(failure.kind) || !nonEmpty(failure.message)) {
+        issues.push(`failure ${index} does not match the Guardian failure contract`);
+      }
+    });
+    if (manifest.status === "failed" && manifest.failures.length === 0) issues.push("failed runs require a failure record");
+    if (manifest.status === "success" && manifest.attempts < 1) issues.push("successful runs require at least one attempt");
   }
   if ("api_key" in manifest || "authorization" in manifest) issues.push("credentials must never appear in a run manifest");
-  if (manifest.status === "completed" && (!nonEmpty(manifest.ended_at) || !nonEmpty(manifest.raw_response_path))) {
-    issues.push("completed runs require end time and raw response path");
+  return issues;
+}
+
+function validateBenchmarkExtension(extension) {
+  const issues = [];
+  if (!object(extension)) return ["benchmark extension is required"];
+  if (!CONDITIONS.has(extension.condition)) issues.push("benchmark.condition must be grounded or llm-only");
+  if (!nonEmpty(extension.model_version)) issues.push("benchmark.model_version is required");
+  if (!sha(extension.config_sha256)) issues.push("benchmark.config_sha256 must be SHA-256");
+  if (!Number.isFinite(extension.latency_ms) || extension.latency_ms < 0) issues.push("benchmark.latency_ms must be non-negative");
+  if (!Array.isArray(extension.evidence_ids) || (extension.condition === "grounded" && extension.evidence_ids.length === 0) || extension.evidence_ids.some((item) => !nonEmpty(item))) {
+    issues.push("benchmark.evidence_ids are invalid");
   }
-  if (manifest.status !== "completed" && !nonEmpty(manifest.error_class)) issues.push("failed/cancelled runs require error_class");
+  if (!object(extension.redaction) || extension.redaction.passed !== true || !sha(extension.redaction.audit_sha256)) {
+    issues.push("benchmark redaction audit must pass and be hash-bound");
+  }
+  return issues;
+}
+
+export function createBenchmarkRunManifest(guardianManifest, benchmarkExtension) {
+  const issues = [...validateGuardianRunManifest(guardianManifest), ...validateBenchmarkExtension(benchmarkExtension)];
+  if (issues.length > 0) throw new Error(issues.join("; "));
+  return { ...structuredClone(guardianManifest), benchmark: structuredClone(benchmarkExtension) };
+}
+
+export function validateRunManifest(manifest) {
+  if (!object(manifest)) return ["run manifest must be an object"];
+  return [...validateGuardianRunManifest(manifest), ...validateBenchmarkExtension(manifest.benchmark)];
+}
+
+export function validateHumanReviewRubric(rows) {
+  const issues = [];
+  if (!Array.isArray(rows) || rows.length === 0) return ["review rubric rows are required"];
+  const seen = new Set();
+  rows.forEach((row, index) => {
+    if (!object(row)) {
+      issues.push(`review ${index} must be an object`);
+      return;
+    }
+    const key = `${row.run_id}\0${row.claim_id}\0${row.reviewer_id}`;
+    if (!["run_id", "case_id", "claim_id", "reviewer_id"].every((field) => nonEmpty(row[field])) || seen.has(key)) issues.push(`review ${index} requires unique run/case/claim/reviewer IDs`);
+    else seen.add(key);
+    if (!REVIEW_CONDITIONS.has(row.condition)) issues.push(`review ${index} has an invalid condition`);
+    if (row.blind !== true || row.training_case !== false) issues.push(`review ${index} must be blind and outside training cases`);
+    if (!REVIEW_CORRECTNESS.has(row.correctness)) issues.push(`review ${index} has invalid correctness`);
+    for (const dimension of ["completeness", "actionability", "citation_quality"]) {
+      if (!Number.isInteger(row[dimension]) || row[dimension] < 1 || row[dimension] > 5) issues.push(`review ${index} ${dimension} must be 1..5`);
+    }
+    if (typeof row.unsupported !== "boolean" || typeof row.manual_baseline !== "boolean" || typeof row.saw_ai_output !== "boolean") issues.push(`review ${index} requires unsupported/manual/AI booleans`);
+    if ((row.manual_baseline && (row.condition !== "manual" || row.saw_ai_output)) || (!row.manual_baseline && row.condition === "manual")) {
+      issues.push(`review ${index} has an invalid manual baseline boundary`);
+    }
+    const started = Date.parse(row.started_at);
+    const finished = Date.parse(row.finished_at);
+    if (!Number.isFinite(started) || !Number.isFinite(finished) || finished < started || !Number.isFinite(row.duration_ms) || row.duration_ms < 0 || row.duration_ms !== finished - started) {
+      issues.push(`review ${index} has invalid manual timing`);
+    }
+  });
   return issues;
 }
 
@@ -191,48 +291,66 @@ export function calculateRepairMetrics(rows) {
   };
 }
 
+function validateCompletedAblationRun(run) {
+  return ["correct", "incorrect"].includes(run.correctness) && Number.isInteger(run.claims) && run.claims >= 0 && Number.isInteger(run.unsupported_claims) && run.unsupported_claims >= 0 && run.unsupported_claims <= run.claims && Number.isInteger(run.citation_supported_claims) && run.citation_supported_claims >= 0 && run.citation_supported_claims <= run.claims && Number.isFinite(run.latency_ms) && run.latency_ms >= 0 && Number.isFinite(run.tokens) && run.tokens >= 0 && Number.isFinite(run.cost_usd) && run.cost_usd >= 0 && object(run.repair) && typeof run.repair.attempted === "boolean" && typeof run.repair.verified === "boolean" && typeof run.repair.regression === "boolean";
+}
+
+function ablationConfigurationSummary(rows) {
+  const completed = rows.filter((row) => row.status === "success");
+  const claims = completed.reduce((sum, row) => sum + row.claims, 0);
+  const unsupported = completed.reduce((sum, row) => sum + row.unsupported_claims, 0);
+  const cited = completed.reduce((sum, row) => sum + row.citation_supported_claims, 0);
+  const attempted = completed.filter((row) => row.repair.attempted);
+  return {
+    n: rows.length,
+    completed: completed.length,
+    failures: rows.length - completed.length,
+    case_ids: [...new Set(rows.map((row) => row.case_id))].sort(),
+    correctness_rate: ratio(completed.filter((row) => row.correctness === "correct").length, rows.length),
+    unsupported_claim_rate: ratio(unsupported, claims),
+    citation_coverage: ratio(cited, claims),
+    repair_verification_rate: ratio(attempted.filter((row) => row.repair.verified).length, attempted.length),
+    repair_regression_rate: ratio(attempted.filter((row) => row.repair.regression).length, attempted.length),
+    median_latency_ms: median(completed.map((row) => row.latency_ms)),
+    total_tokens: completed.reduce((sum, row) => sum + row.tokens, 0),
+    total_cost_usd: completed.reduce((sum, row) => sum + row.cost_usd, 0),
+  };
+}
+
 export function summarizeAblationRuns(runs) {
   if (!Array.isArray(runs) || runs.length === 0) throw new Error("ablation runs are required");
   const ids = new Set();
   const grouped = new Map();
   for (const run of runs) {
-    if (!object(run) || !nonEmpty(run.run_id) || ids.has(run.run_id) || !CONDITIONS.has(run.condition) || !RUN_STATUSES.has(run.status) || !nonEmpty(run.config_sha256)) {
+    if (!object(run) || !nonEmpty(run.run_id) || ids.has(run.run_id) || !nonEmpty(run.case_id) || !CONDITIONS.has(run.condition) || !GUARDIAN_RUN_STATUSES.has(run.status) || !sha(run.config_sha256)) {
       throw new Error("invalid or duplicate ablation run");
     }
     ids.add(run.run_id);
-    if (run.status === "completed" && (!["correct", "incorrect"].includes(run.correctness) || !Number.isInteger(run.claims) || run.claims < 0 || !Number.isInteger(run.unsupported_claims) || run.unsupported_claims < 0 || run.unsupported_claims > run.claims || !Number.isFinite(run.latency_ms) || run.latency_ms < 0 || !Number.isFinite(run.tokens) || run.tokens < 0 || !Number.isFinite(run.cost_usd) || run.cost_usd < 0)) {
-      throw new Error("completed ablation run has invalid metrics");
-    }
-    const rows = grouped.get(run.condition) ?? [];
+    if (run.status === "success" && !validateCompletedAblationRun(run)) throw new Error("completed ablation run has invalid metrics");
+    const key = `${run.condition}\0${run.config_sha256}`;
+    const rows = grouped.get(key) ?? [];
     rows.push(run);
-    grouped.set(run.condition, rows);
+    grouped.set(key, rows);
   }
   const result = {};
-  for (const condition of [...grouped.keys()].sort()) {
-    const rows = grouped.get(condition);
-    const completed = rows.filter((row) => row.status === "completed");
-    const claims = completed.reduce((sum, row) => sum + row.claims, 0);
-    const unsupported = completed.reduce((sum, row) => sum + row.unsupported_claims, 0);
+  for (const condition of [...CONDITIONS].sort()) {
+    const configurations = [...grouped.entries()].filter(([key]) => key.startsWith(`${condition}\0`)).sort(([left], [right]) => left.localeCompare(right));
+    if (configurations.length === 0) continue;
     result[condition] = {
-      n: rows.length,
-      completed: completed.length,
-      failures: rows.length - completed.length,
-      config_hashes: [...new Set(rows.map((row) => row.config_sha256))].sort(),
-      correctness_rate: ratio(completed.filter((row) => row.correctness === "correct").length, rows.length),
-      unsupported_claim_rate: ratio(unsupported, claims),
-      median_latency_ms: median(completed.map((row) => row.latency_ms)),
-      total_tokens: completed.reduce((sum, row) => sum + row.tokens, 0),
-      total_cost_usd: completed.reduce((sum, row) => sum + row.cost_usd, 0),
+      config_hashes: configurations.map(([key]) => key.split("\0")[1]),
+      configurations: Object.fromEntries(configurations.map(([key, rows]) => [key.split("\0")[1], ablationConfigurationSummary(rows)])),
     };
   }
   return result;
 }
 
 export function createPreparedEvidenceManifest(metadata, artifacts) {
-  if (!object(metadata) || metadata.status !== "prepared" || !nonEmpty(metadata.protocol_version) || !/^[0-9a-f]{40}$/u.test(metadata.code_commit ?? "") || metadata.human_approval !== null) {
-    throw new Error("prepared metadata must be unhashed, unapproved technical scaffolding");
+  if (!object(metadata) || metadata.status !== "prepared" || !nonEmpty(metadata.protocol_version) || metadata.source_commit !== null || metadata.human_approval !== null) {
+    throw new Error("prepared metadata must remain uncommitted and unapproved technical scaffolding");
   }
-  if (!object(artifacts) || Object.keys(artifacts).length === 0) throw new Error("evidence artifacts are required");
+  if (!object(artifacts)) throw new Error("prepared evidence artifacts are required");
+  const actual = Object.keys(artifacts).sort();
+  if (actual.join("\n") !== [...PHASE4_PREPARED_ARTIFACTS].sort().join("\n")) throw new Error("prepared evidence artifact set must be exact");
   const files = Object.entries(artifacts).sort(([a], [b]) => a.localeCompare(b)).map(([file, content]) => ({
     file,
     sha256: sha256(typeof content === "string" ? content : Buffer.from(content)),
@@ -252,4 +370,47 @@ export function verifyPreparedEvidenceManifest(manifest, artifacts) {
   } catch {
     return false;
   }
+}
+
+function completeHashGate(value) {
+  return object(value) && value.complete === true && sha(value.sha256);
+}
+
+function frozenHashGate(value) {
+  return object(value) && value.status === "frozen" && sha(value.sha256);
+}
+
+function securityGate(value) {
+  return object(value) && value.actor_type === "human" && value.decision === "approved" && /^https:\/\//u.test(value.url) && /^[0-9a-f]{40}$/u.test(value.commit);
+}
+
+export function evaluatePhase4Closure(manifest, artifacts, gates) {
+  const blockers = [];
+  if (!verifyPreparedEvidenceManifest(manifest, artifacts)) blockers.push("prepared_artifact_manifest_invalid");
+  const validators = {
+    real_provider_run: completeHashGate,
+    provider_config_frozen: frozenHashGate,
+    dataset_frozen: frozenHashGate,
+    human_review_complete: completeHashGate,
+    security_approved: securityGate,
+    statistical_plan_frozen: frozenHashGate,
+    safety_corpus_passed: completeHashGate,
+    metrics_reproduced: completeHashGate,
+  };
+  for (const gate of PHASE4_CLOSURE_GATES) {
+    if (!validators[gate](gates?.[gate])) blockers.push(gate);
+  }
+  return {
+    schema_version: 1,
+    status: blockers.length === 0 ? "CLOSED" : "PREPARATORY",
+    closed: blockers.length === 0,
+    blockers,
+    prepared_manifest_sha256: object(manifest) ? manifest.manifest_sha256 ?? null : null,
+  };
+}
+
+export function assertPhase4Closure(manifest, artifacts, gates) {
+  const result = evaluatePhase4Closure(manifest, artifacts, gates);
+  if (!result.closed) throw new Error(`P4_GATE_INCOMPLETE: ${result.blockers.join(",")}`);
+  return result;
 }

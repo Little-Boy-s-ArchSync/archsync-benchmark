@@ -10,7 +10,19 @@ const EVENT_TYPES = new Set([
   "run_finished",
 ]);
 const STATUSES = new Set(["completed", "failed", "inconclusive"]);
+const TEST_STATUSES = new Set(["passed", "failed"]);
 const ABLATION_CONDITIONS = ["code-only", "code-iac", "code-iac-runtime", "evidence-grounded", "llm-only"];
+
+export const STUDY_STATISTICAL_PLAN_SOURCE = Object.freeze({
+  schema_version: 1,
+  paper_pr: "https://github.com/Little-Boy-s-ArchSync/archsync-paper/pull/17",
+  paper_commit: "a6f4be43171240dfa30e5d5a484b074a0a236830",
+  path: "research/statistical-analysis-plan.md",
+  sha256: "5d5b99204f7ebcfaf1573bb8eeecbbf08b28fdec8ee1be9ed15639899e202421",
+  version: "0.1.0-draft",
+  status: "proposed",
+  task_id: "STAT-101",
+});
 
 function object(value) {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -20,8 +32,20 @@ function nonEmpty(value) {
   return typeof value === "string" && value.trim().length > 0;
 }
 
-function ratio(numerator, denominator) {
-  return denominator === 0 ? null : numerator / denominator;
+function sha(value) {
+  return /^[0-9a-f]{64}$/u.test(value ?? "");
+}
+
+function fullCommit(value) {
+  return /^[0-9a-f]{40}$/u.test(value ?? "");
+}
+
+function safeRelativePath(value) {
+  return nonEmpty(value) && !value.startsWith("/") && !/^[A-Za-z]:/u.test(value) && !value.includes("\\") && !value.split("/").includes("..") && !value.split("/").includes("");
+}
+
+function ratioRecord(numerator, denominator) {
+  return { numerator, denominator, value: denominator === 0 ? null : numerator / denominator };
 }
 
 function median(values) {
@@ -31,12 +55,49 @@ function median(values) {
   return ordered.length % 2 === 0 ? (ordered[middle - 1] + ordered[middle]) / 2 : ordered[middle];
 }
 
+function percentile(ordered, fraction) {
+  return ordered[Math.max(0, Math.ceil(ordered.length * fraction) - 1)];
+}
+
+function distribution(values) {
+  const ordered = [...values].sort((a, b) => a - b);
+  return {
+    n: ordered.length,
+    min: ordered.length === 0 ? null : ordered[0],
+    q1: ordered.length === 0 ? null : percentile(ordered, 0.25),
+    median: median(ordered),
+    q3: ordered.length === 0 ? null : percentile(ordered, 0.75),
+    max: ordered.length === 0 ? null : ordered.at(-1),
+  };
+}
+
+function wilson(numerator, denominator, z = 1.96) {
+  if (denominator === 0) return { method: "Wilson 95%", low: null, high: null };
+  const observed = numerator / denominator;
+  const z2 = z * z;
+  const adjusted = 1 + z2 / denominator;
+  const center = (observed + z2 / (2 * denominator)) / adjusted;
+  const margin = z * Math.sqrt((observed * (1 - observed) + z2 / (4 * denominator)) / denominator) / adjusted;
+  return { method: "Wilson 95%", low: Math.max(0, center - margin), high: Math.min(1, center + margin) };
+}
+
 function sha256(value) {
   return createHash("sha256").update(value).digest("hex");
 }
 
 function exactSet(values, expected) {
   return Array.isArray(values) && values.length === expected.length && [...values].sort().join("\0") === [...expected].sort().join("\0");
+}
+
+export function validateStatisticalPlanSource(source) {
+  if (!object(source)) return ["statistical plan source must be an object"];
+  const issues = [];
+  const expectedKeys = Object.keys(STUDY_STATISTICAL_PLAN_SOURCE).sort();
+  if (Object.keys(source).sort().join("\0") !== expectedKeys.join("\0")) issues.push("statistical plan source fields must be exact");
+  for (const [key, value] of Object.entries(STUDY_STATISTICAL_PLAN_SOURCE)) {
+    if (source[key] !== value) issues.push(`${key} must match the pinned STAT-101 source`);
+  }
+  return issues;
 }
 
 export function validateTaskSuite(suite) {
@@ -53,7 +114,7 @@ export function validateTaskSuite(suite) {
     }
     if (!/^TASK-[0-9]{3}$/u.test(task.id ?? "") || ids.has(task.id)) issues.push(`task ${index} id must be unique and immutable`);
     else ids.add(task.id);
-    if (!/^[0-9a-f]{40}$/u.test(task.baseline_commit ?? "")) issues.push(`task ${index} baseline_commit must be a full SHA`);
+    if (!fullCommit(task.baseline_commit)) issues.push(`task ${index} baseline_commit must be a full SHA`);
     for (const key of ["difficulty", "rationale", "expected_behavior"]) {
       if (!nonEmpty(task[key])) issues.push(`task ${index} ${key} is required`);
     }
@@ -79,7 +140,7 @@ export function validateStudyManifest(manifest) {
   }
   if (!object(manifest.treatment_config) || !exactSet(Object.keys(manifest.treatment_config), CONDITIONS)) issues.push("treatment_config must define A-D");
   if (manifest.status === "frozen") {
-    if (!/^[0-9a-f]{64}$/u.test(manifest.manifest_sha256 ?? "")) issues.push("frozen manifest requires manifest_sha256");
+    if (!sha(manifest.manifest_sha256)) issues.push("frozen manifest requires manifest_sha256");
     for (const role of ["ethics", "data", "lead"]) {
       const approval = manifest.approvals?.[role];
       if (!object(approval) || approval.actor_type !== "human" || !nonEmpty(approval.reviewer_id) || !nonEmpty(approval.approved_at)) issues.push(`frozen manifest requires human ${role} approval`);
@@ -88,6 +149,41 @@ export function validateStudyManifest(manifest) {
     issues.push("proposed manifest approvals must be null");
   }
   return issues;
+}
+
+function nonNegativeInteger(value) {
+  return Number.isInteger(value) && value >= 0;
+}
+
+function eventPayloadIssues(event) {
+  const payload = event.payload;
+  if (!object(payload)) return [`${event.type} payload must be an object`];
+  if (event.type === "run_started") {
+    return ["environment_sha256", "task_suite_sha256", "study_manifest_sha256"].every((key) => sha(payload[key])) ? [] : ["run_started payload requires environment, task-suite, and study-manifest hashes"];
+  }
+  if (event.type === "baseline_recorded") {
+    return fullCommit(payload.baseline_commit) && sha(payload.tree_sha256) ? [] : ["baseline_recorded payload requires commit and tree hashes"];
+  }
+  if (event.type === "prompt_recorded") {
+    if (event.condition === "A") return ["manual condition A must not record a model prompt"];
+    const valid = ["prompt_sha256", "response_sha256", "provider_config_sha256"].every((key) => sha(payload[key])) && object(payload.redaction) && payload.redaction.passed === true && sha(payload.redaction.audit_sha256) && safeRelativePath(payload.prompt_path) && safeRelativePath(payload.output_path);
+    return valid ? [] : ["prompt_recorded payload requires redacted, hash-bound prompt, response, and provider configuration artifacts"];
+  }
+  if (event.type === "task_submitted") {
+    const valid = Array.isArray(payload.commit_chain) && payload.commit_chain.length > 0 && payload.commit_chain.every(fullCommit) && Array.isArray(payload.acceptance_commands) && payload.acceptance_commands.length > 0 && payload.acceptance_commands.every(nonEmpty);
+    return valid ? [] : ["task_submitted payload requires a non-empty commit chain and acceptance commands"];
+  }
+  if (event.type === "tests_recorded") {
+    const validArrays = Array.isArray(payload.commands) && payload.commands.length > 0 && payload.commands.every(nonEmpty) && Array.isArray(payload.results) && payload.results.length === payload.commands.length;
+    const validResults = validArrays && payload.results.every((result, index) => object(result) && result.command === payload.commands[index] && TEST_STATUSES.has(result.status) && nonNegativeInteger(result.exit_code) && ((result.status === "passed" && result.exit_code === 0) || (result.status === "failed" && result.exit_code > 0)) && Number.isFinite(result.duration_ms) && result.duration_ms >= 0);
+    const validCounts = ["findings", "approvals", "repairs"].every((key) => nonNegativeInteger(payload[key]));
+    return validResults && validCounts ? [] : ["tests_recorded payload requires non-empty commands, matched results, and count fields"];
+  }
+  if (event.type === "run_finished") {
+    const valid = STATUSES.has(payload.status) && Number.isFinite(payload.wall_time_ms) && payload.wall_time_ms >= 0 && Number.isFinite(payload.tokens) && payload.tokens >= 0 && ["findings", "approvals", "repairs"].every((key) => nonNegativeInteger(payload[key])) && Number.isFinite(Date.parse(payload.ended_at)) && Array.isArray(payload.deviations) && payload.deviations.every(nonEmpty);
+    return valid ? [] : ["run_finished payload requires status, timing, usage, counts, end time, and deviations"];
+  }
+  return ["unknown event payload type"];
 }
 
 export function validateInstrumentation(events) {
@@ -105,7 +201,8 @@ export function validateInstrumentation(events) {
     if (!nonEmpty(event.run_id) || !nonEmpty(event.task_id)) issues.push(`event ${index} requires run_id and task_id`);
     if (!CONDITIONS.includes(event.condition)) issues.push(`event ${index} has invalid condition`);
     if (!EVENT_TYPES.has(event.type)) issues.push(`event ${index} has invalid type`);
-    if (!nonEmpty(event.recorded_at) || !object(event.payload)) issues.push(`event ${index} requires timestamp and payload`);
+    if (!nonEmpty(event.recorded_at) || !Number.isFinite(Date.parse(event.recorded_at)) || !object(event.payload)) issues.push(`event ${index} requires timestamp and payload`);
+    if (nonEmpty(event.type)) issues.push(...eventPayloadIssues(event).map((issue) => `event ${index}: ${issue}`));
     if (nonEmpty(event.run_id)) {
       const rows = runs.get(event.run_id) ?? [];
       rows.push(event);
@@ -113,22 +210,26 @@ export function validateInstrumentation(events) {
     }
   });
   for (const [runId, rows] of runs) {
-    const types = new Set(rows.map((row) => row.type));
     const condition = rows[0].condition;
     if (rows.some((row) => row.condition !== condition || row.task_id !== rows[0].task_id)) issues.push(`${runId} changes condition or task`);
-    for (const type of ["run_started", "baseline_recorded", "task_submitted", "tests_recorded", "run_finished"]) {
-      if (!types.has(type)) issues.push(`${runId} is missing ${type}`);
+    const expected = ["run_started", "baseline_recorded", ...(condition === "A" ? [] : ["prompt_recorded"]), "task_submitted", "tests_recorded", "run_finished"];
+    const actual = rows.map((row) => row.type);
+    for (const type of expected) {
+      const count = actual.filter((value) => value === type).length;
+      if (count === 0) issues.push(`${runId} is missing ${type}`);
+      else if (count > 1) issues.push(`${runId} has duplicate ${type}`);
     }
-    if (condition !== "A" && !types.has("prompt_recorded")) issues.push(`${runId} is missing prompt_recorded`);
-    const finished = rows.find((row) => row.type === "run_finished");
-    if (!finished || !object(finished.payload) || !STATUSES.has(finished.payload.status) || !Number.isFinite(finished.payload.wall_time_ms) || finished.payload.wall_time_ms < 0 || !Number.isFinite(finished.payload.tokens) || finished.payload.tokens < 0 || !Number.isInteger(finished.payload.findings) || finished.payload.findings < 0 || !Number.isInteger(finished.payload.approvals) || finished.payload.approvals < 0 || !Number.isInteger(finished.payload.repairs) || finished.payload.repairs < 0) {
-      issues.push(`${runId} has incomplete final instrumentation`);
-    }
+    if (condition === "A" && actual.includes("prompt_recorded")) issues.push(`${runId} manual condition contains prompt_recorded`);
+    if (actual.join("\0") !== expected.join("\0")) issues.push(`${runId} event sequence is invalid`);
+    const timestamps = rows.map((row) => Date.parse(row.recorded_at));
+    if (timestamps.some((value, index) => index > 0 && value < timestamps[index - 1])) issues.push(`${runId} timestamps are not monotonic`);
   }
   return issues;
 }
 
-export function calculateStudyMetrics(rows) {
+export function calculateStudyMetrics(rows, statisticalPlanSource) {
+  const planIssues = validateStatisticalPlanSource(statisticalPlanSource);
+  if (planIssues.length > 0) throw new Error(`statistical plan linkage is invalid: ${planIssues.join("; ")}`);
   if (!Array.isArray(rows) || rows.length === 0) throw new Error("study rows are required");
   const ids = new Set();
   const grouped = new Map();
@@ -145,28 +246,50 @@ export function calculateStudyMetrics(rows) {
     group.push(row);
     grouped.set(row.condition, group);
   }
-  const result = {};
+  const conditions = {};
   for (const condition of [...grouped.keys()].sort()) {
     const group = grouped.get(condition);
     const attempted = group.filter((row) => row.repair.attempted);
     const commits = group.reduce((sum, row) => sum + row.commits, 0);
-    result[condition] = {
-      n: group.length,
-      completed: group.filter((row) => row.status === "completed").length,
-      failed: group.filter((row) => row.status === "failed").length,
-      inconclusive: group.filter((row) => row.status === "inconclusive").length,
-      violations_per_commit: ratio(group.reduce((sum, row) => sum + row.violations, 0), commits),
-      median_time_to_fix_ms: median(group.filter((row) => row.time_to_fix_ms !== null).map((row) => row.time_to_fix_ms)),
-      median_merge_delay_ms: median(group.map((row) => row.merge_delay_ms)),
-      approval_interventions_per_run: ratio(group.reduce((sum, row) => sum + row.approvals, 0), group.length),
-      false_block_burden_per_run: ratio(group.reduce((sum, row) => sum + row.false_blocks, 0), group.length),
-      repair_success_rate: ratio(attempted.filter((row) => row.repair.success).length, attempted.length),
-      regression_rate: ratio(attempted.filter((row) => row.repair.regression).length, attempted.length),
+    const violations = group.reduce((sum, row) => sum + row.violations, 0);
+    const approvals = group.reduce((sum, row) => sum + row.approvals, 0);
+    const falseBlocks = group.reduce((sum, row) => sum + row.false_blocks, 0);
+    const successes = attempted.filter((row) => row.repair.success).length;
+    const regressions = attempted.filter((row) => row.repair.regression).length;
+    const completed = group.filter((row) => row.status === "completed").length;
+    conditions[condition] = {
+      assigned_n: group.length,
+      analyzed_n: group.length,
+      status_counts: {
+        completed,
+        failed: group.filter((row) => row.status === "failed").length,
+        inconclusive: group.filter((row) => row.status === "inconclusive").length,
+      },
+      violations_per_commit: ratioRecord(violations, commits),
+      approval_interventions_per_run: ratioRecord(approvals, group.length),
+      false_block_burden_per_run: ratioRecord(falseBlocks, group.length),
+      repair_success_rate: ratioRecord(successes, attempted.length),
+      regression_rate: ratioRecord(regressions, attempted.length),
+      time_to_fix_ms: distribution(group.filter((row) => row.time_to_fix_ms !== null).map((row) => row.time_to_fix_ms)),
+      merge_delay_ms: distribution(group.map((row) => row.merge_delay_ms)),
       total_token_cost_usd: group.reduce((sum, row) => sum + row.token_cost_usd, 0),
       total_compute_cost_usd: group.reduce((sum, row) => sum + row.compute_cost_usd, 0),
+      uncertainty: {
+        completion_rate: { ...ratioRecord(completed, group.length), interval: wilson(completed, group.length) },
+        repair_success_rate: wilson(successes, attempted.length),
+        regression_rate: wilson(regressions, attempted.length),
+        duration_summary: "median and observed IQR; no population inference before STAT-101 freeze",
+      },
     };
   }
-  return result;
+  return {
+    schema_version: 1,
+    analysis_status: "descriptive-preparatory",
+    statistical_plan: structuredClone(statisticalPlanSource),
+    assigned_n: rows.length,
+    analyzed_n: rows.length,
+    conditions,
+  };
 }
 
 export function validateAblationDesign(design) {
@@ -174,12 +297,12 @@ export function validateAblationDesign(design) {
   if (!object(design)) return ["ablation design must be an object"];
   if (!exactSet(design.conditions, ABLATION_CONDITIONS)) issues.push("ablation conditions must include all five locked sources");
   for (const key of ["truth_sha256", "task_set_sha256", "scoring_sha256", "exclusions_sha256"]) {
-    if (!/^[0-9a-f]{64}$/u.test(design[key] ?? "")) issues.push(`${key} must be SHA-256`);
+    if (!sha(design[key])) issues.push(`${key} must be SHA-256`);
   }
   if (!object(design.configs) || !exactSet(Object.keys(design.configs), ABLATION_CONDITIONS)) issues.push("configs must pin all ablation conditions");
   else {
     for (const condition of ABLATION_CONDITIONS) {
-      if (!nonEmpty(design.configs[condition].version)) issues.push(`${condition} config version is required`);
+      if (!object(design.configs[condition]) || !nonEmpty(design.configs[condition].version)) issues.push(`${condition} config version is required`);
     }
   }
   if (design.status !== "prepared" || design.human_approval !== null) issues.push("design must remain prepared and unapproved before freeze");
@@ -187,7 +310,7 @@ export function validateAblationDesign(design) {
 }
 
 export function createNormalizedAnalysis(rows, rawDatasetSha256) {
-  if (!Array.isArray(rows) || rows.length === 0 || !/^[0-9a-f]{64}$/u.test(rawDatasetSha256 ?? "")) throw new Error("rows and raw dataset hash are required");
+  if (!Array.isArray(rows) || rows.length === 0 || !sha(rawDatasetSha256)) throw new Error("rows and raw dataset hash are required");
   const ids = new Set();
   const normalized = rows.map((row) => {
     if (!object(row) || !nonEmpty(row.run_id) || ids.has(row.run_id) || !CONDITIONS.includes(row.condition) || !STATUSES.has(row.status)) throw new Error("invalid analysis row");

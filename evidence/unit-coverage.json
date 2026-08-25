@@ -17,15 +17,23 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 85,
-    "passed": 85,
+    "total": 110,
+    "passed": 110,
     "failed": 0
   },
   "provenance": {
     "files": [
       {
+        "file": "scripts/lib/ablation-evidence.mjs",
+        "sha256": "e275bd49797b8857085ee1bea397d10833332d728ed0c9ad77f31696085d2b9c"
+      },
+      {
         "file": "scripts/lib/ai-evaluation.mjs",
-        "sha256": "590e41574df98a078e8f0a2bf3a1be4987ef38f1e97694e32b9d8fe72d19f938"
+        "sha256": "1a9ead7a20bc1da8629798f12a06365d90c8e1484d64629e2327cea23528852d"
+      },
+      {
+        "file": "scripts/lib/analysis-pipeline.mjs",
+        "sha256": "5bc62a5521e0830e00aa905c187189b2ca78754eefd9d87f773025d01b2462b3"
       },
       {
         "file": "scripts/lib/ground-truth.mjs",
@@ -33,7 +41,7 @@
       },
       {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "f49565c92425c00b03690b17e4d311acf9a3925ed4e343a696cc0d9937f92a99"
+        "sha256": "abcc3d96318de2d3fac91ab4758f152bacf234afa9f6b622b21087b86eca60f6"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -45,23 +53,43 @@
       },
       {
         "file": "scripts/lib/measurement-study.mjs",
-        "sha256": "ce9e60babeeb6bea4f8fd5e559555a39d35e21f8e564cd0a2fe2e710db5b02fa"
+        "sha256": "adeeb2aa3d7d59763890882c2f0559e40229e8e0a2972be83a021faccaa55da1"
       },
       {
         "file": "scripts/lib/pattern-corpus.mjs",
         "sha256": "32c43414da08cdf77ff996d4a0817ee6c765433f663ed894517af5365a8558b4"
       },
       {
+        "file": "scripts/lib/pilot-evidence.mjs",
+        "sha256": "25601036eb08a915bf5df9e598a11f036d6c53bc6d9e23f18c5909a45d47b86f"
+      },
+      {
+        "file": "scripts/lib/pr-history.mjs",
+        "sha256": "fa8158fd4c8c361578ac4663ab5a8121b9be5538e2cd3e3ea3a4d0bbbc64d05a"
+      },
+      {
+        "file": "scripts/lib/reproducibility-audit.mjs",
+        "sha256": "ea4534717baf666fb1e41026a52c4fc1d65e7623e2651359a55cf5ad3ca198e5"
+      },
+      {
         "file": "scripts/lib/runtime-provenance.mjs",
-        "sha256": "9b5e22f39b7a20f12b2a9abc4931beec94583ac600f70f903a2bbbdaebb1b6d7"
+        "sha256": "ed663a2d51d657e61fc7bce049c585bf22f9d2d364aa2f7a85a071c33ed93812"
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "08135d2e07899df026a6b7f9de5866a7b3c0978015f81a2829b7f34f887f1f25"
+        "sha256": "a198ecf08e24c494e07ff8a6aa067ebbc26a18e7e2017efe65c253344c0eb068"
+      },
+      {
+        "file": "test/ablation-evidence.test.mjs",
+        "sha256": "23a07f719adab3f889ec8c229da1754f706c85ee72dabe09ff09259a24978724"
       },
       {
         "file": "test/ai-evaluation.test.mjs",
-        "sha256": "f38a624347bf826c7b36e95afc1ae74848bdf7f39c8a22df9d533d83fa606acb"
+        "sha256": "2bebd9ebec0c18b15519bc93ad7ddc11669baf1d7d20cb7f87adaee8cdeb0420"
+      },
+      {
+        "file": "test/analysis-pipeline.test.mjs",
+        "sha256": "ed43cdb4130eae1ecb47bc36a3c176529b52373bd5bbd66aca31ee56c56dd0c6"
       },
       {
         "file": "test/ground-truth.test.mjs",
@@ -69,7 +97,7 @@
       },
       {
         "file": "test/holdout.test.mjs",
-        "sha256": "d0997c4c27310665bfa5791f3123040b56ea3a3304275b302311258cf2a0165a"
+        "sha256": "8548fb42c5b572b204f82c20f65a53e282b1d6616126e9fa9e69826104504197"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -81,29 +109,41 @@
       },
       {
         "file": "test/measurement-study.test.mjs",
-        "sha256": "8c845fd005901285a4e2665ba5beec7d551dce9e5ab11ff3d8436f997dc1e350"
+        "sha256": "bbd913db2ea3cdb98ba0c006f049160486bdc30d2f2dc308c69b7393b616f7a6"
       },
       {
         "file": "test/pattern-corpus.test.mjs",
         "sha256": "556f474d175a13329d2ab96ffe6e90b598610e1c596355301b69e9ee27fd0923"
       },
       {
+        "file": "test/pilot-evidence.test.mjs",
+        "sha256": "f2d7209ca32133c5439b36a35a9f90938783f9611ed7b283f33fd9e5e82d4718"
+      },
+      {
+        "file": "test/pr-history.test.mjs",
+        "sha256": "34055e2f41d8af3580341f60737ae0b5e8afe7da4d351dfcdb8b2cbbda9d11f5"
+      },
+      {
+        "file": "test/reproducibility-audit.test.mjs",
+        "sha256": "460583588090d5e8f5c7497a04f504d38155a18edbb4468c8ae2f8eb96e85e26"
+      },
+      {
         "file": "test/runtime-provenance.test.mjs",
-        "sha256": "11d521158e89b582447f877744d00ba27ffb662729c5075da99462830f32b951"
+        "sha256": "e2453ca31d0ae9059d7a98b8d0c6fd660c8999453164198d6375469b0dd3df75"
       },
       {
         "file": "package.json",
-        "sha256": "76391b898ca931fd9402266747834cab61728ddf6f18eaa89f05f425d0c6bf45"
+        "sha256": "e403f3e9571fb0319b99c7239f4520837b2ad1d9fd33339d46ba75e5c01deab4"
       },
       {
         "file": "pnpm-lock.yaml",
-        "sha256": "2213b89b258760ad3eb25385a4f8da1cbd25b144e5e6076c8da8f2d64b2ad8a0"
+        "sha256": "083ba9688825064d603def310051557e3f93c432cc9fe988cc58d4aaaa0defcb"
       },
       {
         "file": "vendor/manifest.json",
-        "sha256": "baed9ad5ac1a92069409e78414f5e040c499794d9b353814e7d1d6addc6b51d7"
+        "sha256": "beb49774b96353e3259043ea4be05576ce2b27aa2d2f086c144d447d510da970"
       }
     ],
-    "manifest_sha256": "3c30eecfffb85744ef96d83562dfaac5d608265b595278601cdf2bfb54999cf2"
+    "manifest_sha256": "7c172a9d7d1a9feff8e2d45bf0a3f7791eade77a48007f24a229341c6f765d6c"
   }
 }

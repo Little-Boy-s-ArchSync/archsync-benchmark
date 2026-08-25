@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "synthetic-provisional",
+  "synthetic": true,
+  "repository": {
+    "url": "https://github.com/example/archsync-pr-history-synthetic-fixture",
+    "commit": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "tree_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  },
+  "pr_range": { "first": 1, "last": 2, "expected_count": 2 },
+  "environment": {
+    "id": "synthetic-pr-history-environment",
+    "os": "fixture-os",
+    "node": "v22.0.0",
+    "pnpm": "11.16.0",
+    "cpu": "fixture-cpu",
+    "memory_bytes": 1073741824
+  },
+  "approval": null
+}

@@ -1,0 +1,4 @@
+dataset_status,run_id,condition,run_status,outcome,numerator,denominator,value
+synthetic-provisional,synthetic-a,A,completed,violations_per_commit,1,2,0.5
+synthetic-provisional,synthetic-b,B,failed,violations_per_commit,,,
+synthetic-provisional,synthetic-d,D,inconclusive,violations_per_commit,,,

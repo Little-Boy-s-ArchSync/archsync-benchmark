@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "status": "prepared",
+  "template_only": true,
+  "provider": null,
+  "model": null,
+  "model_version": null,
+  "prompt_version": null,
+  "temperature": null,
+  "seed": null,
+  "max_attempts": null,
+  "max_input_tokens": null,
+  "max_output_tokens": null,
+  "max_cost_usd": null,
+  "config_sha256": null,
+  "security_review": null,
+  "human_approval": null
+}

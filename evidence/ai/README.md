@@ -1,5 +1,9 @@
 # Phase 4 AI evidence workspace
 
-Only schemas, templates, regression data, and deterministic metric functions are present. No real-provider output, human rating, manual baseline, final ablation, or Phase 4 result is claimed.
+Status: **synthetic/provisional technical preparation only**. No real-provider output, credential, human rating, manual-baseline result, frozen configuration, final ablation, security approval, or Phase 4 result exists here.
 
-Before a real run, freeze the provider/model/version, prompt and sampling settings, evaluation cases, exclusions, rubric, budget and security decision. Each failed, cancelled and completed attempt gets a manifest; API keys never do. Raw outputs stay separately hash-bound and access-controlled. Two blind reviewers label claims, with immutable adjudication for disagreements. Prepared evidence can be indexed, but cannot be labeled a closed/frozen Phase 4 gate by the helper in this branch.
+The run template follows the canonical Guardian `RunManifest` contract at the exact integration commit recorded in `guardian-run-manifest-source.json`. Benchmark-only fields are nested under `benchmark`; they cannot replace or weaken Guardian request, retry, usage, failure, redaction, or raw-artifact provenance. Configuration hashes are summarized separately, so incompatible provider/prompt/sampling configurations are never pooled.
+
+`claim-review.template.jsonl` is the P4-123 rubric surface: correctness, completeness, actionability, citation quality, unsupported-claim status, blind/manual-boundary flags, and exact manual timing. It is deliberately incomplete. Two blind human reviewers and immutable disagreement adjudication remain required for real evidence.
+
+`pnpm ai-eval:update` creates a hash-bound inventory of the exact prepared files. `pnpm ai-eval:verify` verifies that inventory plus the provisional templates and 12-case synthetic safety corpus. `pnpm ai-eval:gate` intentionally fails with `P4_GATE_INCOMPLETE` until real-provider, provider-config freeze, dataset freeze, human review, Security approval, statistical-plan freeze, safety replay, and independently reproduced metrics are all supplied as hash-bound evidence. API keys and raw provider content never belong in a manifest.

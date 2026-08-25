@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "preparatory",
+  "template_only": true,
+  "gates": {
+    "phase5_closed": null,
+    "adr_approved": null,
+    "quality_goals_approved": null,
+    "privacy_security_approved": null,
+    "gov103_satisfied": null,
+    "high_risk_candidate_decided": null,
+    "independent_experimental_validation": null,
+    "architecture_change_accepted": null
+  }
+}

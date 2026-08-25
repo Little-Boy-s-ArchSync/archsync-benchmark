@@ -1,2 +1,2 @@
-item_id,reviewer_a_label,reviewer_b_label,agreement,final_label,adjudicator_id,rationale,decided_at
-EXAMPLE-ONLY,unknown,unknown,true,,REPLACE_WITH_HUMAN_ID,REPLACE,
+item_id,reviewer_a_id,reviewer_a_label,reviewer_b_id,reviewer_b_label,agreement,final_label,actor_type,adjudicator_id,rationale,decided_at
+EXAMPLE-ONLY,REVIEWER-A,unknown,REVIEWER-B,unknown,true,,human,REPLACE_WITH_HUMAN_ID,REPLACE,

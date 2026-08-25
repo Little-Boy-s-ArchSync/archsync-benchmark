@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "status": "pending",
+  "pilot_id": null,
+  "final_sample_excluded": true,
+  "final_claims_allowed": false,
+  "operator": null,
+  "protocol_before_version": null,
+  "protocol_after_version": null,
+  "runs": [],
+  "issues": [],
+  "protocol_changes": [],
+  "report_sha256": null,
+  "template_only": true
+}

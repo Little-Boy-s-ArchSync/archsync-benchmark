@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "dataset_id": "analysis-101-synthetic-dry-run",
+  "status": "synthetic-provisional",
+  "synthetic": true,
+  "raw_dataset_sha256": "66fa165602cb83a4024967d329bcf9068f3b1c1d8e56b0a5bd96e3cddb00e5e8",
+  "statistical_plan": {
+    "status": "proposed",
+    "version": "0.1.0-draft",
+    "sha256": "5d5b99204f7ebcfaf1573bb8eeecbbf08b28fdec8ee1be9ed15639899e202421"
+  },
+  "approval": null,
+  "rows": [
+    {
+      "run_id": "synthetic-a",
+      "condition": "A",
+      "status": "completed",
+      "outcome": "violations_per_commit",
+      "numerator": 1,
+      "denominator": 2,
+      "value": 0.5
+    },
+    {
+      "run_id": "synthetic-b",
+      "condition": "B",
+      "status": "failed",
+      "outcome": "violations_per_commit",
+      "numerator": null,
+      "denominator": null,
+      "value": null
+    },
+    {
+      "run_id": "synthetic-d",
+      "condition": "D",
+      "status": "inconclusive",
+      "outcome": "violations_per_commit",
+      "numerator": null,
+      "denominator": null,
+      "value": null
+    }
+  ]
+}

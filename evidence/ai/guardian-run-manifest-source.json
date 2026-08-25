@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "guardian_integration_pr": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian/pull/8",
+  "guardian_integration_commit": "ebaaf2711602890ef6ead8983bd33e2cf4853e17",
+  "contract_path": "src/reasoner/provider.ts",
+  "contract_sha256": "7d6c0b8c8e1b3c426cbb640ee497c6397cd9d9a7871ec930652a7750c5f4c4b0",
+  "contract": "Guardian RunManifest schema_version 1"
+}

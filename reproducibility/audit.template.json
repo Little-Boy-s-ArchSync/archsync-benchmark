@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "status": "pending",
+  "repository": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark",
+  "commit": "REPLACE_WITH_REVIEWED_FULL_COMMIT",
+  "auditor": null,
+  "environment": null,
+  "started_at": null,
+  "finished_at": null,
+  "checks": {
+    "clean_checkout": null,
+    "frozen_install": null,
+    "full_verify": null,
+    "negative_closure_gates": null,
+    "artifact_hashes": null
+  },
+  "report_sha256": null,
+  "template_only": true
+}
