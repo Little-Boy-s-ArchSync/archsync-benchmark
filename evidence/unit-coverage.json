@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 110,
-    "passed": 110,
+    "total": 118,
+    "passed": 118,
     "failed": 0
   },
   "provenance": {
@@ -32,12 +32,20 @@
         "sha256": "2b3e78a3d08aa811bec7ec5b12a23b556bebca116b0c5ec89acc684df19b94ea"
       },
       {
+        "file": "scripts/lib/analysis-notebook.mjs",
+        "sha256": "668c1183d4f31149a5a40dd93caf334408a8eaf29a7c430c45f3e37b99b0c20e"
+      },
+      {
         "file": "scripts/lib/analysis-pipeline.mjs",
         "sha256": "5bc62a5521e0830e00aa905c187189b2ca78754eefd9d87f773025d01b2462b3"
       },
       {
         "file": "scripts/lib/ground-truth.mjs",
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
+      },
+      {
+        "file": "scripts/lib/holdout-candidates.mjs",
+        "sha256": "1d95f28f3875e896bb190cabed6c715bfebea1ede97dd81aaf9c7adf629a6a04"
       },
       {
         "file": "scripts/lib/holdout.mjs",
@@ -77,7 +85,15 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "a198ecf08e24c494e07ff8a6aa067ebbc26a18e7e2017efe65c253344c0eb068"
+        "sha256": "2b4cd11b39e1b0511cc51ea850bb55683fa71453c3f5cdffdd927063e9b2b29f"
+      },
+      {
+        "file": "scripts/validate-analysis-notebook.mjs",
+        "sha256": "6c786e595dde1f1779786dc7704e6178afc8868e1c5e8b66bb117523654b16c1"
+      },
+      {
+        "file": "scripts/validate-holdout-candidates.mjs",
+        "sha256": "d0690dbdf3197f0eabfdd5f994f9aac8d4942add2fda494b47532d78ed2b3f41"
       },
       {
         "file": "test/ablation-evidence.test.mjs",
@@ -88,12 +104,20 @@
         "sha256": "aa2b80cefa4a942bbb26b0702504636787a66953f00a4b64656610d27efb0e21"
       },
       {
+        "file": "test/analysis-notebook.test.mjs",
+        "sha256": "762b2944014c6281c2e976b01c950b3729292a3b96c93d766a86a7a861e8507d"
+      },
+      {
         "file": "test/analysis-pipeline.test.mjs",
         "sha256": "ed43cdb4130eae1ecb47bc36a3c176529b52373bd5bbd66aca31ee56c56dd0c6"
       },
       {
         "file": "test/ground-truth.test.mjs",
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
+      },
+      {
+        "file": "test/holdout-candidates.test.mjs",
+        "sha256": "dfce92aa62664b443ca8a4bd74c98e6685e6bcb7eb3c6b6ccc4de6a7e3e19b10"
       },
       {
         "file": "test/holdout.test.mjs",
@@ -133,7 +157,7 @@
       },
       {
         "file": "package.json",
-        "sha256": "2d798ee410a9d04020b876f0785ed7330343136d6d924db1cd76c8655494bd55"
+        "sha256": "6b0d7a1455781dbb0d442c3b563c3fd9a5ea4030be034cef21de08b784641456"
       },
       {
         "file": "pnpm-lock.yaml",
@@ -142,8 +166,24 @@
       {
         "file": "vendor/manifest.json",
         "sha256": "b6c6824a3e3ec90fe0f29a5c6ec858a535157dea19ac31ca85921ee6faedc2b1"
+      },
+      {
+        "file": "analysis/analysis-101.ipynb",
+        "sha256": "b85a84e0256e5b94b253f5128540bf1f6d6055fab9c33b9129562cda8c9b77e2"
+      },
+      {
+        "file": "holdout/candidate-inventory.schema.json",
+        "sha256": "5a369bee676ad44435b9f6257562f49250767178d9e4c3f8da2bdc46ef10943c"
+      },
+      {
+        "file": "holdout/candidates.eval-102.json",
+        "sha256": "189d5efc2f487ce2bb8f6990dc543ee1952bd1be4beb6f2e4051f0d2c37e33f3"
+      },
+      {
+        "file": "evidence/holdout/eval-102-candidates.validation.json",
+        "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "27a17b7493e4272798a2ae999c39a01cac443a412feaeb804736a71aa6294361"
+    "manifest_sha256": "0d0620704413737e87a472c3b947232d28d095735a12bbc07d7812aa90a1d230"
   }
 }

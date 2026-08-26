@@ -24,7 +24,7 @@
     "end_unix_nano": "1787703300000000000"
   },
   "input_sha256": {
-    "package.json": "2d798ee410a9d04020b876f0785ed7330343136d6d924db1cd76c8655494bd55",
+    "package.json": "6b0d7a1455781dbb0d442c3b563c3fd9a5ea4030be034cef21de08b784641456",
     "pnpm-lock.yaml": "bc8e6b9396d395eaa4a3c5b60e118b21484dc0556ed7a213c934266e9a42a27f",
     "runtime/evidence/closure.template.json": "fd6ad41ed90b36cfc7827fb0ffca7ebc7bd686ddc09147972917af9e6e17c403",
     "runtime/inputs/baseline.otlp.json": "65e396ef37356c80068a4dc9d52f17e57b4ec13e79b11eb9849333eb856b61e8",

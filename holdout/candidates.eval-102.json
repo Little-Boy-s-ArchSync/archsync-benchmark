@@ -1,0 +1,705 @@
+{
+  "schema_version": 1,
+  "task_id": "EVAL-102",
+  "artifact_kind": "ranked-candidate-inventory",
+  "status": "candidate-only-not-selected",
+  "snapshot_completed_at": "2026-08-25T21:59:36Z",
+  "selection_authorized": false,
+  "freeze_authorized": false,
+  "ground_truth_collected": false,
+  "ranking_method": "Candidate-only triage ordered by a clear Node boundary, HTTP/data/message pattern diversity, manageable candidate scope, and recent repository activity. Rank is not a selection decision and must not be used to bypass the Lead protocol gate.",
+  "automation_status": {
+    "github_api_access": "completed-authenticated",
+    "billing_blocked": false,
+    "billing_note": "Candidate discovery used the authenticated GitHub REST API and required no paid provider. Any later model/provider billing gate belongs to analyzer execution, not EVAL-102 candidate discovery."
+  },
+  "blockers": [
+    "A human Lead must approve the proposed holdout protocol before final repository selection.",
+    "A human must check every candidate against detector, rule, prompt, fixture, pilot, and benchmark tuning history.",
+    "Humans must select only 2-3 repositories, define exact scopes and exclusions, and materialize source-tree and environment pins.",
+    "Two blind human reviewers must independently annotate ground truth and a human must adjudicate disagreements.",
+    "The final manifest, package artifacts, statistical plan, and ground truth require human approval and freeze."
+  ],
+  "candidates": [
+    {
+      "rank": 1,
+      "id": "hyperdxio/hyperdx",
+      "name": "HyperDX",
+      "canonical_url": "https://github.com/hyperdxio/hyperdx",
+      "github_api_repository_url": "https://api.github.com/repos/hyperdxio/hyperdx",
+      "github_api_head_url": "https://api.github.com/repos/hyperdxio/hyperdx/commits/main",
+      "default_branch": "main",
+      "observed_default_branch_commit_sha": "e0d2932802bf1b315b420a8a4214a6c0691a7835",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 56696,
+        "stars": 9861,
+        "forks": 457,
+        "open_issues": 183,
+        "pushed_at": "2026-08-25T21:41:16Z",
+        "updated_at": "2026-08-25T21:38:55Z",
+        "default_branch_commit_committed_at": "2026-08-25T21:37:22Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "MIT",
+        "api_url": "https://api.github.com/repos/hyperdxio/hyperdx/license",
+        "path": "LICENSE",
+        "blob_sha": "295e7dfdf4e5702c54af5fbab42db890c958fb7c",
+        "file_url": "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "yarn@4.13.0",
+        "monorepo": true,
+        "signals": "Yarn workspaces over packages/* with Nx orchestration and a committed Yarn lockfile.",
+        "manifest_urls": [
+          "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/package.json",
+          "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/yarn.lock",
+          "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/nx.json"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/packages/api/src/api-app.ts",
+          "source_blob_sha": "5e336d0d8def544376604e4d641c525074ed8e97",
+          "observation": "The API application composes the server-side HTTP surface."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/packages/api/src/clickhouse.ts",
+          "source_blob_sha": "f9bb00910c62b2adf2f5b4b2ed935d9aedfd572e",
+          "observation": "A dedicated ClickHouse integration exposes a concrete data boundary."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/hyperdxio/hyperdx/blob/e0d2932802bf1b315b420a8a4214a6c0691a7835/packages/api/src/controllers/webhook.ts",
+          "source_blob_sha": "ce791330d63967027f7b4b95a04ca7a1936a12a7",
+          "observation": "The webhook controller provides an externally observable event-delivery boundary."
+        }
+      ],
+      "rationale": "A relatively compact, recently active observability system with distinct API, ClickHouse, and webhook boundaries should provide high-value architecture evidence without requiring the largest monorepo scope.",
+      "risks": [
+        "A runnable scope may require ClickHouse and OpenTelemetry dependencies.",
+        "Generated telemetry schemas and integration tests need explicit exclusions."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 2,
+      "id": "amruthpillai/reactive-resume",
+      "name": "Reactive Resume",
+      "canonical_url": "https://github.com/amruthpillai/reactive-resume",
+      "github_api_repository_url": "https://api.github.com/repos/amruthpillai/reactive-resume",
+      "github_api_head_url": "https://api.github.com/repos/amruthpillai/reactive-resume/commits/main",
+      "default_branch": "main",
+      "observed_default_branch_commit_sha": "3c195dc3f8db5ccae4aa4aff0cefe54980c02b74",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 242254,
+        "stars": 41728,
+        "forks": 4665,
+        "open_issues": 118,
+        "pushed_at": "2026-08-25T09:35:29Z",
+        "updated_at": "2026-08-25T21:48:55Z",
+        "default_branch_commit_committed_at": "2026-08-24T19:44:16Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "MIT",
+        "api_url": "https://api.github.com/repos/amruthpillai/reactive-resume/license",
+        "path": "LICENSE",
+        "blob_sha": "474c93d9dc3f213c2fd6d735162777f6e9022021",
+        "file_url": "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "pnpm@11.24.0+sha512.bd27e345e976dcb0be0b7a1228217b049a817e21b1f355c90dbe7dc46671895a8bc1e6d06c24554505ea93ea0b45f489a27ec1bfbc8de6a9659fca0f16fa0000",
+        "monorepo": true,
+        "signals": "pnpm workspaces cover apps/*, packages/*, and tooling; Turbo coordinates the server and web applications.",
+        "manifest_urls": [
+          "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/package.json",
+          "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/pnpm-lock.yaml",
+          "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/pnpm-workspace.yaml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/apps/server/src/http/app.ts",
+          "source_blob_sha": "677f92d5aec4cc0a2953cf529174423a4ea27ebe",
+          "observation": "The server package has an explicit HTTP application composition point."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/apps/server/src/rpc/handler.ts",
+          "source_blob_sha": "0707a30d5430b075de5579f443d273f34da98563",
+          "observation": "The RPC handler exposes a separate request/message boundary."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/amruthpillai/reactive-resume/blob/3c195dc3f8db5ccae4aa4aff0cefe54980c02b74/compose.yml",
+          "source_blob_sha": "a0378f96a5d8bce8eefb1a2d6e02a226be5f45be",
+          "observation": "The deployment manifest makes server-side data and object-storage dependencies inspectable."
+        }
+      ],
+      "rationale": "A recognizable full-stack product with a focused server application, RPC boundary, and deployment-level data services offers a tractable system rather than a library-only target.",
+      "risks": [
+        "PDF rendering and object storage may make full execution resource-heavy.",
+        "The monorepo includes UI and tooling that should be excluded from a server-focused scope."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 3,
+      "id": "ether/etherpad",
+      "name": "Etherpad",
+      "canonical_url": "https://github.com/ether/etherpad",
+      "github_api_repository_url": "https://api.github.com/repos/ether/etherpad",
+      "github_api_head_url": "https://api.github.com/repos/ether/etherpad/commits/develop",
+      "default_branch": "develop",
+      "observed_default_branch_commit_sha": "d85d254ac093dc0801188fd954751c33b181e45c",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 49815,
+        "stars": 18507,
+        "forks": 3038,
+        "open_issues": 18,
+        "pushed_at": "2026-08-25T15:26:22Z",
+        "updated_at": "2026-08-25T15:46:51Z",
+        "default_branch_commit_committed_at": "2026-08-25T15:26:18Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "api_url": "https://api.github.com/repos/ether/etherpad/license",
+        "path": "LICENSE",
+        "blob_sha": "366aa1a47ada71731706b5c1a2bb0933438f4d02",
+        "file_url": "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "pnpm@11.10.0",
+        "monorepo": true,
+        "signals": "pnpm workspaces span the Node server, administration UI, tests, and plugin-facing packages.",
+        "manifest_urls": [
+          "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/package.json",
+          "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/pnpm-lock.yaml",
+          "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/pnpm-workspace.yaml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/src/node/server.ts",
+          "source_blob_sha": "2ab4fcf24d6368f7baf32317d4a0481fd4b85525",
+          "observation": "The Node entry point exposes the server lifecycle and HTTP boundary."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/src/node/db/DB.ts",
+          "source_blob_sha": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5",
+          "observation": "The database module is a concrete pluggable persistence boundary."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/ether/etherpad/blob/d85d254ac093dc0801188fd954751c33b181e45c/src/node/handler/SocketIORouter.ts",
+          "source_blob_sha": "886c26f4227514aba8fa4809a668fef2dab6a748",
+          "observation": "Socket.IO routing supplies a distinct collaborative messaging path."
+        }
+      ],
+      "rationale": "The compact collaborative editing server has unusually clear HTTP, database, and Socket.IO boundaries and substantial real-world history.",
+      "risks": [
+        "The plugin system can create dynamic relationships that need Unknown labels.",
+        "Some server paths retain JavaScript alongside TypeScript and need a frozen language scope."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 4,
+      "id": "hoppscotch/hoppscotch",
+      "name": "Hoppscotch",
+      "canonical_url": "https://github.com/hoppscotch/hoppscotch",
+      "github_api_repository_url": "https://api.github.com/repos/hoppscotch/hoppscotch",
+      "github_api_head_url": "https://api.github.com/repos/hoppscotch/hoppscotch/commits/main",
+      "default_branch": "main",
+      "observed_default_branch_commit_sha": "1acb8a3a7581e4db32ba0d529170c4669a2e1053",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 99788,
+        "stars": 80099,
+        "forks": 6055,
+        "open_issues": 802,
+        "pushed_at": "2026-08-25T12:57:51Z",
+        "updated_at": "2026-08-25T19:26:37Z",
+        "default_branch_commit_committed_at": "2026-07-30T15:24:58Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "MIT",
+        "api_url": "https://api.github.com/repos/hoppscotch/hoppscotch/license",
+        "path": "LICENSE",
+        "blob_sha": "4d209962a5a25c3d3176dd8f2e9d40ccb44e39b4",
+        "file_url": "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "pnpm@10.34.2",
+        "monorepo": true,
+        "signals": "pnpm workspaces cover backend, relay, desktop, web, CLI, data, and shared packages.",
+        "manifest_urls": [
+          "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/package.json",
+          "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/pnpm-lock.yaml",
+          "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/pnpm-workspace.yaml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/packages/hoppscotch-backend/src/app.controller.ts",
+          "source_blob_sha": "298e9551b590749785573a266e0dc7898ecde82f",
+          "observation": "A NestJS controller anchors the backend HTTP surface."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/packages/hoppscotch-backend/src/prisma/prisma.service.ts",
+          "source_blob_sha": "fe8719246f301a1e262bdf86fb7a6cc2424cb8d2",
+          "observation": "The Prisma service supplies an explicit persistence adapter."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/hoppscotch/hoppscotch/blob/1acb8a3a7581e4db32ba0d529170c4669a2e1053/packages/hoppscotch-backend/src/pubsub/pubsub.service.ts",
+          "source_blob_sha": "5cdf57b0bd737dec09c49fcd1496d236f4d0a093",
+          "observation": "The pub/sub service creates a concrete asynchronous message boundary."
+        }
+      ],
+      "rationale": "Its NestJS backend contains distinct controller, Prisma, GraphQL, and pub/sub seams in a system used for real API workflows.",
+      "risks": [
+        "The repository has multiple clients and deployment modes, so the backend scope must be tightly frozen.",
+        "GraphQL decorators and framework indirection may require Unknown labels."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 5,
+      "id": "actualbudget/actual",
+      "name": "Actual Budget",
+      "canonical_url": "https://github.com/actualbudget/actual",
+      "github_api_repository_url": "https://api.github.com/repos/actualbudget/actual",
+      "github_api_head_url": "https://api.github.com/repos/actualbudget/actual/commits/master",
+      "default_branch": "master",
+      "observed_default_branch_commit_sha": "6ccb7add3ee1f0c47d16a4642125044f5a3635a5",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 580654,
+        "stars": 28369,
+        "forks": 2882,
+        "open_issues": 213,
+        "pushed_at": "2026-08-25T17:12:23Z",
+        "updated_at": "2026-08-25T21:31:11Z",
+        "default_branch_commit_committed_at": "2026-08-24T21:38:21Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "MIT",
+        "api_url": "https://api.github.com/repos/actualbudget/actual/license",
+        "path": "LICENSE.txt",
+        "blob_sha": "3898f370d3cef6eaa0cbe60b936512bba6383cfa",
+        "file_url": "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/LICENSE.txt"
+      },
+      "package_topology": {
+        "package_manager": "yarn@4.17.1",
+        "monorepo": true,
+        "signals": "Yarn workspaces span sync server, core, clients, plugins, CLI, and shared UI packages.",
+        "manifest_urls": [
+          "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/package.json",
+          "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/yarn.lock",
+          "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/.yarnrc.yml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/packages/sync-server/src/app-sync.ts",
+          "source_blob_sha": "5d09adb5ef4ed6bf23c7b971375d6d319ba6d126",
+          "observation": "The sync server exposes a concrete network synchronization surface."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/packages/loot-core/src/server/db/index.ts",
+          "source_blob_sha": "866a5ca90ebb941db850a9a7d6be2b21fb598fa6",
+          "observation": "The core database module provides an explicit persistence boundary."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/actualbudget/actual/blob/6ccb7add3ee1f0c47d16a4642125044f5a3635a5/packages/loot-core/src/server/sync/index.ts",
+          "source_blob_sha": "f22e0ab44fe1979cdb67ec2bbb99c8a41e3fefb8",
+          "observation": "The core synchronization module handles state exchange across client/server boundaries."
+        }
+      ],
+      "rationale": "A mature end-user application with a separable sync server, persistence layer, and synchronization protocol offers meaningful evolution and data-flow cases.",
+      "risks": [
+        "The repository is larger than its focused sync-server scope suggests.",
+        "Legacy JavaScript coexists with TypeScript in the server package."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 6,
+      "id": "medplum/medplum",
+      "name": "Medplum",
+      "canonical_url": "https://github.com/medplum/medplum",
+      "github_api_repository_url": "https://api.github.com/repos/medplum/medplum",
+      "github_api_head_url": "https://api.github.com/repos/medplum/medplum/commits/main",
+      "default_branch": "main",
+      "observed_default_branch_commit_sha": "a95240e0104244bfb0f3a1a375dd4c691aee1a99",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 421183,
+        "stars": 2627,
+        "forks": 907,
+        "open_issues": 646,
+        "pushed_at": "2026-08-25T21:38:09Z",
+        "updated_at": "2026-08-25T17:24:34Z",
+        "default_branch_commit_committed_at": "2026-08-25T17:04:36Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "api_url": "https://api.github.com/repos/medplum/medplum/license",
+        "path": "LICENSE.txt",
+        "blob_sha": "0e52542130a761bf130022f620b2e8fe20a981c5",
+        "file_url": "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/LICENSE.txt"
+      },
+      "package_topology": {
+        "package_manager": "npm@10.9.9",
+        "monorepo": true,
+        "signals": "npm workspaces cover packages/* and examples/*, with Turbo coordinating the server and clients.",
+        "manifest_urls": [
+          "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/package.json",
+          "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/package-lock.json",
+          "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/turbo.json"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/packages/server/src/app.ts",
+          "source_blob_sha": "0bd984196d4f507a55371b4ebdc784697ba1a434",
+          "observation": "The server application composes HTTP-facing FHIR and service routes."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/packages/server/src/database.ts",
+          "source_blob_sha": "912955b2c82dc84768c1a3c1b863d87f3a77487e",
+          "observation": "The database module exposes the primary persistence boundary."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/medplum/medplum/blob/a95240e0104244bfb0f3a1a375dd4c691aee1a99/packages/server/src/pubsub.ts",
+          "source_blob_sha": "9bcda126e3a01ed67616cf7bcfde3609b87a564c",
+          "observation": "The pub/sub module provides an explicit asynchronous messaging seam."
+        }
+      ],
+      "rationale": "The server package offers rich, explicit FHIR HTTP, database, pub/sub, webhook, and WebSocket boundaries within a real healthcare platform.",
+      "risks": [
+        "Healthcare-specific protocols and compliance concerns increase annotation complexity.",
+        "Cloud adapters, bots, and generated FHIR definitions require strict exclusions."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 7,
+      "id": "triggerdotdev/trigger.dev",
+      "name": "Trigger.dev",
+      "canonical_url": "https://github.com/triggerdotdev/trigger.dev",
+      "github_api_repository_url": "https://api.github.com/repos/triggerdotdev/trigger.dev",
+      "github_api_head_url": "https://api.github.com/repos/triggerdotdev/trigger.dev/commits/main",
+      "default_branch": "main",
+      "observed_default_branch_commit_sha": "ba57c1fc741a6cddf94248c94cc17216b5d06ef8",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 189439,
+        "stars": 16118,
+        "forks": 1420,
+        "open_issues": 425,
+        "pushed_at": "2026-08-25T17:30:31Z",
+        "updated_at": "2026-08-25T19:16:16Z",
+        "default_branch_commit_committed_at": "2026-08-25T16:29:43Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "api_url": "https://api.github.com/repos/triggerdotdev/trigger.dev/license",
+        "path": "LICENSE",
+        "blob_sha": "5e468e5078530707eb8d28fe28cad2f72fb64bf0",
+        "file_url": "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "pnpm@10.33.2",
+        "monorepo": true,
+        "signals": "pnpm workspaces span apps, packages, integrations, and internal packages; Turbo coordinates builds.",
+        "manifest_urls": [
+          "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/package.json",
+          "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/pnpm-lock.yaml",
+          "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/pnpm-workspace.yaml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/apps/webapp/server.ts",
+          "source_blob_sha": "51afe0c90caae4942a987918b4f61eaf71bfd412",
+          "observation": "The web application has an explicit Node server entry point."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/apps/webapp/app/models/taskQueue.server.ts",
+          "source_blob_sha": "c8d449f165bb8c49e0a8a4e9b3a7876583d22ba9",
+          "observation": "Task queue persistence and orchestration form a core message-processing boundary."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/triggerdotdev/trigger.dev/blob/ba57c1fc741a6cddf94248c94cc17216b5d06ef8/internal-packages/database/prisma/schema.prisma",
+          "source_blob_sha": "a77890930b178fa1ec833703cd86a03c0531a4a3",
+          "observation": "The committed Prisma schema anchors the data model boundary."
+        }
+      ],
+      "rationale": "A production workflow system with queues, tasks, webhooks, a web server, and Prisma data models offers strong message-oriented architecture cases.",
+      "risks": [
+        "The runtime and deployment topology is complex and may exceed a medium execution scope.",
+        "External services and dynamic task execution can obscure static targets."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 8,
+      "id": "payloadcms/payload",
+      "name": "Payload",
+      "canonical_url": "https://github.com/payloadcms/payload",
+      "github_api_repository_url": "https://api.github.com/repos/payloadcms/payload",
+      "github_api_head_url": "https://api.github.com/repos/payloadcms/payload/commits/main",
+      "default_branch": "main",
+      "observed_default_branch_commit_sha": "51bed73ad6f29734d5c99d2073e993ac0a4cdd73",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 214902,
+        "stars": 44402,
+        "forks": 4090,
+        "open_issues": 1080,
+        "pushed_at": "2026-08-25T20:12:06Z",
+        "updated_at": "2026-08-25T21:54:02Z",
+        "default_branch_commit_committed_at": "2026-08-25T19:38:15Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "MIT",
+        "api_url": "https://api.github.com/repos/payloadcms/payload/license",
+        "path": "LICENSE.md",
+        "blob_sha": "b01626c32d15467951f80dc77a0427ed3483a815",
+        "file_url": "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/LICENSE.md"
+      },
+      "package_topology": {
+        "package_manager": "pnpm@11.9.0",
+        "monorepo": true,
+        "signals": "pnpm workspaces span core CMS, database, storage, queue, GraphQL, and integration packages with Turbo.",
+        "manifest_urls": [
+          "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/package.json",
+          "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/pnpm-lock.yaml",
+          "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/pnpm-workspace.yaml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/packages/payload/src/collections/endpoints/index.ts",
+          "source_blob_sha": "8cf6005cb022149a21d9c47d8c099341a0058f42",
+          "observation": "Collection endpoint registration exposes the CMS HTTP surface."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/packages/payload/src/database/createDatabaseAdapter.ts",
+          "source_blob_sha": "be0cba6979dff5e1669071584b6e97fe674115a1",
+          "observation": "Database adapter construction supplies a concrete persistence seam."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/payloadcms/payload/blob/51bed73ad6f29734d5c99d2073e993ac0a4cdd73/packages/payload/src/queues/endpoints/run.ts",
+          "source_blob_sha": "5ba0b7638811e1eea8978f094bd916ae7506ea44",
+          "observation": "The queue run endpoint connects HTTP orchestration to asynchronous work."
+        }
+      ],
+      "rationale": "The core CMS package makes HTTP endpoints, database adapters, and queue execution directly inspectable across multiple supported backends.",
+      "risks": [
+        "Payload is both a framework and a deployed system, so a human must confirm it meets the system criterion.",
+        "Numerous adapters, examples, and generated types can inflate scope."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 9,
+      "id": "backstage/backstage",
+      "name": "Backstage",
+      "canonical_url": "https://github.com/backstage/backstage",
+      "github_api_repository_url": "https://api.github.com/repos/backstage/backstage",
+      "github_api_head_url": "https://api.github.com/repos/backstage/backstage/commits/master",
+      "default_branch": "master",
+      "observed_default_branch_commit_sha": "7f1aee36e974e379ea94a276d7f9ef63d35fedf1",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 6650271,
+        "stars": 34250,
+        "forks": 7585,
+        "open_issues": 400,
+        "pushed_at": "2026-08-25T21:35:36Z",
+        "updated_at": "2026-08-25T18:47:56Z",
+        "default_branch_commit_committed_at": "2026-08-25T18:05:51Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "api_url": "https://api.github.com/repos/backstage/backstage/license",
+        "path": "LICENSE",
+        "blob_sha": "72ea3a85b0ee807370d34ff9bef32e0f2c7e0c92",
+        "file_url": "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "yarn@4.8.1",
+        "monorepo": true,
+        "signals": "Yarn workspaces span packages/* and plugins/* with a large backend and plugin service topology.",
+        "manifest_urls": [
+          "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/package.json",
+          "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/yarn.lock",
+          "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/.yarnrc.yml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/packages/backend-defaults/src/entrypoints/httpRouter/httpRouterServiceFactory.ts",
+          "source_blob_sha": "0fc70a07f0cd85616977e790e79c33e6a46a1979",
+          "observation": "The backend HTTP router factory provides a central service boundary."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/packages/backend-defaults/src/entrypoints/database/DatabaseManager.ts",
+          "source_blob_sha": "96313e50afa23e34f7b67637d1c06dd53b9ba07a",
+          "observation": "The database manager exposes backend persistence ownership."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/backstage/backstage/blob/7f1aee36e974e379ea94a276d7f9ef63d35fedf1/packages/backend-defaults/src/entrypoints/scheduler/schedulerServiceFactory.ts",
+          "source_blob_sha": "8aacdc00051cab4be54ac05d89d4920f78061ae8",
+          "observation": "The scheduler factory supplies an asynchronous task boundary."
+        }
+      ],
+      "rationale": "Backstage has explicit service factories for HTTP, data, scheduling, cache, auth, and plugin boundaries with strong real-world relevance.",
+      "risks": [
+        "The repository is far larger than the protocol's medium-scope target.",
+        "Dynamic plugin discovery and generated APIs may cause substantial ambiguity."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    },
+    {
+      "rank": 10,
+      "id": "supabase/supabase",
+      "name": "Supabase",
+      "canonical_url": "https://github.com/supabase/supabase",
+      "github_api_repository_url": "https://api.github.com/repos/supabase/supabase",
+      "github_api_head_url": "https://api.github.com/repos/supabase/supabase/commits/master",
+      "default_branch": "master",
+      "observed_default_branch_commit_sha": "6ea3567948178e81369cd485bc06c5aa40009db3",
+      "retrieved_at": "2026-08-25T21:59:36Z",
+      "primary_language": "TypeScript",
+      "github_snapshot": {
+        "size_kib_approx": 2433892,
+        "stars": 108401,
+        "forks": 13653,
+        "open_issues": 1060,
+        "pushed_at": "2026-08-25T21:56:40Z",
+        "updated_at": "2026-08-25T21:50:42Z",
+        "default_branch_commit_committed_at": "2026-08-25T21:08:30Z",
+        "archived": false,
+        "disabled": false,
+        "fork": false
+      },
+      "license": {
+        "spdx_id": "Apache-2.0",
+        "api_url": "https://api.github.com/repos/supabase/supabase/license",
+        "path": "LICENSE",
+        "blob_sha": "49ea124025275674563eeff03af0f653ca49fdc0",
+        "file_url": "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/LICENSE"
+      },
+      "package_topology": {
+        "package_manager": "pnpm@11.13.1",
+        "monorepo": true,
+        "signals": "pnpm workspaces and Turbo cover Studio, documentation, UI, and shared packages alongside a multi-service Docker topology.",
+        "manifest_urls": [
+          "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/package.json",
+          "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/pnpm-lock.yaml",
+          "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/pnpm-workspace.yaml"
+        ]
+      },
+      "architecture_evidence": [
+        {
+          "kind": "http",
+          "source_url": "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/apps/studio/api/server.js",
+          "source_blob_sha": "e999b6ac1046c06b2ae304f935c98b6309271919",
+          "observation": "Studio contains an explicit API server boundary."
+        },
+        {
+          "kind": "message",
+          "source_url": "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/apps/studio/data/database-queues/database-queue-messages-send-mutation.ts",
+          "source_blob_sha": "76444b6b3f16caa7e009b0b7f107e802ef58adca",
+          "observation": "The Studio queue mutation exposes a concrete database-message interaction."
+        },
+        {
+          "kind": "data",
+          "source_url": "https://github.com/supabase/supabase/blob/6ea3567948178e81369cd485bc06c5aa40009db3/docker/docker-compose.yml",
+          "source_blob_sha": "d05807667aa63ce96fbbb12feadbf53901e7d59f",
+          "observation": "The deployment manifest records the platform's database, API, realtime, storage, and gateway topology."
+        }
+      ],
+      "rationale": "The platform exposes unusually diverse HTTP, database, queue, realtime, storage, and gateway relationships with very high real-world activity.",
+      "risks": [
+        "The repository is very large and heterogeneous, so it is unlikely to meet the medium-scope criterion without a narrow human-approved slice.",
+        "Several deployed services are implemented outside TypeScript and must not be silently included."
+      ],
+      "prior_tuning_leakage_status": "unknown-needs-human-check",
+      "selection_decision": "not-evaluated-human-gated"
+    }
+  ]
+}

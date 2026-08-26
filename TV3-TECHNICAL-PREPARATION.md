@@ -4,6 +4,7 @@ Status: **technical preparation only**. This record does not claim a real reposi
 
 | Task | Deterministic artifact/check | Current state and external boundary |
 | --- | --- | --- |
+| EVAL-102 | Ranked inventory of exactly ten live TypeScript/Node system candidates with exact GitHub heads, permissive-license provenance, activity/topology snapshots and immutable architecture evidence; strict candidate-only validator | Automated discovery complete; final 2–3 selection, leakage review, scope and freeze remain human-gated |
 | EVAL-103 | Repository URL/full commit/scope/tree/license/environment validator plus injected clone/inspect materialization adapter | Implemented and unit-tested; no final repository selected or cloned |
 | EVAL-106 | Two-review annotation and adjudication validator preserves original IDs/labels, agreement and human rationale/time | Implemented; templates intentionally incomplete and no human adjudication claimed |
 | EVAL-108 | Frozen artifact, repository-pin and Core/Guardian package-bound full replay exactly twice, retaining failures and normalized hashes | Implemented; real D3 execution blocked by freeze and approval |
@@ -16,7 +17,7 @@ Status: **technical preparation only**. This record does not claim a real reposi
 | PILOT-101 | Outside-final-sample report schema captures logging, instructions, annotation comprehension, approval delay, false blocks, recovery, issues and versioned protocol fixes | Empty pending workspace passes; `pilot:gate` fails until a real EVAL-107-gated pilot |
 | ABL-101 | Exact five-condition design/config matrix, same frozen design per case, result/code hashes, identical metric replay and no post-outcome changes | Empty pending workspace passes; `ablation:gate` fails until STUDY-103/freeze/execution |
 | P6-108 | Eight-gate runtime closure for Phase 5, ADR, quality goals, privacy/Security, GOV-103, high-risk human decision, independent non-synthetic validation and architecture acceptance | Synthetic runtime replay passes; `runtime:gate` fails closed |
-| ANALYSIS-101 | Hash-bound raw rows deterministically render normalized CSV, Markdown table, SVG figure and manifest | Committed outputs are visibly synthetic/watermarked; publishable gate rejects empty, unapproved, synthetic or unaudited input |
+| ANALYSIS-101 | Hash-bound raw rows deterministically render normalized CSV, Markdown table, SVG figure and manifest; a pinned unexecuted/output-free notebook indexes the canonical Node pipeline without duplicating it | Committed outputs are visibly synthetic/watermarked; notebook tampering or populated cells fail; publishable gate rejects empty, unapproved, synthetic or unaudited input |
 | REPL-101 | Clean-checkout runbook and exact independent-human audit schema covering install, full verify, negative gates and artifact hashes | Pending template contains no audit; `repl:gate` fails until external reproduction evidence exists |
 
 Normal preparation checks are part of `pnpm verify`. The negative closure commands are `pnpm holdout:gate`, `pnpm pr-history:gate`, `pnpm ai-eval:gate`, `pnpm pilot:gate`, `pnpm ablation:gate`, `pnpm runtime:gate`, `pnpm iac:gate`, `pnpm analysis:gate` and `pnpm repl:gate`; each is expected to exit non-zero in this branch.

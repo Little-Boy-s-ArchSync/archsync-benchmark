@@ -42,5 +42,6 @@ jobs:
             evidence/phase-2-results.json
             evidence/phase-3-results.json
             evidence/iac/phase-5-preparatory.json
+            evidence/holdout/eval-102-candidates.validation.json
             evidence/unit-coverage.json
             runtime/evidence/*.json
