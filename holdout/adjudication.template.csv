@@ -1,0 +1,2 @@
+item_id,reviewer_a_label,reviewer_b_label,agreement,final_label,adjudicator_id,rationale,decided_at
+EXAMPLE-ONLY,unknown,unknown,true,,REPLACE_WITH_HUMAN_ID,REPLACE,

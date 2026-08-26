@@ -1,5 +1,7 @@
 # ArchSync Benchmark
 
+The proposed D3 independent-holdout protocol, blind-review handbook, immutable templates, freeze verifier, metrics/error taxonomy, and scalability/oracle tooling live in [`holdout/`](holdout/). They are technically verified by `pnpm holdout:verify` and the 100% unit-coverage gate, but final repository selection, ground truth, freeze, and inference remain blocked on EXP-102 and explicit human Lead/reviewer actions.
+
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
 **Phase 1 foundation:** model, graph and conformance contracts are executable. **Phase 2 analyzer gate:** strengthened and reproducible as v0.2. **Phase 3 PR gate:** Git-diff decisions, baseline caching and component-incremental analysis are reproducible as v0.3. `ground-truth.json` is the canonical end-to-end benchmark manifest.

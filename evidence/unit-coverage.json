@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 55,
-    "passed": 55,
+    "total": 63,
+    "passed": 63,
     "failed": 0
   },
   "provenance": {
@@ -26,6 +26,10 @@
       {
         "file": "scripts/lib/ground-truth.mjs",
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
+      },
+      {
+        "file": "scripts/lib/holdout.mjs",
+        "sha256": "f49565c92425c00b03690b17e4d311acf9a3925ed4e343a696cc0d9937f92a99"
       },
       {
         "file": "scripts/lib/integrity.mjs",
@@ -37,11 +41,15 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "d51185c2cd9a0f5c36c007b8a36c719dff8cf0d6280dd50bcddd829efbad4055"
+        "sha256": "204f9223625c0cdffe0e02cbd48c09fa54567dadee626c581a92633011b81adf"
       },
       {
         "file": "test/ground-truth.test.mjs",
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
+      },
+      {
+        "file": "test/holdout.test.mjs",
+        "sha256": "d0997c4c27310665bfa5791f3123040b56ea3a3304275b302311258cf2a0165a"
       },
       {
         "file": "test/integrity.test.mjs",
@@ -53,7 +61,7 @@
       },
       {
         "file": "package.json",
-        "sha256": "de03b0b36394d94a4b14e26a06b265a8bf0589b64fb9194920b0960b088796fe"
+        "sha256": "a2bb53351ffc1e1fe3b67065c1daa79325f874ec5a9993b1fcc70ef9cf1cef88"
       },
       {
         "file": "pnpm-lock.yaml",
@@ -64,6 +72,6 @@
         "sha256": "56d42c69cf58246f458c672e8f18e9ef1350f005a6e7de8728e5356d570ff2dd"
       }
     ],
-    "manifest_sha256": "4071170a3b4c2ace6040f9b4de7b2be6e96f6acf464c1677c570478c57115536"
+    "manifest_sha256": "2c3618ad3b087ae80a3eff438e4fa813bd490e295c54f7f8bbee653ac0bdd9f9"
   }
 }
