@@ -1,0 +1,5 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "data/gcp-orders-db", "namespace": "any", "aliases": ["gcp-orders-db"] }]
+}

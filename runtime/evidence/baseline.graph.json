@@ -1,0 +1,156 @@
+{
+  "contract_version": "0.1",
+  "provenance": {
+    "runtime_snapshot_sha256": "aa160a00af06015a50b22c57e856d32641792baca71478a891e9d293f02ad4ff",
+    "mapping_config_sha256": "8c8741f7e30d0ad447e71be4e6eed0c684387716c108cf4ad4e69500b4b0bead"
+  },
+  "environment": "phase6-fixture",
+  "window": {
+    "start_unix_nano": "1787702400000000000",
+    "end_unix_nano": "1787703300000000000"
+  },
+  "nodes": [
+    {
+      "runtime_service": "api-gateway",
+      "component_ids": [
+        "api-gateway"
+      ],
+      "mapping_status": "mapped",
+      "confidence": 1,
+      "span_count": 1,
+      "metric_count": 0,
+      "first_seen_unix_nano": "1787702460000000000",
+      "last_seen_unix_nano": "1787702460080000000"
+    },
+    {
+      "runtime_service": "order-service",
+      "component_ids": [
+        "order-service"
+      ],
+      "mapping_status": "mapped",
+      "confidence": 1,
+      "span_count": 4,
+      "metric_count": 5,
+      "first_seen_unix_nano": "1787702460000000000",
+      "last_seen_unix_nano": "1787703240000000004"
+    },
+    {
+      "runtime_service": "postgres",
+      "component_ids": [
+        "postgres"
+      ],
+      "mapping_status": "mapped",
+      "confidence": 1,
+      "span_count": 3,
+      "metric_count": 0,
+      "first_seen_unix_nano": "1787702520000000000",
+      "last_seen_unix_nano": "1787702640220000000"
+    }
+  ],
+  "edges": [
+    {
+      "key": "api-gateway|http|order-service",
+      "from_service": "api-gateway",
+      "to_service": "order-service",
+      "relationship_type": "http",
+      "from_component_ids": [
+        "api-gateway"
+      ],
+      "to_component_ids": [
+        "order-service"
+      ],
+      "mapping_status": "mapped",
+      "confidence": 1,
+      "count": 1,
+      "error_count": 0,
+      "latency_ms": {
+        "p50": 80,
+        "p95": 80,
+        "max": 80
+      },
+      "first_seen_unix_nano": "1787702460000000000",
+      "last_seen_unix_nano": "1787702460080000000",
+      "evidence_ids": [
+        "span:11111111111111111111111111111111:1111111111111111"
+      ]
+    },
+    {
+      "key": "order-service|data|postgres",
+      "from_service": "order-service",
+      "to_service": "postgres",
+      "relationship_type": "data",
+      "from_component_ids": [
+        "order-service"
+      ],
+      "to_component_ids": [
+        "postgres"
+      ],
+      "mapping_status": "mapped",
+      "confidence": 1,
+      "count": 3,
+      "error_count": 1,
+      "latency_ms": {
+        "p50": 240,
+        "p95": 260,
+        "max": 260
+      },
+      "first_seen_unix_nano": "1787702520000000000",
+      "last_seen_unix_nano": "1787702640220000000",
+      "evidence_ids": [
+        "span:22222222222222222222222222222222:2222222222222222",
+        "span:33333333333333333333333333333333:3333333333333333",
+        "span:44444444444444444444444444444444:4444444444444444"
+      ]
+    }
+  ],
+  "model_components": [
+    {
+      "component_id": "api-gateway",
+      "observation": "observed",
+      "runtime_services": [
+        "api-gateway"
+      ]
+    },
+    {
+      "component_id": "order-service",
+      "observation": "observed",
+      "runtime_services": [
+        "order-service"
+      ]
+    },
+    {
+      "component_id": "postgres",
+      "observation": "observed",
+      "runtime_services": [
+        "postgres"
+      ]
+    },
+    {
+      "component_id": "redis",
+      "observation": "no-evidence",
+      "runtime_services": []
+    }
+  ],
+  "signals": [
+    {
+      "code": "RUNTIME_LOW_SAMPLE",
+      "severity": "info",
+      "subject": "api-gateway|http|order-service",
+      "evidence_ids": [
+        "span:11111111111111111111111111111111:1111111111111111"
+      ]
+    },
+    {
+      "code": "RUNTIME_NO_EVIDENCE",
+      "severity": "info",
+      "subject": "redis",
+      "evidence_ids": []
+    }
+  ],
+  "reliability": {
+    "span_count": 4,
+    "metric_count": 5,
+    "mapped_service_ratio": 1,
+    "low_sample_edge_count": 1
+  }
+}

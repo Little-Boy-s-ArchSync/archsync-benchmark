@@ -18,7 +18,7 @@ Two reviewers independently label component, relationship, violation, evolution,
 
 ## Freeze and inference
 
-Only after adjudication, hash the source snapshot, scope, exclusions, raw annotations, adjudication, final truth, environment, and manifest with `createFrozenManifest`. A frozen manifest requires a human Lead approval identity/time and 2–3 complete repositories. Any changed byte invalidates the verifier. Package exact Core/Guardian versions, run full scan twice, retain failures, and never tune after seeing D3 output.
+Only after adjudication, hash the source snapshot, scope, exclusions, raw annotations, adjudication, final truth, environment, and manifest with `createFrozenManifest`. A frozen manifest requires a human Lead approval identity/time and 2–3 complete repositories. Each repository binds exact URL, full commit, safe scope, tracked-tree hash, license path/hash and tool environment; the clone/inspect adapter rejects any observation mismatch. Any changed byte invalidates the verifier. Package exact Core/Guardian versions, commits and artifact hashes, run full scan exactly twice, retain failures, and never tune after seeing D3 output. `pnpm holdout:gate` remains closed until these prerequisites exist.
 
 ## Analysis
 

@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "package_alias": "@archsync/guardian-phase5",
+  "package_name": "@archsync/guardian",
+  "package_version": "0.3.3",
+  "contract_version": "0.1",
+  "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
+  "source_commit": "de11e48a8f69fbe5cd32f052489a323e1c81eab3",
+  "source_pull_request": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian/pull/7",
+  "artifact": "vendor/archsync-guardian-0.3.3.tgz",
+  "artifact_sha256": "ab2b5e774255cd7e46dd0668a075ca7e22208d6ba6c89a37ef464ba0a8cabc27",
+  "package_content_sha256": "dd901688e68ea9b858f25ec55376db5cfc25983351ed0d9becccdf18487a9560"
+}

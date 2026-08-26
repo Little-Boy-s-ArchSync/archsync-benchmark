@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "template_only": true,
+  "run_id": null,
+  "provider": null,
+  "model": null,
+  "prompt_version": null,
+  "request_hash": null,
+  "started_at": null,
+  "finished_at": null,
+  "temperature": null,
+  "seed": null,
+  "attempts": 0,
+  "tokens": { "input": 0, "output": 0 },
+  "cost_usd": 0,
+  "raw_response_path": null,
+  "status": null,
+  "failures": [],
+  "benchmark": {
+    "condition": null,
+    "model_version": null,
+    "config_sha256": null,
+    "latency_ms": null,
+    "evidence_ids": [],
+    "redaction": { "passed": false, "audit_sha256": null }
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "public/missing-route", "namespace": "any", "aliases": ["missing-route"] }]
+}

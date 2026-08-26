@@ -1,0 +1,201 @@
+{
+  "contract_version": "0.1",
+  "aggregation": "none",
+  "provenance": {
+    "goals_sha256": "b49fe0ad90ced133314d3fcd0177224722823ffe7f7a735f75bd356f1dff88e3",
+    "before_evidence_sha256": "aa160a00af06015a50b22c57e856d32641792baca71478a891e9d293f02ad4ff",
+    "after_evidence_sha256": "bffdbefb67a8f923674a68d99b4e1bd65ad7693e36ac66a1fd4f8c4e352118cf"
+  },
+  "rows": [
+    {
+      "goal_id": "AVL-001",
+      "attribute": "availability",
+      "scope": "order-service",
+      "metric": "availability_ratio",
+      "target": 0.99,
+      "operator": ">=",
+      "unit": "ratio",
+      "window": {
+        "value": 15,
+        "unit": "minute"
+      },
+      "priority": "high",
+      "before": {
+        "status": "known",
+        "value": 0.985,
+        "unit": "ratio",
+        "evidence_id": "metric:ec57398608f352677c9f1076dc77b1410ce8ac4c3488b7516ed2c8b41568545f",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "after": {
+        "status": "known",
+        "value": 0.999,
+        "unit": "ratio",
+        "evidence_id": "metric:dcd8f47297ae9a131ed9a1a35e601ed96657e0dd03cdfc72bf157b896d7cd3eb",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "before_compliance": "unmet",
+      "after_compliance": "met",
+      "change": "improvement",
+      "confidence": 1,
+      "evidence_ids": [
+        "metric:dcd8f47297ae9a131ed9a1a35e601ed96657e0dd03cdfc72bf157b896d7cd3eb",
+        "metric:ec57398608f352677c9f1076dc77b1410ce8ac4c3488b7516ed2c8b41568545f"
+      ]
+    },
+    {
+      "goal_id": "COST-001",
+      "attribute": "cost",
+      "scope": "order-service",
+      "metric": "estimated_cost",
+      "target": 400,
+      "operator": "<=",
+      "unit": "usd",
+      "window": {
+        "value": 15,
+        "unit": "minute"
+      },
+      "priority": "medium",
+      "before": {
+        "status": "known",
+        "value": 350,
+        "unit": "usd",
+        "evidence_id": "metric:8e2b59851efe22faf47e8464a4930db9b22b7b5ab33c9c4fdc8fd3c6ed9b9e16",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "after": {
+        "status": "known",
+        "value": 450,
+        "unit": "usd",
+        "evidence_id": "metric:5bdc556c023fa39e1e8048e99e197e56261c5c10cc3108b7121bd35e6090e7b2",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "before_compliance": "met",
+      "after_compliance": "unmet",
+      "change": "regression",
+      "confidence": 1,
+      "evidence_ids": [
+        "metric:5bdc556c023fa39e1e8048e99e197e56261c5c10cc3108b7121bd35e6090e7b2",
+        "metric:8e2b59851efe22faf47e8464a4930db9b22b7b5ab33c9c4fdc8fd3c6ed9b9e16"
+      ]
+    },
+    {
+      "goal_id": "CPLX-001",
+      "attribute": "complexity",
+      "scope": "order-service",
+      "metric": "component_count",
+      "target": 4,
+      "operator": "<=",
+      "unit": "count",
+      "window": {
+        "value": 15,
+        "unit": "minute"
+      },
+      "priority": "medium",
+      "before": {
+        "status": "known",
+        "value": 4,
+        "unit": "count",
+        "evidence_id": "metric:5c4b60f5b5ca2e1fad3abe1e76d77aeb5e2adddbd3f927064bcd1e7173b698f7",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "after": {
+        "status": "known",
+        "value": 5,
+        "unit": "count",
+        "evidence_id": "metric:109124d37e6d940f2e61a137c616adec2413e80af0729ee62f4a59ebd7bf9854",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "before_compliance": "met",
+      "after_compliance": "unmet",
+      "change": "regression",
+      "confidence": 1,
+      "evidence_ids": [
+        "metric:109124d37e6d940f2e61a137c616adec2413e80af0729ee62f4a59ebd7bf9854",
+        "metric:5c4b60f5b5ca2e1fad3abe1e76d77aeb5e2adddbd3f927064bcd1e7173b698f7"
+      ]
+    },
+    {
+      "goal_id": "LAT-001",
+      "attribute": "latency",
+      "scope": "order-service",
+      "metric": "p95_latency",
+      "target": 200,
+      "operator": "<=",
+      "unit": "ms",
+      "window": {
+        "value": 15,
+        "unit": "minute"
+      },
+      "priority": "high",
+      "before": {
+        "status": "known",
+        "value": 260,
+        "unit": "ms",
+        "evidence_id": "metric:c4d35ef0040e47bcd806c31ae9554b41e7d28e845029283e1a602da75200397f",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "after": {
+        "status": "known",
+        "value": 190,
+        "unit": "ms",
+        "evidence_id": "metric:dde68219d78f4a44fdae128a7ecb668db8ba808a8e9b5e65a1f56dba21fcf85f",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "before_compliance": "unmet",
+      "after_compliance": "met",
+      "change": "improvement",
+      "confidence": 1,
+      "evidence_ids": [
+        "metric:c4d35ef0040e47bcd806c31ae9554b41e7d28e845029283e1a602da75200397f",
+        "metric:dde68219d78f4a44fdae128a7ecb668db8ba808a8e9b5e65a1f56dba21fcf85f"
+      ]
+    },
+    {
+      "goal_id": "SEC-001",
+      "attribute": "security",
+      "scope": "order-service",
+      "metric": "security_violation_count",
+      "target": 0,
+      "operator": "<=",
+      "unit": "count",
+      "window": {
+        "value": 15,
+        "unit": "minute"
+      },
+      "priority": "critical",
+      "before": {
+        "status": "known",
+        "value": 0,
+        "unit": "count",
+        "evidence_id": "metric:5fc8f351cab6472514437edbe9f1569a71f71fa75f49d14998f14d3de39627cb",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "after": {
+        "status": "known",
+        "value": 0,
+        "unit": "count",
+        "evidence_id": "metric:5fc8f351cab6472514437edbe9f1569a71f71fa75f49d14998f14d3de39627cb",
+        "source": "otel-metric",
+        "confidence": 1
+      },
+      "before_compliance": "met",
+      "after_compliance": "met",
+      "change": "unchanged",
+      "confidence": 1,
+      "evidence_ids": [
+        "metric:5fc8f351cab6472514437edbe9f1569a71f71fa75f49d14998f14d3de39627cb"
+      ]
+    }
+  ],
+  "unknown_goal_ids": []
+}

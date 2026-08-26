@@ -1,0 +1,2827 @@
+{
+  "schema_version": 1,
+  "phase": 5,
+  "status": "PREPARATORY",
+  "work_items": [
+    "P5-109",
+    "P5-110"
+  ],
+  "implementation": {
+    "package_alias": "@archsync/guardian-phase5",
+    "package_name": "@archsync/guardian",
+    "package_version": "0.3.3",
+    "contract_version": "0.1",
+    "source_repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian.git",
+    "source_commit": "de11e48a8f69fbe5cd32f052489a323e1c81eab3",
+    "source_pull_request": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian/pull/7",
+    "artifact": "vendor/archsync-guardian-0.3.3.tgz",
+    "artifact_sha256": "ab2b5e774255cd7e46dd0668a075ca7e22208d6ba6c89a37ef464ba0a8cabc27",
+    "package_content_sha256": "dd901688e68ea9b858f25ec55376db5cfc25983351ed0d9becccdf18487a9560"
+  },
+  "protocol": {
+    "runs": 2,
+    "execution": "non-executing Terraform literal parse and Kubernetes document parse",
+    "provider_or_cluster_access": false,
+    "corpus_write_allowed": false,
+    "ground_truth_status": "preparatory-awaiting-human-freeze"
+  },
+  "technical_evidence": {
+    "valid": true,
+    "run_hashes": [
+      "5af482efce67c983681a7b75bd3b2bca29f77834a76129a6d20159887abb2c0a",
+      "5af482efce67c983681a7b75bd3b2bca29f77834a76129a6d20159887abb2c0a"
+    ],
+    "deterministic": true,
+    "input_unchanged": true,
+    "replay_issues": [],
+    "metrics": {
+      "cases": {
+        "total": 20,
+        "valid": 20,
+        "parseable": 20
+      },
+      "exact_findings": {
+        "matched_cases": 20,
+        "total_cases": 20
+      },
+      "exact_required_evidence": {
+        "matched_cases": 20,
+        "total_cases": 20
+      },
+      "public_exposure": {
+        "expected": 4,
+        "detected": 4,
+        "unexpected": 0
+      },
+      "security_rules": {
+        "IAC-PUBLIC-DATABASE": {
+          "true_positive": 3,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 17,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "IAC-TRUST-BOUNDARY": {
+          "true_positive": 1,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 19,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "IAC-UNAPPROVED-DATA-SERVICE": {
+          "true_positive": 2,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 18,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        },
+        "IAC-UNEXPECTED-INGRESS": {
+          "true_positive": 1,
+          "false_positive": 0,
+          "false_negative": 0,
+          "true_negative": 19,
+          "precision": 1,
+          "recall": 1,
+          "f1": 1,
+          "specificity": 1
+        }
+      },
+      "error_counts": {}
+    }
+  },
+  "closure": {
+    "closed": false,
+    "blockers": [
+      "Corpus metadata is not marked frozen",
+      "P4-120 approval is not recorded",
+      "Phase 5 ADR acceptance is not recorded",
+      "Independent Security approval is not recorded",
+      "Ground truth is not frozen before the final run",
+      "phase5-lead approval is absent or not bound to the exact Guardian commit",
+      "independent-security-reviewer approval is absent or not bound to the exact Guardian commit"
+    ],
+    "governance": {
+      "p4_120_approved": false,
+      "phase5_adr_accepted": false,
+      "security_review_approved": false,
+      "ground_truth_frozen": false,
+      "approval_records": []
+    }
+  },
+  "error_taxonomy": {
+    "IAC_INPUT_INVALID": "Corpus metadata or a fixture input violates the benchmark contract.",
+    "IAC_PARSE_ERROR": "Guardian reported an error-level Terraform or Kubernetes diagnostic.",
+    "IAC_FINDING_MISMATCH": "The exact security finding key set differs from ground truth.",
+    "IAC_EVIDENCE_MISMATCH": "A required finding source, file, or line is absent.",
+    "IAC_DIAGNOSTIC_MISMATCH": "The exact parser diagnostic-code multiset differs from ground truth.",
+    "IAC_CLAIM_MISMATCH": "A required cross-source claim or conflict count differs from ground truth.",
+    "IAC_IDENTITY_MISMATCH": "A required identity-resolution outcome differs from ground truth.",
+    "IAC_PUBLIC_EXPOSURE_MISS": "A labeled public-exposure event was not detected exactly.",
+    "IAC_ANALYZER_FAILURE": "The pinned analyzer threw instead of returning a bounded result.",
+    "IAC_NONDETERMINISTIC": "Two complete corpus runs produced different normalized output hashes.",
+    "IAC_INPUT_MUTATION": "An input file changed while the benchmark was executing.",
+    "IAC_PROVENANCE_MISMATCH": "The runtime package does not match its pinned source or artifact hash.",
+    "P5_GATE_INCOMPLETE": "Technical evidence exists, but one or more governed closure gates remain open."
+  },
+  "corpus": {
+    "id": "archsync-iac-pre-freeze-v0.1",
+    "cases": 20,
+    "distribution": {
+      "baseline": 1,
+      "valid-change": 3,
+      "violation": 7,
+      "evolution": 2,
+      "hard-negative": 7
+    },
+    "files": [
+      {
+        "file": "iac/cases/iac-case-01/architecture/spec.yaml",
+        "sha256": "3a574f14c504840cd6cd32584066b8732bf4d4aa81218dab2d17632767bdb838"
+      },
+      {
+        "file": "iac/cases/iac-case-01/repository/database.ts",
+        "sha256": "da43abdca78e37ef2cd6eafb886f5fee04af4b58ad9aa4bc4c66d065dc48089f"
+      },
+      {
+        "file": "iac/cases/iac-case-01/sources.json",
+        "sha256": "5f289ea81b41493d8929dd866e261149f1d4c86c75b545a5099dd77f56261506"
+      },
+      {
+        "file": "iac/cases/iac-case-01/terraform/main.tf",
+        "sha256": "4c9c00794eafa76ae219dd8fdd01a3ca31f22c4ef8e7fa2f1bef0941a8a8f021"
+      },
+      {
+        "file": "iac/cases/iac-case-02/architecture/spec.yaml",
+        "sha256": "f3d851ccdea89a5222cd86b4e4e53542fc7636ffdb8fd9a7f36811be0f16b39f"
+      },
+      {
+        "file": "iac/cases/iac-case-02/repository/cache.ts",
+        "sha256": "44266fd3079447425be95ca120c02b860cb59000d80d0e07ae7b7f473fa5200c"
+      },
+      {
+        "file": "iac/cases/iac-case-02/sources.json",
+        "sha256": "2cd20964d6419df072d7878183964fc5a7d1c7a3ca2a4c94aae509b2d74a061c"
+      },
+      {
+        "file": "iac/cases/iac-case-02/terraform/main.tf",
+        "sha256": "97e8319f83ce710ce2232365c5e9a7c865bb78aa6fc1f4d091b4153defe58c7e"
+      },
+      {
+        "file": "iac/cases/iac-case-03/architecture/spec.yaml",
+        "sha256": "b9e18c2228bf57ca9bc89cd67ea59f5699715589b3497a2e16bee8d9d08c2f86"
+      },
+      {
+        "file": "iac/cases/iac-case-03/repository/broker.ts",
+        "sha256": "7aab92012775f164ae5569f527c908ce9b4ff36d18147d3384eacce2b2523f5a"
+      },
+      {
+        "file": "iac/cases/iac-case-03/sources.json",
+        "sha256": "95f11fcf93acaa524eb10f7e8ea2ffb4814577f00552994ca9cef23ad3be6c17"
+      },
+      {
+        "file": "iac/cases/iac-case-03/terraform/main.tf",
+        "sha256": "4908aa828ba27f1cc1b048dc979313f7fbd492ae4a686b18a18f91605afd9814"
+      },
+      {
+        "file": "iac/cases/iac-case-04/kubernetes/main.yaml",
+        "sha256": "38aab0458c1c16667d5fe9c1b50cee892e3298b72119160f8772ca11429c480a"
+      },
+      {
+        "file": "iac/cases/iac-case-04/sources.json",
+        "sha256": "088c9c8d1dd376d52918f212878a3ae105c0baa1aaa02da1cc49c3db151ec1ce"
+      },
+      {
+        "file": "iac/cases/iac-case-05/sources.json",
+        "sha256": "d6484e7d9968f58592152e86458717cb2f096ff102b8f06ba56d51e2ecc90fc7"
+      },
+      {
+        "file": "iac/cases/iac-case-05/terraform/main.tf",
+        "sha256": "48cf288e0e596cedd318a1b06540984ab6ade03fe4550c98f07cbe964a3abac9"
+      },
+      {
+        "file": "iac/cases/iac-case-06/sources.json",
+        "sha256": "2038bdb0dd5b65f4ba17f7f1ad1c4dd851b06419b896b2cd784cde1977b440ad"
+      },
+      {
+        "file": "iac/cases/iac-case-06/terraform/main.tf",
+        "sha256": "7d40f78485dacb189326c34892627783cd59196e1fb7a9a40fef15576aa89e1e"
+      },
+      {
+        "file": "iac/cases/iac-case-07/sources.json",
+        "sha256": "7da470e7b30b0ed54f584cd5f14ad5d4bf5e23bcfee62f05cfa3dffc859813ae"
+      },
+      {
+        "file": "iac/cases/iac-case-07/terraform/main.tf",
+        "sha256": "df3f576073e0d3f7ff2fbfbf88efc840c28633006e7174fbb53ec368dc8466a0"
+      },
+      {
+        "file": "iac/cases/iac-case-08/kubernetes/main.yaml",
+        "sha256": "78c299446848fcf7c0cb4c8218865267101ad445bad504992aad5c3d578ace0f"
+      },
+      {
+        "file": "iac/cases/iac-case-08/sources.json",
+        "sha256": "088c9c8d1dd376d52918f212878a3ae105c0baa1aaa02da1cc49c3db151ec1ce"
+      },
+      {
+        "file": "iac/cases/iac-case-09/kubernetes/main.yaml",
+        "sha256": "3efd7481376a4f7e9632fd49d32f4af60a4dd2d6a3441b8b76be7ec9e78f3173"
+      },
+      {
+        "file": "iac/cases/iac-case-09/sources.json",
+        "sha256": "088c9c8d1dd376d52918f212878a3ae105c0baa1aaa02da1cc49c3db151ec1ce"
+      },
+      {
+        "file": "iac/cases/iac-case-10/sources.json",
+        "sha256": "f671cb8974a3c2d12536aeecb696998ca05c7093bb6fdb439f0288dece36d792"
+      },
+      {
+        "file": "iac/cases/iac-case-10/terraform/main.tf",
+        "sha256": "bfa1a8e96989971fea24723822fa96ad16dc903644d9477ee82f159a5fdba28e"
+      },
+      {
+        "file": "iac/cases/iac-case-11/sources.json",
+        "sha256": "62273c2c5d1a47e1a2846c75fcf60ae9eb8f3915758279c1077ab5ddf86bd15f"
+      },
+      {
+        "file": "iac/cases/iac-case-11/terraform/main.tf",
+        "sha256": "b4d2d02c89b1b190a2b44bf54f210b4bbd06cba3adfe09544909ad62097ff4a9"
+      },
+      {
+        "file": "iac/cases/iac-case-12/sources.json",
+        "sha256": "beca54cd8cd3498593149fdc85ce58838b525ea6d14f7faa57bd1b21079547f2"
+      },
+      {
+        "file": "iac/cases/iac-case-12/terraform/main.tf",
+        "sha256": "844f9cea51fd629b66650f76bbbd94fd338930588ebbe774f89de48ffec39ba2"
+      },
+      {
+        "file": "iac/cases/iac-case-13/architecture/spec.yaml",
+        "sha256": "14a2984795cdc10e6aed128fc207dbf3009fa461d8cf0f2a5cdc75f6e9361d61"
+      },
+      {
+        "file": "iac/cases/iac-case-13/kubernetes/main.yaml",
+        "sha256": "347d53f35742c8b2b19a5eb5d9decdafd2c267bc61a18e41216fabc3592d61bd"
+      },
+      {
+        "file": "iac/cases/iac-case-13/repository/worker.ts",
+        "sha256": "8235b1777e887b5c63a84a007284f661223d2bd851d061a7bb9df73baee19e17"
+      },
+      {
+        "file": "iac/cases/iac-case-13/sources.json",
+        "sha256": "4d40a86a48154e1f3cc3dacb169d303210e24c2e058ab2b556801459b9bb0856"
+      },
+      {
+        "file": "iac/cases/iac-case-14/sources.json",
+        "sha256": "9440b9c15b948368c72745cfa564ab61853234ec2e226b2f306bc00ff28a7be5"
+      },
+      {
+        "file": "iac/cases/iac-case-14/terraform/main.tf",
+        "sha256": "2134cd6fbcff0f5d745388b101de3c1ac36cd6db8396bcad5903cf33d8e8a878"
+      },
+      {
+        "file": "iac/cases/iac-case-15/kubernetes/main.yaml",
+        "sha256": "38aab0458c1c16667d5fe9c1b50cee892e3298b72119160f8772ca11429c480a"
+      },
+      {
+        "file": "iac/cases/iac-case-15/sources.json",
+        "sha256": "088c9c8d1dd376d52918f212878a3ae105c0baa1aaa02da1cc49c3db151ec1ce"
+      },
+      {
+        "file": "iac/cases/iac-case-16/sources.json",
+        "sha256": "1c91113a8cf1416cb6b048807062f7747104da758658f36624aeacd763454ece"
+      },
+      {
+        "file": "iac/cases/iac-case-16/terraform/main.tf",
+        "sha256": "f30650f41f5f1036ddab87c01dbe243bc20efff5f4577238614d45c7ba8b40c5"
+      },
+      {
+        "file": "iac/cases/iac-case-17/sources.json",
+        "sha256": "99d70ea651905ac1404d17a66d890de840ecda6404a6b1801fb9e3fdfafe7f86"
+      },
+      {
+        "file": "iac/cases/iac-case-17/terraform/main.tf",
+        "sha256": "3d84a4282a948cd11954ca704b5246d71380dafedbe96c0dfb1e49624ca07f5d"
+      },
+      {
+        "file": "iac/cases/iac-case-18/kubernetes/main.yaml",
+        "sha256": "71edb377627f7ce9225720813dbcd58df93d574fce1fc32c14e244f73b06bffd"
+      },
+      {
+        "file": "iac/cases/iac-case-18/sources.json",
+        "sha256": "7d19ce9f4b397ab824c33ecf8cff3eaa7a9a0aa415fd72ffc4e78c07d8cd3329"
+      },
+      {
+        "file": "iac/cases/iac-case-19/sources.json",
+        "sha256": "c273dae8c70514c934b0921ea190acb582b6f69eb59320e5b98c977702246bc0"
+      },
+      {
+        "file": "iac/cases/iac-case-19/terraform/main.tf",
+        "sha256": "51d680c2c0b2dbd6faf875922214d9e48486034c4ee84eb99b175c22a3e93c56"
+      },
+      {
+        "file": "iac/cases/iac-case-20/sources.json",
+        "sha256": "7fd7ec51ad47f58e21799c8999631b0ea26e5824c4dd5cdf64ad8ca8e9afd31e"
+      },
+      {
+        "file": "iac/cases/iac-case-20/terraform/main.tf",
+        "sha256": "1f4c18862a13c8a032d6d4bc84af8e7b08a575e6833359a75f7ea1923ab1beef"
+      },
+      {
+        "file": "iac/ground-truth.json",
+        "sha256": "d3f71dbb0d8dc2889a00dea413777d1e80a480333c0369d837afcf01fb0b9d13"
+      },
+      {
+        "file": "iac/guardian-source.json",
+        "sha256": "cf981c6dd4674b75f0cc7ccbbe93214af56f84b0063f24397d0c62f1fa3a6c6d"
+      }
+    ],
+    "tree_sha256": "86511fb09f84e23c61d651f664ab2ef7ade483328ecfbb7f99842b7920cf8aca"
+  },
+  "results": [
+    {
+      "id": "iac-case-01",
+      "title": "Aligned private AWS database baseline",
+      "category": "baseline",
+      "targets": [
+        "terraform",
+        "identity",
+        "claims"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/orders-db:exposure",
+          "subject": "data/orders-db",
+          "property": "exposure",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:private",
+            "iac:private",
+            "spec:private"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:data/orders-db:identity",
+          "subject": "data/orders-db",
+          "property": "identity",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:data/orders-db",
+            "iac:data/orders-db",
+            "spec:data/orders-db"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:data/orders-db:kind",
+          "subject": "data/orders-db",
+          "property": "kind",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:database",
+            "iac:database",
+            "spec:database"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:data/orders-db:trust-boundary",
+          "subject": "data/orders-db",
+          "property": "trust-boundary",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:data",
+            "iac:data",
+            "spec:data"
+          ],
+          "missing_sources": []
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "code:code-orders-db",
+          "canonical_id": "data/orders-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "spec:spec-orders-db",
+          "canonical_id": "data/orders-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "terraform:terraform:aws:aws_db_instance:orders",
+          "canonical_id": "data/orders-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-02",
+      "title": "Aligned approved private cache",
+      "category": "valid-change",
+      "targets": [
+        "terraform",
+        "identity",
+        "claims",
+        "security"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/orders-cache:exposure",
+          "subject": "data/orders-cache",
+          "property": "exposure",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:private",
+            "iac:private",
+            "spec:private"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:data/orders-cache:identity",
+          "subject": "data/orders-cache",
+          "property": "identity",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:data/orders-cache",
+            "iac:data/orders-cache",
+            "spec:data/orders-cache"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:data/orders-cache:kind",
+          "subject": "data/orders-cache",
+          "property": "kind",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:cache",
+            "iac:cache",
+            "spec:cache"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:data/orders-cache:trust-boundary",
+          "subject": "data/orders-cache",
+          "property": "trust-boundary",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:data",
+            "iac:data",
+            "spec:data"
+          ],
+          "missing_sources": []
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "code:code-orders-cache",
+          "canonical_id": "data/orders-cache",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "spec:spec-orders-cache",
+          "canonical_id": "data/orders-cache",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "terraform:terraform:aws:aws_elasticache_replication_group:orders",
+          "canonical_id": "data/orders-cache",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-03",
+      "title": "Aligned approved private broker",
+      "category": "valid-change",
+      "targets": [
+        "terraform",
+        "identity",
+        "claims",
+        "security"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:integration/orders-events:exposure",
+          "subject": "integration/orders-events",
+          "property": "exposure",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:private",
+            "iac:private",
+            "spec:private"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:integration/orders-events:identity",
+          "subject": "integration/orders-events",
+          "property": "identity",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:integration/orders-events",
+            "iac:integration/orders-events",
+            "spec:integration/orders-events"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:integration/orders-events:kind",
+          "subject": "integration/orders-events",
+          "property": "kind",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:broker",
+            "iac:broker",
+            "spec:broker"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:integration/orders-events:trust-boundary",
+          "subject": "integration/orders-events",
+          "property": "trust-boundary",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:integration",
+            "iac:integration",
+            "spec:integration"
+          ],
+          "missing_sources": []
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "code:code-orders-events",
+          "canonical_id": "integration/orders-events",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "spec:spec-orders-events",
+          "canonical_id": "integration/orders-events",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "terraform:terraform:aws:aws_mq_broker:orders",
+          "canonical_id": "integration/orders-events",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-04",
+      "title": "Approved public Kubernetes ingress and transition",
+      "category": "valid-change",
+      "targets": [
+        "kubernetes",
+        "security"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:application/orders-api:exposure",
+          "subject": "application/orders-api",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:internal"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:identity",
+          "subject": "application/orders-api",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application/orders-api"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:kind",
+          "subject": "application/orders-api",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:service"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:trust-boundary",
+          "subject": "application/orders-api",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:exposure",
+          "subject": "public/orders-public",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:identity",
+          "subject": "public/orders-public",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public/orders-public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:kind",
+          "subject": "public/orders-public",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:ingress"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:trust-boundary",
+          "subject": "public/orders-public",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "kubernetes:kubernetes:orders:ingress:orders-public",
+          "canonical_id": "public/orders-public",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "kubernetes:kubernetes:orders:service:orders-api",
+          "canonical_id": "application/orders-api",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 0,
+        "kubernetes_resources": 2,
+        "nodes": 2,
+        "edges": 1
+      }
+    },
+    {
+      "id": "iac-case-05",
+      "title": "Public AWS database violation",
+      "category": "violation",
+      "targets": [
+        "terraform",
+        "security",
+        "aws"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-PUBLIC-DATABASE|data/aws-orders-db|"
+      ],
+      "actual_finding_keys": [
+        "IAC-PUBLIC-DATABASE|data/aws-orders-db|"
+      ],
+      "expected_public_exposures": [
+        {
+          "rule_id": "IAC-PUBLIC-DATABASE",
+          "subject": "data/aws-orders-db"
+        }
+      ],
+      "findings": [
+        {
+          "rule_id": "IAC-PUBLIC-DATABASE",
+          "subject": "data/aws-orders-db",
+          "edge": "",
+          "severity": "critical",
+          "evidence": [
+            {
+              "source": "terraform",
+              "file": "iac/cases/iac-case-05/terraform/main.tf",
+              "line": 1,
+              "column": 1,
+              "detector": "terraform-resource"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/aws-orders-db:exposure",
+          "subject": "data/aws-orders-db",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/aws-orders-db:identity",
+          "subject": "data/aws-orders-db",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/aws-orders-db"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/aws-orders-db:kind",
+          "subject": "data/aws-orders-db",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/aws-orders-db:trust-boundary",
+          "subject": "data/aws-orders-db",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:aws:aws_db_instance:orders",
+          "canonical_id": "data/aws-orders-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-06",
+      "title": "Public Azure database violation",
+      "category": "violation",
+      "targets": [
+        "terraform",
+        "security",
+        "azure"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-PUBLIC-DATABASE|data/azure-orders-db|"
+      ],
+      "actual_finding_keys": [
+        "IAC-PUBLIC-DATABASE|data/azure-orders-db|"
+      ],
+      "expected_public_exposures": [
+        {
+          "rule_id": "IAC-PUBLIC-DATABASE",
+          "subject": "data/azure-orders-db"
+        }
+      ],
+      "findings": [
+        {
+          "rule_id": "IAC-PUBLIC-DATABASE",
+          "subject": "data/azure-orders-db",
+          "edge": "",
+          "severity": "critical",
+          "evidence": [
+            {
+              "source": "terraform",
+              "file": "iac/cases/iac-case-06/terraform/main.tf",
+              "line": 1,
+              "column": 1,
+              "detector": "terraform-resource"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/azure-orders-db:exposure",
+          "subject": "data/azure-orders-db",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-orders-db:identity",
+          "subject": "data/azure-orders-db",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/azure-orders-db"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-orders-db:kind",
+          "subject": "data/azure-orders-db",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-orders-db:trust-boundary",
+          "subject": "data/azure-orders-db",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:azure:azurerm_postgresql_flexible_server:orders",
+          "canonical_id": "data/azure-orders-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-07",
+      "title": "Public GCP database violation",
+      "category": "violation",
+      "targets": [
+        "terraform",
+        "security",
+        "gcp"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-PUBLIC-DATABASE|data/gcp-orders-db|"
+      ],
+      "actual_finding_keys": [
+        "IAC-PUBLIC-DATABASE|data/gcp-orders-db|"
+      ],
+      "expected_public_exposures": [
+        {
+          "rule_id": "IAC-PUBLIC-DATABASE",
+          "subject": "data/gcp-orders-db"
+        }
+      ],
+      "findings": [
+        {
+          "rule_id": "IAC-PUBLIC-DATABASE",
+          "subject": "data/gcp-orders-db",
+          "edge": "",
+          "severity": "critical",
+          "evidence": [
+            {
+              "source": "terraform",
+              "file": "iac/cases/iac-case-07/terraform/main.tf",
+              "line": 1,
+              "column": 1,
+              "detector": "terraform-resource"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/gcp-orders-db:exposure",
+          "subject": "data/gcp-orders-db",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-orders-db:identity",
+          "subject": "data/gcp-orders-db",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/gcp-orders-db"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-orders-db:kind",
+          "subject": "data/gcp-orders-db",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-orders-db:trust-boundary",
+          "subject": "data/gcp-orders-db",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:gcp:google_sql_database_instance:orders",
+          "canonical_id": "data/gcp-orders-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-08",
+      "title": "Unexpected Kubernetes ingress violation",
+      "category": "violation",
+      "targets": [
+        "kubernetes",
+        "security"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-UNEXPECTED-INGRESS|public/orders-public|"
+      ],
+      "actual_finding_keys": [
+        "IAC-UNEXPECTED-INGRESS|public/orders-public|"
+      ],
+      "expected_public_exposures": [
+        {
+          "rule_id": "IAC-UNEXPECTED-INGRESS",
+          "subject": "public/orders-public"
+        }
+      ],
+      "findings": [
+        {
+          "rule_id": "IAC-UNEXPECTED-INGRESS",
+          "subject": "public/orders-public",
+          "edge": "",
+          "severity": "high",
+          "evidence": [
+            {
+              "source": "kubernetes",
+              "file": "iac/cases/iac-case-08/kubernetes/main.yaml",
+              "line": 1,
+              "column": 1,
+              "detector": "kubernetes-object"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:application/orders-api:exposure",
+          "subject": "application/orders-api",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:internal"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:identity",
+          "subject": "application/orders-api",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application/orders-api"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:kind",
+          "subject": "application/orders-api",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:service"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:trust-boundary",
+          "subject": "application/orders-api",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:exposure",
+          "subject": "public/orders-public",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:identity",
+          "subject": "public/orders-public",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public/orders-public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:kind",
+          "subject": "public/orders-public",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:ingress"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:trust-boundary",
+          "subject": "public/orders-public",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "kubernetes:kubernetes:orders:ingress:orders-public",
+          "canonical_id": "public/orders-public",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "kubernetes:kubernetes:orders:service:orders-api",
+          "canonical_id": "application/orders-api",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 0,
+        "kubernetes_resources": 2,
+        "nodes": 2,
+        "edges": 1
+      }
+    },
+    {
+      "id": "iac-case-09",
+      "title": "Unapproved Kubernetes trust-boundary route",
+      "category": "violation",
+      "targets": [
+        "kubernetes",
+        "security"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-TRUST-BOUNDARY|public/orders-public|public/orders-public|routes-to|application/orders-api"
+      ],
+      "actual_finding_keys": [
+        "IAC-TRUST-BOUNDARY|public/orders-public|public/orders-public|routes-to|application/orders-api"
+      ],
+      "expected_public_exposures": [],
+      "findings": [
+        {
+          "rule_id": "IAC-TRUST-BOUNDARY",
+          "subject": "public/orders-public",
+          "edge": "public/orders-public|routes-to|application/orders-api",
+          "severity": "critical",
+          "evidence": [
+            {
+              "source": "kubernetes",
+              "file": "iac/cases/iac-case-09/kubernetes/main.yaml",
+              "line": 1,
+              "column": 1,
+              "detector": "kubernetes-object"
+            },
+            {
+              "source": "kubernetes",
+              "file": "iac/cases/iac-case-09/kubernetes/main.yaml",
+              "line": 15,
+              "column": 1,
+              "detector": "kubernetes-object"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:application/orders-api:exposure",
+          "subject": "application/orders-api",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:internal"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:identity",
+          "subject": "application/orders-api",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application/orders-api"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:kind",
+          "subject": "application/orders-api",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:service"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:trust-boundary",
+          "subject": "application/orders-api",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:exposure",
+          "subject": "public/orders-public",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:identity",
+          "subject": "public/orders-public",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public/orders-public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:kind",
+          "subject": "public/orders-public",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:ingress"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:trust-boundary",
+          "subject": "public/orders-public",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "kubernetes:kubernetes:orders:ingress:orders-public",
+          "canonical_id": "public/orders-public",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "kubernetes:kubernetes:orders:service:orders-api",
+          "canonical_id": "application/orders-api",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 0,
+        "kubernetes_resources": 2,
+        "nodes": 2,
+        "edges": 1
+      }
+    },
+    {
+      "id": "iac-case-10",
+      "title": "Unapproved Terraform broker violation",
+      "category": "violation",
+      "targets": [
+        "terraform",
+        "security",
+        "broker"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-UNAPPROVED-DATA-SERVICE|integration/orders-events|"
+      ],
+      "actual_finding_keys": [
+        "IAC-UNAPPROVED-DATA-SERVICE|integration/orders-events|"
+      ],
+      "expected_public_exposures": [],
+      "findings": [
+        {
+          "rule_id": "IAC-UNAPPROVED-DATA-SERVICE",
+          "subject": "integration/orders-events",
+          "edge": "",
+          "severity": "high",
+          "evidence": [
+            {
+              "source": "terraform",
+              "file": "iac/cases/iac-case-10/terraform/main.tf",
+              "line": 1,
+              "column": 1,
+              "detector": "terraform-resource"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:integration/orders-events:exposure",
+          "subject": "integration/orders-events",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/orders-events:identity",
+          "subject": "integration/orders-events",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:integration/orders-events"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/orders-events:kind",
+          "subject": "integration/orders-events",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:broker"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/orders-events:trust-boundary",
+          "subject": "integration/orders-events",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:integration"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:aws:aws_mq_broker:orders",
+          "canonical_id": "integration/orders-events",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-11",
+      "title": "Unapproved Terraform cache violation",
+      "category": "violation",
+      "targets": [
+        "terraform",
+        "security",
+        "cache"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [
+        "IAC-UNAPPROVED-DATA-SERVICE|data/orders-cache|"
+      ],
+      "actual_finding_keys": [
+        "IAC-UNAPPROVED-DATA-SERVICE|data/orders-cache|"
+      ],
+      "expected_public_exposures": [],
+      "findings": [
+        {
+          "rule_id": "IAC-UNAPPROVED-DATA-SERVICE",
+          "subject": "data/orders-cache",
+          "edge": "",
+          "severity": "high",
+          "evidence": [
+            {
+              "source": "terraform",
+              "file": "iac/cases/iac-case-11/terraform/main.tf",
+              "line": 1,
+              "column": 1,
+              "detector": "terraform-resource"
+            }
+          ]
+        }
+      ],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/orders-cache:exposure",
+          "subject": "data/orders-cache",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/orders-cache:identity",
+          "subject": "data/orders-cache",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/orders-cache"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/orders-cache:kind",
+          "subject": "data/orders-cache",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:cache"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/orders-cache:trust-boundary",
+          "subject": "data/orders-cache",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:azure:azurerm_redis_cache:orders",
+          "canonical_id": "data/orders-cache",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-12",
+      "title": "Approved broker evolution missing spec and code evidence",
+      "category": "evolution",
+      "targets": [
+        "terraform",
+        "claims",
+        "evolution"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:integration/new-events:exposure",
+          "subject": "integration/new-events",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:unknown"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/new-events:identity",
+          "subject": "integration/new-events",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:integration/new-events"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/new-events:kind",
+          "subject": "integration/new-events",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:broker"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/new-events:trust-boundary",
+          "subject": "integration/new-events",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:integration"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:gcp:google_pubsub_topic:events",
+          "canonical_id": "integration/new-events",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-13",
+      "title": "Workload versus service kind contradiction",
+      "category": "evolution",
+      "targets": [
+        "kubernetes",
+        "identity",
+        "claims",
+        "evolution"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:application/orders-worker:exposure",
+          "subject": "application/orders-worker",
+          "property": "exposure",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:internal",
+            "iac:internal",
+            "spec:internal"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:application/orders-worker:identity",
+          "subject": "application/orders-worker",
+          "property": "identity",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:application/orders-worker",
+            "iac:application/orders-worker",
+            "spec:application/orders-worker"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:application/orders-worker:kind",
+          "subject": "application/orders-worker",
+          "property": "kind",
+          "classification": "contradiction",
+          "confidence": 1,
+          "values": [
+            "code:service",
+            "iac:workload",
+            "spec:service"
+          ],
+          "missing_sources": []
+        },
+        {
+          "id": "claim:application/orders-worker:trust-boundary",
+          "subject": "application/orders-worker",
+          "property": "trust-boundary",
+          "classification": "aligned",
+          "confidence": 1,
+          "values": [
+            "code:application",
+            "iac:application",
+            "spec:application"
+          ],
+          "missing_sources": []
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "code:code-orders-worker",
+          "canonical_id": "application/orders-worker",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "kubernetes:kubernetes:orders:deployment:orders-worker",
+          "canonical_id": "application/orders-worker",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "spec:spec-orders-worker",
+          "canonical_id": "application/orders-worker",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 0,
+        "kubernetes_resources": 1,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-14",
+      "title": "Private database hard negatives across providers",
+      "category": "hard-negative",
+      "targets": [
+        "terraform",
+        "security",
+        "aws",
+        "azure",
+        "gcp"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/aws-private:exposure",
+          "subject": "data/aws-private",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/aws-private:identity",
+          "subject": "data/aws-private",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/aws-private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/aws-private:kind",
+          "subject": "data/aws-private",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/aws-private:trust-boundary",
+          "subject": "data/aws-private",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-private:exposure",
+          "subject": "data/azure-private",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-private:identity",
+          "subject": "data/azure-private",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/azure-private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-private:kind",
+          "subject": "data/azure-private",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/azure-private:trust-boundary",
+          "subject": "data/azure-private",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-private:exposure",
+          "subject": "data/gcp-private",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-private:identity",
+          "subject": "data/gcp-private",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/gcp-private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-private:kind",
+          "subject": "data/gcp-private",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/gcp-private:trust-boundary",
+          "subject": "data/gcp-private",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:aws:aws_db_instance:aws_private",
+          "canonical_id": "data/aws-private",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "terraform:terraform:azure:azurerm_mysql_flexible_server:azure_private",
+          "canonical_id": "data/azure-private",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "terraform:terraform:gcp:google_sql_database_instance:gcp_private",
+          "canonical_id": "data/gcp-private",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 3,
+        "kubernetes_resources": 0,
+        "nodes": 3,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-15",
+      "title": "Approved public ingress and approved cross-boundary route hard negative",
+      "category": "hard-negative",
+      "targets": [
+        "kubernetes",
+        "security"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:application/orders-api:exposure",
+          "subject": "application/orders-api",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:internal"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:identity",
+          "subject": "application/orders-api",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application/orders-api"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:kind",
+          "subject": "application/orders-api",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:service"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:application/orders-api:trust-boundary",
+          "subject": "application/orders-api",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:application"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:exposure",
+          "subject": "public/orders-public",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:identity",
+          "subject": "public/orders-public",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public/orders-public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:kind",
+          "subject": "public/orders-public",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:ingress"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/orders-public:trust-boundary",
+          "subject": "public/orders-public",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "kubernetes:kubernetes:orders:ingress:orders-public",
+          "canonical_id": "public/orders-public",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "kubernetes:kubernetes:orders:service:orders-api",
+          "canonical_id": "application/orders-api",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 0,
+        "kubernetes_resources": 2,
+        "nodes": 2,
+        "edges": 1
+      }
+    },
+    {
+      "id": "iac-case-16",
+      "title": "Public-looking unsupported Terraform resource hard negative",
+      "category": "hard-negative",
+      "targets": [
+        "terraform",
+        "security",
+        "diagnostics"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [
+        {
+          "code": "unsupported-resource",
+          "severity": "warning",
+          "source": "terraform",
+          "file": "iac/cases/iac-case-16/terraform/main.tf",
+          "line": 1
+        }
+      ],
+      "claims": [
+        {
+          "id": "claim:data/lookalike:exposure",
+          "subject": "data/lookalike",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/lookalike:identity",
+          "subject": "data/lookalike",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/lookalike"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/lookalike:kind",
+          "subject": "data/lookalike",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:unknown"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/lookalike:trust-boundary",
+          "subject": "data/lookalike",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:unknown"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:unknown:null_resource:lookalike",
+          "canonical_id": "data/lookalike",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-17",
+      "title": "Dynamic public exposure remains unknown hard negative",
+      "category": "hard-negative",
+      "targets": [
+        "terraform",
+        "security",
+        "diagnostics"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [
+        {
+          "code": "unsupported-dynamic-expression",
+          "severity": "warning",
+          "source": "terraform",
+          "file": "iac/cases/iac-case-17/terraform/main.tf",
+          "line": 3
+        }
+      ],
+      "claims": [
+        {
+          "id": "claim:data/dynamic-db:exposure",
+          "subject": "data/dynamic-db",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:unknown"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/dynamic-db:identity",
+          "subject": "data/dynamic-db",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/dynamic-db"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/dynamic-db:kind",
+          "subject": "data/dynamic-db",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/dynamic-db:trust-boundary",
+          "subject": "data/dynamic-db",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:aws:aws_db_instance:dynamic",
+          "canonical_id": "data/dynamic-db",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-18",
+      "title": "Unresolved Kubernetes route cannot create a trust finding",
+      "category": "hard-negative",
+      "targets": [
+        "kubernetes",
+        "security",
+        "diagnostics"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [
+        {
+          "code": "missing-reference",
+          "severity": "warning",
+          "source": "kubernetes",
+          "file": "iac/cases/iac-case-18/kubernetes/main.yaml",
+          "line": 1
+        }
+      ],
+      "claims": [
+        {
+          "id": "claim:public/missing-route:exposure",
+          "subject": "public/missing-route",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/missing-route:identity",
+          "subject": "public/missing-route",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public/missing-route"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/missing-route:kind",
+          "subject": "public/missing-route",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:ingress"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:public/missing-route:trust-boundary",
+          "subject": "public/missing-route",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:public"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "kubernetes:kubernetes:orders:ingress:missing-route",
+          "canonical_id": "public/missing-route",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 0,
+        "kubernetes_resources": 1,
+        "nodes": 1,
+        "edges": 1
+      }
+    },
+    {
+      "id": "iac-case-19",
+      "title": "Approved cache and broker hard negatives",
+      "category": "hard-negative",
+      "targets": [
+        "terraform",
+        "security",
+        "cache",
+        "broker"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:data/approved-cache:exposure",
+          "subject": "data/approved-cache",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/approved-cache:identity",
+          "subject": "data/approved-cache",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data/approved-cache"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/approved-cache:kind",
+          "subject": "data/approved-cache",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:cache"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:data/approved-cache:trust-boundary",
+          "subject": "data/approved-cache",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/approved-events:exposure",
+          "subject": "integration/approved-events",
+          "property": "exposure",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/approved-events:identity",
+          "subject": "integration/approved-events",
+          "property": "identity",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:integration/approved-events"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/approved-events:kind",
+          "subject": "integration/approved-events",
+          "property": "kind",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:broker"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:integration/approved-events:trust-boundary",
+          "subject": "integration/approved-events",
+          "property": "trust-boundary",
+          "classification": "missing-source",
+          "confidence": 0.33,
+          "values": [
+            "iac:integration"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:aws:aws_elasticache_cluster:cache",
+          "canonical_id": "data/approved-cache",
+          "method": "explicit-alias",
+          "confidence": 1
+        },
+        {
+          "observation_key": "terraform:terraform:azure:azurerm_servicebus_namespace:events",
+          "canonical_id": "integration/approved-events",
+          "method": "explicit-alias",
+          "confidence": 1
+        }
+      ],
+      "counts": {
+        "terraform_resources": 2,
+        "kubernetes_resources": 0,
+        "nodes": 2,
+        "edges": 0
+      }
+    },
+    {
+      "id": "iac-case-20",
+      "title": "Ambiguous explicit aliases remain separate",
+      "category": "hard-negative",
+      "targets": [
+        "terraform",
+        "identity",
+        "claims"
+      ],
+      "valid": true,
+      "issues": [],
+      "expected_finding_keys": [],
+      "actual_finding_keys": [],
+      "expected_public_exposures": [],
+      "findings": [],
+      "diagnostics": [],
+      "claims": [
+        {
+          "id": "claim:ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous:exposure",
+          "subject": "ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous",
+          "property": "exposure",
+          "classification": "identity-uncertain",
+          "confidence": 0.25,
+          "values": [
+            "iac:private"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous:identity",
+          "subject": "ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous",
+          "property": "identity",
+          "classification": "identity-uncertain",
+          "confidence": 0.25,
+          "values": [
+            "iac:ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous:kind",
+          "subject": "ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous",
+          "property": "kind",
+          "classification": "identity-uncertain",
+          "confidence": 0.25,
+          "values": [
+            "iac:database"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        },
+        {
+          "id": "claim:ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous:trust-boundary",
+          "subject": "ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous",
+          "property": "trust-boundary",
+          "classification": "identity-uncertain",
+          "confidence": 0.25,
+          "values": [
+            "iac:data"
+          ],
+          "missing_sources": [
+            "code",
+            "spec"
+          ]
+        }
+      ],
+      "identities": [
+        {
+          "observation_key": "terraform:terraform:aws:aws_db_instance:ambiguous",
+          "canonical_id": "ambiguous:iac:terraform/ambiguous-db@terraform-aws-aws-db-instance-ambiguous",
+          "method": "ambiguous",
+          "confidence": 0
+        }
+      ],
+      "counts": {
+        "terraform_resources": 1,
+        "kubernetes_resources": 0,
+        "nodes": 1,
+        "edges": 0
+      }
+    }
+  ],
+  "provenance": {
+    "files": [
+      {
+        "file": "iac/ground-truth.json",
+        "sha256": "d3f71dbb0d8dc2889a00dea413777d1e80a480333c0369d837afcf01fb0b9d13"
+      },
+      {
+        "file": "iac/guardian-source.json",
+        "sha256": "cf981c6dd4674b75f0cc7ccbbe93214af56f84b0063f24397d0c62f1fa3a6c6d"
+      },
+      {
+        "file": "scripts/iac-evidence.mjs",
+        "sha256": "5cdaf13354a9098558372594862ced0b95daece57d552aa0f92129ab3369a9e8"
+      },
+      {
+        "file": "scripts/lib/iac-benchmark.mjs",
+        "sha256": "4b62dd17e6931d66ad2afd3f691ff5a7612a4a77db2f6b1197bc8db6c56a1b16"
+      },
+      {
+        "file": "test/iac-benchmark.test.mjs",
+        "sha256": "d236bd260bcf8e22b88d2afc01ffb8dac2be96bd3f123ca0ea42cd00ec7a2b23"
+      },
+      {
+        "file": "package.json",
+        "sha256": "6b0d7a1455781dbb0d442c3b563c3fd9a5ea4030be034cef21de08b784641456"
+      },
+      {
+        "file": "pnpm-lock.yaml",
+        "sha256": "bc8e6b9396d395eaa4a3c5b60e118b21484dc0556ed7a213c934266e9a42a27f"
+      },
+      {
+        "file": "vendor/archsync-guardian-0.3.3.tgz",
+        "sha256": "ab2b5e774255cd7e46dd0668a075ca7e22208d6ba6c89a37ef464ba0a8cabc27"
+      }
+    ],
+    "manifest_sha256": "07a3fc4046e493c0460616a2d787a2676b25c324ccbda6d7169c245f1b4ea415"
+  }
+}

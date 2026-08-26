@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "dataset_id": null,
+  "status": null,
+  "synthetic": false,
+  "raw_dataset_sha256": null,
+  "statistical_plan": {
+    "status": "proposed",
+    "version": "0.1.0-draft",
+    "sha256": "5d5b99204f7ebcfaf1573bb8eeecbbf08b28fdec8ee1be9ed15639899e202421"
+  },
+  "approval": null,
+  "rows": [],
+  "independent_audit": null,
+  "template_only": true
+}

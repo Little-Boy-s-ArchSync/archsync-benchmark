@@ -1,10 +1,27 @@
 # ArchSync Benchmark
 
-The proposed D3 independent-holdout protocol, blind-review handbook, immutable templates, freeze verifier, metrics/error taxonomy, and scalability/oracle tooling live in [`holdout/`](holdout/). They are technically verified by `pnpm holdout:verify` and the 100% unit-coverage gate, but final repository selection, ground truth, freeze, and inference remain blocked on EXP-102 and explicit human Lead/reviewer actions.
+The proposed D3 independent-holdout protocol, blind-review handbook, immutable templates, repository pin/tree/license verifier, adjudication checker, exact two-pass harness, explicit-denominator metrics/error taxonomy, scalability/oracle tooling and synthetic PR-history replay live in [`holdout/`](holdout/) and [`pr-history/`](pr-history/). A separate EVAL-102 artifact ranks exactly ten commit-pinned candidate systems without selecting or freezing any of them; `pnpm holdout:candidates:verify` validates its permissive-license, GitHub provenance, topology, pattern-evidence, and human-gate fields. The scaffolds are technically verified by `pnpm holdout:verify`, `pnpm pr-history:verify` and the 100% unit-coverage gate. `holdout:gate` and `pr-history:gate` remain closed because final repository selection, leakage clearance, ground truth, freeze, approval and real-system extraction require external human action.
+
+ANALYSIS-101 also includes a result-free Jupyter notebook index validated by `pnpm analysis:notebook:verify`; the deterministic Node pipeline remains canonical, so neither Python nor Jupyter is an install/runtime dependency.
+
+The Phase 4 evaluation and Phase 7 measurement-study technical foundations now include a 12-case AI safety regression corpus, canonical Guardian run-manifest adaptation, blind P4-123 rubric/timing, unsupported-claim and repair calculations, config-separated ablation/citation metrics, non-empty A–D instrumentation, pinned STAT-101 linkage, pilot and five-condition ablation evidence schemas, a watermarked synthetic CSV/table/figure pipeline, and an independent reproduction runbook. Run `pnpm ai-eval:verify`, `pnpm study:verify`, `pnpm pilot:verify`, `pnpm ablation:verify`, `pnpm analysis:verify` and `pnpm repl:verify`. Their corresponding `:gate` commands intentionally fail until real provider, participant, pilot, freeze, security, ethics/data and independent-auditor evidence exists.
+
+The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record. `pnpm runtime:gate` fails closed on eight Phase 5, governance, human, privacy/security and independent non-synthetic validation prerequisites; no ADR approval, architecture acceptance or experimental validation is claimed.
 
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
 **Phase 1 foundation:** model, graph and conformance contracts are executable. **Phase 2 analyzer gate:** strengthened and reproducible as v0.2. **Phase 3 PR gate:** Git-diff decisions, baseline caching and component-incremental analysis are reproducible as v0.3. `ground-truth.json` is the canonical end-to-end benchmark manifest.
+
+**Phase 5 preparation:** [`iac/`](iac/) contains a 20-case Terraform,
+Kubernetes, identity, conflict, and security corpus pinned to Guardian commit
+`de11e48a8f69fbe5cd32f052489a323e1c81eab3`. The preparatory verifier runs it
+twice, checks exact source evidence and per-rule metrics, hashes every input and
+runtime artifact, and proves the corpus is not modified. This is not a final
+research freeze: P4-120, Phase 5 ADR acceptance, independent Security approval,
+and human ground-truth freeze remain explicit blockers. `pnpm iac:gate` therefore
+fails closed even when `pnpm iac:verify` confirms the technical bundle.
+The requirement-by-requirement record is in
+[`PHASE5-IAC-AUDIT.md`](PHASE5-IAC-AUDIT.md).
 
 ## Order Platform lab
 
@@ -66,7 +83,7 @@ See [`README-DEMO.md`](README-DEMO.md) for the short Vietnamese presentation scr
 
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
-The benchmark's deterministic validation libraries are covered by 55 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
+The benchmark's deterministic validation libraries are covered by 110 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
 
 Expected Phase 2 result:
 
@@ -78,7 +95,7 @@ VALID PHASE 3 BENCHMARK EVIDENCE (20/20 decisions, 20/20 incremental/full-scan e
 
 The committed [`evidence/phase-2-results.json`](evidence/phase-2-results.json) records full-graph and changed-graph node/edge precision/recall/F1, classification agreement (`20/20`), violation rule-set agreement (`7/7`), exact file/line evidence agreement (`11/11` finding-bearing cases), and deterministic replay (`20/20`). [`evidence/typescript-pattern-baseline-v0.1.json`](evidence/typescript-pattern-baseline-v0.1.json) freezes the v0.1 analyzer result on the later challenge corpus; the v0.2 result is stored separately in `evidence/typescript-pattern-results.json`. SHA-256 provenance binds results to their manifests, sources and runtime artifacts. GitHub Actions reruns the complete gate on `ubuntu-latest`, `windows-latest` and `macos-latest`.
 
-The Phase 3 artifact [`evidence/phase-3-results.json`](evidence/phase-3-results.json) applies the same 20 patches as real Git working-tree diffs. It records `20/20` classification and merge-decision matches, `20/20` changed-file matches, `20/20` exact architecture-delta matches, `20/20` incremental/full-scan equivalence checks, `7/7` violation rule-set matches, `11/11` exact evidence lines, deterministic cold/warm replay and `20/20` baseline-cache hits. Each incremental result is checked against a separate full scan of the same patched head, preventing a stable but incorrect incremental merge from satisfying the gate. Component-incremental analysis parsed 57 of 189 TypeScript file instances across the 20 head repositories (`0.3016`). On the recorded Windows machine, cold median/p95 latency was `518.51/531.05 ms` and warm median/p95 latency was `242.62/249.30 ms`. These timing values are environment-specific measurements, not general performance estimates.
+The Phase 3 artifact [`evidence/phase-3-results.json`](evidence/phase-3-results.json) applies the same 20 patches as real Git working-tree diffs. It records `20/20` classification and merge-decision matches, `20/20` changed-file matches, `20/20` exact architecture-delta matches, `20/20` incremental/full-scan equivalence checks, `7/7` violation rule-set matches, `11/11` exact evidence lines, deterministic cold/warm replay and `20/20` baseline-cache hits. Each incremental result is checked against a separate full scan of the same patched head, preventing a stable but incorrect incremental merge from satisfying the gate. Component-incremental analysis parsed 57 of 189 TypeScript file instances across the 20 head repositories (`0.3016`). The committed evidence also records its machine and cold/warm latency samples; those values are environment-specific measurements, not general performance estimates.
 
 The complete requirement-by-requirement Phase 1--3 decision and paper-claim boundary are recorded in [`PHASE1-3-AUDIT.md`](PHASE1-3-AUDIT.md). The detailed Phase 3 exit-gate record remains in [`PHASE3-AUDIT.md`](PHASE3-AUDIT.md).
 
@@ -123,5 +140,13 @@ pnpm integrity:update
 pnpm phase2:update
 pnpm phase3:update
 pnpm patterns:update
+pnpm runtime:update
+pnpm iac:update
+pnpm ai-eval:update
+pnpm analysis:update
+pnpm pr-history:update
+pnpm coverage:update
 pnpm verify
 ```
+
+The complete TV3 preparatory task/gate mapping is recorded in [`TV3-TECHNICAL-PREPARATION.md`](TV3-TECHNICAL-PREPARATION.md).

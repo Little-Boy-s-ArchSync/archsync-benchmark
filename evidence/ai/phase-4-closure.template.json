@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "status": "preparatory",
+  "template_only": true,
+  "prepared_manifest_sha256": null,
+  "gates": {
+    "real_provider_run": null,
+    "provider_config_frozen": null,
+    "dataset_frozen": null,
+    "human_review_complete": null,
+    "security_approved": null,
+    "statistical_plan_frozen": null,
+    "safety_corpus_passed": null,
+    "metrics_reproduced": null
+  }
+}

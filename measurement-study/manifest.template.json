@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "proposed",
+  "protocol_version": "measurement-study-draft-v1",
+  "eligibility": "Defined by the future approved EXP-103 protocol; pilot and final samples must be disjoint.",
+  "sample_size_rationale": "Must be replaced by the frozen statistical analysis plan before a main run.",
+  "assignment": "Blocked: requires approved randomization or deterministic agent assignment.",
+  "counterbalancing": "Blocked: requires the approved treatment/task ordering plan.",
+  "task_order": "Use immutable task IDs; final order is not selected in this template.",
+  "environment": "Pin OS, CPU, memory, Node, package manager, provider/model/prompt and repository commits.",
+  "stop_rule": "No main run until ethics, data, statistical and Lead gates are approved.",
+  "exclusions": "Never silently remove failures, deviations, inconclusive runs or stopped runs.",
+  "treatment_config": {
+    "A": { "label": "Human", "provider": null },
+    "B": { "label": "AI", "provider": "REPLACE_BEFORE_FREEZE" },
+    "C": { "label": "AI+Context", "provider": "REPLACE_BEFORE_FREEZE" },
+    "D": { "label": "AI+ArchSync", "provider": "REPLACE_BEFORE_FREEZE" }
+  },
+  "approvals": null
+}

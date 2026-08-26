@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "status": "technical-dry-run-only",
+  "conditions": ["A", "B", "C", "D"],
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "baseline_commit": "24d63ebf2fc3075a1d64f1eaff38cdc0b7f586fb",
+      "difficulty": "medium",
+      "rationale": "Exercise a topology-preserving feature change with executable acceptance criteria.",
+      "expected_behavior": "The feature passes tests without introducing a new architecture edge.",
+      "feature_steps": ["Add a customer-visible order label", "Preserve the existing service boundary"],
+      "acceptance_commands": ["pnpm validate:model", "pnpm test"],
+      "treatments": {
+        "A": { "allowed_tools": [] },
+        "B": { "allowed_tools": ["model"] },
+        "C": { "allowed_tools": ["model", "repository-context"] },
+        "D": { "allowed_tools": ["model", "repository-context", "archsync-evidence"] }
+      }
+    },
+    {
+      "id": "TASK-002",
+      "baseline_commit": "24d63ebf2fc3075a1d64f1eaff38cdc0b7f586fb",
+      "difficulty": "medium-high",
+      "rationale": "Exercise a feature that can tempt a direct dependency-boundary bypass.",
+      "expected_behavior": "The implementation preserves the gateway boundary and passes architecture checks.",
+      "feature_steps": ["Expose payment status to the frontend", "Retain the approved gateway-mediated flow"],
+      "acceptance_commands": ["pnpm validate:model", "pnpm validate:benchmark", "pnpm test"],
+      "treatments": {
+        "A": { "allowed_tools": [] },
+        "B": { "allowed_tools": ["model"] },
+        "C": { "allowed_tools": ["model", "repository-context"] },
+        "D": { "allowed_tools": ["model", "repository-context", "archsync-evidence"] }
+      }
+    }
+  ]
+}

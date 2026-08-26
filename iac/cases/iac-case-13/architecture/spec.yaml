@@ -1,0 +1,4 @@
+component: orders-worker
+kind: service
+exposure: internal
+trust_boundary: application

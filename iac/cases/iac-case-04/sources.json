@@ -1,0 +1,8 @@
+{
+  "observations": [],
+  "references": [],
+  "alias_rules": [
+    { "canonical_id": "public/orders-public", "namespace": "any", "aliases": ["orders-public"] },
+    { "canonical_id": "application/orders-api", "namespace": "any", "aliases": ["orders-api"] }
+  ]
+}

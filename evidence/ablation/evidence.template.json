@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "status": "pending",
+  "design": {
+    "status": "prepared",
+    "conditions": ["code-only", "code-iac", "code-iac-runtime", "evidence-grounded", "llm-only"],
+    "configs": {
+      "code-only": { "version": null, "sha256": null },
+      "code-iac": { "version": null, "sha256": null },
+      "code-iac-runtime": { "version": null, "sha256": null },
+      "evidence-grounded": { "version": null, "sha256": null },
+      "llm-only": { "version": null, "sha256": null }
+    },
+    "human_approval": null
+  },
+  "study_dataset_sha256": null,
+  "runs": [],
+  "results": null,
+  "replay": null,
+  "post_outcome_changes": [],
+  "template_only": true
+}

@@ -1,0 +1,3 @@
+# Measurement-study evidence workspace
+
+No raw study data exists here. Future immutable records must preserve run/treatment/task IDs, environment, task-suite and manifest hashes, baseline commit/tree, commit chain, redacted prompt/output/provider-configuration hashes, acceptance commands and matched test results, findings, approvals, repairs, timing, tokens, costs, failures, deviations and human signatures where required. Empty event payloads fail validation. The normalizer hashes derived rows so manual result edits are detectable; the descriptive metric helper is explicitly linked to the proposed, unfrozen STAT-101 source and cannot claim a completed study.

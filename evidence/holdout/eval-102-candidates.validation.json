@@ -1,0 +1,85 @@
+{
+  "schema_version": 1,
+  "task_id": "EVAL-102",
+  "validation": "PASS_CANDIDATE_ONLY",
+  "inventory_sha256": "890af6c2a443988e1fd0a5abc22a2bdd0839442650b10a08c875d1c6f779208a",
+  "validated_candidates": 10,
+  "licenses": {
+    "Apache-2.0": 5,
+    "MIT": 5
+  },
+  "candidates_with_pattern": {
+    "http": 10,
+    "data": 10,
+    "cache": 0,
+    "message": 10
+  },
+  "ranked_targets": [
+    {
+      "rank": 1,
+      "url": "https://github.com/hyperdxio/hyperdx",
+      "head": "e0d2932802bf1b315b420a8a4214a6c0691a7835"
+    },
+    {
+      "rank": 2,
+      "url": "https://github.com/amruthpillai/reactive-resume",
+      "head": "3c195dc3f8db5ccae4aa4aff0cefe54980c02b74"
+    },
+    {
+      "rank": 3,
+      "url": "https://github.com/ether/etherpad",
+      "head": "d85d254ac093dc0801188fd954751c33b181e45c"
+    },
+    {
+      "rank": 4,
+      "url": "https://github.com/hoppscotch/hoppscotch",
+      "head": "1acb8a3a7581e4db32ba0d529170c4669a2e1053"
+    },
+    {
+      "rank": 5,
+      "url": "https://github.com/actualbudget/actual",
+      "head": "6ccb7add3ee1f0c47d16a4642125044f5a3635a5"
+    },
+    {
+      "rank": 6,
+      "url": "https://github.com/medplum/medplum",
+      "head": "a95240e0104244bfb0f3a1a375dd4c691aee1a99"
+    },
+    {
+      "rank": 7,
+      "url": "https://github.com/triggerdotdev/trigger.dev",
+      "head": "ba57c1fc741a6cddf94248c94cc17216b5d06ef8"
+    },
+    {
+      "rank": 8,
+      "url": "https://github.com/payloadcms/payload",
+      "head": "51bed73ad6f29734d5c99d2073e993ac0a4cdd73"
+    },
+    {
+      "rank": 9,
+      "url": "https://github.com/backstage/backstage",
+      "head": "7f1aee36e974e379ea94a276d7f9ef63d35fedf1"
+    },
+    {
+      "rank": 10,
+      "url": "https://github.com/supabase/supabase",
+      "head": "6ea3567948178e81369cd485bc06c5aa40009db3"
+    }
+  ],
+  "selection_authorized": false,
+  "freeze_authorized": false,
+  "ground_truth_collected": false,
+  "automation_status": {
+    "github_api_access": "completed-authenticated",
+    "billing_blocked": false,
+    "billing_note": "Candidate discovery used the authenticated GitHub REST API and required no paid provider. Any later model/provider billing gate belongs to analyzer execution, not EVAL-102 candidate discovery."
+  },
+  "human_gates_remaining": [
+    "A human Lead must approve the proposed holdout protocol before final repository selection.",
+    "A human must check every candidate against detector, rule, prompt, fixture, pilot, and benchmark tuning history.",
+    "Humans must select only 2-3 repositories, define exact scopes and exclusions, and materialize source-tree and environment pins.",
+    "Two blind human reviewers must independently annotate ground truth and a human must adjudicate disagreements.",
+    "The final manifest, package artifacts, statistical plan, and ground truth require human approval and freeze."
+  ],
+  "schema_sha256": "5a369bee676ad44435b9f6257562f49250767178d9e4c3f8da2bdc46ef10943c"
+}

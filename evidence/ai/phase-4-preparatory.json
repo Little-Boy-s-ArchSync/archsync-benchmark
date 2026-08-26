@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "metadata": {
+    "status": "prepared",
+    "protocol_version": "phase4-preparatory-v1",
+    "source_commit": null,
+    "human_approval": null
+  },
+  "files": [
+    {
+      "file": "ai-safety/corpus.json",
+      "sha256": "9273acfadb128d747b0c012a9bdb69c2bcbe42cbf9d30998946623b8638eac00"
+    },
+    {
+      "file": "evidence/ai/claim-adjudication.template.jsonl",
+      "sha256": "2f20e5bef82227acc280296484e903469dbf2eed6ab5c0e81e2504745a9b9fee"
+    },
+    {
+      "file": "evidence/ai/claim-review.template.jsonl",
+      "sha256": "2ea2333dae9a484bd02fe3dcc848332ab72faa535f5b00eaa6510301667acb92"
+    },
+    {
+      "file": "evidence/ai/guardian-run-manifest-source.json",
+      "sha256": "4dd51a3418060518ae80aa2eefa826ac75ab3b22cc3c977f52664be4cea98af4"
+    },
+    {
+      "file": "evidence/ai/model-config.template.json",
+      "sha256": "9c6ea8d970a7e7e4d6c89860fad22ee9dcd51a865c5402fbc287cb418b2a22ce"
+    },
+    {
+      "file": "evidence/ai/phase-4-closure.template.json",
+      "sha256": "e9f12e8578df67c87c95b53af9a7d6005c6e047a7655397159b6e233b7a4e716"
+    },
+    {
+      "file": "evidence/ai/README.md",
+      "sha256": "7f21bb4f3510b3f7c09aedf2d3aa5696b2534933ea609b22740d06ca629ed0bf"
+    },
+    {
+      "file": "evidence/ai/run-manifest.template.json",
+      "sha256": "56f246de5d29155d42ebc30a66a3e14fa2e3fe3cf00d603e7739116906fda65c"
+    },
+    {
+      "file": "scripts/lib/ai-evaluation.mjs",
+      "sha256": "2b3e78a3d08aa811bec7ec5b12a23b556bebca116b0c5ec89acc684df19b94ea"
+    },
+    {
+      "file": "scripts/validate-ai-evaluation.mjs",
+      "sha256": "f8ffd37089d910aa1a7c87e276b634d6005badf43da9baf5ec79e3a20e2f5684"
+    },
+    {
+      "file": "test/ai-evaluation.test.mjs",
+      "sha256": "aa2b80cefa4a942bbb26b0702504636787a66953f00a4b64656610d27efb0e21"
+    }
+  ],
+  "manifest_sha256": "8727eaf209a8a9bdad077b073ef9a581a46592fb3da69517fada6cf84dd5369b"
+}

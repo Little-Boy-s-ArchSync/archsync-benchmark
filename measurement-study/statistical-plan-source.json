@@ -1,0 +1,10 @@
+{
+  "schema_version": 1,
+  "paper_pr": "https://github.com/Little-Boy-s-ArchSync/archsync-paper/pull/17",
+  "paper_commit": "a6f4be43171240dfa30e5d5a484b074a0a236830",
+  "path": "research/statistical-analysis-plan.md",
+  "sha256": "5d5b99204f7ebcfaf1573bb8eeecbbf08b28fdec8ee1be9ed15639899e202421",
+  "version": "0.1.0-draft",
+  "status": "proposed",
+  "task_id": "STAT-101"
+}

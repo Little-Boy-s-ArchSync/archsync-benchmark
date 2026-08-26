@@ -1,0 +1,8 @@
+{
+  "observations": [
+    { "source": "spec", "native_id": "spec-orders-cache", "name": "orders-cache", "namespace": "architecture", "aliases": ["orders-cache"], "kind": "cache", "exposure": "private", "approved": true, "trust_boundary": "data", "attributes": {}, "evidence": { "file": "architecture/spec.yaml", "line": 1, "snippet": "component: orders-cache", "detector": "benchmark-spec-fixture" } },
+    { "source": "code", "native_id": "code-orders-cache", "name": "orders-cache", "namespace": "repository", "aliases": ["orders-cache"], "kind": "cache", "exposure": "private", "approved": true, "trust_boundary": "data", "attributes": {}, "evidence": { "file": "repository/cache.ts", "line": 1, "snippet": "export const component = 'orders-cache';", "detector": "benchmark-code-fixture" } }
+  ],
+  "references": [],
+  "alias_rules": [{ "canonical_id": "data/orders-cache", "namespace": "any", "aliases": ["orders-cache"] }]
+}

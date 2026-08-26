@@ -1,2 +1,6 @@
 # Architecture intent may change only through an explicit owner-reviewed proposal.
 /order-platform/architecture.yaml @L1nkinPark
+
+# Provisional Phase 5 ground truth and its generated evidence require owner review.
+/iac/ @L1nkinPark
+/evidence/iac/ @L1nkinPark

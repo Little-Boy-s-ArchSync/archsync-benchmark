@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "dataset_id": "analysis-101-synthetic-dry-run",
+  "raw_dataset_sha256": "66fa165602cb83a4024967d329bcf9068f3b1c1d8e56b0a5bd96e3cddb00e5e8",
+  "statistical_plan": {
+    "status": "proposed",
+    "version": "0.1.0-draft",
+    "sha256": "5d5b99204f7ebcfaf1573bb8eeecbbf08b28fdec8ee1be9ed15639899e202421"
+  },
+  "status": "synthetic-preparatory",
+  "publishable": false,
+  "files": {
+    "figure.svg": "0a86330565d15041ccf717717767be6ed5f964169902f5481eef0c8d7ee7a1e1",
+    "results.csv": "cd4db15c9540814716d513ae81d1aa37978c03a152ecc447df39b861fd85fedc",
+    "table.md": "78158f908bf788bdd2067bd74c3f5c087c9bfc7b1c6559bcebd43a2ea874bad4"
+  },
+  "manifest_sha256": "f5624f29abd8bf2b7f23ee8cfc82cc32f6e71e791ed50b66caa35f5574d023cc"
+}

@@ -1,0 +1,10 @@
+{
+  "contract_version": "0.1",
+  "record_id": "redis-runtime-candidate-001",
+  "risk_level": "high",
+  "decision": "pending",
+  "evidence_snapshot_sha256": "463635e8485388aeb8dfc8e379fcdd3baa6090d48cce2a71f7ab977bd191c374",
+  "scorecard_sha256": "4925dca2cbaaa9e4b1a7deb2c26998a23aabfe871525aa50a524581776fbb033",
+  "rationale": "Latency and availability improve while cost and complexity regress; prerequisites and human review remain open.",
+  "rollback_plan": "Retain the current baseline and remove the Redis candidate deployment; no baseline update is authorized."
+}

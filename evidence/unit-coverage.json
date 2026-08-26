@@ -17,61 +17,173 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 63,
-    "passed": 63,
+    "total": 118,
+    "passed": 118,
     "failed": 0
   },
   "provenance": {
     "files": [
       {
+        "file": "scripts/lib/ablation-evidence.mjs",
+        "sha256": "e275bd49797b8857085ee1bea397d10833332d728ed0c9ad77f31696085d2b9c"
+      },
+      {
+        "file": "scripts/lib/ai-evaluation.mjs",
+        "sha256": "2b3e78a3d08aa811bec7ec5b12a23b556bebca116b0c5ec89acc684df19b94ea"
+      },
+      {
+        "file": "scripts/lib/analysis-notebook.mjs",
+        "sha256": "668c1183d4f31149a5a40dd93caf334408a8eaf29a7c430c45f3e37b99b0c20e"
+      },
+      {
+        "file": "scripts/lib/analysis-pipeline.mjs",
+        "sha256": "5bc62a5521e0830e00aa905c187189b2ca78754eefd9d87f773025d01b2462b3"
+      },
+      {
         "file": "scripts/lib/ground-truth.mjs",
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
       },
       {
+        "file": "scripts/lib/holdout-candidates.mjs",
+        "sha256": "1d95f28f3875e896bb190cabed6c715bfebea1ede97dd81aaf9c7adf629a6a04"
+      },
+      {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "f49565c92425c00b03690b17e4d311acf9a3925ed4e343a696cc0d9937f92a99"
+        "sha256": "abcc3d96318de2d3fac91ab4758f152bacf234afa9f6b622b21087b86eca60f6"
+      },
+      {
+        "file": "scripts/lib/iac-benchmark.mjs",
+        "sha256": "4b62dd17e6931d66ad2afd3f691ff5a7612a4a77db2f6b1197bc8db6c56a1b16"
       },
       {
         "file": "scripts/lib/integrity.mjs",
         "sha256": "6cbbb9f7249d3d67b17169245604cee815fec6384fef8eb9d39773fb549e2c74"
       },
       {
+        "file": "scripts/lib/measurement-study.mjs",
+        "sha256": "adeeb2aa3d7d59763890882c2f0559e40229e8e0a2972be83a021faccaa55da1"
+      },
+      {
         "file": "scripts/lib/pattern-corpus.mjs",
         "sha256": "32c43414da08cdf77ff996d4a0817ee6c765433f663ed894517af5365a8558b4"
       },
       {
+        "file": "scripts/lib/pilot-evidence.mjs",
+        "sha256": "25601036eb08a915bf5df9e598a11f036d6c53bc6d9e23f18c5909a45d47b86f"
+      },
+      {
+        "file": "scripts/lib/pr-history.mjs",
+        "sha256": "fa8158fd4c8c361578ac4663ab5a8121b9be5538e2cd3e3ea3a4d0bbbc64d05a"
+      },
+      {
+        "file": "scripts/lib/reproducibility-audit.mjs",
+        "sha256": "ea4534717baf666fb1e41026a52c4fc1d65e7623e2651359a55cf5ad3ca198e5"
+      },
+      {
+        "file": "scripts/lib/runtime-provenance.mjs",
+        "sha256": "ed663a2d51d657e61fc7bce049c585bf22f9d2d364aa2f7a85a071c33ed93812"
+      },
+      {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "204f9223625c0cdffe0e02cbd48c09fa54567dadee626c581a92633011b81adf"
+        "sha256": "2b4cd11b39e1b0511cc51ea850bb55683fa71453c3f5cdffdd927063e9b2b29f"
+      },
+      {
+        "file": "scripts/validate-analysis-notebook.mjs",
+        "sha256": "6c786e595dde1f1779786dc7704e6178afc8868e1c5e8b66bb117523654b16c1"
+      },
+      {
+        "file": "scripts/validate-holdout-candidates.mjs",
+        "sha256": "d0690dbdf3197f0eabfdd5f994f9aac8d4942add2fda494b47532d78ed2b3f41"
+      },
+      {
+        "file": "test/ablation-evidence.test.mjs",
+        "sha256": "23a07f719adab3f889ec8c229da1754f706c85ee72dabe09ff09259a24978724"
+      },
+      {
+        "file": "test/ai-evaluation.test.mjs",
+        "sha256": "aa2b80cefa4a942bbb26b0702504636787a66953f00a4b64656610d27efb0e21"
+      },
+      {
+        "file": "test/analysis-notebook.test.mjs",
+        "sha256": "762b2944014c6281c2e976b01c950b3729292a3b96c93d766a86a7a861e8507d"
+      },
+      {
+        "file": "test/analysis-pipeline.test.mjs",
+        "sha256": "ed43cdb4130eae1ecb47bc36a3c176529b52373bd5bbd66aca31ee56c56dd0c6"
       },
       {
         "file": "test/ground-truth.test.mjs",
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
       },
       {
+        "file": "test/holdout-candidates.test.mjs",
+        "sha256": "dfce92aa62664b443ca8a4bd74c98e6685e6bcb7eb3c6b6ccc4de6a7e3e19b10"
+      },
+      {
         "file": "test/holdout.test.mjs",
-        "sha256": "d0997c4c27310665bfa5791f3123040b56ea3a3304275b302311258cf2a0165a"
+        "sha256": "8548fb42c5b572b204f82c20f65a53e282b1d6616126e9fa9e69826104504197"
+      },
+      {
+        "file": "test/iac-benchmark.test.mjs",
+        "sha256": "d236bd260bcf8e22b88d2afc01ffb8dac2be96bd3f123ca0ea42cd00ec7a2b23"
       },
       {
         "file": "test/integrity.test.mjs",
         "sha256": "797ae4524c0102cdbcccf894541d2511e96626c9db16ba28ad2646284bbd2cb2"
       },
       {
+        "file": "test/measurement-study.test.mjs",
+        "sha256": "bbd913db2ea3cdb98ba0c006f049160486bdc30d2f2dc308c69b7393b616f7a6"
+      },
+      {
         "file": "test/pattern-corpus.test.mjs",
         "sha256": "556f474d175a13329d2ab96ffe6e90b598610e1c596355301b69e9ee27fd0923"
       },
       {
+        "file": "test/pilot-evidence.test.mjs",
+        "sha256": "f2d7209ca32133c5439b36a35a9f90938783f9611ed7b283f33fd9e5e82d4718"
+      },
+      {
+        "file": "test/pr-history.test.mjs",
+        "sha256": "34055e2f41d8af3580341f60737ae0b5e8afe7da4d351dfcdb8b2cbbda9d11f5"
+      },
+      {
+        "file": "test/reproducibility-audit.test.mjs",
+        "sha256": "460583588090d5e8f5c7497a04f504d38155a18edbb4468c8ae2f8eb96e85e26"
+      },
+      {
+        "file": "test/runtime-provenance.test.mjs",
+        "sha256": "e2453ca31d0ae9059d7a98b8d0c6fd660c8999453164198d6375469b0dd3df75"
+      },
+      {
         "file": "package.json",
-        "sha256": "a2bb53351ffc1e1fe3b67065c1daa79325f874ec5a9993b1fcc70ef9cf1cef88"
+        "sha256": "6b0d7a1455781dbb0d442c3b563c3fd9a5ea4030be034cef21de08b784641456"
       },
       {
         "file": "pnpm-lock.yaml",
-        "sha256": "ac08537ee786bf7e6f1e5b1474d22712759fc4171c90d44def88ba4a61c0e299"
+        "sha256": "bc8e6b9396d395eaa4a3c5b60e118b21484dc0556ed7a213c934266e9a42a27f"
       },
       {
         "file": "vendor/manifest.json",
-        "sha256": "56d42c69cf58246f458c672e8f18e9ef1350f005a6e7de8728e5356d570ff2dd"
+        "sha256": "b6c6824a3e3ec90fe0f29a5c6ec858a535157dea19ac31ca85921ee6faedc2b1"
+      },
+      {
+        "file": "analysis/analysis-101.ipynb",
+        "sha256": "b85a84e0256e5b94b253f5128540bf1f6d6055fab9c33b9129562cda8c9b77e2"
+      },
+      {
+        "file": "holdout/candidate-inventory.schema.json",
+        "sha256": "5a369bee676ad44435b9f6257562f49250767178d9e4c3f8da2bdc46ef10943c"
+      },
+      {
+        "file": "holdout/candidates.eval-102.json",
+        "sha256": "189d5efc2f487ce2bb8f6990dc543ee1952bd1be4beb6f2e4051f0d2c37e33f3"
+      },
+      {
+        "file": "evidence/holdout/eval-102-candidates.validation.json",
+        "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "2c3618ad3b087ae80a3eff438e4fa813bd490e295c54f7f8bbee653ac0bdd9f9"
+    "manifest_sha256": "0d0620704413737e87a472c3b947232d28d095735a12bbc07d7812aa90a1d230"
   }
 }

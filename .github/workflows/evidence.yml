@@ -36,9 +36,12 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: phase-2-3-benchmark-${{ matrix.os }}
+          name: phase-2-3-5-6-benchmark-${{ matrix.os }}
           if-no-files-found: error
           path: |
             evidence/phase-2-results.json
             evidence/phase-3-results.json
+            evidence/iac/phase-5-preparatory.json
+            evidence/holdout/eval-102-candidates.validation.json
             evidence/unit-coverage.json
+            runtime/evidence/*.json
