@@ -100,6 +100,7 @@ const auditClaims = [
   "Incremental analysis scope: 57/189 TypeScript file instances, or 0.3016.",
   "Recorded Windows cold median/p95: 518.51/531.05 ms.",
   "Recorded Windows warm median/p95: 242.62/249.30 ms.",
+  "As of 2026-08-30, the repository is public and `main` is protected.",
 ];
 for (const claim of auditClaims) {
   assert.ok(phase3Audit.includes(claim), `PHASE3-AUDIT.md is missing: ${claim}`);
@@ -111,7 +112,7 @@ const completeAuditClaims = [
   "58/58 tests, 22/22 built-CLI smoke checks and 100% statement/branch/function/line coverage",
   "55/55 tests and 100% line/branch/function coverage for deterministic benchmark validation libraries",
   "Phase 3 benchmark: 20/20 merge decisions, 20/20 changed-file sets, 20/20 architecture deltas, 20/20 incremental/full-scan equivalence checks, 20/20 repeated cache hits, 7/7 violation rule sets and 11/11 exact evidence locations.",
-  "The private GitHub organization plan currently rejects branch-protection and repository-ruleset APIs.",
+  "As of 2026-08-30, `main` is protected and requires the three-platform `Benchmark evidence` matrix",
 ];
 for (const claim of completeAuditClaims) {
   assert.ok(phaseAudit.includes(claim), `PHASE1-3-AUDIT.md is missing: ${claim}`);
