@@ -3,6 +3,7 @@ name: ArchSync architecture gate
 on:
   pull_request:
     paths:
+      - ".github/workflows/architecture-gate.yml"
       - "order-platform/architecture.yaml"
       - "order-platform/repository/**"
       - "package.json"
