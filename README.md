@@ -6,7 +6,7 @@ ANALYSIS-101 also includes a result-free Jupyter notebook index validated by `pn
 
 The Phase 4 evaluation and Phase 7 measurement-study technical foundations now include a 12-case AI safety regression corpus, canonical Guardian run-manifest adaptation, blind P4-123 rubric/timing, unsupported-claim and repair calculations, config-separated ablation/citation metrics, non-empty A–D instrumentation, pinned STAT-101 linkage, pilot and five-condition ablation evidence schemas, a watermarked synthetic CSV/table/figure pipeline, and an independent reproduction runbook. Run `pnpm ai-eval:verify`, `pnpm study:verify`, `pnpm pilot:verify`, `pnpm ablation:verify`, `pnpm analysis:verify` and `pnpm repl:verify`. Their corresponding `:gate` commands intentionally fail until real provider, participant, pilot, freeze, security, ethics/data and independent-auditor evidence exists.
 
-The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record. `pnpm runtime:gate` fails closed on eight Phase 5, governance, human, privacy/security and independent non-synthetic validation prerequisites; no ADR approval, architecture acceptance or experimental validation is claimed.
+The proposed Phase 6 runtime fixture foundation lives in [`runtime/`](runtime/README.md). It produces deterministic runtime snapshots, normalized graphs, per-goal scorecards and a deliberately pending approval record. `pnpm runtime:gate` is intentionally impossible to close in this preparatory version: all eight claims remain false until a later reviewed source-import change supplies authoritative validators. The current GOV-103 diagnostic mirrors only Core's flat schema-v1 contract and never treats caller data, local repositories or remote-tracking refs as proof; no GOV-103 acceptance, ADR approval, architecture acceptance or experimental validation is claimed.
 
 Ground-truth datasets and reproducible architecture-change scenarios for ArchSync.
 
@@ -83,7 +83,7 @@ See [`README-DEMO.md`](README-DEMO.md) for the short Vietnamese presentation scr
 
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
-The benchmark's deterministic validation libraries are covered by 110 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
+The benchmark's deterministic validation libraries are covered by 123 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
 
 Expected Phase 2 result:
 

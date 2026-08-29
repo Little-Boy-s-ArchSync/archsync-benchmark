@@ -33,6 +33,7 @@ const inputFiles = {
   "runtime/inputs/mapping.json": join(inputDirectory, "mapping.json"),
   "runtime/inputs/options.json": join(inputDirectory, "options.json"),
   "runtime/inputs/quality-goals.json": join(inputDirectory, "quality-goals.json"),
+  "runtime/README.md": join(root, "runtime", "README.md"),
   "runtime/evidence/closure.template.json": join(evidenceDirectory, "closure.template.json"),
   "scripts/lib/runtime-provenance.mjs": join(root, "scripts", "lib", "runtime-provenance.mjs"),
   "scripts/runtime-foundation.mjs": fileURLToPath(import.meta.url),
@@ -130,13 +131,15 @@ const manifest = createRuntimeFoundationManifest({
   runtimeContractVersion: baselineSnapshot.contract_version,
   window: inputs.options.window,
 });
+assert.equal(inputs.closure.schema_version, 1);
 assert.equal(inputs.closure.status, "preparatory");
 assert.equal(inputs.closure.template_only, true);
 assert.deepEqual(Object.keys(inputs.closure.gates), RUNTIME_CLOSURE_GATES);
+assert.ok(Object.values(inputs.closure.gates).every((gate) => gate === null));
 const closure = evaluateRuntimeClosure(manifest, inputs.closure.gates);
 assert.equal(closure.status, "PREPARATORY");
 assert.equal(closure.closed, false);
-assert.deepEqual(closure.blockers, RUNTIME_CLOSURE_GATES);
+assert.equal(closure.authoritative_verification_available, false);
 const allOutputs = {
   ...outputText,
   "runtime/evidence/manifest.json": serialize(manifest),
@@ -159,5 +162,5 @@ for (const [name, content] of Object.entries(allOutputs)) {
 if (requireClosed) assertRuntimeClosure(manifest, inputs.closure.gates);
 
 console.log(
-  `${writeMode ? "WROTE" : "VALID"} RUNTIME FOUNDATION (${Object.keys(allOutputs).length} artifacts; ${closure.blockers.length} closure blockers; no experimental claim)`,
+  `${writeMode ? "WROTE" : "VALID"} RUNTIME FOUNDATION (${Object.keys(allOutputs).length} artifacts; ${closure.blockers.length} authoritative blockers; no experimental claim)`,
 );
