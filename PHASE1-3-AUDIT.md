@@ -83,11 +83,11 @@ The paper may claim only the following within the evaluated scope:
 - exact Git-diff decisions, cache behavior, incremental/full-scan equivalence and recorded timings in `evidence/phase-3-results.json`;
 - Core, Guardian and benchmark validation test/coverage results reproduced by their repository gates.
 
-It must not generalize corpus-bound 1.0 scores to arbitrary TypeScript repositories, describe the timing sample as universal performance, claim an independent external holdout, claim multi-language support, or claim enforced merge protection on the current private repository plan.
+It must not generalize corpus-bound 1.0 scores to arbitrary TypeScript repositories, describe the timing sample as universal performance, claim an independent external holdout, or claim multi-language support. Current merge protection may be described only as an operational repository control enabled on 2026-08-30, not as empirical evidence for the Phase 1--3 results.
 
-## Remaining operational boundary
+## Current operational enforcement and boundary
 
-The private GitHub organization plan currently rejects branch-protection and repository-ruleset APIs. Workflows, annotations, exit decisions and CODEOWNERS are present, but a maintainer with merge authority can bypass a failed check until required-check enforcement becomes available. This does not invalidate the deterministic technical Phase 3 result, but it prevents a claim of deployed, non-bypassable governance.
+As of 2026-08-30, `main` is protected and requires the three-platform `Benchmark evidence` matrix, one approval after the latest push, CODEOWNERS review for governed architecture/IaC evidence paths, resolved conversations, and administrator enforcement; force-push and deletion are disabled. This closes the former repository-plan enforcement gap. It does not turn CI, a GitHub review, or merge metadata into protocol acceptance, frozen ground truth, independent annotation, or research-result evidence.
 
 ## Final decision
 
