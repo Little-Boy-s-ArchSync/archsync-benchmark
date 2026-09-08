@@ -131,7 +131,18 @@ The three commands demonstrate the complete pull-request contract without leavin
 
 The repository includes [`.github/workflows/architecture-gate.yml`](.github/workflows/architecture-gate.yml) as a live consumer of Guardian v0.3. For a pull request that changes the Order Platform model, source tree, or pinned Guardian artifact, the workflow fetches full Git history, restores the baseline graph cache, checks the proposed source against the merge base, emits GitHub annotations, and uploads the Markdown decision report.
 
-Configure this workflow as a required status check when the repository plan supports branch protection. [`.github/CODEOWNERS`](.github/CODEOWNERS) assigns the current architecture contract to a real repository owner so model changes request review. ArchSync never rewrites or self-approves `architecture.yaml`; without an enforced repository approval policy, a contributor with merge authority could still change code and contract together and bypass the intended governance boundary.
+As verified on 2026-08-30, protected branch `main` requires the three always-run
+`full benchmark` statuses for Ubuntu, Windows, and macOS in strict mode. It also
+requires a CODEOWNERS review, one approval, a new approval after the latest
+push, stale-review dismissal, resolved conversations, administrator
+enforcement, and no force push or deletion. For a relevant pull request,
+`Order Platform architecture decision` runs as a supplemental path-filtered
+check; it is not one of the always-required contexts.
+[`.github/CODEOWNERS`](.github/CODEOWNERS) assigns the current architecture
+contract to a repository owner so model changes request review. These host
+controls do not let ArchSync rewrite or self-approve `architecture.yaml`, and
+they do not substitute for the explicit human or research acceptance required
+by a task.
 
 Every case also carries explicit acceptance criteria and an expected source location. SHA-256 integrity fields bind `ground-truth.json` to the architecture model, baseline source tree and complete patch set. Intentional fixture changes require:
 

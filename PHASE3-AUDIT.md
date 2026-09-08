@@ -55,9 +55,9 @@ The Phase 3 benchmark now rejects all of the following: a wrong decision, wrong 
 
 - D1 and D2 are controlled, co-developed regression datasets, not independent estimates of general accuracy.
 - Performance values describe one recorded machine and are not cross-platform thresholds.
-- The repository is private on a GitHub plan that currently rejects branch protection and repository ruleset APIs. The workflow and CODEOWNERS request the correct decision and review, but a maintainer with merge authority is not technically prevented from bypassing the failed check until required-check enforcement becomes available.
+- As of 2026-08-30, the repository is public and `main` is protected. GitHub requires the three-platform `Benchmark evidence` matrix, one approval after the latest push, CODEOWNERS review for governed architecture/IaC evidence paths, resolved conversations, and applies the rule to administrators; force-push and deletion are disabled. These repository controls do not replace a protocol approval, ground-truth freeze, or independent research review.
 - Phase 3 does not include automatic baseline updates, automatic repair, AI authority, IaC, runtime evidence, or multi-language validation.
 
 ## Completion decision
 
-The deterministic Phase 3 technical MVP is complete against the roadmap artifacts and exit behaviors. The remaining branch-protection limitation is an external repository-plan constraint and must not be represented as deployed merge enforcement.
+The deterministic Phase 3 technical MVP is complete against the roadmap artifacts and exit behaviors. Merge enforcement was enabled after the original audit and is an operational control, not additional Phase 3 research evidence.
