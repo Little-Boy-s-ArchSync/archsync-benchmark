@@ -1,12 +1,23 @@
 {
   "schema_version": "0.1",
-  "status": "blocked-pending-prerequisites-and-human-approval",
+  "status": "preparatory-authoritative-source-imports-required",
   "claims": {
+    "phase5_closed": false,
     "adr_approved": false,
     "quality_goals_approved": false,
+    "privacy_security_approved": false,
+    "gov103_accepted": false,
+    "high_risk_candidate_decided": false,
     "experimental_validation_complete": false,
     "architecture_change_accepted": false,
     "phase_6_exit_gate_closed": false
+  },
+  "authoritative_source_imports": {
+    "core_gov103_contract": false,
+    "core_gov103_policy": false,
+    "core_gov103_approval_evidence": false,
+    "core_gov103_closure_record": false,
+    "phase6_success_validators": false
   },
   "dependencies": {
     "core_quality_goal_foundation_commit": "503b5fe97aa39a78d5e5de80b794a94508e106cc",
@@ -15,6 +26,9 @@
   "contracts": {
     "collector_version": "0.1.0-foundation",
     "runtime_evidence_version": "0.1",
+    "runtime_closure_version": "0.4-preparatory",
+    "gov103_acceptance_record_version": "Core schema-v1 mirror",
+    "gov103_approval_evidence_version": "Core schema-v1 mirror",
     "quality_goal_version": "0.2",
     "scorecard_version": "0.1",
     "approval_record_version": "0.1"
@@ -32,8 +46,9 @@
     "runtime/inputs/options.json": "ebfe95f8caf0ee451ddda8eb67d4cf0a1ae2c0c416d7733055e3cc7fd03d5365",
     "runtime/inputs/quality-goals.json": "a42b7457f4e177ed441857fc3dad045b18ff32433c8d610ca08d3acc961f4524",
     "runtime/inputs/redis-candidate.otlp.json": "74a1c9f5a28fcdf41d9d196b0899a2097ca198c2d021fa9f9731b70cac5082c9",
-    "scripts/lib/runtime-provenance.mjs": "ed663a2d51d657e61fc7bce049c585bf22f9d2d364aa2f7a85a071c33ed93812",
-    "scripts/runtime-foundation.mjs": "bfadbd72631dd3afea29d3a6952073d56bbc09a8a0bbeb74094a80d496af4e8f",
+    "runtime/README.md": "64cbace88a5d6e2ad1e83694fc4040e9c11f3e4e5b6af32f84ba44c8e1e954d2",
+    "scripts/lib/runtime-provenance.mjs": "455ba2bcee1c4ff8381c9172b4954821214037d02472fbd6df9fda4eeaed3329",
+    "scripts/runtime-foundation.mjs": "bef373ffadc61e5b1025ef64b2fa49ced58b55d76491b28591537b93653acf83",
     "vendor/manifest.json": "b6c6824a3e3ec90fe0f29a5c6ec858a535157dea19ac31ca85921ee6faedc2b1"
   },
   "output_sha256": {
@@ -45,11 +60,13 @@
     "runtime/evidence/scorecard.json": "00415ab74a9dfc01f05d92c3cccaea57f2e93e894edc0ec6d26a8d7ebd7b115c"
   },
   "blockers": [
-    "P5-110 Phase 5 evidence gate is not closed",
-    "P6-101 ADR requires lead and privacy/security approval",
-    "P6-104 quality-goal targets require stakeholder approval",
-    "P6-106 high-risk candidate requires a real human approver",
-    "GOV-103 prerequisite is not satisfied",
-    "No production or independent experimental validation has run"
+    "authoritative_phase5_verification_unavailable",
+    "authoritative_adr_verification_unavailable",
+    "authoritative_quality_goals_verification_unavailable",
+    "authoritative_privacy_security_verification_unavailable",
+    "authoritative_gov103_core_source_not_imported",
+    "authoritative_high_risk_decision_verification_unavailable",
+    "authoritative_independent_experiment_verification_unavailable",
+    "authoritative_architecture_change_verification_unavailable"
   ]
 }
