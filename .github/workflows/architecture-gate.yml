@@ -3,11 +3,12 @@ name: ArchSync architecture gate
 on:
   pull_request:
     paths:
+      - ".github/workflows/architecture-gate.yml"
       - "order-platform/architecture.yaml"
       - "order-platform/repository/**"
       - "package.json"
       - "pnpm-lock.yaml"
-      - "vendor/archsync-guardian-0.3.0.tgz"
+      - "vendor/archsync-guardian-0.3.3-global-5ac01f1.tgz"
 
 permissions:
   contents: read
@@ -38,7 +39,7 @@ jobs:
         with:
           path: .git/archsync-cache
           key: >-
-            archsync-order-platform-${{ runner.os }}-${{ github.event.pull_request.base.sha }}-${{ hashFiles('order-platform/architecture.yaml', 'vendor/archsync-guardian-0.3.0.tgz') }}
+            archsync-order-platform-${{ runner.os }}-${{ github.event.pull_request.base.sha }}-${{ hashFiles('order-platform/architecture.yaml', 'vendor/archsync-guardian-0.3.3-global-5ac01f1.tgz') }}
 
       - name: Check architecture impact
         run: >-
