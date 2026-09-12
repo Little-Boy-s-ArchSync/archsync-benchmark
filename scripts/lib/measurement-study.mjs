@@ -88,7 +88,8 @@ function sha256(value) {
 }
 
 function exactSet(values, expected) {
-  return Array.isArray(values) && values.length === expected.length && [...values].sort().join("\0") === [...expected].sort().join("\0");
+  return Array.isArray(values) && values.length === expected.length && new Set(values).size === expected.length
+    && values.every((value) => typeof value === "string" && expected.includes(value));
 }
 
 export function validateStatisticalPlanSource(source) {

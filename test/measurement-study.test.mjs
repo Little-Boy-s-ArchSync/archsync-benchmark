@@ -107,6 +107,24 @@ test("task treatments cannot introduce model access or change shared baseline an
   assert.deepEqual(validateTaskSuite(original), []);
 });
 
+test("exact study string sets reject JSON arrays, non-strings and delimiter aliases without coercion", async () => {
+  const original = JSON.parse(await readFile(new URL("../measurement-study/task-suite.json", import.meta.url), "utf8"));
+  for (const condition of ["B", "C", "D"]) {
+    const suite = structuredClone(original);
+    suite.tasks[0].treatments[condition].allowed_tools = suite.tasks[0].treatments[condition].allowed_tools.map((value) => [value]);
+    assert.ok(validateTaskSuite(suite).some((issue) => issue.includes("exact declared tools")));
+  }
+  for (const value of [null, 1, true, {}, ["model"], "model\0"]) {
+    const suite = structuredClone(original);
+    suite.tasks[0].treatments.B.allowed_tools = [value];
+    assert.ok(validateTaskSuite(suite).some((issue) => issue.includes("exact declared tools")));
+  }
+  for (const values of [original.conditions.map((value) => [value]), ["A", "B", "C", "C"]]) {
+    assert.ok(validateTaskSuite({ ...original, conditions: values }).some((issue) => issue.includes("conditions must be exactly")));
+  }
+  assert.deepEqual(validateTaskSuite(original), []);
+});
+
 function frozenStudyManifest(overrides = {}) {
   return {
     schema_version: 1,
