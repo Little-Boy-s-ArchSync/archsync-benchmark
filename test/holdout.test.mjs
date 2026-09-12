@@ -228,13 +228,13 @@ test("freeze record is deterministic and detects mutation", () => {
 
 function frozenInputs() {
   const artifacts = { "truth.json": "truth", "source.tar": "source" };
-  const frozen = createFrozenManifest(manifest(), artifacts);
-  const observations = Object.fromEntries(frozen.manifest.repositories.map((item) => [item.id, observation(item)]));
   const packages = {
     core: { version: "0.1.1", commit: "d".repeat(40), artifact_sha256: "e".repeat(64) },
     guardian: { version: "0.3.3", commit: "f".repeat(40), artifact_sha256: "1".repeat(64) },
   };
   const environment = { id: "synthetic-env", node: "22.0.0", package_manager: "pnpm@11.16.0" };
+  const frozen = createFrozenManifest({ ...manifest(), run_context: { packages, environment } }, artifacts);
+  const observations = Object.fromEntries(frozen.manifest.repositories.map((item) => [item.id, observation(item)]));
   return { artifacts, frozen, observations, packages, environment };
 }
 
@@ -277,6 +277,34 @@ test("holdout harness fails closed on freeze, configuration, pin, and replay dri
   const drift = await runFrozenHoldoutTwice({ ...input, analyze: async ({ repository: source, run }) => ({ raw: {}, normalized: { id: source.id, run }, duration_ms: 1 }) });
   assert.equal(drift.status, "BLOCKED_NONDETERMINISTIC");
   assert.equal(drift.normalized_replay_sha256, null);
+});
+
+test("holdout replay binds package/environment scope before any analyzer call and snapshots immutable inputs", async () => {
+  const input = frozenInputs();
+  let calls = 0;
+  for (const changes of [
+    { packages: { ...input.packages, core: { ...input.packages.core, artifact_sha256: "a".repeat(64) } } },
+    { packages: { ...input.packages, guardian: { ...input.packages.guardian, version: "9.9.9" } } },
+    { environment: { ...input.environment, id: "different-host" } },
+    { environment: { ...input.environment, node: "99.0.0" } },
+    { frozen: createFrozenManifest(manifest(), input.artifacts) },
+  ]) await assert.rejects(runFrozenHoldoutTwice({ ...input, ...changes, analyze: async () => { calls += 1; return { normalized: {}, duration_ms: 0 }; } }), /RUN_SCOPE_MISMATCH/);
+  assert.equal(calls, 0);
+  const original = structuredClone(input);
+  const result = await runFrozenHoldoutTwice({ ...input, analyze: async ({ repository, packages, environment }) => {
+    input.packages.core.version = "mutated";
+    input.environment.node = "mutated";
+    input.frozen.manifest.repositories[0].commit = "0".repeat(40);
+    input.frozen.freeze_sha256 = "mutated";
+    assert.deepEqual(packages, original.packages);
+    assert.deepEqual(environment, original.environment);
+    assert.equal(repository.commit, original.frozen.manifest.repositories.find((r) => r.id === repository.id).commit);
+    return { normalized: { id: repository.id }, duration_ms: 0 };
+  } });
+  assert.equal(result.deterministic, true);
+  assert.deepEqual(result.packages, original.packages);
+  assert.deepEqual(result.environment, original.environment);
+  assert.equal(result.freeze_sha256, original.frozen.freeze_sha256);
 });
 
 function metricRow(id, repositoryId, unitType, overrides = {}) {
@@ -399,6 +427,8 @@ test("scalability summaries reject malformed or one-case generalization", () => 
     null,
     { ...valid[0], mode: "bad" }, { ...valid[0], repository_id: "" }, { ...valid[0], environment_id: "" }, { ...valid[0], parsed_scope: "" },
     { ...valid[0], files: 0 }, { ...valid[0], parsed_files: -1 }, { ...valid[0], parsed_files: 11 }, { ...valid[0], component_count: 0 },
+    { ...valid[0], oracle_match: undefined }, { ...valid[0], oracle_match: "true" },
+    { ...valid[0], status: "failed", duration_ms: null, cpu_ms: null, peak_memory_bytes: null, failure_class: "FAILED", oracle_match: true },
     { ...valid[0], duration_ms: -1 }, { ...valid[0], cpu_ms: -1 }, { ...valid[0], peak_memory_bytes: -1 },
     { ...valid[0], status: "failed", failure_class: "", duration_ms: null, cpu_ms: null, peak_memory_bytes: null },
   ]) assert.throws(() => summarizeScalabilitySamples([sample, ...valid.slice(1)]), /invalid/);

@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 164,
-    "passed": 164,
+    "total": 174,
+    "passed": 174,
     "failed": 0
   },
   "provenance": {
@@ -52,8 +52,12 @@
         "sha256": "b97cb2b0c7646e1ac1b1d82029ee39c8070c11bfc722ba1c7f9af2540cd7f2b3"
       },
       {
+        "file": "scripts/lib/holdout-repeat-capture.mjs",
+        "sha256": "a1530e0794230aa1b073bf4f5e5e5ea8cedfbbc6f9fb1d02b0285f51d9d0cb44"
+      },
+      {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "35e8834c4e7ff94b0cf8f9540729a2a37cc0ef8fac2b5f8ee1c49017f09c50ee"
+        "sha256": "7e1b7c0a85bd4b5fd7819cb581cc494fd17ffa58e84c04ce4d5c979591430b4e"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -93,7 +97,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "eaef96bc37a70e8b6aad7d49c21c9c942bc1983150ab0dd71d7d7d1820875d90"
+        "sha256": "7345245cdb5776246de24efe07f6185e662a2c3efb9f0dfab6dbccfbf726fcb8"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -133,11 +137,19 @@
       },
       {
         "file": "test/holdout-repository.test.mjs",
-        "sha256": "5123f6cd0cb7240a7ba78549e3e81341a079c7593a0ef991e2ea4f17b41a5472"
+        "sha256": "df32028ab22c1c2e06acdae68453d9e7a49767b1a2ee20f08617b0d42e2a1360"
+      },
+      {
+        "file": "test/holdout-repeat-capture.test.mjs",
+        "sha256": "ab717b6819cb54afbbd1ebba447545c13dd72216cf9ee13de1b9a4d45d68c9ed"
+      },
+      {
+        "file": "test-support/holdout-git-fixture.mjs",
+        "sha256": "5614d8df6cc99ecd597d2ffe9880ffa20f707464d6992bb3b379d29a62e44ebc"
       },
       {
         "file": "test/holdout.test.mjs",
-        "sha256": "b42fff644c0824f9cceb8e11916f48fbd8a1b0eadb5ecf51c9bb3473d69b2193"
+        "sha256": "25f1052500870550ed070e692292b73248d7c3e01342e875ff6f9716f5f96e36"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -204,6 +216,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "de8481e97f643e02c00db2109f3328131c9dbe1ead94a0e295deab9b8f072096"
+    "manifest_sha256": "04fa9bed698a244313a91030a0bedf0e89414025ab492eb3e8f8265b9f9f4009"
   }
 }

@@ -243,11 +243,15 @@ function validateRunPackages(packages) {
   });
 }
 
-export async function runFrozenHoldoutTwice({ frozen, artifacts, observations, packages, environment, analyze }) {
+export async function runFrozenHoldoutTwice({ frozen: suppliedFrozen, artifacts, observations, packages: suppliedPackages, environment: suppliedEnvironment, analyze }) {
+  const frozen = structuredClone(suppliedFrozen);
+  const packages = structuredClone(suppliedPackages);
+  const environment = structuredClone(suppliedEnvironment);
   if (!verifyFrozenManifest(frozen, artifacts)) throw new Error("HOLDOUT_NOT_FROZEN");
   if (!object(observations) || !validateRunPackages(packages) || !object(environment) || !nonEmpty(environment.id) || !nonEmpty(environment.node) || !nonEmpty(environment.package_manager) || typeof analyze !== "function") {
     throw new Error("HOLDOUT_RUN_CONFIGURATION_INVALID");
   }
+  if (stable(frozen.manifest.run_context) !== stable({ packages, environment })) throw new Error("HOLDOUT_RUN_SCOPE_MISMATCH");
   for (const repository of frozen.manifest.repositories) {
     const issues = verifyRepositoryPin(repository, observations[repository.id]);
     if (issues.length > 0) throw new Error(`HOLDOUT_PIN_INVALID: ${issues.join("; ")}`);
@@ -411,8 +415,8 @@ function scalabilityGroup(rows) {
 export function summarizeScalabilitySamples(samples) {
   if (!Array.isArray(samples) || samples.length < 4) throw new Error("at least four scalability samples are required");
   for (const sample of samples) {
-    const completedMetricsValid = sample?.status === "completed" && ["duration_ms", "cpu_ms", "peak_memory_bytes"].every((key) => Number.isFinite(sample[key]) && sample[key] >= 0);
-    const failedMetricsValid = sample?.status === "failed" && nonEmpty(sample.failure_class) && sample.duration_ms === null && sample.cpu_ms === null && sample.peak_memory_bytes === null;
+    const completedMetricsValid = sample?.status === "completed" && typeof sample.oracle_match === "boolean" && ["duration_ms", "cpu_ms", "peak_memory_bytes"].every((key) => Number.isFinite(sample[key]) && sample[key] >= 0);
+    const failedMetricsValid = sample?.status === "failed" && nonEmpty(sample.failure_class) && sample.duration_ms === null && sample.cpu_ms === null && sample.peak_memory_bytes === null && sample.oracle_match === false;
     if (!object(sample) || !["full", "incremental"].includes(sample.mode) || !nonEmpty(sample.repository_id) || !nonEmpty(sample.environment_id) || !nonEmpty(sample.parsed_scope) || !Number.isInteger(sample.files) || sample.files < 1 || !Number.isInteger(sample.parsed_files) || sample.parsed_files < 0 || sample.parsed_files > sample.files || !Number.isInteger(sample.component_count) || sample.component_count < 1 || (!completedMetricsValid && !failedMetricsValid)) {
       throw new Error("invalid scalability sample");
     }
