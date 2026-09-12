@@ -43,7 +43,7 @@ function complete(overrides = {}) {
     study_dataset_sha256: "8".repeat(64),
     runs: ABLATION_CONDITIONS.map((condition, index) => ({ run_id: `unit-fixture-${index}`, case_id: "unit-fixture-case", condition, design_sha256: designSha, config_sha256: design.configs[condition].sha256, status: "completed", score: index / 10, claims: 2, citation_supported_claims: 1, repair_verified: false })),
     results: { analysis_code_commit: "9".repeat(40), normalized_results_sha256: "a".repeat(64), metrics_sha256: "b".repeat(64) },
-    replay: { first_sha256: "c".repeat(64), second_sha256: "c".repeat(64) },
+    replay: { first_sha256: "b".repeat(64), second_sha256: "b".repeat(64) },
     post_outcome_changes: [],
     ...overrides,
   });
@@ -100,4 +100,18 @@ test("ABL-101 closure refuses a pending template and accepts only complete fixtu
   const closed = assertAblationClosure(complete());
   assert.equal(closed.status, "CLOSED");
   assert.equal(closed.closed, true);
+});
+
+test("equal replay hashes cannot substitute for the declared ablation metrics artifact", () => {
+  const input = complete();
+  input.design.human_approval = null;
+  input.replay = { first_sha256: "c".repeat(64), second_sha256: "c".repeat(64) };
+  const issues = validateAblationEvidence(input);
+  assert.ok(issues.some((issue) => issue.includes("declared metrics hash")));
+  assert.ok(issues.some((issue) => issue.includes("human approval")));
+  assert.equal(evaluateAblationClosure(input).closed, false);
+  input.replay.first_sha256 = input.results.metrics_sha256;
+  input.replay.second_sha256 = input.results.metrics_sha256;
+  assert.ok(!validateAblationEvidence(input).some((issue) => issue.includes("metric replay")));
+  assert.equal(evaluateAblationClosure(input).closed, false);
 });

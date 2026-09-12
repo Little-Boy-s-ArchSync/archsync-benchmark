@@ -2,6 +2,7 @@ import { createHash } from "node:crypto";
 import { isDeepStrictEqual } from "node:util";
 
 const CONDITIONS = ["A", "B", "C", "D"];
+const TREATMENT_TOOLS = { A: [], B: ["model"], C: ["model", "repository-context"], D: ["model", "repository-context", "archsync-evidence"] };
 const EVENT_TYPES = new Set([
   "run_started",
   "baseline_recorded",
@@ -53,7 +54,7 @@ function median(values) {
   if (values.length === 0) return null;
   const ordered = [...values].sort((a, b) => a - b);
   const middle = Math.floor(ordered.length / 2);
-  return ordered.length % 2 === 0 ? (ordered[middle - 1] + ordered[middle]) / 2 : ordered[middle];
+  return ordered.length % 2 === 0 ? ordered[middle - 1] + (ordered[middle] - ordered[middle - 1]) / 2 : ordered[middle];
 }
 
 function percentile(ordered, fraction) {
@@ -125,6 +126,7 @@ export function validateTaskSuite(suite) {
     else {
       for (const condition of CONDITIONS) {
         if (!object(task.treatments[condition]) || !Array.isArray(task.treatments[condition].allowed_tools)) issues.push(`task ${index} treatment ${condition} requires allowed_tools`);
+        else if (!exactSet(Object.keys(task.treatments[condition]), ["allowed_tools"]) || !exactSet(task.treatments[condition].allowed_tools, TREATMENT_TOOLS[condition])) issues.push(`task ${index} treatment ${condition} must retain its exact declared tools without shared-task overrides`);
       }
     }
   });
@@ -327,9 +329,10 @@ export function calculateStudyMetrics(rows, statisticalPlanSource) {
     for (const key of ["commits", "violations", "merge_delay_ms", "approvals", "false_blocks", "token_cost_usd", "compute_cost_usd"]) {
       if (!Number.isFinite(row[key]) || row[key] < 0) throw new Error(`invalid study metric ${key}`);
     }
-    if (!Number.isInteger(row.commits) || row.commits < 1 || !Number.isInteger(row.violations) || !Number.isInteger(row.approvals) || !Number.isInteger(row.false_blocks)) throw new Error("count metrics must be integers");
+    if (!Number.isSafeInteger(row.commits) || row.commits < 1 || !Number.isSafeInteger(row.violations) || !Number.isSafeInteger(row.approvals) || !Number.isSafeInteger(row.false_blocks)) throw new Error("count metrics must be integers in the safe range");
     if (row.time_to_fix_ms !== null && (!Number.isFinite(row.time_to_fix_ms) || row.time_to_fix_ms < 0)) throw new Error("invalid time_to_fix_ms");
     if (!object(row.repair) || typeof row.repair.attempted !== "boolean" || typeof row.repair.success !== "boolean" || typeof row.repair.regression !== "boolean") throw new Error("repair metrics are required");
+    if (!row.repair.attempted && (row.repair.success || row.repair.regression)) throw new Error("repair success or regression requires a recorded attempt");
     ids.add(row.run_id);
     const group = grouped.get(row.condition) ?? [];
     group.push(row);
@@ -339,10 +342,15 @@ export function calculateStudyMetrics(rows, statisticalPlanSource) {
   for (const condition of [...grouped.keys()].sort()) {
     const group = grouped.get(condition);
     const attempted = group.filter((row) => row.repair.attempted);
-    const commits = group.reduce((sum, row) => sum + row.commits, 0);
-    const violations = group.reduce((sum, row) => sum + row.violations, 0);
-    const approvals = group.reduce((sum, row) => sum + row.approvals, 0);
-    const falseBlocks = group.reduce((sum, row) => sum + row.false_blocks, 0);
+    const sum = (key, count = true) => {
+      const value = group.reduce((total, row) => total + row[key], 0);
+      if (!Number.isFinite(value) || (count && !Number.isSafeInteger(value))) throw new Error(`study metric ${key} aggregate exceeds the numeric range`);
+      return value;
+    };
+    const commits = sum("commits");
+    const violations = sum("violations");
+    const approvals = sum("approvals");
+    const falseBlocks = sum("false_blocks");
     const successes = attempted.filter((row) => row.repair.success).length;
     const regressions = attempted.filter((row) => row.repair.regression).length;
     const completed = group.filter((row) => row.status === "completed").length;
@@ -361,8 +369,8 @@ export function calculateStudyMetrics(rows, statisticalPlanSource) {
       regression_rate: ratioRecord(regressions, attempted.length),
       time_to_fix_ms: distribution(group.filter((row) => row.time_to_fix_ms !== null).map((row) => row.time_to_fix_ms)),
       merge_delay_ms: distribution(group.map((row) => row.merge_delay_ms)),
-      total_token_cost_usd: group.reduce((sum, row) => sum + row.token_cost_usd, 0),
-      total_compute_cost_usd: group.reduce((sum, row) => sum + row.compute_cost_usd, 0),
+      total_token_cost_usd: sum("token_cost_usd", false),
+      total_compute_cost_usd: sum("compute_cost_usd", false),
       uncertainty: {
         completion_rate: { ...ratioRecord(completed, group.length), interval: wilson(completed, group.length) },
         repair_success_rate: wilson(successes, attempted.length),

@@ -17,15 +17,15 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 145,
-    "passed": 145,
+    "total": 163,
+    "passed": 163,
     "failed": 0
   },
   "provenance": {
     "files": [
       {
         "file": "scripts/lib/ablation-evidence.mjs",
-        "sha256": "e275bd49797b8857085ee1bea397d10833332d728ed0c9ad77f31696085d2b9c"
+        "sha256": "e528c9753dfabbeabcd05cd3e0de5a0358dab634b587c3c2ef1f899c10dec69f"
       },
       {
         "file": "scripts/lib/ai-evaluation.mjs",
@@ -37,7 +37,7 @@
       },
       {
         "file": "scripts/lib/analysis-pipeline.mjs",
-        "sha256": "5bc62a5521e0830e00aa905c187189b2ca78754eefd9d87f773025d01b2462b3"
+        "sha256": "d02a989a74dc3d4bb3144edcfed461d33b152a378abc958af1cb535ce4065418"
       },
       {
         "file": "scripts/lib/ground-truth.mjs",
@@ -65,7 +65,7 @@
       },
       {
         "file": "scripts/lib/measurement-study.mjs",
-        "sha256": "986306990ba5ee149fb214eb13995fa61175909981cb0342551d6ecb9ee8ae54"
+        "sha256": "6733d8afb466b5ffe80c140a76fe4ceaec581964ad5328a45424305f0f4945f9"
       },
       {
         "file": "scripts/lib/pattern-corpus.mjs",
@@ -73,7 +73,7 @@
       },
       {
         "file": "scripts/lib/pilot-evidence.mjs",
-        "sha256": "25601036eb08a915bf5df9e598a11f036d6c53bc6d9e23f18c5909a45d47b86f"
+        "sha256": "49fcf1efcf88b975efacbb8076ba6c4bb52cd96e7808b6953bbc576d202508ee"
       },
       {
         "file": "scripts/lib/pr-history.mjs",
@@ -88,8 +88,12 @@
         "sha256": "455ba2bcee1c4ff8381c9172b4954821214037d02472fbd6df9fda4eeaed3329"
       },
       {
+        "file": "scripts/lib/study-artifact-store.mjs",
+        "sha256": "7d0a130c471660f548e9d30acb83790c2076f4413bff5ac41adf7bd660ea69d1"
+      },
+      {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "1175f2fe4b0dad73bede1b6ee8bff81d42d7dcdc37473de1b677941c62ff7b0f"
+        "sha256": "eaef96bc37a70e8b6aad7d49c21c9c942bc1983150ab0dd71d7d7d1820875d90"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -100,8 +104,12 @@
         "sha256": "d0690dbdf3197f0eabfdd5f994f9aac8d4942add2fda494b47532d78ed2b3f41"
       },
       {
+        "file": "scripts/validate-measurement-scaffold.mjs",
+        "sha256": "4a6fb5f43da2de60407744162c567ff55fcb69d1565d3e1f50b66a6922fca7b2"
+      },
+      {
         "file": "test/ablation-evidence.test.mjs",
-        "sha256": "23a07f719adab3f889ec8c229da1754f706c85ee72dabe09ff09259a24978724"
+        "sha256": "be950e0d9fdc3663482e442db0211b6820b6b9c654c7afc03f6331d44c6f2757"
       },
       {
         "file": "test/ai-evaluation.test.mjs",
@@ -113,7 +121,7 @@
       },
       {
         "file": "test/analysis-pipeline.test.mjs",
-        "sha256": "ed43cdb4130eae1ecb47bc36a3c176529b52373bd5bbd66aca31ee56c56dd0c6"
+        "sha256": "3ba19097980446bc867a6fccaaf085dd63fe1b31b6427fb1d67dea552f9fab9d"
       },
       {
         "file": "test/ground-truth.test.mjs",
@@ -141,7 +149,7 @@
       },
       {
         "file": "test/measurement-study.test.mjs",
-        "sha256": "ef93a03dea1d39b5ffb06b03959bf11c9d5bd2e7895fcb56587bbd69fa8daedc"
+        "sha256": "40e502f6058958fc8ae38b5e514ec9d97801c5ccf7fb413a5d3cf6867fbf3ff0"
       },
       {
         "file": "test/pattern-corpus.test.mjs",
@@ -149,7 +157,7 @@
       },
       {
         "file": "test/pilot-evidence.test.mjs",
-        "sha256": "f2d7209ca32133c5439b36a35a9f90938783f9611ed7b283f33fd9e5e82d4718"
+        "sha256": "26fa5e02e43014177594f0dc94b09baea21997b818f236e41437ead44af18c16"
       },
       {
         "file": "test/pr-history.test.mjs",
@@ -162,6 +170,10 @@
       {
         "file": "test/runtime-provenance.test.mjs",
         "sha256": "b66d69f4c10d0ea87f025193e8cdac31543812db6135c8780c46b8fab35867db"
+      },
+      {
+        "file": "test/study-artifact-store.test.mjs",
+        "sha256": "a748866f7c9ea4aaf3471f6e519de0d345998ddcf014cfe2ff82328d47f8135e"
       },
       {
         "file": "package.json",
@@ -192,6 +204,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "624ab9dd546150f03e06285bdfcfe8feb555b9363abaf3ccb88adce3d19848e2"
+    "manifest_sha256": "ed4031553fc2f2007b4b7cb790e909a3cb784102547f60aab1f77d3b3d09d3c7"
   }
 }

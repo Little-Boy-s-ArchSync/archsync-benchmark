@@ -92,6 +92,21 @@ test("task suite locks shared task fields outside A-D treatments", async () => {
   }
 });
 
+test("task treatments cannot introduce model access or change shared baseline and acceptance fields", async () => {
+  const original = JSON.parse(await readFile(new URL("../measurement-study/task-suite.json", import.meta.url), "utf8"));
+  for (const [condition, change] of [
+    ["A", { allowed_tools: ["model"] }], ["B", { allowed_tools: ["model", "model"] }],
+    ["C", { allowed_tools: ["model"] }], ["D", { allowed_tools: ["model", "repository-context", "unapproved-tool"] }],
+    ["B", { baseline_commit: "f".repeat(40) }], ["C", { acceptance_commands: ["skip-acceptance"] }],
+    ["D", { expected_behavior: "different task" }], ["A", { feature_steps: ["different step"] }],
+  ]) {
+    const suite = structuredClone(original);
+    Object.assign(suite.tasks[0].treatments[condition], change);
+    assert.ok(validateTaskSuite(suite).some((issue) => issue.includes("exact declared tools without shared-task overrides")));
+  }
+  assert.deepEqual(validateTaskSuite(original), []);
+});
+
 function frozenStudyManifest(overrides = {}) {
   return {
     schema_version: 1,
@@ -543,6 +558,33 @@ test("study metrics expose denominators, failures, burden and costs", () => {
   for (const repair of [null, { attempted: "yes", success: true, regression: false }, { attempted: true, success: "yes", regression: false }, { attempted: true, success: true, regression: "no" }]) {
     assert.throws(() => calculateStudyMetrics([studyRow({ repair })], STUDY_STATISTICAL_PLAN_SOURCE), /repair metrics/);
   }
+});
+
+test("study metrics reject contradictory repair claims without dropping failures or changing denominators", () => {
+  for (const repair of [{ attempted: false, success: true, regression: false }, { attempted: false, success: false, regression: true }]) {
+    assert.throws(() => calculateStudyMetrics([studyRow({ repair })], STUDY_STATISTICAL_PLAN_SOURCE), /requires a recorded attempt/);
+  }
+  const result = calculateStudyMetrics([
+    studyRow({ run_id: "failed-attempt", status: "failed", repair: { attempted: true, success: false, regression: true } }),
+    studyRow({ run_id: "inconclusive-attempt", status: "inconclusive", repair: { attempted: false, success: false, regression: false } }),
+  ], STUDY_STATISTICAL_PLAN_SOURCE);
+  assert.equal(result.assigned_n, 2);
+  assert.equal(result.analyzed_n, 2);
+  assert.deepEqual(result.conditions.A.status_counts, { completed: 0, failed: 1, inconclusive: 1 });
+  assert.deepEqual(result.conditions.A.regression_rate, { numerator: 1, denominator: 1, value: 1 });
+});
+
+test("study counts, cost totals and duration medians retain finite exact numeric meaning", () => {
+  for (const key of ["commits", "violations", "approvals", "false_blocks"]) {
+    assert.throws(() => calculateStudyMetrics([studyRow({ [key]: Number.MAX_SAFE_INTEGER + 1 })], STUDY_STATISTICAL_PLAN_SOURCE), /safe range/);
+    assert.throws(() => calculateStudyMetrics([studyRow({ run_id: "one", [key]: Number.MAX_SAFE_INTEGER }), studyRow({ run_id: "two", [key]: 1 })], STUDY_STATISTICAL_PLAN_SOURCE), /aggregate exceeds/);
+  }
+  for (const key of ["token_cost_usd", "compute_cost_usd"]) {
+    assert.throws(() => calculateStudyMetrics([studyRow({ run_id: "one", [key]: Number.MAX_VALUE }), studyRow({ run_id: "two", [key]: Number.MAX_VALUE })], STUDY_STATISTICAL_PLAN_SOURCE), /aggregate exceeds/);
+  }
+  const result = calculateStudyMetrics([studyRow({ run_id: "one", time_to_fix_ms: 1e308 }), studyRow({ run_id: "two", time_to_fix_ms: 1e308 })], STUDY_STATISTICAL_PLAN_SOURCE);
+  assert.equal(result.conditions.A.time_to_fix_ms.median, 1e308);
+  assert.equal(result.conditions.A.time_to_fix_ms.n, 2);
 });
 
 function ablationDesign(overrides = {}) {

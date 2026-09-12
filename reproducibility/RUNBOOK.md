@@ -12,4 +12,6 @@ The auditor must be a human who did not author the evaluated change, records aff
 6. Create a separate audit report containing commands, environment, all attempts, deviations, hashes and conclusion. Only after every exact check passes, populate a copy of `audit.template.json` with `status: reproduced`, independent human identity, timestamps, per-check evidence hashes and the report hash.
 7. Submit the report through an independently reviewable URL bound to the audited commit. Do not edit this repository’s pending template to imply that the audit already happened.
 
+For study artifact inputs, use the [pinned local intake](../measurement-study/ARTIFACT-STORE.md) with the previously reviewed manifest and event-log digests, a canonical root and a trusted quiescent source. Preserve its receipt and the original external pins with the reproduction logs. Do not replace expected pins with hashes computed from changed files to make a failed check pass. A content-matching local snapshot is not capture authentication, a study approval or an independent human reproduction; all of the checks and auditor requirements above still apply.
+
 `pnpm repl:verify` validates the empty pending workspace. `pnpm repl:gate` intentionally fails with `REPL_GATE_INCOMPLETE` until an external independent auditor supplies complete evidence.
