@@ -17,15 +17,15 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 123,
-    "passed": 123,
+    "total": 174,
+    "passed": 174,
     "failed": 0
   },
   "provenance": {
     "files": [
       {
         "file": "scripts/lib/ablation-evidence.mjs",
-        "sha256": "e275bd49797b8857085ee1bea397d10833332d728ed0c9ad77f31696085d2b9c"
+        "sha256": "e528c9753dfabbeabcd05cd3e0de5a0358dab634b587c3c2ef1f899c10dec69f"
       },
       {
         "file": "scripts/lib/ai-evaluation.mjs",
@@ -37,7 +37,7 @@
       },
       {
         "file": "scripts/lib/analysis-pipeline.mjs",
-        "sha256": "5bc62a5521e0830e00aa905c187189b2ca78754eefd9d87f773025d01b2462b3"
+        "sha256": "d02a989a74dc3d4bb3144edcfed461d33b152a378abc958af1cb535ce4065418"
       },
       {
         "file": "scripts/lib/ground-truth.mjs",
@@ -48,8 +48,16 @@
         "sha256": "1d95f28f3875e896bb190cabed6c715bfebea1ede97dd81aaf9c7adf629a6a04"
       },
       {
+        "file": "scripts/lib/holdout-repository.mjs",
+        "sha256": "b97cb2b0c7646e1ac1b1d82029ee39c8070c11bfc722ba1c7f9af2540cd7f2b3"
+      },
+      {
+        "file": "scripts/lib/holdout-repeat-capture.mjs",
+        "sha256": "a1530e0794230aa1b073bf4f5e5e5ea8cedfbbc6f9fb1d02b0285f51d9d0cb44"
+      },
+      {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "abcc3d96318de2d3fac91ab4758f152bacf234afa9f6b622b21087b86eca60f6"
+        "sha256": "7e1b7c0a85bd4b5fd7819cb581cc494fd17ffa58e84c04ce4d5c979591430b4e"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -61,7 +69,7 @@
       },
       {
         "file": "scripts/lib/measurement-study.mjs",
-        "sha256": "adeeb2aa3d7d59763890882c2f0559e40229e8e0a2972be83a021faccaa55da1"
+        "sha256": "e8150827f8ffdd3401317612202b1af76a9a6af0d596c99b13029710c6fec45e"
       },
       {
         "file": "scripts/lib/pattern-corpus.mjs",
@@ -69,7 +77,7 @@
       },
       {
         "file": "scripts/lib/pilot-evidence.mjs",
-        "sha256": "25601036eb08a915bf5df9e598a11f036d6c53bc6d9e23f18c5909a45d47b86f"
+        "sha256": "49fcf1efcf88b975efacbb8076ba6c4bb52cd96e7808b6953bbc576d202508ee"
       },
       {
         "file": "scripts/lib/pr-history.mjs",
@@ -84,8 +92,12 @@
         "sha256": "455ba2bcee1c4ff8381c9172b4954821214037d02472fbd6df9fda4eeaed3329"
       },
       {
+        "file": "scripts/lib/study-artifact-store.mjs",
+        "sha256": "7d0a130c471660f548e9d30acb83790c2076f4413bff5ac41adf7bd660ea69d1"
+      },
+      {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "2b4cd11b39e1b0511cc51ea850bb55683fa71453c3f5cdffdd927063e9b2b29f"
+        "sha256": "7345245cdb5776246de24efe07f6185e662a2c3efb9f0dfab6dbccfbf726fcb8"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -96,8 +108,12 @@
         "sha256": "d0690dbdf3197f0eabfdd5f994f9aac8d4942add2fda494b47532d78ed2b3f41"
       },
       {
+        "file": "scripts/validate-measurement-scaffold.mjs",
+        "sha256": "4a6fb5f43da2de60407744162c567ff55fcb69d1565d3e1f50b66a6922fca7b2"
+      },
+      {
         "file": "test/ablation-evidence.test.mjs",
-        "sha256": "23a07f719adab3f889ec8c229da1754f706c85ee72dabe09ff09259a24978724"
+        "sha256": "be950e0d9fdc3663482e442db0211b6820b6b9c654c7afc03f6331d44c6f2757"
       },
       {
         "file": "test/ai-evaluation.test.mjs",
@@ -109,7 +125,7 @@
       },
       {
         "file": "test/analysis-pipeline.test.mjs",
-        "sha256": "ed43cdb4130eae1ecb47bc36a3c176529b52373bd5bbd66aca31ee56c56dd0c6"
+        "sha256": "3ba19097980446bc867a6fccaaf085dd63fe1b31b6427fb1d67dea552f9fab9d"
       },
       {
         "file": "test/ground-truth.test.mjs",
@@ -120,8 +136,20 @@
         "sha256": "dfce92aa62664b443ca8a4bd74c98e6685e6bcb7eb3c6b6ccc4de6a7e3e19b10"
       },
       {
+        "file": "test/holdout-repository.test.mjs",
+        "sha256": "df32028ab22c1c2e06acdae68453d9e7a49767b1a2ee20f08617b0d42e2a1360"
+      },
+      {
+        "file": "test/holdout-repeat-capture.test.mjs",
+        "sha256": "ab717b6819cb54afbbd1ebba447545c13dd72216cf9ee13de1b9a4d45d68c9ed"
+      },
+      {
+        "file": "test-support/holdout-git-fixture.mjs",
+        "sha256": "5614d8df6cc99ecd597d2ffe9880ffa20f707464d6992bb3b379d29a62e44ebc"
+      },
+      {
         "file": "test/holdout.test.mjs",
-        "sha256": "8548fb42c5b572b204f82c20f65a53e282b1d6616126e9fa9e69826104504197"
+        "sha256": "25f1052500870550ed070e692292b73248d7c3e01342e875ff6f9716f5f96e36"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -133,7 +161,7 @@
       },
       {
         "file": "test/measurement-study.test.mjs",
-        "sha256": "bbd913db2ea3cdb98ba0c006f049160486bdc30d2f2dc308c69b7393b616f7a6"
+        "sha256": "bb4f9dd77de7d9058fa28fef193e0a088949366189d319879caca07730061f5e"
       },
       {
         "file": "test/pattern-corpus.test.mjs",
@@ -141,7 +169,7 @@
       },
       {
         "file": "test/pilot-evidence.test.mjs",
-        "sha256": "f2d7209ca32133c5439b36a35a9f90938783f9611ed7b283f33fd9e5e82d4718"
+        "sha256": "26fa5e02e43014177594f0dc94b09baea21997b818f236e41437ead44af18c16"
       },
       {
         "file": "test/pr-history.test.mjs",
@@ -154,6 +182,10 @@
       {
         "file": "test/runtime-provenance.test.mjs",
         "sha256": "b66d69f4c10d0ea87f025193e8cdac31543812db6135c8780c46b8fab35867db"
+      },
+      {
+        "file": "test/study-artifact-store.test.mjs",
+        "sha256": "a748866f7c9ea4aaf3471f6e519de0d345998ddcf014cfe2ff82328d47f8135e"
       },
       {
         "file": "package.json",
@@ -184,6 +216,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "60031c064b2a046422b25a94d52fc560f69405a6ccf12147a616e31499790e7f"
+    "manifest_sha256": "04fa9bed698a244313a91030a0bedf0e89414025ab492eb3e8f8265b9f9f4009"
   }
 }

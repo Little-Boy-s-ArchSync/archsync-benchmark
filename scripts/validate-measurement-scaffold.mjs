@@ -1,10 +1,15 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { dirname, join } from "node:path";
+import { openStudyArtifactStore } from "./lib/study-artifact-store.mjs";
 
 import {
   STUDY_STATISTICAL_PLAN_SOURCE,
   calculateStudyMetrics,
   validateInstrumentation,
+  validateInstrumentationArtifacts,
   validateStatisticalPlanSource,
   validateStudyManifest,
   validateTaskSuite,
@@ -54,11 +59,76 @@ for (const condition of ["A", "B", "C", "D"]) {
     task_id: "TASK-001",
     condition,
     type,
-    recorded_at: `2026-08-26T00:00:0${index}Z`,
+    recorded_at: `2026-08-26T00:00:0${type === "run_finished" ? 6 : index}Z`,
     payload: payload(type, condition),
   }));
 }
 assert.deepEqual(validateInstrumentation(events), []);
+
+// These in-memory bytes are controlled fixtures, never participant/provider data.
+const artifacts = new Map();
+for (const event of events) {
+  event.attempt_id = `${event.run_id}-synthetic-attempt`;
+  function bind(target, pathKey, hashKey, role) {
+    const path = `synthetic/${event.event_id}/${role}.json`;
+    const bytes = Buffer.from(JSON.stringify({ fixture: "synthetic-only", run_id: event.run_id, role }));
+    target[pathKey] = path;
+    target[hashKey] = createHash("sha256").update(bytes).digest("hex");
+    artifacts.set(path, bytes);
+  }
+  if (event.type === "run_started") for (const key of ["environment", "task_suite", "study_manifest"]) bind(event.payload, `${key}_path`, `${key}_sha256`, key);
+  if (event.type === "baseline_recorded") bind(event.payload, "tree_path", "tree_sha256", "tree");
+  if (event.type === "prompt_recorded") {
+    bind(event.payload, "prompt_path", "prompt_sha256", "prompt");
+    bind(event.payload, "output_path", "response_sha256", "response");
+    bind(event.payload, "provider_config_path", "provider_config_sha256", "provider-config");
+    bind(event.payload.redaction, "audit_path", "audit_sha256", "redaction-audit");
+  }
+  const receipt = Buffer.from(JSON.stringify({ schema_version: 1, event }));
+  event.artifact = { path: `synthetic/${event.event_id}/receipt.json`, sha256: createHash("sha256").update(receipt).digest("hex") };
+  artifacts.set(event.artifact.path, receipt);
+}
+assert.deepEqual(await validateInstrumentationArtifacts(events, async (path) => artifacts.get(path)), []);
+
+// Exercise the concrete disk intake with the same synthetic-only bytes. These
+// locally calculated fixture pins are not independently reviewed study pins.
+const storeRoot = await realpath(await mkdtemp(join(tmpdir(), "archsync-study-dry-run-")));
+try {
+  const digest = (bytes) => createHash("sha256").update(bytes).digest("hex");
+  for (const [path, bytes] of artifacts) {
+    const target = join(storeRoot, path);
+    await mkdir(dirname(target), { recursive: true });
+    await writeFile(target, bytes);
+  }
+  const eventBytes = Buffer.from(`${JSON.stringify(events)}\n`);
+  await writeFile(join(storeRoot, "events.json"), eventBytes);
+  const inventory = {
+    schema_version: 1,
+    kind: "study-artifact-store",
+    event_log: { path: "events.json", sha256: digest(eventBytes) },
+    runs: ["A", "B", "C", "D"].map((condition) => {
+      const runEvents = events.filter((event) => event.condition === condition);
+      return {
+        run_id: runEvents[0].run_id,
+        attempt_id: runEvents[0].attempt_id,
+        task_id: runEvents[0].task_id,
+        condition,
+        artifacts: [...artifacts].filter(([path]) => runEvents.some((event) => path.startsWith(`synthetic/${event.event_id}/`)))
+          .map(([path, bytes]) => ({ path, sha256: digest(bytes) })),
+      };
+    }),
+  };
+  const inventoryBytes = Buffer.from(`${JSON.stringify(inventory)}\n`);
+  await writeFile(join(storeRoot, "manifest.json"), inventoryBytes);
+  const store = await openStudyArtifactStore({ root: storeRoot, manifest: { path: "manifest.json", sha256: digest(inventoryBytes) }, event_log_sha256: digest(eventBytes) });
+  assert.deepEqual(store.events, events);
+  assert.deepEqual(await validateInstrumentationArtifacts(store.events, store.readArtifact), []);
+  assert.equal(store.receipt.run_count, 4);
+  assert.equal(store.receipt.authenticated_capture, false);
+  assert.equal(store.receipt.human_approval_verified, false);
+} finally {
+  await rm(storeRoot, { recursive: true, force: true });
+}
 
 const descriptive = calculateStudyMetrics(["A", "B", "C", "D"].map((condition, index) => ({
   run_id: `synthetic-metric-${condition}`,
@@ -82,4 +152,4 @@ const readme = await readFile(new URL("measurement-study/README.md", root), "utf
 assert.match(readme, /no participant, agent, pilot, or final-study result/iu);
 assert.match(readme, /blocked by EXP-103, STAT-101, PILOT-101, ETH-101 and DATA-101/iu);
 assert.match(readme, /Empty placeholder payloads fail/iu);
-console.log("VALID MEASUREMENT SCAFFOLD (A-D synthetic non-empty logging dry run; proposed STAT-101 linked; no research execution)");
+console.log("VALID MEASUREMENT SCAFFOLD (A-D synthetic logging, pinned local-store intake and exact-byte artifact binding dry run; proposed STAT-101 linked; no research execution)");

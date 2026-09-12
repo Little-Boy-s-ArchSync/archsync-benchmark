@@ -138,3 +138,35 @@ test("publishable analysis rejects empty, unapproved, synthetic, unfrozen and un
     { ...audit, sha256: "bad" },
   ]) assert.throws(() => assertPublishableAnalysis(frozen, invalid), /independent_reproduction_missing/u);
 });
+
+test("analysis retains one condition and final status per run across all outcomes", () => {
+  for (const changed of [{ condition: "D" }, { status: "failed" }]) {
+    const input = dataset({ rows: [row(), row({ outcome: "second_outcome", ...changed })] });
+    assert.ok(validateAnalysisDataset(input).some((issue) => issue.includes("changes condition or run status")));
+    assert.throws(() => createPreparatoryAnalysisArtifacts(input), /changes condition or run status/);
+  }
+  const valid = dataset({ rows: [row({ status: "failed" }), row({ outcome: "second_outcome", status: "failed", numerator: null, denominator: null, value: null })] });
+  assert.deepEqual(validateAnalysisDataset(valid), []);
+  const artifacts = createPreparatoryAnalysisArtifacts(valid);
+  assert.equal(artifacts["results.csv"].split("\n").filter((line) => line.includes(",failed,")).length, 2);
+  for (const key of ["run_id", "outcome", "condition"]) {
+    for (const value of [undefined, null, 3]) {
+      assert.ok(validateAnalysisDataset(dataset({ rows: [row({ [key]: value })] })).length > 0);
+    }
+  }
+});
+
+test("analysis rejects infinite derived ratios before generating tables or SVG geometry", () => {
+  for (const values of [
+    { numerator: 1e308, denominator: 1e-308, value: Infinity },
+    { numerator: 1, denominator: 2, value: NaN },
+    { numerator: 1, denominator: 2, value: -Infinity },
+  ]) {
+    const input = dataset({ rows: [row(values)] });
+    assert.ok(validateAnalysisDataset(input).some((issue) => issue.includes("numerator/denominator/value")));
+    assert.throws(() => createPreparatoryAnalysisArtifacts(input), /invalid analysis dataset/);
+  }
+  const input = dataset({ rows: [row({ numerator: Number.MAX_VALUE, denominator: 1, value: Number.MAX_VALUE })] });
+  const artifacts = createPreparatoryAnalysisArtifacts(input);
+  assert.ok(!/NaN|Infinity/u.test(artifacts["figure.svg"]));
+});

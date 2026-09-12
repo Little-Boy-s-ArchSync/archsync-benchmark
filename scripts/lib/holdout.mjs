@@ -37,8 +37,16 @@ function stable(value) {
   return JSON.stringify(value);
 }
 
-function safeRelativePath(value) {
-  return nonEmpty(value) && !value.startsWith("/") && !/^[A-Za-z]:/u.test(value) && !value.includes("\\") && !value.split("/").includes("..") && !value.split("/").includes("");
+export function isSafeHoldoutPath(value) {
+  return nonEmpty(value) && value.normalize("NFC") === value && !/[\\:\x00-\x1f\x7f]/u.test(value) && value.split("/").every((part) => part !== "" && part !== "." && part !== ".." && !/[. ]$/u.test(part) && !/^(?:\.git|con|prn|aux|nul|com[1-9]|lpt[1-9])(?:\.|$)/iu.test(part));
+}
+
+export function isHoldoutRepositoryUrl(value) {
+  return typeof value === "string" && /^https:\/\/github\.com\/[A-Za-z0-9][A-Za-z0-9-]*\/[A-Za-z0-9_][A-Za-z0-9._-]*$/u.test(value) && !value.endsWith(".git");
+}
+
+export function isHoldoutTimestamp(value) {
+  return typeof value === "string" && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/u.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString().replace(".000Z", "Z") === value.replace(".000Z", "Z");
 }
 
 function repositoryIssues(repository, index = 0) {
@@ -46,13 +54,13 @@ function repositoryIssues(repository, index = 0) {
   const prefix = `repositories[${index}]`;
   if (!object(repository)) return [`${prefix} must be an object`];
   if (!nonEmpty(repository.id)) issues.push(`${prefix}.id is required`);
-  if (!/^https:\/\/github\.com\/[^/]+\/[^/]+$/u.test(repository.url ?? "")) issues.push(`${prefix}.url must be an exact GitHub repository URL`);
+  if (!isHoldoutRepositoryUrl(repository.url)) issues.push(`${prefix}.url must be an exact GitHub repository URL`);
   if (!/^[0-9a-f]{40}$/u.test(repository.commit ?? "")) issues.push(`${prefix}.commit must be a full SHA`);
   if (!nonEmpty(repository.license_spdx)) issues.push(`${prefix}.license_spdx is required`);
-  if (!safeRelativePath(repository.license_file)) issues.push(`${prefix}.license_file must be a safe tracked path`);
+  if (!isSafeHoldoutPath(repository.license_file)) issues.push(`${prefix}.license_file must be a safe tracked path`);
   if (!/^[0-9a-f]{64}$/u.test(repository.license_sha256 ?? "")) issues.push(`${prefix}.license_sha256 is required`);
-  if (!safeRelativePath(repository.scope)) issues.push(`${prefix}.scope is required and must be safe`);
-  if (!nonEmpty(repository.retrieved_at)) issues.push(`${prefix}.retrieved_at is required`);
+  if (!isSafeHoldoutPath(repository.scope)) issues.push(`${prefix}.scope is required and must be safe`);
+  if (!isHoldoutTimestamp(repository.retrieved_at)) issues.push(`${prefix}.retrieved_at must be a valid UTC timestamp`);
   if (!/^[0-9a-f]{64}$/u.test(repository.tree_sha256 ?? "")) issues.push(`${prefix}.tree_sha256 is required`);
   if (!object(repository.environment) || !nonEmpty(repository.environment.node) || !nonEmpty(repository.environment.package_manager)) {
     issues.push(`${prefix}.environment requires Node and package manager versions`);
@@ -96,12 +104,12 @@ export function computeTrackedTreeSha256(entries) {
   if (!Array.isArray(entries) || entries.length === 0) throw new Error("tracked tree entries are required");
   const seen = new Set();
   const records = entries.map((entry) => {
-    if (!object(entry) || !safeRelativePath(entry.path) || seen.has(entry.path) || !(typeof entry.content === "string" || Buffer.isBuffer(entry.content))) {
+    if (!object(entry) || !isSafeHoldoutPath(entry.path) || seen.has(entry.path) || !(typeof entry.content === "string" || Buffer.isBuffer(entry.content))) {
       throw new Error("tracked tree entries require unique safe paths and byte content");
     }
     seen.add(entry.path);
     return { path: entry.path, sha256: sha256(entry.content) };
-  }).sort((left, right) => left.path.localeCompare(right.path));
+  }).sort((left, right) => Buffer.compare(Buffer.from(left.path), Buffer.from(right.path)));
   return sha256(records.map(({ path, sha256: digest }) => `${path}\0${digest}`).join("\n"));
 }
 
@@ -115,6 +123,8 @@ export function verifyRepositoryPin(repository, observation) {
   if (observation.license_file !== repository.license_file || observation.license_sha256 !== repository.license_sha256) {
     issues.push("repository license artifact does not match the frozen pin");
   }
+  if (!isHoldoutTimestamp(observation.retrieved_at) || Date.parse(observation.retrieved_at) < Date.parse(repository.retrieved_at)) issues.push("repository retrieval time is invalid or predates the frozen pin");
+  if (!object(observation.environment) || observation.environment.node !== repository.environment?.node || observation.environment.package_manager !== repository.environment?.package_manager) issues.push("repository environment does not match the frozen pin");
   return issues;
 }
 
@@ -233,11 +243,15 @@ function validateRunPackages(packages) {
   });
 }
 
-export async function runFrozenHoldoutTwice({ frozen, artifacts, observations, packages, environment, analyze }) {
+export async function runFrozenHoldoutTwice({ frozen: suppliedFrozen, artifacts, observations, packages: suppliedPackages, environment: suppliedEnvironment, analyze }) {
+  const frozen = structuredClone(suppliedFrozen);
+  const packages = structuredClone(suppliedPackages);
+  const environment = structuredClone(suppliedEnvironment);
   if (!verifyFrozenManifest(frozen, artifacts)) throw new Error("HOLDOUT_NOT_FROZEN");
   if (!object(observations) || !validateRunPackages(packages) || !object(environment) || !nonEmpty(environment.id) || !nonEmpty(environment.node) || !nonEmpty(environment.package_manager) || typeof analyze !== "function") {
     throw new Error("HOLDOUT_RUN_CONFIGURATION_INVALID");
   }
+  if (stable(frozen.manifest.run_context) !== stable({ packages, environment })) throw new Error("HOLDOUT_RUN_SCOPE_MISMATCH");
   for (const repository of frozen.manifest.repositories) {
     const issues = verifyRepositoryPin(repository, observations[repository.id]);
     if (issues.length > 0) throw new Error(`HOLDOUT_PIN_INVALID: ${issues.join("; ")}`);
@@ -401,8 +415,8 @@ function scalabilityGroup(rows) {
 export function summarizeScalabilitySamples(samples) {
   if (!Array.isArray(samples) || samples.length < 4) throw new Error("at least four scalability samples are required");
   for (const sample of samples) {
-    const completedMetricsValid = sample?.status === "completed" && ["duration_ms", "cpu_ms", "peak_memory_bytes"].every((key) => Number.isFinite(sample[key]) && sample[key] >= 0);
-    const failedMetricsValid = sample?.status === "failed" && nonEmpty(sample.failure_class) && sample.duration_ms === null && sample.cpu_ms === null && sample.peak_memory_bytes === null;
+    const completedMetricsValid = sample?.status === "completed" && typeof sample.oracle_match === "boolean" && ["duration_ms", "cpu_ms", "peak_memory_bytes"].every((key) => Number.isFinite(sample[key]) && sample[key] >= 0);
+    const failedMetricsValid = sample?.status === "failed" && nonEmpty(sample.failure_class) && sample.duration_ms === null && sample.cpu_ms === null && sample.peak_memory_bytes === null && sample.oracle_match === false;
     if (!object(sample) || !["full", "incremental"].includes(sample.mode) || !nonEmpty(sample.repository_id) || !nonEmpty(sample.environment_id) || !nonEmpty(sample.parsed_scope) || !Number.isInteger(sample.files) || sample.files < 1 || !Number.isInteger(sample.parsed_files) || sample.parsed_files < 0 || sample.parsed_files > sample.files || !Number.isInteger(sample.component_count) || sample.component_count < 1 || (!completedMetricsValid && !failedMetricsValid)) {
       throw new Error("invalid scalability sample");
     }

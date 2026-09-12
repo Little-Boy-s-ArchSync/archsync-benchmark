@@ -35,17 +35,18 @@ export function validatePilotReport(report) {
     else runIds.add(run.run_id);
     if (run.outside_final_sample !== true || run.logging_complete !== true || run.instructions_understood !== true || run.annotation_comprehension_checked !== true) issues.push(`run ${index} must confirm separation, logging, instructions, and annotation comprehension`);
     if (!Number.isFinite(run.approval_delay_ms) || run.approval_delay_ms < 0 || !Number.isInteger(run.false_blocks) || run.false_blocks < 0) issues.push(`run ${index} requires approval delay and false-block burden`);
-    if (!object(run.failure_recovery) || typeof run.failure_recovery.exercised !== "boolean" || !["passed", "failed", "not-triggered"].includes(run.failure_recovery.outcome)) issues.push(`run ${index} requires failure-recovery evidence`);
+    if (!object(run.failure_recovery) || typeof run.failure_recovery.exercised !== "boolean" || !["passed", "failed", "not-triggered"].includes(run.failure_recovery.outcome)
+      || run.failure_recovery.exercised !== (run.failure_recovery.outcome !== "not-triggered")) issues.push(`run ${index} requires consistent failure-recovery evidence`);
     for (const [field, kind] of [["missing_fields", "missing-field"], ["ambiguities", "ambiguity"]]) {
       if (!Array.isArray(run[field]) || !run[field].every(nonEmpty)) issues.push(`run ${index} ${field} must be an array`);
       else run[field].forEach((description) => requiredIssues.push({ run_id: run.run_id, kind, description }));
     }
   });
+  const issueIds = new Set();
   if (!Array.isArray(report.issues)) issues.push("pilot issues must be an array");
   else {
-    const issueIds = new Set();
     report.issues.forEach((issue, index) => {
-      if (!object(issue) || !nonEmpty(issue.issue_id) || issueIds.has(issue.issue_id) || !nonEmpty(issue.run_id) || !["missing-field", "ambiguity"].includes(issue.kind) || !nonEmpty(issue.description) || !/^https:\/\//u.test(issue.url) || !["open", "resolved"].includes(issue.status)) issues.push(`issue ${index} must be unique, linked, and reviewable`);
+      if (!object(issue) || !nonEmpty(issue.issue_id) || issueIds.has(issue.issue_id) || !runIds.has(issue.run_id) || !["missing-field", "ambiguity"].includes(issue.kind) || !nonEmpty(issue.description) || !/^https:\/\//u.test(issue.url) || !["open", "resolved"].includes(issue.status)) issues.push(`issue ${index} must be unique, linked to an observed run, and reviewable`);
       else issueIds.add(issue.issue_id);
     });
     for (const required of requiredIssues) {
@@ -53,6 +54,9 @@ export function validatePilotReport(report) {
     }
   }
   if (!Array.isArray(report.protocol_changes) || !report.protocol_changes.every((change) => object(change) && nonEmpty(change.issue_id) && nonEmpty(change.description) && nonEmpty(change.version))) issues.push("protocol_changes must be versioned and issue-linked");
+  else for (const change of report.protocol_changes) {
+    if (!issueIds.has(change.issue_id)) issues.push("protocol change must reference a recorded valid issue");
+  }
   if ((requiredIssues.length > 0 || report.protocol_changes?.length > 0) && report.protocol_before_version === report.protocol_after_version) issues.push("protocol fixes require a new version before freeze");
   if (!sha(report.report_sha256)) issues.push("complete pilot requires report_sha256");
   return issues;
