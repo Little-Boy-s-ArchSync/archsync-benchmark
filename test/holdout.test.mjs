@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { createHash } from "node:crypto";
 import test from "node:test";
 
 import {
@@ -8,6 +9,8 @@ import {
   computeTrackedTreeSha256,
   createFrozenManifest,
   materializeRepositoryPin,
+  isHoldoutRepositoryUrl,
+  isHoldoutTimestamp,
   runFrozenHoldoutTwice,
   summarizeScalabilitySamples,
   validateAdjudications,
@@ -46,6 +49,8 @@ function observation(value = repository()) {
     tree_sha256: value.tree_sha256,
     license_file: value.license_file,
     license_sha256: value.license_sha256,
+    retrieved_at: value.retrieved_at,
+    environment: structuredClone(value.environment),
   };
 }
 
@@ -95,7 +100,7 @@ test("holdout manifest reports provenance, leakage, path, and approval issues", 
     "repositories[1].environment", "repositories[2].id", "appears in the tuning set",
   ]) assert.ok(issues.some((issue) => issue.includes(text)), text);
 
-  for (const unsafe of ["C:/LICENSE", "dir\\LICENSE", "dir//LICENSE", ""]) {
+  for (const unsafe of ["C:/LICENSE", "dir\\LICENSE", "dir//LICENSE", "", ".", "./LICENSE", "dir/../LICENSE", "LICENSE\0suffix", "dir\n/LICENSE", ".git/config", "dir/CON.txt", "dir/LPT1", "dir./LICENSE", "dir /LICENSE", "cafe\u0301/LICENSE"]) {
     const invalid = repository();
     invalid.license_file = unsafe;
     assert.ok(validateHoldoutManifest({ ...manifest("proposed"), repositories: [invalid] }).some((issue) => issue.includes("license_file")));
@@ -113,9 +118,19 @@ test("holdout manifest reports provenance, leakage, path, and approval issues", 
   assert.deepEqual(validateHoldoutManifest({ ...manifest("proposed"), tuning_repository_urls: null }), []);
 });
 
+test("repository URLs and retrieval timestamps have canonical unambiguous forms", () => {
+  for (const url of [null, "https://github.com/owner/repo?x", "https://github.com/owner/repo#x", "https://github.com/@owner/repo", "https://github.com/owner/repo.git", "https://github.com/owner/..", "https://github.com/owner/repo%2Fother"]) assert.equal(isHoldoutRepositoryUrl(url), false);
+  for (const time of [null, "yesterday", "2026-02-30T00:00:00Z", "2026-99-01T00:00:00Z", "2026-09-12T00:00:00+00:00"]) assert.equal(isHoldoutTimestamp(time), false);
+  assert.equal(isHoldoutTimestamp("2026-09-12T01:02:03.456Z"), true);
+});
+
 test("tracked tree hashing is path-stable and rejects unsafe or ambiguous entries", () => {
   const forward = computeTrackedTreeSha256(treeEntries);
   assert.equal(computeTrackedTreeSha256([...treeEntries].reverse()), forward);
+  // UTF-8 byte order is independent of the host locale/collation tables.
+  const entries = [{ path: "a.ts", content: "a" }, { path: "Z.ts", content: "z" }];
+  const hash = (value) => createHash("sha256").update(value).digest("hex");
+  assert.equal(computeTrackedTreeSha256(entries), hash(`Z.ts\0${hash("z")}\na.ts\0${hash("a")}`));
   assert.throws(() => computeTrackedTreeSha256([]), /required/);
   assert.throws(() => computeTrackedTreeSha256(null), /required/);
   for (const entries of [
@@ -133,6 +148,8 @@ test("repository pins bind URL, commit, scope, tree, and license", async () => {
   assert.ok(verifyRepositoryPin({ id: "" }, null).some((issue) => issue.includes("observation")));
   const mismatched = { ...observed, url: "x", commit: "x", scope: "x", tree_sha256: "x", license_file: "x", license_sha256: "x" };
   assert.deepEqual(verifyRepositoryPin(expected, mismatched).length, 5);
+  for (const change of [{ retrieved_at: "bad" }, { retrieved_at: "2020-01-01T00:00:00Z" }, { environment: null }, { environment: { ...expected.environment, node: "99.0.0" } }, { environment: { ...expected.environment, package_manager: "npm@1.0.0" } }]) assert.ok(verifyRepositoryPin(expected, { ...observed, ...change }).length > 0);
+  assert.deepEqual(verifyRepositoryPin(expected, { ...observed, retrieved_at: "2026-09-12T00:00:00Z" }), []);
 
   const calls = [];
   const materialized = await materializeRepositoryPin(expected, {

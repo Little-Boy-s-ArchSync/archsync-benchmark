@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 138,
-    "passed": 138,
+    "total": 145,
+    "passed": 145,
     "failed": 0
   },
   "provenance": {
@@ -48,8 +48,12 @@
         "sha256": "1d95f28f3875e896bb190cabed6c715bfebea1ede97dd81aaf9c7adf629a6a04"
       },
       {
+        "file": "scripts/lib/holdout-repository.mjs",
+        "sha256": "b97cb2b0c7646e1ac1b1d82029ee39c8070c11bfc722ba1c7f9af2540cd7f2b3"
+      },
+      {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "abcc3d96318de2d3fac91ab4758f152bacf234afa9f6b622b21087b86eca60f6"
+        "sha256": "35e8834c4e7ff94b0cf8f9540729a2a37cc0ef8fac2b5f8ee1c49017f09c50ee"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -85,7 +89,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "2b4cd11b39e1b0511cc51ea850bb55683fa71453c3f5cdffdd927063e9b2b29f"
+        "sha256": "1175f2fe4b0dad73bede1b6ee8bff81d42d7dcdc37473de1b677941c62ff7b0f"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -120,8 +124,12 @@
         "sha256": "dfce92aa62664b443ca8a4bd74c98e6685e6bcb7eb3c6b6ccc4de6a7e3e19b10"
       },
       {
+        "file": "test/holdout-repository.test.mjs",
+        "sha256": "5123f6cd0cb7240a7ba78549e3e81341a079c7593a0ef991e2ea4f17b41a5472"
+      },
+      {
         "file": "test/holdout.test.mjs",
-        "sha256": "8548fb42c5b572b204f82c20f65a53e282b1d6616126e9fa9e69826104504197"
+        "sha256": "b42fff644c0824f9cceb8e11916f48fbd8a1b0eadb5ecf51c9bb3473d69b2193"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -184,6 +192,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "909c2ff5c9d273d046d68cd1be68e043a061f2231f1425d76e9b2512b5c0d356"
+    "manifest_sha256": "624ab9dd546150f03e06285bdfcfe8feb555b9363abaf3ccb88adce3d19848e2"
   }
 }
