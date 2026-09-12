@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { isDeepStrictEqual } from "node:util";
 
 const CONDITIONS = ["A", "B", "C", "D"];
 const EVENT_TYPES = new Set([
@@ -237,6 +238,80 @@ export function validateInstrumentation(events) {
       const endedAt = Date.parse(finished.payload.ended_at);
       if (endedAt < Date.parse(tested.recorded_at) || endedAt > Date.parse(finished.recorded_at)) issues.push(`${runId} end time falls outside the recorded test-to-finish interval`);
     }
+  }
+  return issues;
+}
+
+// Structural validation remains available for proposed/synthetic envelopes. This
+// separate verifier requires bytes from the caller's trusted artifact store.
+export async function validateInstrumentationArtifacts(events, readArtifact) {
+  const issues = validateInstrumentation(events);
+  if (issues.length > 0) return issues;
+  if (typeof readArtifact !== "function") return ["artifact verification requires an injected byte reader"];
+  // Snapshot before awaiting external I/O so callers cannot change the claims
+  // during verification. No failed/inconclusive event is removed or rewritten.
+  const snapshot = structuredClone(events);
+  const attempts = new Map();
+  const owners = new Map();
+  for (const event of snapshot) {
+    if (!nonEmpty(event.attempt_id)) issues.push(`${event.event_id} requires attempt_id for artifact verification`);
+    else if (attempts.has(event.run_id) && attempts.get(event.run_id) !== event.attempt_id) issues.push(`${event.run_id} changes attempt_id`);
+    else if (owners.has(event.attempt_id) && owners.get(event.attempt_id) !== event.run_id) issues.push(`${event.attempt_id} is reused by another run`);
+    else {
+      attempts.set(event.run_id, event.attempt_id);
+      owners.set(event.attempt_id, event.run_id);
+    }
+  }
+  if (issues.length > 0) return issues;
+
+  async function readBoundArtifact(path, digest, label) {
+    if (!safeRelativePath(path) || !/^[A-Za-z0-9_./-]+$/u.test(path) || path.split("/").includes(".") || !sha(digest)) {
+      issues.push(`${label} requires a safe artifact path and SHA-256`);
+      return null;
+    }
+    let bytes;
+    try {
+      bytes = await readArtifact(path);
+    } catch {
+      issues.push(`${label} artifact is missing or unreadable`);
+      return null;
+    }
+    if (!(bytes instanceof Uint8Array) || bytes.byteLength === 0) {
+      issues.push(`${label} artifact reader must return non-empty bytes`);
+      return null;
+    }
+    // Copy reader-owned memory before checking or parsing it.
+    const captured = Buffer.from(bytes);
+    if (sha256(captured) !== digest) {
+      issues.push(`${label} artifact SHA-256 mismatch`);
+      return null;
+    }
+    return captured;
+  }
+
+  for (const event of snapshot) {
+    const { artifact, ...envelope } = event;
+    const receipt = await readBoundArtifact(artifact?.path, artifact?.sha256, `${event.event_id} receipt`);
+    if (receipt !== null) {
+      let recorded;
+      try {
+        recorded = JSON.parse(receipt.toString("utf8"));
+      } catch {
+        issues.push(`${event.event_id} receipt must contain JSON`);
+      }
+      if (!isDeepStrictEqual(recorded, { schema_version: 1, event: envelope })) issues.push(`${event.event_id} receipt does not match the exact event and run/attempt binding`);
+    }
+    const payload = event.payload;
+    let references = [];
+    if (event.type === "run_started") references = ["environment", "task_suite", "study_manifest"].map((key) => [payload[`${key}_path`], payload[`${key}_sha256`], key]);
+    if (event.type === "baseline_recorded") references = [[payload.tree_path, payload.tree_sha256, "tree"]];
+    if (event.type === "prompt_recorded") references = [
+      [payload.prompt_path, payload.prompt_sha256, "prompt"],
+      [payload.output_path, payload.response_sha256, "response"],
+      [payload.provider_config_path, payload.provider_config_sha256, "provider configuration"],
+      [payload.redaction.audit_path, payload.redaction.audit_sha256, "redaction audit"],
+    ];
+    for (const [path, digest, role] of references) await readBoundArtifact(path, digest, `${event.event_id} ${role}`);
   }
   return issues;
 }

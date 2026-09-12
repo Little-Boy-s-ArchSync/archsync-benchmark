@@ -1,5 +1,8 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { createHash } from "node:crypto";
+import { mkdtemp, readFile, rm, writeFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import test from "node:test";
 
 import {
@@ -8,6 +11,7 @@ import {
   createNormalizedAnalysis,
   validateAblationDesign,
   validateInstrumentation,
+  validateInstrumentationArtifacts,
   validateStatisticalPlanSource,
   validateStudyManifest,
   validateTaskSuite,
@@ -291,6 +295,190 @@ test("instrumentation requires end time after tests and before finish was record
     const events = runEvents("end-time");
     events.at(-1).payload.ended_at = endedAt;
     assert.ok(validateInstrumentation(events).some((issue) => issue.includes("end time falls outside")));
+  }
+});
+
+function digest(bytes) {
+  return createHash("sha256").update(bytes).digest("hex");
+}
+
+function artifactFixture(runId = "synthetic-artifact-run", condition = "B", status = "completed") {
+  const events = runEvents(runId, condition);
+  const files = new Map();
+  const references = [];
+  function bind(payload, pathKey, hashKey, role) {
+    const path = `${runId}-${role}.json`;
+    const bytes = Buffer.from(JSON.stringify({ fixture: "synthetic-only", run_id: runId, role }));
+    payload[pathKey] = path;
+    payload[hashKey] = digest(bytes);
+    files.set(path, bytes);
+    references.push({ path, role });
+  }
+  for (const event of events) {
+    event.attempt_id = `${runId}-attempt-1`;
+    const payload = event.payload;
+    if (event.type === "run_started") {
+      for (const key of ["environment", "task_suite", "study_manifest"]) bind(payload, `${key}_path`, `${key}_sha256`, key);
+    }
+    if (event.type === "baseline_recorded") bind(payload, "tree_path", "tree_sha256", "tree");
+    if (event.type === "prompt_recorded") {
+      bind(payload, "prompt_path", "prompt_sha256", "prompt");
+      bind(payload, "output_path", "response_sha256", "response");
+      bind(payload, "provider_config_path", "provider_config_sha256", "provider-config");
+      bind(payload.redaction, "audit_path", "audit_sha256", "redaction-audit");
+    }
+    if (event.type === "tests_recorded" && status !== "completed") Object.assign(payload.results[0], { status: "failed", exit_code: 1 });
+    if (event.type === "run_finished") payload.status = status;
+    const bytes = Buffer.from(JSON.stringify({ schema_version: 1, event }));
+    const path = `${event.event_id}-receipt.json`;
+    event.artifact = { path, sha256: digest(bytes) };
+    files.set(path, bytes);
+  }
+  const readArtifact = async (path) => {
+    if (!files.has(path)) throw new Error("ENOENT");
+    return files.get(path);
+  };
+  return { events, files, references, readArtifact };
+}
+
+test("strict artifact verification retains complete A-D completed, failed and inconclusive attempts", async () => {
+  for (const condition of conditions) {
+    for (const status of ["completed", "failed", "inconclusive"]) {
+      const fixture = artifactFixture(`synthetic-${condition}-${status}`, condition, status);
+      const original = structuredClone(fixture.events);
+      assert.deepEqual(await validateInstrumentationArtifacts(fixture.events, fixture.readArtifact), []);
+      assert.deepEqual(fixture.events, original);
+      assert.equal(fixture.events.at(-1).payload.status, status);
+    }
+  }
+});
+
+test("strict artifact verification rejects missing and changed bytes for every claimed artifact", async () => {
+  const fixture = artifactFixture();
+  for (const [path, original] of [...fixture.files]) {
+    // The previous structural validator accepts both missing and substituted files.
+    fixture.files.delete(path);
+    assert.deepEqual(validateInstrumentation(fixture.events), []);
+    assert.ok((await validateInstrumentationArtifacts(fixture.events, fixture.readArtifact)).some((issue) => issue.includes("missing or unreadable")), path);
+    fixture.files.set(path, Buffer.concat([original, Buffer.from("\n")]));
+    assert.deepEqual(validateInstrumentation(fixture.events), []);
+    assert.ok((await validateInstrumentationArtifacts(fixture.events, fixture.readArtifact)).some((issue) => issue.includes("SHA-256 mismatch")), path);
+    fixture.files.set(path, original);
+  }
+  assert.deepEqual(await validateInstrumentationArtifacts(fixture.events, fixture.readArtifact), []);
+});
+
+test("strict receipts reject correctly hashed substitutions across event, run and attempt identities", async () => {
+  for (const [key, value] of [
+    ["schema_version", 2], ["event_id", "other-event"], ["run_id", "other-run"], ["attempt_id", "other-attempt"],
+    ["task_id", "TASK-002"], ["condition", "C"], ["type", "run_started"], ["recorded_at", "2026-08-26T00:00:00Z"],
+    ["payload", {}], ["extra", true],
+  ]) {
+    const fixture = artifactFixture();
+    const event = fixture.events.find((row) => row.type === "tests_recorded");
+    const receipt = JSON.parse(fixture.files.get(event.artifact.path));
+    if (["schema_version", "extra"].includes(key)) receipt[key] = value;
+    else receipt.event[key] = value;
+    const replacement = Buffer.from(JSON.stringify(receipt));
+    fixture.files.set(event.artifact.path, replacement);
+    event.artifact.sha256 = digest(replacement);
+    assert.deepEqual(validateInstrumentation(fixture.events), []);
+    assert.ok((await validateInstrumentationArtifacts(fixture.events, fixture.readArtifact)).some((issue) => issue.includes("exact event and run/attempt binding")), key);
+  }
+});
+
+test("strict verification rejects passed summaries substituted for recorded failed acceptance tests", async () => {
+  const fixture = artifactFixture("synthetic-failed-attempt", "B", "failed");
+  const originalFiles = [...fixture.files].map(([path, bytes]) => [path, Buffer.from(bytes)]);
+  Object.assign(fixture.events.find((row) => row.type === "tests_recorded").payload.results[0], { status: "passed", exit_code: 0 });
+  fixture.events.at(-1).payload.status = "completed";
+  assert.deepEqual(validateInstrumentation(fixture.events), []);
+  const issues = await validateInstrumentationArtifacts(fixture.events, fixture.readArtifact);
+  assert.equal(issues.filter((issue) => issue.includes("exact event and run/attempt binding")).length, 2);
+  assert.deepEqual([...fixture.files], originalFiles);
+});
+
+test("strict verification requires one stable attempt per run and an injected byte reader", async () => {
+  assert.deepEqual(await validateInstrumentationArtifacts([]), ["instrumentation events are required"]);
+  const fixture = artifactFixture();
+  assert.deepEqual(await validateInstrumentationArtifacts(fixture.events), ["artifact verification requires an injected byte reader"]);
+  const noRead = () => assert.fail("invalid attempt envelopes must not read artifacts");
+  for (const attempt of [undefined, ""]) {
+    const events = structuredClone(fixture.events);
+    events[0].attempt_id = attempt;
+    assert.ok((await validateInstrumentationArtifacts(events, noRead)).some((issue) => issue.includes("requires attempt_id")));
+  }
+  const changed = structuredClone(fixture.events);
+  changed[1].attempt_id = "other-attempt";
+  assert.ok((await validateInstrumentationArtifacts(changed, noRead)).some((issue) => issue.includes("changes attempt_id")));
+  const second = artifactFixture("synthetic-other-run");
+  second.events.forEach((event) => { event.attempt_id = fixture.events[0].attempt_id; });
+  assert.ok((await validateInstrumentationArtifacts([...fixture.events, ...second.events], noRead)).some((issue) => issue.includes("reused by another run")));
+});
+
+test("strict verification rejects invalid references before handing their paths to the reader", async () => {
+  const fixture = artifactFixture();
+  for (const descriptor of [
+    undefined, null, {}, { path: "receipt.json", sha256: "bad" },
+    ...["../secret", "/absolute", "C:/absolute", "a\\b", "a//b", "a/./b", "a:b", "a\0b", "https://example.com/a", "%2e%2e/a"].map((path) => ({ path, sha256: "a".repeat(64) })),
+  ]) {
+    const events = structuredClone(fixture.events);
+    events[0].artifact = descriptor;
+    const visited = [];
+    const issues = await validateInstrumentationArtifacts(events, async (path) => {
+      visited.push(path);
+      return fixture.readArtifact(path);
+    });
+    assert.ok(issues.some((issue) => issue.includes("safe artifact path and SHA-256")));
+    assert.ok(!visited.includes(descriptor?.path));
+  }
+  for (const [type, key] of [["run_started", "environment_path"], ["baseline_recorded", "tree_path"], ["prompt_recorded", "provider_config_path"]]) {
+    const events = structuredClone(fixture.events);
+    delete events.find((event) => event.type === type).payload[key];
+    assert.ok((await validateInstrumentationArtifacts(events, fixture.readArtifact)).some((issue) => issue.includes("safe artifact path and SHA-256")));
+  }
+});
+
+test("strict verification requires actual nonempty bytes and valid exact receipt JSON", async () => {
+  const fixture = artifactFixture();
+  for (const result of [undefined, null, "text", {}, Buffer.alloc(0)]) {
+    assert.ok((await validateInstrumentationArtifacts(fixture.events, async () => result)).some((issue) => issue.includes("non-empty bytes")));
+  }
+  for (const content of ["not JSON", "null", "[]"]) {
+    const events = structuredClone(fixture.events);
+    const bytes = Buffer.from(content);
+    events[0].artifact.sha256 = digest(bytes);
+    const issues = await validateInstrumentationArtifacts(events, async (path) => path === events[0].artifact.path ? bytes : fixture.readArtifact(path));
+    assert.ok(issues.some((issue) => issue.includes(content === "not JSON" ? "must contain JSON" : "exact event and run/attempt binding")));
+  }
+});
+
+test("strict verification snapshots event claims before awaiting the reader", async () => {
+  const fixture = artifactFixture();
+  const issues = await validateInstrumentationArtifacts(fixture.events, async (path) => {
+    // Mutating caller-owned input must not change the attempt being verified.
+    fixture.events.at(-1).payload.status = "failed";
+    fixture.events.at(-1).artifact.sha256 = "f".repeat(64);
+    return fixture.readArtifact(path);
+  });
+  assert.deepEqual(issues, []);
+});
+
+test("strict verification observes deletion and substitution through a real temporary-file reader", async () => {
+  const fixture = artifactFixture();
+  const directory = await mkdtemp(join(tmpdir(), "archsync-study-artifacts-"));
+  try {
+    for (const [path, bytes] of fixture.files) await writeFile(join(directory, path), bytes);
+    const reader = (path) => readFile(join(directory, path));
+    assert.deepEqual(await validateInstrumentationArtifacts(fixture.events, reader), []);
+    const prompt = fixture.references.find((reference) => reference.role === "prompt").path;
+    await rm(join(directory, prompt));
+    assert.deepEqual(validateInstrumentation(fixture.events), []);
+    assert.ok((await validateInstrumentationArtifacts(fixture.events, reader)).some((issue) => issue.includes("prompt artifact is missing or unreadable")));
+    await writeFile(join(directory, prompt), "substituted synthetic prompt bytes");
+    assert.ok((await validateInstrumentationArtifacts(fixture.events, reader)).some((issue) => issue.includes("prompt artifact SHA-256 mismatch")));
+  } finally {
+    await rm(directory, { recursive: true, force: true });
   }
 });
 
