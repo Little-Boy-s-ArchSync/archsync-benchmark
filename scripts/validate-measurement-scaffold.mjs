@@ -54,7 +54,7 @@ for (const condition of ["A", "B", "C", "D"]) {
     task_id: "TASK-001",
     condition,
     type,
-    recorded_at: `2026-08-26T00:00:0${index}Z`,
+    recorded_at: `2026-08-26T00:00:0${type === "run_finished" ? 6 : index}Z`,
     payload: payload(type, condition),
   }));
 }

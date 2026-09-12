@@ -172,7 +172,7 @@ function runEvents(runId, condition = "A") {
     task_id: "TASK-001",
     condition,
     type,
-    recorded_at: `2026-08-26T00:00:0${index}Z`,
+    recorded_at: `2026-08-26T00:00:0${type === "run_finished" ? 6 : index}Z`,
     payload: payload(type, condition),
   }));
 }
@@ -240,6 +240,58 @@ test("instrumentation dry run requires a complete failure-retaining event envelo
   const invalidPath = runEvents("invalid-path", "B");
   invalidPath.find((event) => event.type === "prompt_recorded").payload.prompt_path = "../secret";
   assert.ok(validateInstrumentation(invalidPath).some((issue) => issue.includes("redacted")));
+});
+
+
+test("instrumentation binds submitted acceptance commands to actual test execution", () => {
+  const events = runEvents("command-substitution");
+  events.find((event) => event.type === "tests_recorded").payload.commands = ["node -e 'process.exit(0)'"];
+  events.find((event) => event.type === "tests_recorded").payload.results[0].command = "node -e 'process.exit(0)'";
+  assert.ok(validateInstrumentation(events).some((issue) => issue.includes("submitted acceptance commands")));
+});
+
+test("instrumentation rejects dropped, reordered and duplicate acceptance commands", () => {
+  for (const actual of [["test-a"], ["test-b", "test-a"], ["test-a", "test-a"]]) {
+    const events = runEvents("commands");
+    events.find((event) => event.type === "task_submitted").payload.acceptance_commands = ["test-a", "test-b"];
+    const tests = events.find((event) => event.type === "tests_recorded").payload;
+    tests.commands = actual;
+    tests.results = actual.map((command) => ({ command, status: "passed", exit_code: 0, duration_ms: 0 }));
+    assert.ok(validateInstrumentation(events).some((issue) => issue.includes("submitted acceptance commands")));
+  }
+});
+
+test("instrumentation preserves findings, approvals and repairs in final counts", () => {
+  for (const key of ["findings", "approvals", "repairs"]) {
+    const events = runEvents(`counts-${key}`);
+    events.at(-1).payload[key] += 1;
+    assert.ok(validateInstrumentation(events).some((issue) => issue.includes(`final ${key} count`)));
+  }
+});
+
+test("instrumentation cannot claim completed when acceptance tests failed", () => {
+  const events = runEvents("failed-tests", "B");
+  const result = events.find((event) => event.type === "tests_recorded").payload.results[0];
+  Object.assign(result, { status: "failed", exit_code: 1 });
+  assert.ok(validateInstrumentation(events).some((issue) => issue.includes("completed run has failed acceptance tests")));
+  for (const status of ["failed", "inconclusive"]) {
+    events.at(-1).payload.status = status;
+    assert.deepEqual(validateInstrumentation(events), []);
+  }
+});
+
+test("instrumentation rejects model usage in the human-only condition", () => {
+  const events = runEvents("manual-token-usage");
+  events.at(-1).payload.tokens = 1;
+  assert.ok(validateInstrumentation(events).some((issue) => issue.includes("manual condition A reports model tokens")));
+});
+
+test("instrumentation requires end time after tests and before finish was recorded", () => {
+  for (const endedAt of ["2026-08-25T23:59:59Z", "2026-08-26T00:00:07Z"]) {
+    const events = runEvents("end-time");
+    events.at(-1).payload.ended_at = endedAt;
+    assert.ok(validateInstrumentation(events).some((issue) => issue.includes("end time falls outside")));
+  }
 });
 
 function studyRow(overrides = {}) {

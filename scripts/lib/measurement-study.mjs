@@ -223,6 +223,20 @@ export function validateInstrumentation(events) {
     if (actual.join("\0") !== expected.join("\0")) issues.push(`${runId} event sequence is invalid`);
     const timestamps = rows.map((row) => Date.parse(row.recorded_at));
     if (timestamps.some((value, index) => index > 0 && value < timestamps[index - 1])) issues.push(`${runId} timestamps are not monotonic`);
+    // Only reconcile structurally valid runs; malformed payloads already have specific errors.
+    if (actual.join("\0") === expected.join("\0") && rows.every((row) => eventPayloadIssues(row).length === 0)) {
+      const submitted = rows.find((row) => row.type === "task_submitted").payload;
+      const tested = rows.find((row) => row.type === "tests_recorded");
+      const finished = rows.at(-1);
+      if (JSON.stringify(submitted.acceptance_commands) !== JSON.stringify(tested.payload.commands)) issues.push(`${runId} test execution does not match submitted acceptance commands`);
+      for (const key of ["findings", "approvals", "repairs"]) {
+        if (finished.payload[key] !== tested.payload[key]) issues.push(`${runId} final ${key} count does not match the recorded test evidence`);
+      }
+      if (finished.payload.status === "completed" && tested.payload.results.some((result) => result.status === "failed")) issues.push(`${runId} completed run has failed acceptance tests`);
+      if (condition === "A" && finished.payload.tokens !== 0) issues.push(`${runId} manual condition A reports model tokens`);
+      const endedAt = Date.parse(finished.payload.ended_at);
+      if (endedAt < Date.parse(tested.recorded_at) || endedAt > Date.parse(finished.recorded_at)) issues.push(`${runId} end time falls outside the recorded test-to-finish interval`);
+    }
   }
   return issues;
 }

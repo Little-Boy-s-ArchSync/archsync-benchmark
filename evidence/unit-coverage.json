@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 123,
-    "passed": 123,
+    "total": 129,
+    "passed": 129,
     "failed": 0
   },
   "provenance": {
@@ -61,7 +61,7 @@
       },
       {
         "file": "scripts/lib/measurement-study.mjs",
-        "sha256": "adeeb2aa3d7d59763890882c2f0559e40229e8e0a2972be83a021faccaa55da1"
+        "sha256": "7349b97fe555125387214a515fd94b5b0b81a4b006c8e0afaaee39ab91ce78b4"
       },
       {
         "file": "scripts/lib/pattern-corpus.mjs",
@@ -133,7 +133,7 @@
       },
       {
         "file": "test/measurement-study.test.mjs",
-        "sha256": "bbd913db2ea3cdb98ba0c006f049160486bdc30d2f2dc308c69b7393b616f7a6"
+        "sha256": "f49c8c091b7b57b1fd2cd4155e1ae0d2d557894f750999f2ce4476f64b64a936"
       },
       {
         "file": "test/pattern-corpus.test.mjs",
@@ -184,6 +184,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "60031c064b2a046422b25a94d52fc560f69405a6ccf12147a616e31499790e7f"
+    "manifest_sha256": "1f2bdec4f1a7a0d27ce50a16f1b145ad173320f43455af0e5df39ca73c03d2e1"
   }
 }
