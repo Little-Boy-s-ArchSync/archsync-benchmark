@@ -264,7 +264,7 @@ test("observed file and directory mutations are rejected and all opened descript
     });
     const closeMock = t.mock.method(fs, "closeSync", (fd) => { closed += 1; return realClose(fd); });
     try {
-      await assert.rejects(openStudyArtifactStore(f.options), /changed/);
+      await assert.rejects(openStudyArtifactStore(f.options), /changed/, `mutation stage ${stage} must fail closed`);
       assert.equal(closed, opened);
     } finally { openMock.mock.restore(); readMock.mock.restore(); closeMock.mock.restore(); }
   }

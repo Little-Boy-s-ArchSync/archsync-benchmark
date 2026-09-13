@@ -41,7 +41,14 @@ function reference(value) {
 }
 
 function sameStat(left, right) {
-  return ["dev", "ino", "mode", "nlink", "size", "mtimeNs", "ctimeNs"].every((key) => left[key] === right[key]);
+  // A zero device ID means that the runtime did not expose a comparable
+  // device. Node on Windows can return zero for pathname lstat and the volume
+  // serial for descriptor fstat on the same file. Device identity stays strict
+  // whenever both calls provide it; all other identity/change fields remain
+  // mandatory on every platform.
+  const sameDevice = [left.dev === right.dev, left.dev === 0n, right.dev === 0n].includes(true);
+  return sameDevice && ["ino", "mode", "nlink", "size", "mtimeNs", "ctimeNs"]
+    .every((key) => left[key] === right[key]);
 }
 
 function eventReferences(event) {
@@ -74,8 +81,10 @@ export async function openStudyArtifactStore(options) {
   function checkDirectory(path) {
     const stat = fs.lstatSync(path, { bigint: true });
     if (!stat.isDirectory() || stat.isSymbolicLink()) fail("artifact root and ancestors must be real directories");
-    if (directories.has(path) && !sameStat(directories.get(path), stat)) fail("artifact directory changed during intake");
-    directories.set(path, stat);
+    const entries = JSON.stringify(fs.readdirSync(path).sort());
+    const previous = directories.get(path);
+    if (previous && (!sameStat(previous.stat, stat) || previous.entries !== entries)) fail("artifact directory changed during intake");
+    directories.set(path, { stat, entries });
   }
 
   checkDirectory(root);
@@ -108,7 +117,8 @@ export async function openStudyArtifactStore(options) {
         length += count;
       }
       if (length !== Number(before.size) || !sameStat(before, fs.fstatSync(fd, { bigint: true }))
-        || !sameStat(before, fs.lstatSync(path, { bigint: true }))) fail("artifact changed during capture");
+        || !sameStat(before, fs.lstatSync(path, { bigint: true }))
+        || !fs.readFileSync(fd).equals(buffer.subarray(0, length))) fail("artifact changed during capture");
       bytes = buffer.subarray(0, length);
     } finally {
       fs.closeSync(fd);
