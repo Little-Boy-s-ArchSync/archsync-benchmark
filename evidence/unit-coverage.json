@@ -93,7 +93,7 @@
       },
       {
         "file": "scripts/lib/study-artifact-store.mjs",
-        "sha256": "7d0a130c471660f548e9d30acb83790c2076f4413bff5ac41adf7bd660ea69d1"
+        "sha256": "af927c084b63de1a9fd9c996f38e1899da9806af1648d089fee4088789072863"
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
@@ -185,7 +185,7 @@
       },
       {
         "file": "test/study-artifact-store.test.mjs",
-        "sha256": "a748866f7c9ea4aaf3471f6e519de0d345998ddcf014cfe2ff82328d47f8135e"
+        "sha256": "fa02dbba6b76c85af83be0ef180cf38c96f11b1c958060b0e396de5cc9104977"
       },
       {
         "file": "package.json",
@@ -216,6 +216,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "04fa9bed698a244313a91030a0bedf0e89414025ab492eb3e8f8265b9f9f4009"
+    "manifest_sha256": "01c8a3f19ff666ab6c3dba7d7aa2a46061488b02fc9b42d667347863cf7da0a3"
   }
 }
