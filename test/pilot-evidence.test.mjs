@@ -62,3 +62,27 @@ test("PILOT-101 gate remains closed until a real outside-sample pilot completes"
   assert.equal(closed.status, "CLOSED");
   assert.equal(closed.closed, true);
 });
+
+test("pilot issues and protocol changes cannot reference nonexistent runs or issues", () => {
+  const input = complete({ operator: null });
+  input.issues.push({ ...input.issues[0], issue_id: "orphan-issue", run_id: "not-observed" });
+  input.protocol_changes.push({ issue_id: "not-recorded", description: "Synthetic unmatched change", version: "unit-fixture-v2" });
+  const issues = validatePilotReport(input);
+  assert.ok(issues.some((issue) => issue.includes("observed run")));
+  assert.ok(issues.some((issue) => issue.includes("recorded valid issue")));
+  assert.ok(issues.some((issue) => issue.includes("human operator")));
+  assert.equal(evaluatePilotClosure(input).closed, false);
+});
+
+test("pilot recovery cannot claim an outcome for a recovery that was not exercised", () => {
+  for (const recovery of [{ exercised: false, outcome: "passed" }, { exercised: false, outcome: "failed" }, { exercised: true, outcome: "not-triggered" }]) {
+    const input = complete({ operator: null }); input.runs[0].failure_recovery = recovery;
+    assert.ok(validatePilotReport(input).some((issue) => issue.includes("consistent failure-recovery")));
+    assert.equal(evaluatePilotClosure(input).closed, false);
+  }
+  for (const recovery of [{ exercised: false, outcome: "not-triggered" }, { exercised: true, outcome: "failed" }]) {
+    const input = complete({ operator: null }); input.runs[0].failure_recovery = recovery;
+    assert.ok(!validatePilotReport(input).some((issue) => issue.includes("failure-recovery")));
+    assert.equal(evaluatePilotClosure(input).closed, false);
+  }
+});

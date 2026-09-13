@@ -42,17 +42,21 @@ export function validateAnalysisDataset(dataset) {
   if (!Array.isArray(dataset.rows) || dataset.rows.length === 0) return [...issues, "analysis rows must be non-empty"];
   if (!sha(dataset.raw_dataset_sha256) || dataset.raw_dataset_sha256 !== analysisDatasetSha256(dataset.rows)) issues.push("raw_dataset_sha256 must bind the exact rows");
   const seen = new Set();
+  const runs = new Map();
   dataset.rows.forEach((row, index) => {
     if (!object(row)) {
       issues.push(`row ${index} must be an object`);
       return;
     }
     const key = `${row.run_id}\0${row.outcome}`;
-    if (!/^[A-Za-z0-9][A-Za-z0-9_-]*$/u.test(row.run_id) || !/^[a-z0-9][a-z0-9_-]*$/u.test(row.outcome) || seen.has(key)) issues.push(`row ${index} requires a unique run/outcome key`);
+    if (typeof row.run_id !== "string" || !/^[A-Za-z0-9][A-Za-z0-9_-]*$/u.test(row.run_id) || typeof row.outcome !== "string" || !/^[a-z0-9][a-z0-9_-]*$/u.test(row.outcome) || seen.has(key)) issues.push(`row ${index} requires a unique run/outcome key`);
     else seen.add(key);
-    if (!/^[A-Za-z0-9][A-Za-z0-9+-]*$/u.test(row.condition)) issues.push(`row ${index} has invalid condition`);
+    if (typeof row.condition !== "string" || !/^[A-Za-z0-9][A-Za-z0-9+-]*$/u.test(row.condition)) issues.push(`row ${index} has invalid condition`);
     if (!RUN_STATUSES.has(row.status)) issues.push(`row ${index} has invalid status`);
-    const measured = Number.isFinite(row.numerator) && row.numerator >= 0 && Number.isFinite(row.denominator) && row.denominator > 0 && row.value === row.numerator / row.denominator;
+    const run = runs.get(row.run_id);
+    if (run && (run.condition !== row.condition || run.status !== row.status)) issues.push(`row ${index} changes condition or run status across outcomes`);
+    else runs.set(row.run_id, { condition: row.condition, status: row.status });
+    const measured = Number.isFinite(row.numerator) && row.numerator >= 0 && Number.isFinite(row.denominator) && row.denominator > 0 && Number.isFinite(row.value) && row.value === row.numerator / row.denominator;
     const retainedFailure = row.status !== "completed" && row.numerator === null && row.denominator === null && row.value === null;
     if (!measured && !retainedFailure) issues.push(`row ${index} requires an exact numerator/denominator/value or retained failure`);
   });

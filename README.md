@@ -83,7 +83,7 @@ See [`README-DEMO.md`](README-DEMO.md) for the short Vietnamese presentation scr
 
 Verification checks the SHA-256 of the vendored packages built from pinned Core and Guardian revisions, validates both datasets, confirms that all 20 patches apply cleanly and reruns the Guardian analyzer against every case and annotated signal. The vendored packages allow the complete gate to run from a clean checkout without access tokens for the private source repositories.
 
-The benchmark's deterministic validation libraries are covered by 123 detailed tests with enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the measured totals and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
+The benchmark's deterministic validation libraries have enforced 100% line, branch and function coverage. [`evidence/unit-coverage.json`](evidence/unit-coverage.json) records the current test totals, measured coverage and SHA-256 provenance for the libraries, tests, package metadata, lockfile and runtime-artifact manifest. Top-level evidence and demo processes are validated by the full real-artifact integration gate rather than being counted as unit-library coverage.
 
 Expected Phase 2 result:
 

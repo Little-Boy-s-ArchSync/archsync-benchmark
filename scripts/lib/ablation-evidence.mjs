@@ -78,7 +78,8 @@ export function validateAblationEvidence(evidence) {
     if (!exact(conditions, ABLATION_CONDITIONS)) issues.push(`${caseId} must contain each frozen condition exactly once`);
   }
   if (!object(evidence.results) || !/^[0-9a-f]{40}$/u.test(evidence.results.analysis_code_commit) || !sha(evidence.results.normalized_results_sha256) || !sha(evidence.results.metrics_sha256)) issues.push("complete ablation requires hash-bound analysis results");
-  if (!object(evidence.replay) || !sha(evidence.replay.first_sha256) || evidence.replay.first_sha256 !== evidence.replay.second_sha256) issues.push("metric replay must reproduce an identical hash");
+  if (!object(evidence.replay) || !sha(evidence.replay.first_sha256) || evidence.replay.first_sha256 !== evidence.replay.second_sha256
+    || evidence.replay.first_sha256 !== evidence.results?.metrics_sha256) issues.push("metric replay must reproduce the identical declared metrics hash");
   if (!Array.isArray(evidence.post_outcome_changes) || evidence.post_outcome_changes.length !== 0) issues.push("prompt/parser/config changes after outcomes are forbidden");
   return issues;
 }

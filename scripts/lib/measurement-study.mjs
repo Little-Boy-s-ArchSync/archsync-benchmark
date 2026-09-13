@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto";
+import { isDeepStrictEqual } from "node:util";
 
 const CONDITIONS = ["A", "B", "C", "D"];
+const TREATMENT_TOOLS = { A: [], B: ["model"], C: ["model", "repository-context"], D: ["model", "repository-context", "archsync-evidence"] };
 const EVENT_TYPES = new Set([
   "run_started",
   "baseline_recorded",
@@ -52,7 +54,7 @@ function median(values) {
   if (values.length === 0) return null;
   const ordered = [...values].sort((a, b) => a - b);
   const middle = Math.floor(ordered.length / 2);
-  return ordered.length % 2 === 0 ? (ordered[middle - 1] + ordered[middle]) / 2 : ordered[middle];
+  return ordered.length % 2 === 0 ? ordered[middle - 1] + (ordered[middle] - ordered[middle - 1]) / 2 : ordered[middle];
 }
 
 function percentile(ordered, fraction) {
@@ -86,7 +88,8 @@ function sha256(value) {
 }
 
 function exactSet(values, expected) {
-  return Array.isArray(values) && values.length === expected.length && [...values].sort().join("\0") === [...expected].sort().join("\0");
+  return Array.isArray(values) && values.length === expected.length && new Set(values).size === expected.length
+    && values.every((value) => typeof value === "string" && expected.includes(value));
 }
 
 export function validateStatisticalPlanSource(source) {
@@ -124,6 +127,7 @@ export function validateTaskSuite(suite) {
     else {
       for (const condition of CONDITIONS) {
         if (!object(task.treatments[condition]) || !Array.isArray(task.treatments[condition].allowed_tools)) issues.push(`task ${index} treatment ${condition} requires allowed_tools`);
+        else if (!exactSet(Object.keys(task.treatments[condition]), ["allowed_tools"]) || !exactSet(task.treatments[condition].allowed_tools, TREATMENT_TOOLS[condition])) issues.push(`task ${index} treatment ${condition} must retain its exact declared tools without shared-task overrides`);
       }
     }
   });
@@ -223,6 +227,94 @@ export function validateInstrumentation(events) {
     if (actual.join("\0") !== expected.join("\0")) issues.push(`${runId} event sequence is invalid`);
     const timestamps = rows.map((row) => Date.parse(row.recorded_at));
     if (timestamps.some((value, index) => index > 0 && value < timestamps[index - 1])) issues.push(`${runId} timestamps are not monotonic`);
+    // Only reconcile structurally valid runs; malformed payloads already have specific errors.
+    if (actual.join("\0") === expected.join("\0") && rows.every((row) => eventPayloadIssues(row).length === 0)) {
+      const submitted = rows.find((row) => row.type === "task_submitted").payload;
+      const tested = rows.find((row) => row.type === "tests_recorded");
+      const finished = rows.at(-1);
+      if (JSON.stringify(submitted.acceptance_commands) !== JSON.stringify(tested.payload.commands)) issues.push(`${runId} test execution does not match submitted acceptance commands`);
+      for (const key of ["findings", "approvals", "repairs"]) {
+        if (finished.payload[key] !== tested.payload[key]) issues.push(`${runId} final ${key} count does not match the recorded test evidence`);
+      }
+      if (finished.payload.status === "completed" && tested.payload.results.some((result) => result.status === "failed")) issues.push(`${runId} completed run has failed acceptance tests`);
+      if (condition === "A" && finished.payload.tokens !== 0) issues.push(`${runId} manual condition A reports model tokens`);
+      const endedAt = Date.parse(finished.payload.ended_at);
+      if (endedAt < Date.parse(tested.recorded_at) || endedAt > Date.parse(finished.recorded_at)) issues.push(`${runId} end time falls outside the recorded test-to-finish interval`);
+    }
+  }
+  return issues;
+}
+
+// Structural validation remains available for proposed/synthetic envelopes. This
+// separate verifier requires bytes from the caller's trusted artifact store.
+export async function validateInstrumentationArtifacts(events, readArtifact) {
+  const issues = validateInstrumentation(events);
+  if (issues.length > 0) return issues;
+  if (typeof readArtifact !== "function") return ["artifact verification requires an injected byte reader"];
+  // Snapshot before awaiting external I/O so callers cannot change the claims
+  // during verification. No failed/inconclusive event is removed or rewritten.
+  const snapshot = structuredClone(events);
+  const attempts = new Map();
+  const owners = new Map();
+  for (const event of snapshot) {
+    if (!nonEmpty(event.attempt_id)) issues.push(`${event.event_id} requires attempt_id for artifact verification`);
+    else if (attempts.has(event.run_id) && attempts.get(event.run_id) !== event.attempt_id) issues.push(`${event.run_id} changes attempt_id`);
+    else if (owners.has(event.attempt_id) && owners.get(event.attempt_id) !== event.run_id) issues.push(`${event.attempt_id} is reused by another run`);
+    else {
+      attempts.set(event.run_id, event.attempt_id);
+      owners.set(event.attempt_id, event.run_id);
+    }
+  }
+  if (issues.length > 0) return issues;
+
+  async function readBoundArtifact(path, digest, label) {
+    if (!safeRelativePath(path) || !/^[A-Za-z0-9_./-]+$/u.test(path) || path.split("/").includes(".") || !sha(digest)) {
+      issues.push(`${label} requires a safe artifact path and SHA-256`);
+      return null;
+    }
+    let bytes;
+    try {
+      bytes = await readArtifact(path);
+    } catch {
+      issues.push(`${label} artifact is missing or unreadable`);
+      return null;
+    }
+    if (!(bytes instanceof Uint8Array) || bytes.byteLength === 0) {
+      issues.push(`${label} artifact reader must return non-empty bytes`);
+      return null;
+    }
+    // Copy reader-owned memory before checking or parsing it.
+    const captured = Buffer.from(bytes);
+    if (sha256(captured) !== digest) {
+      issues.push(`${label} artifact SHA-256 mismatch`);
+      return null;
+    }
+    return captured;
+  }
+
+  for (const event of snapshot) {
+    const { artifact, ...envelope } = event;
+    const receipt = await readBoundArtifact(artifact?.path, artifact?.sha256, `${event.event_id} receipt`);
+    if (receipt !== null) {
+      let recorded;
+      try {
+        recorded = JSON.parse(receipt.toString("utf8"));
+      } catch {
+        issues.push(`${event.event_id} receipt must contain JSON`);
+      }
+      if (!isDeepStrictEqual(recorded, { schema_version: 1, event: envelope })) issues.push(`${event.event_id} receipt does not match the exact event and run/attempt binding`);
+    }
+    const payload = event.payload;
+    let references = [];
+    if (event.type === "run_started") references = ["environment", "task_suite", "study_manifest"].map((key) => [payload[`${key}_path`], payload[`${key}_sha256`], key]);
+    if (event.type === "baseline_recorded") references = [[payload.tree_path, payload.tree_sha256, "tree"]];
+    if (event.type === "prompt_recorded") references = [
+      [payload.prompt_path, payload.prompt_sha256, "prompt"],
+      [payload.output_path, payload.response_sha256, "response"],
+      [payload.provider_config_path, payload.provider_config_sha256, "provider configuration"],
+      [payload.redaction.audit_path, payload.redaction.audit_sha256, "redaction audit"],
+    ];
+    for (const [path, digest, role] of references) await readBoundArtifact(path, digest, `${event.event_id} ${role}`);
   }
   return issues;
 }
@@ -238,9 +330,10 @@ export function calculateStudyMetrics(rows, statisticalPlanSource) {
     for (const key of ["commits", "violations", "merge_delay_ms", "approvals", "false_blocks", "token_cost_usd", "compute_cost_usd"]) {
       if (!Number.isFinite(row[key]) || row[key] < 0) throw new Error(`invalid study metric ${key}`);
     }
-    if (!Number.isInteger(row.commits) || row.commits < 1 || !Number.isInteger(row.violations) || !Number.isInteger(row.approvals) || !Number.isInteger(row.false_blocks)) throw new Error("count metrics must be integers");
+    if (!Number.isSafeInteger(row.commits) || row.commits < 1 || !Number.isSafeInteger(row.violations) || !Number.isSafeInteger(row.approvals) || !Number.isSafeInteger(row.false_blocks)) throw new Error("count metrics must be integers in the safe range");
     if (row.time_to_fix_ms !== null && (!Number.isFinite(row.time_to_fix_ms) || row.time_to_fix_ms < 0)) throw new Error("invalid time_to_fix_ms");
     if (!object(row.repair) || typeof row.repair.attempted !== "boolean" || typeof row.repair.success !== "boolean" || typeof row.repair.regression !== "boolean") throw new Error("repair metrics are required");
+    if (!row.repair.attempted && (row.repair.success || row.repair.regression)) throw new Error("repair success or regression requires a recorded attempt");
     ids.add(row.run_id);
     const group = grouped.get(row.condition) ?? [];
     group.push(row);
@@ -250,10 +343,15 @@ export function calculateStudyMetrics(rows, statisticalPlanSource) {
   for (const condition of [...grouped.keys()].sort()) {
     const group = grouped.get(condition);
     const attempted = group.filter((row) => row.repair.attempted);
-    const commits = group.reduce((sum, row) => sum + row.commits, 0);
-    const violations = group.reduce((sum, row) => sum + row.violations, 0);
-    const approvals = group.reduce((sum, row) => sum + row.approvals, 0);
-    const falseBlocks = group.reduce((sum, row) => sum + row.false_blocks, 0);
+    const sum = (key, count = true) => {
+      const value = group.reduce((total, row) => total + row[key], 0);
+      if (!Number.isFinite(value) || (count && !Number.isSafeInteger(value))) throw new Error(`study metric ${key} aggregate exceeds the numeric range`);
+      return value;
+    };
+    const commits = sum("commits");
+    const violations = sum("violations");
+    const approvals = sum("approvals");
+    const falseBlocks = sum("false_blocks");
     const successes = attempted.filter((row) => row.repair.success).length;
     const regressions = attempted.filter((row) => row.repair.regression).length;
     const completed = group.filter((row) => row.status === "completed").length;
@@ -272,8 +370,8 @@ export function calculateStudyMetrics(rows, statisticalPlanSource) {
       regression_rate: ratioRecord(regressions, attempted.length),
       time_to_fix_ms: distribution(group.filter((row) => row.time_to_fix_ms !== null).map((row) => row.time_to_fix_ms)),
       merge_delay_ms: distribution(group.map((row) => row.merge_delay_ms)),
-      total_token_cost_usd: group.reduce((sum, row) => sum + row.token_cost_usd, 0),
-      total_compute_cost_usd: group.reduce((sum, row) => sum + row.compute_cost_usd, 0),
+      total_token_cost_usd: sum("token_cost_usd", false),
+      total_compute_cost_usd: sum("compute_cost_usd", false),
       uncertainty: {
         completion_rate: { ...ratioRecord(completed, group.length), interval: wilson(completed, group.length) },
         repair_success_rate: wilson(successes, attempted.length),
