@@ -118,6 +118,37 @@ test("holdout manifest reports provenance, leakage, path, and approval issues", 
   assert.deepEqual(validateHoldoutManifest({ ...manifest("proposed"), tuning_repository_urls: null }), []);
 });
 
+test("repository aliases cannot inflate the holdout or bypass the tuning exclusion", () => {
+  for (const url of ["https://github.com/example/alpha", "https://github.com/EXAMPLE/Alpha"]) {
+    const value = manifest();
+    value.repositories[1].url = url;
+    assert.ok(validateHoldoutManifest(value).some((issue) => issue.includes("distinct repository")));
+    assert.throws(() => createFrozenManifest(value, { "synthetic-truth.json": "fixture" }), /distinct repository/);
+  }
+  const value = manifest();
+  value.tuning_repository_urls = ["https://github.com/EXAMPLE/Alpha"];
+  assert.ok(validateHoldoutManifest(value).some((issue) => issue.includes("tuning set")));
+  value.repositories[0].url = "https://github.com/EXAMPLE/Alpha";
+  value.tuning_repository_urls = ["https://github.com/example/alpha"];
+  assert.ok(validateHoldoutManifest(value).some((issue) => issue.includes("tuning set")));
+});
+
+test("approval and adjudication require real UTC timestamp syntax", () => {
+  const rows = [annotation("i1", "a", "violation"), annotation("i1", "b", "unknown")];
+  for (const time of ["not-a-timestamp", "2026-02-30T00:00:00Z", "2026-09-27T00:00:00+00:00", null]) {
+    const value = manifest();
+    value.approval.approved_at = time;
+    assert.ok(validateHoldoutManifest(value).some((issue) => issue.includes("human Lead approval")));
+    assert.throws(() => createFrozenManifest(value, { "synthetic-truth.json": "fixture" }), /human Lead approval/);
+    assert.ok(validateAdjudications(rows, [decision("i1", "violation", "unknown", "violation", { decided_at: time })]).some((issue) => issue.includes("human sign-off")));
+  }
+  const time = "2026-09-27T00:00:00.123Z";
+  const value = manifest();
+  value.approval.approved_at = time;
+  assert.deepEqual(validateHoldoutManifest(value), []);
+  assert.deepEqual(validateAdjudications(rows, [decision("i1", "violation", "unknown", "violation", { decided_at: time })]), []);
+});
+
 test("repository URLs and retrieval timestamps have canonical unambiguous forms", () => {
   for (const url of [null, "https://github.com/owner/repo?x", "https://github.com/owner/repo#x", "https://github.com/@owner/repo", "https://github.com/owner/repo.git", "https://github.com/owner/..", "https://github.com/owner/repo%2Fother"]) assert.equal(isHoldoutRepositoryUrl(url), false);
   for (const time of [null, "yesterday", "2026-02-30T00:00:00Z", "2026-99-01T00:00:00Z", "2026-09-12T00:00:00+00:00"]) assert.equal(isHoldoutTimestamp(time), false);
