@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 225,
-    "passed": 225,
+    "total": 241,
+    "passed": 241,
     "failed": 0
   },
   "provenance": {
@@ -153,7 +153,7 @@
       },
       {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "14d43ac220194397b3beee2ecd4cd0cb400b7eec3c4cfaf9345c486c2ce941e3"
+        "sha256": "5ec138c01be3e4d3c2e6e26efd6ab1272e688177bffae832fd346d120598f77a"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -193,7 +193,35 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "0294d88e38e5db879dd94c77b52074aeca76d6968600e0234bfc7246095dd960"
+        "sha256": "e226d04e334464632838182e6ee1bd48232706ed258701187d830b8113dfba4c"
+      },
+      {
+        "file": "scripts/prepare-d3-sources.mjs",
+        "sha256": "cf3d65bac5e0e30a488dbfd828284027470053da910eec1365fd3072b2d86489"
+      },
+      {
+        "file": "scripts/prepare-d3-change-packets.mjs",
+        "sha256": "cbae955f023b6f343f8c1fc2b481ac47cf837f6379c89951cbd05aa08c4cc4c8"
+      },
+      {
+        "file": "scripts/prepare-d3-change-review.mjs",
+        "sha256": "2bffbd6463f17a95fbd9b0a86cd0c59915175bb6691542e88cecdeb8e971af66"
+      },
+      {
+        "file": "scripts/capture-d3-object-packet.mjs",
+        "sha256": "afca2ddcbcc1880e16a0e11853f7a58934eaac298abbb4406713190d3358aca6"
+      },
+      {
+        "file": "scripts/collect-d3-history.mjs",
+        "sha256": "ace4171cb6a33cccf4c28ab5a075b72b39664c4b5d285b21f1c5bde730ce1ba2"
+      },
+      {
+        "file": "scripts/verify-d3-history.mjs",
+        "sha256": "0f4d134ad4a0275d3f97e69530b1ed057cbc8ed4b9523af90ced5ac76441f6e9"
+      },
+      {
+        "file": "scripts/verify-d3-preparation.mjs",
+        "sha256": "2053f322044ff87a010f3eeed6231ca1acff9c0f39f942b953b78b74b24156c8"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -228,6 +256,18 @@
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
       },
       {
+        "file": "test/d3-preparation.test.mjs",
+        "sha256": "e906e8343a0fe9fbda7c9cc4d5f3c87bd8cbd6220bb6af65f135b22f582657f8"
+      },
+      {
+        "file": "test/d3-change-packets.test.mjs",
+        "sha256": "3b147f4b6b13bcd2004409e70862e69ad02c5c4a66a42e217cc3615fe204a4c0"
+      },
+      {
+        "file": "test/d3-object-packet.test.mjs",
+        "sha256": "ff23fcb3d94c1019d66f942a39e663a255c2065f7f1a824984ad38f1d1352786"
+      },
+      {
         "file": "test/holdout-annotation-source.test.mjs",
         "sha256": "94d9c22a91cbc963184c6c3696372c877be01186fb24b567fbab7c05b1199fe9"
       },
@@ -249,7 +289,7 @@
       },
       {
         "file": "test/holdout.test.mjs",
-        "sha256": "fbd51a171f559f49062b9b0fa943dbfdb5146fe654836696e196ee7a1dd29f7c"
+        "sha256": "be41c122c52c97240bdc16a781d5e2020c35a4c030296026d0867a7afceab8ea"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -312,10 +352,14 @@
         "sha256": "189d5efc2f487ce2bb8f6990dc543ee1952bd1be4beb6f2e4051f0d2c37e33f3"
       },
       {
+        "file": "holdout/selection-preparation-20260927.json",
+        "sha256": "7f146571d652f6eeaf6f07633c4e7df5d053361517dacbe6803d901393dfbc32"
+      },
+      {
         "file": "evidence/holdout/eval-102-candidates.validation.json",
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "972d5aa6b67e2722cea5bb8e97823708fe3d70144dc5394d7a832b5ca293da54"
+    "manifest_sha256": "ca475f037eb08f1f4d5c3efdde99249b05894ce7cd0cf2f47503b109c7833108"
   }
 }
