@@ -66,8 +66,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "b5b1d05a471513931486982eda2c306c44d45450db282fe82b8414440064c707",
-      "bytes": 5960
+      "sha256": "49bd8d8b6a1a0c3b85fd5319f3d626b4bd54a30b4bcc581743998ff47008203c",
+      "bytes": 6088
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -121,13 +121,13 @@
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "d56ab78cdd0808166b802bdb73e7125c01bb5774f6aee831c4a3e8a734c02a1b",
-      "bytes": 25396
+      "sha256": "098eecbf9b412e6994fa8edcd3c992ad46936ecd9285b38f683bbc5fa3994452",
+      "bytes": 26101
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "5c1603de67369db414f6206a1fa79c8f2572cca543740c99f31da8a7700442b6",
-      "bytes": 13724
+      "sha256": "27b1540682b5f37bd93c22b7b93c134dcec038f22dd50734043f28f0d2fdd3a3",
+      "bytes": 14417
     }
   ],
   "scientific_claims": {

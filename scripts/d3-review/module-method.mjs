@@ -10,6 +10,7 @@ export const METHOD_VERSION = '0.2.0';
 export const GUARDIAN_SOURCE_COMMIT = 'e32ef53eeb07bc8c904b6a1e6a8b897d16def820';
 export const COMMON_CAPABILITY_MERGE_COMMIT = 'efc1a14bc650056f98fd2093c79effb79ce7cc87';
 export const COMMON_CAPABILITY_RECEIPT_SHA256 = '83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9';
+export const ACCEPTED_SELECTED_CASES_SHA256 = '44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35';
 export const LEGACY_REVIEW_SCHEMAS = Object.freeze(['d3-author-review/1', 'd3-change-case-review/1']);
 const hex = /^[a-f0-9]{64}$/u;
 const oid = /^[a-f0-9]{40}$/u;
@@ -229,6 +230,14 @@ export function validateModuleReview(review, casesRawBytes = null) {
     }
   }
   return { status: 'STRUCTURALLY_VALID_NOT_SCIENTIFICALLY_VERIFIED', research_complete: false, cases: seenCases.size };
+}
+
+/** Official selected-scope binding; structural validity is still not scientific truth or method acceptance. */
+export function validateAcceptedD3Review(review, casesRawBytes) {
+  assert.equal(review?.cases_sha256, ACCEPTED_SELECTED_CASES_SHA256, 'Review is not pinned to the accepted selected D3 case bundle');
+  assert(Buffer.isBuffer(casesRawBytes), 'Accepted D3 review requires original raw case bytes');
+  assert.equal(sha256(casesRawBytes), ACCEPTED_SELECTED_CASES_SHA256, 'Raw case bundle differs from the accepted D3 scope');
+  return validateModuleReview(review, casesRawBytes);
 }
 
 export function validatePolicyScaffold(policy) {

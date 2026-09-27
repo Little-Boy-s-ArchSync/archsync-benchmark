@@ -5,11 +5,13 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import {
+  ACCEPTED_SELECTED_CASES_SHA256,
   GUARDIAN_SOURCE_COMMIT,
   METHOD_ARTIFACT_PATHS,
   buildFreezeManifest,
   edgeKey,
   occurrenceKey,
+  validateAcceptedD3Review,
   validateFreezeManifest,
   validateModuleReview,
 } from '../scripts/d3-review/module-method.mjs';
@@ -171,6 +173,16 @@ test('case-bound review verifies pinned source bytes and exact occurrence positi
   const missingRaw = Buffer.from(`${JSON.stringify(missingSource)}\n`);
   review.cases_sha256 = sha256(missingRaw);
   assert.throws(() => validateModuleReview(review, missingRaw), /File-side source is missing/);
+});
+
+test('official D3 review cannot substitute a self-pinned synthetic case bundle', () => {
+  const review = sealedReviewFixture();
+  const { raw } = boundCases(review);
+  assert.equal(validateModuleReview(review, raw).cases, 56);
+  assert.throws(() => validateAcceptedD3Review(review, raw), /not pinned to the accepted selected D3 case bundle/);
+  review.cases_sha256 = ACCEPTED_SELECTED_CASES_SHA256;
+  assert.throws(() => validateAcceptedD3Review(review, raw), /Raw case bundle differs from the accepted D3 scope/);
+  assert.throws(() => validateAcceptedD3Review(review, JSON.parse(raw)), /requires original raw case bytes/);
 });
 
 test('freeze manifest binds the merged development receipt without pretending method acceptance', async () => {
