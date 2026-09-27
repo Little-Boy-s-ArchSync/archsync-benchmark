@@ -4,11 +4,28 @@ Phạm vi: chuẩn bị và kiểm tra đầu vào gán nhãn. Chưa phải D3 �
 
 ## Bước 1: chuẩn bị hồ sơ đọc source
 
-Dùng packet gốc và hai hash được nhận riêng. Lệnh không tải mạng, không chạy code của repository hoặc analyzer, không sửa packet gốc và không ghi đè thư mục đã tồn tại.
+Dùng packet gốc và hai hash được nhận riêng. Với phạm vi đã chốt ở [quyết định scope](D3-SCOPE-ACCEPTANCE-20260928.md), cần truyền thêm đường dẫn tuyệt đối tới `scope-proposal.json` đã giữ nguyên byte. Tham số cuối này là tùy chọn của CLI, nhưng bắt buộc cho bộ chuẩn bị hiện hành: bỏ nó sẽ tạo phiếu cho cả 60 case, thay vì 56 case chính và giữ bốn case context để audit.
+
+Đối chiếu SHA-256 của file scope trước khi chuẩn bị; thay đường dẫn ví dụ bằng đường dẫn tuyệt đối thực tế. Lệnh không tải mạng, không chạy code của repository hoặc analyzer, không sửa packet gốc và không ghi đè thư mục đã tồn tại.
 
 ```powershell
-pnpm d3:review prepare "D:\packet-goc" "D:\review-moi" TRANSFER_SHA data/d3-change-packets-20260927-01/change-summary.json SUMMARY_SHA
+$d3ScopeProposal = "D:\archsync-benchmark\holdout\d3-preflight\response-v0.2.0\scope-proposal.json"
+$d3ScopeSha = "85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3"
+if ((Get-FileHash -LiteralPath $d3ScopeProposal -Algorithm SHA256).Hash -ne $d3ScopeSha) {
+    throw "Scope proposal hash mismatch; stop preparation."
+}
+pnpm d3:review prepare "D:\packet-goc" "D:\review-moi" TRANSFER_SHA data/d3-change-packets-20260927-01/change-summary.json SUMMARY_SHA $d3ScopeProposal
 ```
+
+Chỉ dùng bộ chuẩn bị nếu lệnh kết thúc thành công và JSON đầu ra báo đúng:
+
+- `captured_cases: 60`, `proposed_primary_cases: 56`, `context_only_cases: 4`;
+- `scope_proposal_sha256` bằng `85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3`;
+- `labels_created: 0`, `predictions_executed: 0`, `research_complete: false`.
+
+Kiểm tra thêm `cases.json`: `cases.length` bằng 56 và `context_only_cases.length` bằng 4; mỗi phiếu review trống có 56 dòng. Giữ bốn case context trong inventory audit, không tính là case đã review hoặc tự gán no-impact. Lưu riêng `cases_sha256` trả về để dùng cho các bước sau. Nếu hash hoặc số lượng lệch, giữ đầu ra để kiểm tra và chưa dùng làm bộ review hiện hành; không sửa packet gốc hoặc xóa case để ép số lượng.
+
+Tên trường `proposed_primary_cases` mô tả bước tạo kit; quyết định scope đã được ghi riêng, nhưng không đồng nghĩa phương pháp, nhãn hay thực nghiệm được duyệt. Lệnh không tạo acceptance và `method.json` vẫn là proposal.
 
 Đầu ra:
 

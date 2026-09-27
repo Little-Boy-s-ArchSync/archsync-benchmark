@@ -57,7 +57,7 @@
       },
       {
         "file": "holdout/D3-TWO-AUTHOR-REVIEW.md",
-        "sha256": "f603c3dc2c892eb359c3d7bb26e55adb4945f8722ee1c13408b7a1bae02ac795"
+        "sha256": "5382df4ae0d8d0332a11df7ac273691b951d62fb2d802c32b1481dd38a5fecad"
       },
       {
         "file": "holdout/D3-AUTHOR-ANNOTATION-AMENDMENT.md",
@@ -360,6 +360,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "35da15f6a46c5d4ddb1248c7c7ed354c62969209b13cd4697a7a903940ebb25d"
+    "manifest_sha256": "8f9a642699b62e0bb18bc9fe619d809e51bc2be359b5174b2ea4fab9897916d9"
   }
 }
