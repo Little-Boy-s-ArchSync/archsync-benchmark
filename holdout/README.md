@@ -17,6 +17,14 @@ Positive example: a bound `pg.Pool` call from `frontend/src/database.ts:4` to th
 
 Each item must have exactly two distinct blind reviewer rows, source file/line, confidence 0–1, and `saw_prediction=false`. Use immutable raw JSONL files. Adjudication appends a final row; it never overwrites either reviewer.
 
+The annotation validator checks declared IDs, labels and fields, not the real
+identity, implementation independence, actual blinding or scientific correctness
+of a reviewer. Two different strings and `saw_prediction=false` do not prove two
+independent people. The coordinator must retain the real role/exposure
+declarations and review evidence required by the approved protocol. A source
+file/line supplied in a row is not automatically checked against the source
+snapshot by this structural validator.
+
 The `holdout` validation library provides manifest, URL/commit/scope/tree/license pin materialization, dual-review, immutable adjudication, freeze, exact two-pass replay, metric, error-taxonomy, and scalability/oracle checks at 100% line/branch/function coverage. The materialization API accepts separately injected clone and inspect adapters; [`createGitRepositoryAdapters`](../scripts/lib/holdout-repository.mjs) supplies the Git implementation. It never substitutes a mutable branch for the full commit. Templates are intentionally incomplete so they cannot be mistaken for frozen evidence.
 
 ## Repository capture preparation (EVAL-103)
@@ -62,3 +70,37 @@ The controlled local Git tests cover moved branch tips, complete manifest tamper
 `pnpm holdout:candidates:verify` fail-closes the ten-record inventory on unsupported or non-permissive licenses, mutable evidence links, incomplete GitHub metadata, inactive/fork status, missing package topology, insufficient pattern evidence, or any accidental selection/freeze authority. `pnpm holdout:verify` verifies the proposed execution scaffold. `pnpm holdout:gate` is the execution closure gate and intentionally exits non-zero with `HOLDOUT_GATE_INCOMPLETE` until the manifest is human-approved and frozen, contains 2–3 complete non-tuning repository pins, binds adjudicated ground truth, and is accompanied by exact Core/Guardian package pins. The double-run harness independently revalidates every repository pin and frozen artifact before calling the analyzer exactly twice; mismatch, invalid output, or nondeterminism is retained and blocks a deterministic result. Before computing a runnable freeze, include `run_context: { packages, environment }` in the manifest, using the exact Core/Guardian package records and execution environment supplied to the harness. The freeze hash then binds those inputs; absent or different run context is rejected before any analyzer call. Input snapshots prevent a caller from changing the verified freeze or execution metadata between awaited runs. Existing proposed templates remain unchanged and closed. Earlier manifests without run context remain readable/verifiable as artifact freezes, but cannot authorize this execution API; no accepted D3 freeze currently exists.
 
 Metric rows carry repository and node/edge/rule units. Pooled and per-repository precision/recall/F1, classification, rule matching, and exact file/line evidence expose numerator and denominator. Root-cause analysis accepts only wrapper, dynamic endpoint, alias, dependency injection, monorepo, generated code, unsupported library, or mapping ambiguity with evidence and an explicit fix/limitation/out-of-scope action. Scalability summaries require 2–3 repositories, at least two environments, and both full and incremental samples per repository; CPU, memory, file/parsed scope, component count, oracle agreement, and failures remain visible. Completed samples require an explicit boolean oracle result; failed samples must not claim an oracle match. Missing oracle evidence is rejected rather than converted into an observed mismatch.
+
+## Replay and metric output schema 2
+
+The replay and metric result objects now emit `schema_version: 2`. This is an
+explicit correction to preparatory software, not a replacement of frozen
+research evidence or an authorization to run D3. Source/freeze manifest schemas
+are unchanged. Downstream consumers must check the result schema before use.
+
+- Any failed repository attempt produces `BLOCKED_ANALYZER_FAILURE`, including
+  when both attempts fail with the same error class. `failed_runs` counts failed
+  repository attempts, not distinct repositories. `normalized_records_match`
+  reports only whether the retained normalized hashes match; matching simplified
+  error records do not establish reproducible successful analysis.
+- `deterministic: true` and a non-null `normalized_replay_sha256` require every
+  attempt to complete and both runs to match. Successful but different outputs
+  produce `BLOCKED_NONDETERMINISTIC`. All attempts remain in the receipt. Even
+  `PREPARATORY_REPLAY_COMPLETE` proves only replay under these supplied inputs,
+  not label accuracy, independent annotation or publication readiness.
+- Each analyzer return is copied immediately so a reused mutable output object
+  cannot rewrite retained earlier evidence after its hash has been calculated.
+- Exact line evidence requires a non-failed prediction, the correct file **and**
+  the correct line. Matching line 12 in the wrong file earns no location credit.
+  Every `evidence_required` row, including failed predictions, stays in that
+  denominator. Zero denominators remain `null`, not perfect scores.
+
+These helpers consume caller-supplied metric flags, not independently verified
+labels. Their classification summary is per input metric row across the declared
+node/edge/rule units; it must not be reported as change-case accuracy when one
+change produces multiple rows. A case-level analysis requires a separately
+specified unique case population in the frozen analysis plan.
+
+The regression tests demonstrating these corrections use explicitly synthetic
+software fixtures. They are not D3 observations and do not improve or replace
+the paper's empirical results. Existing D1/D2/Phase 3 evidence stays unchanged.
