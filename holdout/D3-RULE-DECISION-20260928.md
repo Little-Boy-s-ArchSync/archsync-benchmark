@@ -1,5 +1,7 @@
 # D3 conditional module-rule decision (conversation record)
 
+**Preparation amendment:** Read [method packet v0.1.0](D3-METHOD-PACKET.v0.1.0.md) before labeling. It proposes the module occurrence/edge endpoint, explicit Unknown/scoring scope, resolver freeze and joint acceptance. Conflicting legacy case-classification instructions are historical; no method acceptance is asserted.
+
 Date: 2026-09-28, Asia/Bangkok. The user selected "Chấp nhận 4 rule có điều kiện (đề xuất)" after being shown the specific four study-defined module restrictions, the two out-of-scope Reactive Resume context rules, and the requirement to check historical applicability for every base/head pair. This is a conversation record, not a signature or an upstream maintainer's policy.
 
 Source-backed contract proposal: the retained D3 contract packet's `contract.json`, SHA-256 `efff60a655ebc2eaf9819ddf1e15646c7cfe7f82f0cf8bb44d54464354fe3b8a`. The repository also retains `holdout/contracts/v0.1.0/proposal.json`, SHA-256 `ace17e11043efbf4bcff9728f2702b0d39725fcd8cda80d6cd1d99eae47c4ca6`. These source artifacts remain unchanged and historically marked proposed. Exact accepted-conditional IDs:

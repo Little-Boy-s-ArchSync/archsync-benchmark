@@ -1,0 +1,13 @@
+# Proposed D3 historical applicability ledger contract — version 0.1.0
+
+Preparation only: no decisions or reviewer acceptance are supplied. The blank152-row checklist remains immutable. Create a separate reviewed artifact only through actual source review.
+
+Top-level fields: `schema: d3-reviewed-applicability/1`, `status: proposed-reviewed-not-accepted`, `checklist_sha256` (raw bytes), `rows`. Each row has exactly the original identity `(repository, case_id, rule_id, side, commit)` and records `applicability` (`applicable`, `not-applicable`, `unresolved`), `rationale`, `unknown_reason` (required only for unresolved), `reviewer_id`, actual ISO UTC `reviewed_at_utc`, nonempty `decision_reference`, `source_evidence`, and `ai_assistance`.
+
+There must be exactly152 unique rows covering all56 original case identities and both sides, with no altered source commits or rule IDs. Each resolved decision requires at least one citation. Unresolved rows may have no citation only when their reason explains missing evidence; they never enable a rule claim.
+
+Each citation has `repository`, `commit`, `path`, `mode` (100644/100755), `git_blob`, `sha256`, `start_line`, `end_line`, `quote`, `source_receipt_sha256`. A receipt binds the path/object to the pinned historical Git tree or separately verified source extension, and the receipt itself must be frozen. The validator receives a trusted source map from independently verified retained packets; it does not establish Git-tree membership or fetch/read arbitrary citation paths. It verifies byte SHA-256, Git blob identity, regular mode, exact physical quote/lines and receipt identity. A self-supplied map is not authenticated evidence. Symlinks are rejected, never dereferenced. Same-byte anchor equality alone cannot determine applicability.
+
+`ai_assistance` requires `used` boolean and `human_verification` text. When used, also record `tool_model` (unknown allowed), nonempty `input_sha256` array, `input_scope`, `prediction_exposure`, `output_reference`, `output_sha256`, and `shared` boolean. When unused do not fabricate tool/output details. Structural checks cannot prove the actual reviewer read source or that a rationale is scientifically sound.
+
+API: `validateApplicabilityLedger(ledger, checklistBytes, expectedChecklistSha256, verifiedSources)`. Source-map key is the JSON array `[repository,commit,path]`; each value has `bytes` (Buffer), `mode`, `git_blob`, `receipt_sha256`. Returns only `STRUCTURALLY_VALID_NOT_ACCEPTED` and row counts. No existing completion/acceptance gate is relaxed or replaced. Synthetic tests are development fixtures, not D3 decisions.

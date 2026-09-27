@@ -39,13 +39,15 @@ Tạo bản riêng cho mỗi người trước khi điền. Không dùng một t
 
 ## Bước 2: chốt phương pháp trước khi gán nhãn chính thức
 
+**Dừng trước khi gán nhãn:** [method packet v0.1.0](D3-METHOD-PACKET.v0.1.0.md) đề xuất occurrence/edge inventory, resolver, Unknown, mẫu số và ledger applicability152 dòng. Hiếu và Hoàng cần cùng chấp nhận version/hash thật. Các phiếu bốn nhãn và lệnh check/compare bên dưới là giao diện legacy, chưa kiểm chứng schema occurrence/edge; không dùng chúng để bắt đầu gán nhãn module hoặc vượt gate.
+
 Chuẩn bị và review năm artifact `rubric.md`, `contract.json`, `scope.json`, `tool-pins.json`, `analysis-plan.md`. Ghi hash byte của chúng vào method.json và ghi đúng chấp thuận có reference/thời điểm thật. Pin hash method vào hai phiếu. Đây là các đầu vào khoa học cần xác định theo source, không được công cụ tự giả lập.
 
 Đã có [rubric nonblind, AI-assisted đề xuất](D3-CASE-RUBRIC.v0.2.0.md) và [analysis plan mô tả đề xuất](D3-ANALYSIS-PLAN.v0.1.0.md) để review, không phải tự viết từ đầu. Rubric v0.1.0 chỉ là bản lịch sử của thiết kế blind đã bị khai báo tiếp xúc mới thay thế. Chúng chưa thay contract/mapping thực của từng repo hoặc thống kê suy luận STAT-101; không đổi trạng thái accepted khi các phần này chưa được chốt.
 
 Hai người làm chính có thể dùng AI rà soát toàn bộ source, đề xuất hoặc điền nhãn rồi tự kiểm tra, và giữ hai phiếu theo đúng mức độ thực tế. Mô tả là author-associated, nonblind, AI-assisted khi có dùng AI; không là external independent validation. Nếu cùng một đầu ra AI được chép sang hai phiếu, không gọi đó là hai nhãn người độc lập. Tham khảo [amendment đề xuất](D3-AUTHOR-ANNOTATION-AMENDMENT.md).
 
-## Bước 3: điền từng case
+## Bước 3: giao diện case legacy — chưa dùng cho endpoint module
 
 - `label`: `no-impact`, `violation`, `evolution` hoặc `unknown`, theo rubric đã chốt.
 - `rationale`: giải thích bằng source, không bằng kết quả của tool.

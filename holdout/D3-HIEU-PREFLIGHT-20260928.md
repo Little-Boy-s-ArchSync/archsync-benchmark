@@ -1,5 +1,7 @@
 # D3 Repository Lead preflight: source coverage and scoring boundary
 
+**Preparation amendment:** Read [method packet v0.1.0](D3-METHOD-PACKET.v0.1.0.md) before labeling. It proposes the module occurrence/edge endpoint, explicit Unknown/scoring scope, resolver freeze and joint acceptance. Conflicting legacy case-classification instructions are historical; no method acceptance is asserted.
+
 Date: 2026-09-28 (Asia/Bangkok). Status: source-backed preflight and method proposal, **not** a completed D3 evaluation or a declaration that Hiếu personally verified each case.
 
 ## Decisions already made by Hiếu
