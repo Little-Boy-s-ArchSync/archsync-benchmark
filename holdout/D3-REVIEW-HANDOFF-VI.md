@@ -11,6 +11,13 @@ lần thu thập đầu vẫn được lưu. Định dạng bổ sung này cần
 khi dùng làm đầu vào đã chốt. Danh sách và hash ở
 `D3-COLLECTION-RECEIPT-20260927.md`.
 
+Đã bổ sung 60 cặp commit trước/sau có diff và source thật trong
+`private-evidence/d3-change-packets-20260927-01/`. Mở `review-preparation/README.md`
+trong packet để tìm case và đọc source theo Git blob. Hai file `reviewer-a-cases.csv`
+và `reviewer-b-cases.csv` là danh sách ca trống để phân phối riêng, không phải nhãn
+đã hoàn thành. Xem `D3-CHANGE-PACKET-RECEIPT-20260927.md` để kiểm tra hash,
+khoảng thời gian và các trường hợp lặp file/commit.
+
 Đây là bộ chuẩn bị, chưa phải lệnh bắt đầu gán nhãn chính thức. Cần chốt phạm
 vi, rubric, role/exposure và protocol trước; không ghi ngày chấp nhận lùi về
 trước hoặc coi bản chuẩn bị là bằng chứng đã được người khác duyệt.
