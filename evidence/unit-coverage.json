@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 186,
-    "passed": 186,
+    "total": 187,
+    "passed": 187,
     "failed": 0
   },
   "provenance": {
@@ -61,7 +61,7 @@
       },
       {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "14d43ac220194397b3beee2ecd4cd0cb400b7eec3c4cfaf9345c486c2ce941e3"
+        "sha256": "ba6211426e7710daee665ad8833f8bb59a2cd896f86120b7b9a7cd7e119134cb"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -157,7 +157,7 @@
       },
       {
         "file": "test/holdout.test.mjs",
-        "sha256": "fbd51a171f559f49062b9b0fa943dbfdb5146fe654836696e196ee7a1dd29f7c"
+        "sha256": "f8aec74c4d2a5117c9cfcdcc220b87cf8648bc7d27322d4415decc78177304dd"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -224,6 +224,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "5564107d44232ed262988faad3cb2155571c5bf4f8efa308dd68f7c8d50c72c5"
+    "manifest_sha256": "4930bdc2c21a6295c5debf43f88c090b6928ace167339e4fa9b33b337b95a982"
   }
 }
