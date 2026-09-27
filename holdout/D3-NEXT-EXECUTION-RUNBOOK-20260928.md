@@ -1,0 +1,39 @@
+# D3 module-only exploratory execution runbook
+
+Status: preparation is real and source-pinned; D3 evaluation is **not complete**. Do not report accuracy, external validity, independent labels or baseline superiority from these artifacts.
+
+Read `D3-HIEU-PREFLIGHT-20260928.md` before approving the scoring method. Its source-coverage audit shows that neither Etherpad rule has a changed `DB.ts` source file in the accepted 20 cases, so introduced-rule-violation accuracy alone would be a weak primary endpoint. The recommended module-edge recovery endpoint is a proposal requiring a versioned rubric/truth-inventory amendment; it is not silently adopted by the legacy four-label worksheet.
+
+## Locked narrow decisions
+
+- Retained source transfer SHA-256: `0cb702b6df6e684b587f97cc39d64dc1cb7d535c92aff2896962b2d55c26f341`.
+- Scope proposal SHA-256: `85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3`; user accepted 56 primary cases and four context-only cases. Main review bundle SHA-256: `44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35`.
+- Initial unit: direct source-module dependencies in defined module groups. This does **not** measure Guardian's existing HTTP/data/cache/message detectors.
+- Four study-defined rules are conditionally accepted: `D3-HDX-MOD-001`, `D3-RR-MOD-001`, `D3-EP-MOD-001`, `D3-EP-MOD-002`. `D3-RR-MOD-002` and `D3-RR-MOD-003` are context only. The six-rule source-backed contract packet SHA-256 is `efff60a655ebc2eaf9819ddf1e15646c7cfe7f82f0cf8bb44d54464354fe3b8a`.
+- Both annotators are development-associated and prediction-exposed; Hiếu also reported analyzer/rule development. Exact earlier exposure remains uncertain. This is nonblind author-associated exploratory evaluation. AI may do substantive source reading and propose/prefill answers; disclose assistance and verify cited source bytes/lines.
+
+## Gate 1: source and rule applicability
+
+Use the private review kit's `cases.json`, 56 `cases/*.md` dossiers, `scope.json` and `contract.json`. The four excluded cases remain recorded in `context_only_cases`; do not relabel them no-impact. The kit's `historical-applicability-checklist.json` contains 152 undecided rule/side rows across 56 cases. A same-byte anchor is not proof of applicability; a different-byte anchor must be read at that historical commit. For every row, record applicable / not-applicable / unresolved, source evidence and AI provenance. Keep the original blank checklist and produce a separately versioned reviewed file; do not overwrite the source packet.
+
+Do not fill an `applicable` decision solely from the reference snapshot, repository name or rule rationale. Do not treat study-defined rules as upstream-approved policy. Resolve historical anchors from the pinned Git-object packet; preserve symlink mode `120000` and never silently dereference it.
+
+## Gate 2: method and reviews
+
+Approve and byte-pin the final rubric, accepted scope record, historical-applicability ledger, module-edge definition, rule set, tool packages/configuration, resolver policy and descriptive analysis plan. The current `method.json` is intentionally `proposed`, and `d3:review status` must report `D3_NOT_COMPLETE` until these gates are satisfied. The present contract wrapper is intentionally conditional and cannot pass the final-contract validator.
+
+Then produce Hiếu's and Hoàng's separate source-bound 56-row review files with declared prior exposure and AI assistance. AI may inspect all source and suggest labels/evidence. Each reviewer must record actual input scope, retained AI output reference, human verification extent and whether suggestions were shared. Source quotations must match the pinned commit/path/line. Preserve original reviews and their raw byte hashes before comparison or discussion. If suggestions are shared, state that original agreement is dependent, not independent.
+
+Compute original agreement before joint reconciliation. Resolve disagreements using source evidence and agreed rules; unresolved cases stay Unknown. A case label is not an exhaustive graph-edge inventory. Keep both attempted and scored denominators, repository-level breakdowns and every Unknown.
+
+## Gate 3: tool capability and fair comparison
+
+The Guardian version pinned by Benchmark does not emit module import dependency edges. A separate local Guardian development branch `research/d3-module-detector-20260928` has a tested opt-in adapter, but it is not yet frozen as a D3 research tool or integrated into Benchmark. Validate it on development fixtures **outside D3** for all required resolution modes, package exports and symlink behavior; then pin its source/package hash or stop this comparison as unsupported. The adapter must not be tuned against D3 outcomes. Development after known D3 exposure must be disclosed as part of the nonblind exploratory design; do not call this an untouched independent holdout.
+
+Freeze the exact common capability with dependency-cruiser, including value imports/re-exports, literal `require`/dynamic import, type-only exclusion, tsconfig/package resolution, path grouping, unsupported cases and source tree construction. Test both on non-D3 development fixtures. Reconstruct every base/head source from pinned Git objects without script execution; retain all failures and symlink handling decisions.
+
+## Gate 4: execution and reporting
+
+Only after the preceding gates, run both tools on the same eligible base/head pairs. Retain commands, package/config hashes, stdout/stderr, exit codes, UTC times, raw edges, failures, unsupported outcomes and result hashes. Compute module-only case metrics with the predeclared denominators, per repository first; do not claim whole-system edge recall without an exhaustive edge inventory. Update the paper only with real, auditable results and explicitly disclose author annotation, AI assistance, earlier prediction exposure, purposive selection and the study-defined contracts.
+
+The successful local `pnpm verify` and D3 review tests validate preparation code only. The separate `pnpm holdout:gate` remains closed for unfrozen manifest, repository/package pins, ground truth, lead approval and statistical plan. It must not be bypassed to make this research look complete.

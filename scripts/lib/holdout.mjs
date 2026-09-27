@@ -365,6 +365,9 @@ export function calculateHoldoutMetrics(rows) {
     if (!nonEmpty(row.repository_id) || !unitTypes.includes(row.unit_type) || typeof row.truth_positive !== "boolean" || !predictionValues.has(row.prediction) || !nonEmpty(row.truth_label) || (row.prediction !== "failed" && !nonEmpty(row.predicted_label)) || typeof row.rule_match !== "boolean" || typeof row.evidence_required !== "boolean" || typeof row.evidence_file_exact !== "boolean" || typeof row.evidence_line_exact !== "boolean") {
       throw new Error(`invalid metric row ${row.id}`);
     }
+    if (row.truth_label.trim().toLowerCase() === "unknown" || (typeof row.predicted_label === "string" && row.predicted_label.trim().toLowerCase() === "unknown")) {
+      throw new Error(`HOLDOUT_UNKNOWN_SCORING_POLICY_REQUIRED: ${row.id}`);
+    }
   }
   const repositories = [...new Set(rows.map((row) => row.repository_id))].sort();
   return {

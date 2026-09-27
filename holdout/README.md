@@ -1,5 +1,7 @@
 # D3 ground-truth handbook and tooling
 
+The blind-review protocol and `holdout:gate` below are an older proposed route, not the current two-author design. Hiếu and Hoàng disclosed prior D3 output exposure and chose a nonblind, AI-assisted exploratory route. AI may read source and propose or pre-fill annotations under `D3-AUTHOR-ANNOTATION-AMENDMENT.md` and `D3-CASE-RUBRIC.v0.2.0.md`; retain AI provenance and do not call shared AI suggestions independent human labels. The existing blind gate remains closed rather than accepting false exposure declarations.
+
 The protocol is proposed, not approved. Do not select final repositories, annotate final truth, run ArchSync, or freeze D3 until EXP-102 and the Lead gates in `PROTOCOL.md` are complete.
 
 `candidates.eval-102.json` is a ranked **candidate-only** inventory of exactly ten active TypeScript systems observed through the authenticated GitHub REST API on 2026-08-25 UTC; `candidate-inventory.schema.json` publishes its JSON Schema. Each record binds the canonical repository, observed default-branch commit, permissive SPDX result and immutable license file, GitHub size/activity snapshot, package-manager/monorepo signals, and commit-pinned source evidence for at least two HTTP/data/cache/message pattern kinds. Every prior-tuning/leakage state remains `unknown-needs-human-check`; the artifact authorizes neither final selection nor freeze. Candidate discovery required no paid provider, while later provider billing and execution gates remain separate.
@@ -152,3 +154,12 @@ specified unique case population in the frozen analysis plan.
 The regression tests demonstrating these corrections use explicitly synthetic
 software fixtures. They are not D3 observations and do not improve or replace
 the paper's empirical results. Existing D1/D2/Phase 3 evidence stays unchanged.
+
+Until the Repository Lead and statistical-plan owner freeze an Unknown analysis
+policy, `calculateHoldoutMetrics` rejects rows whose truth or predicted label
+is `unknown`. This fail-closed guard prevents an unresolved Unknown/Unknown
+pair from being counted as correct classification or a false negative/true
+negative through a supplied Boolean `truth_positive`. Unknown rows remain in
+the raw execution/accounting population; an approved analysis adapter must
+separately report them and pass only the policy-defined scored population to
+this metric helper. The guard does not choose the final denominator rule.

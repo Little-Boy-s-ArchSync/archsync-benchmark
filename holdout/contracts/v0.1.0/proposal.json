@@ -1,0 +1,168 @@
+{
+  "schema": "d3-research-contract-proposal/1",
+  "version": "0.1.0",
+  "status": "proposed-not-accepted",
+  "intent_authority": "study-defined-not-upstream-approved",
+  "human_acceptances": [],
+  "cases_sha256": "4998ea4bffe219a4f74449d187a8ffe1272451df828801a1dbdb6ef9d5b9b8ba",
+  "transfer_sha256": "0cb702b6df6e684b587f97cc39d64dc1cb7d535c92aff2896962b2d55c26f341",
+  "module_semantics": {
+    "unit": "direct resolved production-source module dependency aggregated to a named module group",
+    "included": ["ES value imports and re-exports", "literal CommonJS require", "literal dynamic import"],
+    "excluded": ["explicit type-only imports/exports", "test-only files", "generated artifacts", "third-party vendored source"],
+    "test_path_regex": "(^|/)(__tests__|test|tests|fixtures|__fixtures__|__mocks__)(/|$)|\\.(test|spec)\\.[cm]?[jt]sx?$",
+    "source_extensions": [".ts", ".tsx", ".js", ".jsx", ".mts", ".cts", ".mjs", ".cjs"],
+    "resolution": "Resolve using each side's tsconfig and package export maps without executing upstream configuration. Longest matching declared path prefix owns a file; exact files override prefixes. Unresolved targets, ambiguous aliases, computed imports and ambiguous production/test/generated status remain Unknown. Unmapped resolved modules remain explicitly unmapped, never silently assigned to a forbidden group.",
+    "path_semantics": "Case-sensitive POSIX repository-relative paths. A prefix ends in / and matches only descendants. No symlink traversal. No deployment boundary is inferred from a folder.",
+    "baseline_boundary": "Candidate module-only comparison; no executable adapter or baseline equivalence is asserted by this proposal. Both tools must share source set, resolver and edge definition before scoring.",
+    "evolution_boundary": "Do not use the empty relationships in policy fragments as an expected graph. Evolution requires a separately reviewed base/head observation inventory and accepted per-case model. Until then topology labels are not authorized."
+  },
+  "historical_policy": {
+    "rule_activation": "pending-per-case-human-applicability-review",
+    "reference_snapshot_is_not_historical_intent": true,
+    "procedure": "Before annotation, record for every rule and base/head pair: applicable, not-applicable or unresolved with source evidence. Use the same accepted rule on both sides. Anchor presence or equal hashes is only a context check, not rule acceptance or conformance. Changed/missing historical anchors require review of the actual historical content; never retroactively assert a later ADR was already binding.",
+    "upstream_bug_claim_allowed": false,
+    "case_selection": "Keep all 60 captured candidates in the disposition inventory. No resampling to obtain violations or better scores. Rules and eligibility must be fixed before labels and predictions."
+  },
+  "repositories": [
+    {
+      "id": "hyperdxio/hyperdx",
+      "reference_commit": "e0d2932802bf1b315b420a8a4214a6c0691a7835",
+      "case_scope": "packages/api/src",
+      "source": {
+        "kind": "captured-files",
+        "manifest": "data/d3-source-preparation-20260927-01/hyperdxio--hyperdx/capture-manifest.json",
+        "manifest_sha256": "ba412e9dc6ec5f460c008b13078e39d1ae3ed58f03fbb3cc9d8a7d6f0895b456",
+        "root": "data/d3-source-preparation-20260927-01/hyperdxio--hyperdx/holdout-vMK3Dm/source"
+      },
+      "components": {
+        "api-models": {"type": "library", "layer": "data", "description": "In-process model and persistence modules, not a separate database service."},
+        "api-routers": {"type": "library", "layer": "application", "description": "In-process HTTP routing modules, not a separate deployment."}
+      },
+      "mapping": [
+        {"component": "api-models", "prefix": "packages/api/src/models/"},
+        {"component": "api-routers", "prefix": "packages/api/src/routers/"}
+      ],
+      "rules": [
+        {
+          "id": "D3-HDX-MOD-001", "type": "deny", "from": "api-models", "to": "api-routers", "relationship_type": "dependency", "severity": "warning",
+          "rationale": "Study proposes keeping persistence/model modules independent of HTTP routing. Observed route-to-model use motivates this separation but does not prove an upstream prohibition on the reverse direction.",
+          "basis": "study-design-inference-from-source-roles",
+          "evidence_ids": ["HDX-MODEL", "HDX-ROUTE"],
+          "historical_anchor_paths": ["packages/api/src/models/index.ts", "packages/api/src/routers/api/alerts.ts"]
+        }
+      ],
+      "evidence": [
+        {"id": "HDX-MODEL", "path": "packages/api/src/models/index.ts", "start": 1, "end": 6, "supports": "Mongoose and configuration are used by the model module; no absence or exhaustive graph claim."},
+        {"id": "HDX-MONGO", "path": "packages/api/src/models/index.ts", "start": 58, "end": 64, "supports": "MongoDB connection uses configured MONGO_URI."},
+        {"id": "HDX-ROUTE", "path": "packages/api/src/routers/api/alerts.ts", "start": 28, "end": 34, "supports": "An HTTP router imports model functionality."},
+        {"id": "HDX-CLICKHOUSE", "path": "packages/api/src/clickhouse.ts", "start": 1, "end": 5, "supports": "ClickHouse client implementation is wrapped through common-utils; a library import is not by itself an observed network edge."},
+        {"id": "HDX-WEBHOOK", "path": "packages/api/src/tasks/checkAlerts/transports/index.ts", "start": 18, "end": 24, "supports": "Generic, Slack and IncidentIO webhook transports are configurable, not a fixed closed destination allowlist."},
+        {"id": "HDX-STACK", "path": "README.md", "start": 46, "end": 49, "supports": "Documented stack context includes ClickHouse, HyperDX, collector and MongoDB."}
+      ],
+      "runtime_context": "API runtime, MongoDB, ClickHouse and configurable webhooks must not be collapsed into module-import edges. Do not require Redis/PostgreSQL/AMQP or forbid all external calls merely because those detectors exist. Context is not a complete runtime graph.",
+      "unknown_conditions": ["Unresolved @/ alias at a historical revision", "Computed webhook destination without frozen configuration", "Wrapper-only evidence insufficient to identify a runtime endpoint"]
+    },
+    {
+      "id": "amruthpillai/reactive-resume",
+      "reference_commit": "3c195dc3f8db5ccae4aa4aff0cefe54980c02b74",
+      "case_scope": "apps/server/src",
+      "source": {
+        "kind": "git-object-packet",
+        "manifest": "data/d3-reactive-resume-objects-20260927-01/object-manifest.json",
+        "manifest_sha256": "7868ba025ebf1ddca3238458fc9170b4edcde905715a1304bfa4e2c1feda6e55",
+        "root": "data/d3-reactive-resume-objects-20260927-01"
+      },
+      "components": {
+        "server-adapter": {"type": "library", "layer": "application", "description": "Production server source modules."},
+        "web-private-source": {"type": "library", "layer": "experience", "description": "Private apps/web/src modules; includes full-stack code, not assumed all browser-only."},
+        "api-package": {"type": "library", "layer": "domain", "description": "In-process API feature implementation, not a remote API service."}
+      },
+      "mapping": [
+        {"component": "server-adapter", "prefix": "apps/server/src/"},
+        {"component": "web-private-source", "prefix": "apps/web/src/"},
+        {"component": "api-package", "prefix": "packages/api/src/"}
+      ],
+      "rules": [
+        {
+          "id": "D3-RR-MOD-001", "type": "deny", "from": "server-adapter", "to": "web-private-source", "relationship_type": "dependency", "severity": "warning",
+          "rationale": "Study adopts the documented server/private-web-source separation. Serving compiled web assets or importing public package exports is not this forbidden source import.",
+          "basis": "study-adaptation-of-pinned-upstream-documentation",
+          "evidence_ids": ["RR-ADR", "RR-BOUNDARY", "RR-MCP"],
+          "historical_anchor_paths": ["docs/adr/0001-workspace-boundaries.md", "docs/contributing/architecture.mdx", "apps/server/src/rpc/handler.ts"]
+        },
+        {
+          "id": "D3-RR-MOD-002", "type": "deny", "from": "api-package", "to": "server-adapter", "relationship_type": "dependency", "severity": "warning",
+          "rationale": "Study adopts package-to-app direction restriction for the API package. The current changed-file scope is server-only; do not count this rule as tested when its source modules were not examined.",
+          "basis": "study-adaptation-of-pinned-upstream-documentation",
+          "evidence_ids": ["RR-DIRECTION", "RR-RPC"],
+          "historical_anchor_paths": ["docs/adr/0001-workspace-boundaries.md", "apps/server/src/rpc/handler.ts"]
+        },
+        {
+          "id": "D3-RR-MOD-003", "type": "deny", "from": "api-package", "to": "web-private-source", "relationship_type": "dependency", "severity": "warning",
+          "rationale": "Study adopts package-to-app direction restriction for private web source. This context rule needs API-package source coverage; the server-only case scope does not establish absence of this dependency.",
+          "basis": "study-adaptation-of-pinned-upstream-documentation",
+          "evidence_ids": ["RR-DIRECTION", "RR-BOUNDARY"],
+          "historical_anchor_paths": ["docs/adr/0001-workspace-boundaries.md", "docs/contributing/architecture.mdx"]
+        }
+      ],
+      "evidence": [
+        {"id": "RR-ADR", "path": "docs/adr/0001-workspace-boundaries.md", "start": 15, "end": 24, "supports": "Snapshot ADR explicitly describes workspace import restrictions."},
+        {"id": "RR-DIRECTION", "path": "docs/adr/0001-workspace-boundaries.md", "start": 30, "end": 34, "supports": "Package-to-app restrictions and a test-config exception are documented."},
+        {"id": "RR-RUNTIME", "path": "docs/contributing/architecture.mdx", "start": 6, "end": 8, "supports": "One deployed Node process with source-separated apps/packages; package export usage."},
+        {"id": "RR-BOUNDARY", "path": "docs/contributing/architecture.mdx", "start": 68, "end": 75, "supports": "Private source and runtime-boundary restrictions; no all-web-code-is-browser assumption."},
+        {"id": "RR-MCP", "path": "docs/contributing/architecture.mdx", "start": 139, "end": 143, "supports": "Server must not import MCP implementation from apps/web/src."},
+        {"id": "RR-RPC", "path": "apps/server/src/rpc/handler.ts", "start": 1, "end": 8, "supports": "Server adapter imports public API router export."},
+        {"id": "RR-DATA", "path": "docs/contributing/architecture.mdx", "start": 32, "end": 35, "supports": "Documented API/storage/DB/PostgreSQL context, not observed deployment evidence."}
+      ],
+      "runtime_context": "The pinned architecture document describes one Node process, PostgreSQL via packages/db, and filesystem or S3-compatible storage. apps/web is full-stack; do not ban every server-side dependency in that tree. packages/api is not a separately deployed service. CLAUDE.md is retained as a symlink object only, never executed or followed.",
+      "unknown_conditions": ["Historical ADR absent or different without resolved applicability", "Package export mapping unresolved at the case commit", "Private source import vs built asset serving not distinguishable", "Only server changed-file scope available for an API-package rule"]
+    },
+    {
+      "id": "ether/etherpad",
+      "reference_commit": "d85d254ac093dc0801188fd954751c33b181e45c",
+      "case_scope": "src/node",
+      "source": {
+        "kind": "captured-files",
+        "manifest": "data/d3-source-preparation-20260927-01/ether--etherpad/capture-manifest.json",
+        "manifest_sha256": "9cb1be88c7492ac6d04c3bda13099068f60ef3cf0ac0ef4641fe8b34778d5a0c",
+        "root": "data/d3-source-preparation-20260927-01/ether--etherpad/holdout-AfmuWT/source"
+      },
+      "components": {
+        "database-adapter": {"type": "library", "layer": "data", "description": "Only src/node/db/DB.ts; not the entire db directory."},
+        "message-handlers": {"type": "library", "layer": "application", "description": "In-process request/message handling modules."},
+        "http-hooks": {"type": "library", "layer": "application", "description": "Express integration module and its hook directory."}
+      },
+      "mapping": [
+        {"component": "database-adapter", "path": "src/node/db/DB.ts"},
+        {"component": "message-handlers", "prefix": "src/node/handler/"},
+        {"component": "http-hooks", "path": "src/node/hooks/express.ts"},
+        {"component": "http-hooks", "prefix": "src/node/hooks/express/"}
+      ],
+      "rules": [
+        {
+          "id": "D3-EP-MOD-001", "type": "deny", "from": "database-adapter", "to": "message-handlers", "relationship_type": "dependency", "severity": "warning",
+          "rationale": "Study proposes keeping low-level database initialization independent of message orchestration. This does not forbid pad-domain modules or plugins from calling handlers; it applies only to DB.ts.",
+          "basis": "study-design-inference-from-source-roles",
+          "evidence_ids": ["EP-DB-ROLE", "EP-DB-INIT", "EP-SERVER"],
+          "historical_anchor_paths": ["src/node/db/DB.ts", "src/node/server.ts"]
+        },
+        {
+          "id": "D3-EP-MOD-002", "type": "deny", "from": "database-adapter", "to": "http-hooks", "relationship_type": "dependency", "severity": "warning",
+          "rationale": "Study proposes keeping storage initialization independent of HTTP hook composition. Server startup may legitimately initialize both. No upstream maintainers approved this study restriction.",
+          "basis": "study-design-inference-from-source-roles",
+          "evidence_ids": ["EP-DB-ROLE", "EP-COMPOSITION"],
+          "historical_anchor_paths": ["src/node/db/DB.ts", "src/node/server.ts"]
+        }
+      ],
+      "evidence": [
+        {"id": "EP-DB-ROLE", "path": "src/node/db/DB.ts", "start": 3, "end": 6, "supports": "DB module role is initialization using settings."},
+        {"id": "EP-DB-INIT", "path": "src/node/db/DB.ts", "start": 39, "end": 43, "supports": "ueberdb2 selects backend from configuration; no fixed PostgreSQL assumption."},
+        {"id": "EP-SERVER", "path": "src/node/server.ts", "start": 3, "end": 7, "supports": "Documented HTTP and Socket.IO server responsibilities."},
+        {"id": "EP-COMPOSITION", "path": "src/node/server.ts", "start": 56, "end": 62, "supports": "Startup composes database, Express and plugin modules."}
+      ],
+      "runtime_context": "HTTP/Socket.IO, configured ueberdb storage and plugin hooks are distinct concepts. Do not infer a particular database engine from the adapter, require network persistence when a local backend is configured, or forbid all plugin/database interactions. Tests and type-only ueberdb imports are not runtime network evidence.",
+      "unknown_conditions": ["Database backend/configuration unavailable", "Plugin-provided relationship without retained plugin source", "Dynamic loader or ambiguous CommonJS resolution", "Historical DB.ts mapping absent or renamed without an accepted mapping amendment"]
+    }
+  ]
+}

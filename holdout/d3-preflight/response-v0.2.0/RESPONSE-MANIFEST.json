@@ -1,0 +1,47 @@
+{
+  "schema": "d3-preflight-response/1",
+  "version": "0.2.0",
+  "status": "proposed-not-approved",
+  "created_at_utc": "2026-09-27T17:01:05.1554805Z",
+  "source_zip_sha256": "76fa9d3ad76c3885ca7125d9e6a209f212b4534daaa127ee0c6e581fd5dcfe4a",
+  "labels_created": false,
+  "predictions_executed": false,
+  "human_approval_created": false,
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1846,
+      "sha256": "6a932eb0104112ced4f4d98d26bed26202de6815a40bb3aa69625e1a1846f55f"
+    },
+    {
+      "path": "REVIEW-VA-DE-XUAT-CHOT.md",
+      "bytes": 15814,
+      "sha256": "2d0330b0a27f79425f5071f0f3e4ed6d66f3f11c2e85bf932d00a6ac94cb59af"
+    },
+    {
+      "path": "scope-proposal.json",
+      "bytes": 296188,
+      "sha256": "85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3"
+    },
+    {
+      "path": "verification.json",
+      "bytes": 1778,
+      "sha256": "76d2cf237e8dc0df9d7332e3f4ae91e4eaf2abc10edf4c74a732c09c7e5c9dca"
+    },
+    {
+      "path": "github-status.json",
+      "bytes": 3774,
+      "sha256": "e446be3fd7019ccddc693eabfe030cb8dddd3cf501b8212f81648acae69a8ee0"
+    },
+    {
+      "path": "verify-preflight.ps1",
+      "bytes": 13611,
+      "sha256": "fe2f3532d037d70446909c29a4eee07b4c7d01f309530178c87ee0af687f193e"
+    },
+    {
+      "path": "TIN-NHAN-CHO-HOANG.md",
+      "bytes": 2363,
+      "sha256": "c219e2abc041c8c7a06dc089ca17dc4418e893a25be149d0bba03067501033eb"
+    }
+  ]
+}
