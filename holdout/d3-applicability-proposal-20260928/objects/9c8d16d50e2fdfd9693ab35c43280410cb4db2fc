@@ -1,0 +1,25 @@
+tree 4be979d9861843f4ae205611d2fbc23cfdd0b046
+parent f8686dda1043b4003efe0d06afce2aea68d814aa
+author John McLear <john@mclear.co.uk> 1785324643 +0100
+committer GitHub <noreply@github.com> 1785324643 +0100
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqaeRjCRC1aQ7uu5UhlAAAtrIQAJtAh0K5RV2/6KOJ+gUjX9aK
+ 51P7mkdjr56+bexaZe6e6ixyiD9dOcu/Lnu65F//64BwimO+nEpk4R8WiP+Vr4Iy
+ SSvIIvUiqsBiMWaonQeyYLprytgeg/B0F6sW+tiCnrsTvutDGM9vzl/e3v4FxJo7
+ mdijuA9NnLM3Np3OHs9beV4WUCV6uTYQmhxg9cDkp/lKAid9T51O5y+SGbWKuAix
+ vHsGqbrxMPVe/ersOeaWOH6Vh/Lv9nQ8jxy9SgkM3kIhoRfRLAj2QPzljtnUuDS4
+ YLXh7U/i2sr+mxFUFYdSQP1jo6O/oiCq8N8HxQUDz4iiz3wLttnTPmhhuIiw9Zha
+ 19A8jU+QsD1wMx8BMMQloumPQ/n/xS9bm5tIzag7BFIlZENM7u6ZLC3xyx97GBcS
+ l3PZ9kkYPiFENGytCq0aF0To5YH5g/QUGEU8ise+vwF0PTROqtJ1jsBzH9WL5ERq
+ x8lXZSDOwfSVic9oAcABiNg2GSeTDaFWEhlFUI4TMsAPNVtMn0OuyTFrrp0LJNNE
+ kyclVqPa9p7brSS1ELsnk1mCVDBH9arEpa6j8euGG4JwfphywAxdOqBXTATeMuhm
+ 6zKLztO5Po+VlSYV+2zVpao8fh4BEJm6pUGNIQpGM8Qtoq+pt6E0/Rwtzlsnk8Qa
+ trrZUswtZMKiA6RX1O6M
+ =oq9d
+ -----END PGP SIGNATURE-----
+ 
+
+fix: pre-auth path traversal in /static/* handler (GHSA-mc8w-wjhw-45x5) (#8081)
+
+Guards the backslash→slash conversion in Minify.ts to Windows only, closing an unauthenticated arbitrary file read via ..%5C in /static/*. Adds a backend regression test. Also adds the 3.3.3 CHANGELOG entry. Reported by @gcm-explo1t.

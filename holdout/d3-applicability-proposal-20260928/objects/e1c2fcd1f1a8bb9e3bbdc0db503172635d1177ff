@@ -1,0 +1,79 @@
+tree e090931948c71b585446f11c733aadeb931e3921
+parent 63f95d602905aa3f5b105c49d60ec706b37da6c3
+author John McLear <john@mclear.co.uk> 1785179006 +0100
+committer GitHub <noreply@github.com> 1785179006 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6t+CRC1aQ7uu5UhlAAARlgQAB+6ACVOwjmu+W72h+ayolpZ
+ ZUPNmnqH8et0nMPdmB6RLr2UG2whbWhHyoF2mPOCJPJflaXzlJ7BBnyLeT6bqB9t
+ 8Nlmn/FuwIjc9Qa5A3FQIoilNEjvp406Bk/u4EAJX/jJ1rSMmwow7Cl5TK6WSomT
+ BFjHOXdbGxPO+CPMvyzsodrTgV66f6tFXD59HnSG0LgqZmIpx8s1mQKfr10cik6M
+ 1iIBy8PYFSxhnk5NO5WwlSsZQ05LGuRVoUQlLPxT8TM9NxductoxHsWgUfPLb/Wn
+ tWBNFw4RuoaEw7pYDNnGpNm4BVdHUuwhhZSCNOe6/QFrtfv1z9v1hZbNPbGo74nS
+ 3Xl6wA5rfuinCqe6Lg2VbcmWa8nfvbqk6k/pfpHKcRo31yZ8EqF1rZN2yuPHcm/D
+ TUV7cT2/+4F2Qn4mzEYNR9uM0OGonxP3ZT23ovGprvnzlNGSDCn1WFOPaxBB6Irg
+ cvgbmsXrHQ1Qf+zP04c6D9oJcwG73RJNptvFoQrTlXlOaEBO0eS2mR72dgVqO3iQ
+ MSfw+b0flaMHTOxFtlp/5bxg/cApiyc6C9os6m7xjrLPcGpmwn16BPq9C38TMNRD
+ FjPcJOnjETv37UbP/hC2tnVEcLnneSOo96tRvzOqVv8KOI5olZIApjQin5fz+oN6
+ 24b0+UIyyLVFE1WIey84
+ =RmDR
+ -----END PGP SIGNATURE-----
+ 
+
+perf: don't log settings.loadTest warning per-message (#7756) (#7776)
+
+* perf: don't log settings.loadTest warning per-message (#7756)
+
+CPU profile of develop (and of the open #7775 branch) at the
+100-400 author dive sweep attributed ~4% of total process CPU to
+log4js inside SecurityManager.checkAccess. Tracing the actual log
+call: line 79-80 emits `console.warn('bypassing socket.io
+authentication...')` on every checkAccess invocation when
+settings.loadTest is true — once per inbound message. With log4js's
+replaceConsole + cluster-mode dispatch enabled, that warning
+allocated, formatted, and dispatched a LogEvent through
+sendToListeners -> sendLogEventToAppender for every CLIENT_READY,
+COMMIT_CHANGESET, USERINFO_UPDATE, etc.
+
+settings.loadTest is a configuration choice, not a per-request
+condition. The warning belongs at startup. Move it to Settings.ts
+init alongside the other "you set X, beware" warnings, and drop
+the per-message branch (the loadTest short-circuit still applies).
+
+Test plan:
+- tests/backend/specs/api/sessionsAndGroups.ts: 32 passing
+- tests/backend/specs/socketio.ts: 39 passing (handleMessage paths)
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+* fixup: address Qodo review on #7776
+
+Three issues flagged:
+
+1. Indentation: outdented the continuation lines inside the new
+   `if (settings.loadTest)` block from 10 spaces to 8 (one level
+   from `logger.warn(`), matching 2-space indent rule for added
+   code.
+
+2. Warning scope: the original wording said only socket.io
+   authn/authz is bypassed, but settings.loadTest short-circuits
+   SecurityManager.checkAccess() which is called from both HTTP
+   (padaccess, importexport) and socket.io (PadMessageHandler)
+   paths. Reword to "SecurityManager.checkAccess() will bypass
+   authentication and authorization for both HTTP and socket.io
+   requests".
+
+3. Misleading "fires once at startup" comment in
+   SecurityManager.ts: the warning is logged from Settings.ts
+   reloadSettings(), which is also called on admin restart and
+   plugin install. Rephrase to "logged from Settings.ts during
+   settings load/reload, not on every request".
+
+All three issues are accurate. No behaviour change for the fix
+itself; only comment + warning text.
+
+Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>

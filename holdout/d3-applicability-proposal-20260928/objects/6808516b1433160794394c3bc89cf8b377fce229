@@ -1,0 +1,54 @@
+tree 9eb982dbd0f0157a542f10e4ffe13b3007bffbcd
+parent d1c1054b3f395bea72d81b397c6e4e4882ebf9c2
+author John McLear <john@mclear.co.uk> 1787321113 +0100
+committer GitHub <noreply@github.com> 1787321113 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiFsZCRC1aQ7uu5UhlAAAIsIQAEC3A/umQGKcCkn5a+7r4dio
+ ANAfWDLcSE64A/RWkVHuW0XngxgxpDc4Sn+p+MYWFL8CPSUtL0RWuBzOkr9sQdmj
+ No2/aTjJDF2PVGZ0vwxso8eKmGRZQYQqP/hEqfgdXZErR/A1cEbfZU8Q9NNyAINu
+ 0+cGYDpuCeiljMT/7BkQu5WRL2X5j1ZJYNx8HMGxJxuSdWU5QwCFynU15bKphMVe
+ Gfm0dhGDJmlBCwl4D+BdCiQd+wxibgCuqcOzVBNtN53blEKVThqyjI3tTkBPVkxP
+ Uh7qpzj7MVu8SW4PlAO9e4E7Lr585+DL9rma6YATqs1JmJZmcfX1LX4WGFrqsLyk
+ t5NZWuTzDx8syHeaE3S8BOkS9tcBAZqHMUIFxCvNEP1qCxw4QaMQCH2X88NqYSxm
+ RVHIjkM7mg0imATYnvc2jZgtWBYkXyb0Kn30w7Rj8AQ+ux1SZks+7Xit9xWOb/Qy
+ U5LciGXbShHP0GQFIvjnt80w/Tlj51RRenP3UUwTwdemb9Fc5h9sP0B41dLsvx6B
+ mHMMtTipbqX/ubAmW6UAm5zIBvZTZx3dzCDr5CIHovRLQgOWs5XdF1hmlbWeyYNK
+ mrvmkLcXb8AERKWuwmNtsoriD72kx3N78bAccsfMlB6IEJGDF9a9SvaFmECennjx
+ P4VPKdbXqpWXxZ84iQl5
+ =JJ+9
+ -----END PGP SIGNATURE-----
+ 
+
+feat: report a damaged pad history instead of asserting (#8145)
+
+deleteRevisions() went straight into pad.check(), which replays the
+whole history and dies on
+
+  AssertionError: The expression evaluated to a falsy value:
+    assert(timestamp != null)
+
+That is an assertion about a null timestamp, when what an operator needs
+to hear is which revision is missing and what to do about it. The
+reporter on #8134 had to bisect their database by hand to find it.
+
+Add Pad.findMissingRevisions(), a cheap scan of 0..head for revisions
+that are absent or carry no meta.timestamp -- it reads one sub-field per
+revision and replays nothing -- and run it before check() so the clear
+error wins. Cleanup now fails with:
+
+  Pad eu-demopad is missing revision(s) 6. Its history cannot be
+  replayed, so revisions cannot be cleaned up. The pad's current text is
+  unaffected. Rebuild the history with a full compaction (compactPad
+  with no keepRevisions) to make the pad cleanable again.
+
+The admin UI already renders err.toString(), so this reaches the
+operator with no UI change.
+
+Full compaction is deliberately NOT gated on the same check: it does not
+replay history, it rebuilds from the current text, so it is the recovery
+path the message points at.
+
+Refs #8134
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

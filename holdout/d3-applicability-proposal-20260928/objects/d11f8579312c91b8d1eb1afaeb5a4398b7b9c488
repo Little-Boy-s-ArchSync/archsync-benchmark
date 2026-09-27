@@ -1,0 +1,23 @@
+tree 7d2fd82f25c01fd73816f642d62c3c517560349b
+parent 8723d7af130d6cc4600d9f813a71f9ae41eb8916
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787282490 +1000
+committer GitHub <noreply@github.com> 1787282490 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqh8Q6CRC1aQ7uu5UhlAAAXn0QAEGZsRZqjfsRJPcsGniN24v2
+ Y2Si84PiwtNBBe4TWKgYUzh1hdEe/bpZpdJIRrsdo8eTGBWC6NIiiDb/sGQkxCG1
+ Id9Q3kDPbv+J+I0TtGd5KjXzp3ASpUckB5KNBpLk734z2NjYamwvPsUFob1HR56W
+ lJ2BsAF73kJhQLMxEGSI8m1206lWWvqJe1fR80mQbA+pwy9ffHLHGsiLC9SiUxbh
+ zdtCHA4Kzpm3uILbYitZoSDQ6kNwBQj2KPYf7LgFUHP8GW6z2LD6qyWMPuOUTgUA
+ CSGqzazHtbHQxT495u1M1nGyxa7OEOqk6EEJT0jTYU4yyJnsFR9gOKbsWFt1zc+t
+ OCJM89GmQswdrsAcVVL9UfdZ4vaApIIWd1JFTSM6zgcgm8aLPtPlcVnBro61L7kj
+ QQt7Ev3F7hkSHGXAfX6BRR9BUG4Z5mCZRQbgKSSdc2X7fGOYIazgWu1QYWyLlb1O
+ idek78N8YYwUatZPenbj3rB2r2E3qJVsBvquo9v7CpfSDp16GO2EbEtoDnQoAzXV
+ tP1KencMsYeeuVe72cU+PWoBQhfETQP5MX1H07GBxsaxu26xaa0rH33MPGnDDqal
+ d2YvmU988oErpvFhWvbWkRqJo8Qoo1JhyDocWpMzZHTaLiB+0wnvQBW5kt38YX8Z
+ C2866W8uqBIbK3fbsYBy
+ =TG2C
+ -----END PGP SIGNATURE-----
+ 
+
+feat(alerts): fan out notifications to every configured channel (#2847)

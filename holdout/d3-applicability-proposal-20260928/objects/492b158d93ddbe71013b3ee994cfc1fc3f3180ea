@@ -1,0 +1,64 @@
+tree 6024a94680e6d4ccf824f32b625fb66bb1b3497d
+parent f3ccc6c718194c74d7412d307fb32a3163dbf8f9
+author John McLear <john@mclear.co.uk> 1785176327 +0100
+committer GitHub <noreply@github.com> 1785176327 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6EHCRC1aQ7uu5UhlAAAyM0QAGDAsmVmvbQdqIXq5IWu5vYn
+ MphBHNRgLW4PeZXc/VT4UT7A0rhLDsYL6YdH5hiJofiJicSH/oOLBFc5KXB9LGP+
+ FCmqs85TFkz8zYsCZwhJjAWfT7aQ8wzCht1WR4qVRolguNWjVGrEsOXt505+Q140
+ 4+sgIiUFFfQkBgWh58VTU/QTf2PZ9XEB2R2luyrheXifYY0QsIXHa0xVmbWQMo1m
+ rT9cDSlgdYGeT7K5UT3zID3gIXFq8gJjEtLQoM7x6uYamy+Y+bsF2qlCQ9cgVhk2
+ QgigWdEcfgDJnGUkBzZVNbfAp2psPlCN5iwNCM5eUekJuaTn4ZArAWQ35hjGaMbI
+ /5xBQKt+1j0JIMMNUrmz74fKamQKG2JFIjUzBi0U4Ds8UVShtXxHkvmqCU53HWSQ
+ S+3gtjhaqWmBmDWiEBFur2/6W/n38EkryqDc80M1GzQf/HVQILGE3jgUHGLSpsxU
+ 8Oedvnnron31H4MSMbEhQqnU9q/S0PpjMngZwc4jYaX12hAkDPH02bGw0pHMVEBa
+ GD5PoAPpzlLikD1tlcpYjd3tMiAGuscjcJU2kCRXhyft0V1wu2MYZtghdOA5OgyX
+ PZnmedYI7lgHWrn4xXoX6t9jcnV7Y92VgTRiD1r58674LcljQODExu7Gb4xcwfdo
+ XhF8EU6Kvyo2pAeQ6vk9
+ =o+Hs
+ -----END PGP SIGNATURE-----
+ 
+
+security(export): strip remote images on the soffice path to match the native path (#8071)
+
+* security(export): strip remote images on the soffice path to match the native path
+
+Defense-in-depth / consistency fix — not a core vulnerability on its own.
+Core Etherpad never emits <img> tags in export HTML; they only appear
+when a plugin/hook injects them, so sanitising such content is primarily
+the injecting plugin's responsibility.
+
+However, the native in-process export path (issue #7538) already calls
+stripRemoteImages() defensively, while the LibreOffice (soffice) path
+wrote the HTML to the temp file verbatim. soffice is the only export
+path that actually performs outbound fetches for remote <img> URLs during
+conversion, so a plugin-injected remote image there becomes a blind SSRF
+sink. This makes the soffice path consistent with the native path core
+already ships.
+
+Adds a regression test that injects a remote image via
+exportHTMLAdditionalContent, intercepts the temp file via the
+exportConvert hook, and asserts no remote image URL survives.
+Remote-image behaviour reported privately by meifukun.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* export: preserve doctype and comments in stripRemoteImages
+
+Addresses Qodo review on #8071. Applying stripRemoteImages() to the full
+export document for the soffice path dropped `<!doctype html>` and HTML
+comments, because the htmlparser2 handler only emitted open/text/close
+tags. A missing doctype can flip LibreOffice's HTML import into quirks
+mode, subtly changing rendering for all soffice exports.
+
+Add onprocessinginstruction (doctype) and oncomment handlers so the
+serializer round-trips document directives and comments while still
+stripping remote images. The native path is unaffected (it strips only
+extractBody() output, which has no doctype). Adds regression tests.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

@@ -1,0 +1,12 @@
+tree d7c8620fa482372dd1ae36051d12982fea1a8592
+parent 90105cb1480f636899ae50687ece102c2689f66a
+author Amruth Pillai <im.amruth@gmail.com> 1783541711 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1783541711 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQEsd0AwH/y1yIPHF1Xr4FJ92hl5LHberOqDTKqxrYHDwNsX8ORtn1oJzd/L+p4QfNP
+ uM3zjyqOJd7p7Fb9+5Awc=
+ -----END SSH SIGNATURE-----
+
+Fix OAuth metadata authorization server list

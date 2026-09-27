@@ -1,0 +1,14 @@
+tree 49a40d54629b14edbe2a4c130b421946b316c44c
+parent 0c7c3ac4c4f399b90356d4cb40c8ce9f656b4260
+author Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+
+fix(seo): serve the root request through the web app handler
+
+The static middleware was mounted ahead of the web app fallback, and Hono's
+serveStatic resolves "/" to the directory and returns dist/index.html verbatim.
+handleWebApp never ran for the root route, so the OpenGraph, Twitter, canonical
+and JSON-LD markup it injects was missing in production - fetching
+https://rxresu.me/ as Twitterbot returned zero og: tags.
+
+Route "/" explicitly before the static middleware so the injection runs.

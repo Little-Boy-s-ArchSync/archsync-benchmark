@@ -1,0 +1,45 @@
+tree 777fc32c312bfd3c3d3ea739348d87c2cdd0a80a
+parent 387651b683e32c378a11654ccdce3cdd9c980b9c
+author John McLear <john@mclear.co.uk> 1787321249 +0100
+committer GitHub <noreply@github.com> 1787321249 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiFuhCRC1aQ7uu5UhlAAALp4QAFga4JTDBWKn3mkwoPPtH7mU
+ u2AGKYrRzl14M2Qt2xyc8XTld0NllCaxRmbTfXcRc3ngj1tbs/6bQ6hHsvlHtMIL
+ UVZjzynxB/ykdtcmQbM+VS5lZ4HOUyZkO8o1u+3GHpRPYBrCOnrCwEyz9YaK06Sl
+ kGR2XQITe7bkJq7TE2ixDbisZsSSioJsNsRHe9wHp03ZQeYSANigdD2aJDDMHrnP
+ tlP3AupdrYtrhMQRaKPxWzIW/FJVLQa6PiZ8bG680jR6fds39Dnl/q41V6UvOERK
+ EWXqzbAJwT28dHl8rRyaoDYatpOcZwfTkakMADKlCPSmZ8fIKGoxfWhpRPPGkYGK
+ suexuYviqqHDhnvua1lB3UjkEqZXWOqESNSykSKZxpDvNnNc53ett1+dhD0m/vhz
+ eCpOfGf5F8I47EZ9iwhP+WWkc1EfAjfC5kRye4tqf1umvTWON3wI6x33o1Qddx/p
+ C/nASdi66Tp1Qk+9/37Wk/RrZaNc5gLZx+gRCEUWxb92VKWfSOJ+H+UBAgSWWG/W
+ 33bCedurW0/dSvQX2vuT65jkfhIflV8RzFRpPM6EAGD3Tkmd3NUMeaBjdsLqpAkq
+ ULhcIOx4ErqPkjcp7+ez0SkomE1nW3/85DfdK2MgYl8cLQjZfccFkHw0QQW6IccO
+ mcBVt3fKcaT5KJVVLNbm
+ =L+G9
+ -----END PGP SIGNATURE-----
+ 
+
+fix: keep err.stack in sync when pad.check() adds context (#8138)
+
+pad.check() prefixes failures with `(pad <id> revision <n>)` so admins
+know which record is bad, but it only assigned to `err.message`.
+`err.stack` is rendered from the message when the error is constructed,
+so the stack kept showing the original, context-free text.
+
+Both places that report a failed check log `err.stack` -- Cleanup
+.checkTodos and the admin `cleanupPadRevisions` handler -- so the
+revision number never reached the log. The reporter on #8134 had to
+bisect their database by hand to find the missing revision:
+
+  [ERROR] adminSettings - Error in pad eu-<id>: AssertionError:
+    The expression evaluated to a falsy value:
+      assert(timestamp != null)
+      at Pad.check (src/node/db/Pad.ts:969:9)
+
+Fix it at the source with an addErrorContext() helper so every reporter
+of a check() failure benefits, including plugins that log err.stack.
+
+Refs #8134
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

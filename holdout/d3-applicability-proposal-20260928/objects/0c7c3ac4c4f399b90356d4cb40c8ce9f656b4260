@@ -1,0 +1,25 @@
+tree 698c00065048a6fa85b9242858b95b07a80c8325
+parent 9509b5bc2ec133a12cd49e725f3445d0c7eaf77a
+author github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com> 1786954808 +0200
+committer GitHub <noreply@github.com> 1786954808 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqgsQ4CRC1aQ7uu5UhlAAATuQQAGijjlo8FiCV+Ix/y/mDKLOm
+ /2XBNFsoDaz4lPIjgzAkvN/i+D6UbciuIX4spIVqLx5XqbPq4pquM6tlRFhUqaCp
+ cSs/zwN2Zco+ZA+9202RMT6Q4w0V/u7UQ3bsjOn42mX+fXRAM0qemomkvcZ3dCGV
+ SM9/N5RxXq+tk5esf0VwyQViP+86ADkWHowmhmnVZMx7Je4XzHxxbTkJmiae5Ij5
+ fT7e1l7LZz0T9+3QUCFjA+SlOJQcBPhMc7VvlPXW1FTVquOSrjtdb1+j4lV4Uw7Q
+ zGOSxLezozz+5K6tJyHdDr4WadD2Cf9ZRJtqZHFDmJFPTCMGUR1stRXaJxFqzQBO
+ 3emPopwoGYUuHcC6c4Bzl1hxKZh7YYdrEkus78XwJ8MEg+iIVt6u74HwdDPqw9DZ
+ zHLP7NQd05TTVplI7FWAQKGal/nPmrHxAsnvJLNJtn35VpZL4msz5atI5JkbYrSG
+ NRhUsmzkO6QvwmC7kbfGWVi1zCRHakQLyvNvflaK9ZUCG/VysQIYDYNGJ4gDBWEV
+ kRHyjcGivNyfc8jXkV2ukIDZ8Glk9SF5o+oWbi3qGAZZR+orJmWWVgIYWF9QkrCq
+ qvzY03te8Q8d2qTHSGxOgtP1OMb/XklS8xA/O085LAVrYtDePoM4gJp5bWpnoawy
+ assTft2FKSGb746aZ2By
+ =ifkX
+ -----END PGP SIGNATURE-----
+ 
+
+[skip ci] chore(i18n): sync translations from crowdin (#3330)
+
+Co-authored-by: Crowdin Bot <support+bot@crowdin.com>

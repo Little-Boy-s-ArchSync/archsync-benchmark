@@ -1,0 +1,23 @@
+tree d4518a553133dc3dd5ce981b6af320291dc3f3d5
+parent 7f3878bcb2d6b2766b86eebb729ce37d5b73f462
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787601480 +1000
+committer GitHub <noreply@github.com> 1787601480 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqjKJICRC1aQ7uu5UhlAAAl8EQAEVyWQVmmKhX90zpLvLUggBy
+ kGokg9hsM+m/BTR8p2JvyiBcUaxhoVhErG31rHzp01KUGXK9Zu6R+hnsyKZR+1xA
+ 9qGKD0TGotu+aI0X+9+BgogT3r8PsHWBCDHBUSWr+c2WLjcvK9LeKP8sVTvHjzfh
+ M5u4BU3noOgWaSzc+ZZnyRc0pczpb0pkTwI8cOCjs01yfZsNR72b42hAcoRFB2M7
+ fqcFkxGNyXuz5ZnPeA0uJMsCVnijRlKQq3lswJqGOzh/KGys5lGqcTUsXhvsdbBF
+ sLRxypo/Hz8qxQuVFx4KxALUtQWQT3zF9BL9yUXeTzjrRlJ2APrF8VA8vn8n7kPK
+ QtQbq0R0fNqU/wOaUYupcrTMSZQpDLFtsBCMmdpXbxI7jj3BtZCKtdU+QzmzYIrq
+ 7xGckJS/DjIRboX2qRhF0b9iiM++zTDIikHHpKGNZu+FFSb8dW9mAPHBjW+vYPK6
+ kJY8Qaok8pKOocajQL3StPoX1lbUTZ93CbGsugEPPFIM94MUqaT4JuZMfUqtICWV
+ 8Gi9lZQozKVdBn56++yvCJ+OnM46BBGg7Ev43jug/bhtI4EjuuYrxIqy8rXzf5Jo
+ FWS1guQG9IT4UFbjlYpuKLND1mlVOdWb0rVT6zeLf6qou+dvOnqpcPmUfaj45X5P
+ sj8NkKqE0Dc5U5EZhNKD
+ =CUzf
+ -----END PGP SIGNATURE-----
+ 
+
+fix(alerts): notify configured channels directly, not via mention strings (#2984)

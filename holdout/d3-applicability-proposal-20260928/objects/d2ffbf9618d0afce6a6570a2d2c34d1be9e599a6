@@ -1,0 +1,25 @@
+tree a71281d963c7567504581b05c8ff1df0856886ce
+parent 4ac19f81b3d290dd063764ff6b0fa3dd94d34632
+author Amruth Pillai <im.amruth@gmail.com> 1785407955 +0200
+committer GitHub <noreply@github.com> 1785407955 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqaynTCRC1aQ7uu5UhlAAAHcMQAJFfCQcNfCCWVgHaskYYWPlz
+ r+gFlGtqJIjJCOSsE7/DcpFhuWcTsbU89jLRamE+gkM4F2yqC/NOqlg9rriG28rj
+ db+J5/jZsd+c5HJ1HoMwDeRJHwQINiK2IG/YixCfkWaX1HP8nFXx0yJ4+Vqqc91e
+ +SWO2C1OD5+dAtIFYuY25L3xIu577q//vxXjR5iT58Nw36/Td7XaT7IGi4sx0ZKp
+ eSvTQOwDqBi9mtFR03z+xYUVi/J5Qsw/YnoO64aXDhI1BXt/hvXn/7m7gFh4avbl
+ oW+wTvbZK9L/9xpibFICum+xNYD5xhB4vzTPF39mB9G+IWHzwjGm9zHtDwlVfC+P
+ Khhfql6YYDEM5M16YQu9YgondqOLHz6CNinAhbJVPRYfFCxQVizwRBeFeAWX1KHh
+ E8VrXqnUgFJQA9JoKfxuLNVCw1uLr2FXvx0xlI1VP8LR7HbSgTzSSVZ6DeKcwcaO
+ alVo6uAFs9MreHfQu9VTfNBRO0Shrplfq4nDB59Q79mcgXlcgVOAgBuUXUTXBi7U
+ EIqVbyCxMz1JeifstcV+R2JfA0RYhidL0I/pDrFIhRa7yPW3XZ/azKVv0M79u8g3
+ s+65xs8yTPmUq+JkwAl8GG0rxfgBVU+lxZm0BM0qDh77eCgH6o+ELjjnUqAiZhsV
+ HzRAhq2R5kFs8t241i3k
+ =lm7S
+ -----END PGP SIGNATURE-----
+ 
+
+feat: add semantic CSS stylesheets (#3274)
+
+Co-authored-by: Cursor Agent <cursoragent@cursor.com>

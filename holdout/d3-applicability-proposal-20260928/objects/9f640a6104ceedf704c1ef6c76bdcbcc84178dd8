@@ -1,0 +1,54 @@
+tree 47cad81ba07a53dc9c8da3a06cec5850d6796b9f
+parent a8317c2153f0daeb9780edbe70003b8f8121b679
+author Tom Alexander <teeohhem@gmail.com> 1787066607 -0400
+committer GitHub <noreply@github.com> 1787066607 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhHjvCRC1aQ7uu5UhlAAA7fkQAArzbJNEMeyeLKYF8v1oOzVE
+ mV2z8QIjNeDdmSUnsR2GqT6mdppP2EXsQQx3GZy8GUqchyhnctSRUHfVCeHvhqqV
+ 8sfA5NxTO3hhpTO64cetspZoNUPwoc6gmBOFPAwzCRHbi0V7/pcgfRszxSlP9OhV
+ 5jMVV7wHMSnZQhoZSkQjyHewFPCm9jvJF4ttK9w4RYXSXriWpvyoa0qzDbcC4bq4
+ KB1qfOME8MsUbQmX8tjbeceEAWK3uM/lnFmcLRESvk14ybDKrKvXz3J2MHFxD2Op
+ Cl+VvX58127wsJeqMZQPkJdHSGMBaea5V4YsuguFprgx0/ydJZERRjP9xomfBjrW
+ dFHcdVxuLYKMAtE1dWz3FTcKhT31+YAEcAPRTDEvBn8cIqQMVn1DD70WT9K9ez+F
+ HIbqw9DA4hfZYzXfZWNLGYalbG9/UGSuD4HluA/vyjsK4CSBvaap8EAdgLizjW9O
+ 2g0WVJrtqtju+nQv6z6jivlqQ5zXZPSuPV+K2JlbtiZFImIq6SdTNN0fSln4KXDL
+ kC0JIdy9j4xg+Aw7D1+pFEMutddfjwDsM1ESgb0kJtpZQwVfunNtBZaMzVxE4ybp
+ u+piyqRdFhWw/0xP+GfHi2s5U5gNi5U285X3xexld5NfIF5llnJuL19D125WkgLd
+ iMsz0kvSfygtyLV885Jn
+ =OnKN
+ -----END PGP SIGNATURE-----
+ 
+
+feat: make personal API access keys rotatable (#2926)
+
+## Summary
+
+**Personal API access keys can now be rotated** from Team Settings → API & Agents.
+
+The key is the bearer token for the external API v2 and the MCP server, but it was generated once at account creation and could never be changed. A leaked key could only be dealt with by **deleting the user**.
+
+**What's new**
+
+- `PATCH /me/accessKey`, plus a **Rotate access key** button on the Personal API access key card, mirroring the ingestion key flow directly above it.
+- Rotation is **immediate, with no grace period**. Your browser session stays signed in.
+
+**Two deliberate limits**
+
+- The route takes **no user identifier** (the id comes from the session), so it can only ever rotate the caller's own key.
+- It is **not** exposed on the bearer-authed external API v2. A leaked key can already read itself there, so letting it also rotate would let someone lock the owner out of their own tooling.
+
+**Also in this diff**
+
+- Both rotate flows now use the shared **`useConfirm`** dialog instead of a bespoke modal (review feedback). The ingestion flow loses its modal title as a result, and its confirm/cancel testids become the shared `confirm-*` ones.
+- `APIKeyCopyButton` emitted `data-test-id`, which neither Playwright nor Testing Library queries by default, and both key displays shared the value `api-key`. Now `data-testid`, split into `ingestion-api-key` and `personal-access-key`.
+- **Sentence case applied to the whole card**, including the pre-existing ingestion key labels, per `agent_docs/code_style.md`. Half-converting it would have looked like an oversight. `MCP.md` references the same labels, so it moves too.
+- **Agent docs**: a required-pattern section for `useConfirm`, and a fix to the `AGENTS.md` pointer that said to read `code_style.md` "only when actively coding". This PR shipped title-case labels and a hand-rolled modal because that invited deferring the file past planning, with both rules already written down.
+
+### How to test on Vercel preview
+
+**N/A. Not reachable on the preview build.** `useMe()` returns `null` under LOCAL_MODE and the Personal API access key card only renders when `me != null`, so neither the card nor its Rotate button exists there. Covered by integration, component and E2E tests instead.
+
+### References
+
+- Linear Issue: HDX-5099

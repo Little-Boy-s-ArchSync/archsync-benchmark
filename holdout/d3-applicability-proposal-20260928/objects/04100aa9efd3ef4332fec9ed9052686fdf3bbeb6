@@ -1,0 +1,23 @@
+tree 7216b45415f524d88c181dc4167139309ecbd7a4
+parent c292968314390090514e3abae5d09281f8fcef39
+author Amruth Pillai <im.amruth@gmail.com> 1786283191 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786283191 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQKmrlfZFH1n25QZlYmaVm54/TIKvmrMfpedtbAXErg8WcYq1Cy617EXUPKfH0GlqRn
+ 3pK8S/st1hH5MUn/6pWwk=
+ -----END SSH SIGNATURE-----
+
+fix(agent): abort stopped runs with an AbortError, not a bare string
+
+Stopping (or archiving) an agent run called controller.abort("USER_STOPPED")
+with a plain string reason. The AI SDK only recognizes a cancellation when the
+reason is an AbortError (err.name === "AbortError" / isAbortError); a bare
+string is treated as a real stream error, and its rejection escaped the
+background resumable-stream pump and crashed the whole server process with
+ERR_UNHANDLED_REJECTION on every user Stop. Abort with a DOMException named
+AbortError (label preserved as the message) so the SDK cancels the run
+gracefully. Same fix for the USER_ARCHIVED path.
+
+Claude-Session: https://claude.ai/code/session_01ULhhLQ24DvnYwzP4afDuye

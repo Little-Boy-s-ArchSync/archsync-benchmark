@@ -1,0 +1,9 @@
+tree 742e4a51114288c266db9c3da5c0c52676ecd7bb
+parent 1e23a453a0db53bb17827d9789fc2ccc1886dd98
+author Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+
+fix(seo): shorten the meta description for mobile search results
+
+The 131 character description overflowed the three line snippet Google renders
+on mobile. The replacement is 114 characters and keeps the same claims.

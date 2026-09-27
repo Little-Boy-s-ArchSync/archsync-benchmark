@@ -1,0 +1,12 @@
+tree 7ffbc46dcf6f06a639bcef9943a2def52644f70c
+parent 12407d473d9b9782a8686f5bfcf59ea5931022d6
+author Amruth Pillai <im.amruth@gmail.com> 1785218873 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1785218873 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQCHqrxUCVWzpJsEB3PwUDpa6d++IPuRCzp3RG6DHsXoqMTEE90TTD51cVwuds1/tdt
+ xX0sv9spvcfByihWuKRwE=
+ -----END SSH SIGNATURE-----
+
+fix(server): emit initial homepage SEO metadata

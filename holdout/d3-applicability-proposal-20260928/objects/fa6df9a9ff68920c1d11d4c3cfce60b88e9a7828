@@ -1,0 +1,66 @@
+tree 61bac0977eae973db97c954b1e483320994462ba
+parent 4d95a12845d42ce4cbc1f5cda5460a44269c2574
+author John McLear <john@mclear.co.uk> 1785176320 +0100
+committer GitHub <noreply@github.com> 1785176320 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6EACRC1aQ7uu5UhlAAAx+kQAABD7rbR/lc41Zxtr7Dp4SZJ
+ 5n4yiqDeCuJmtHEJylPG29eZicWPtYP21CAFeXYRaXinO5VVL4/P8dFRdzBlwq8X
+ zDw+mtuWIVd28znznyAcvTgjjEBdUZrYnwpTydebBx4iLyUrjXf8jM+a1aC7S7s8
+ brLdDmnZnzpzqEG/qo0o43m/IHyTL8/IPlJwKhg/lOaAEBYbUBBr4q0ypXAdbmWM
+ WYNfN3g1WPlZB/Yb3K3M4+4nDniUxRnZefUIy4LbvIPKMMY1vqwmpqT0yiqdxIJJ
+ zueomMnQz1hGRwvfBFCsMNYOpPgwI4ESIRa5NXGqtxB4lwpvHecsONHLkVgKlIrW
+ MOn81Lg/k8jMmalap2ruoWrlaqvNsxUWNp3a1JbJm0RRYANv3+b5gZxucAd9Z4Ma
+ uxROZjOuBEYV29gQyo0rrXm3noGWMvgXUVyq0R4n012MooaHMNFrYd50HSEk1KFf
+ mKnOzVuqx8QJ9/A6jNzyOEjmMSK3uKErrS+/K3kGFVQ5WS/UCxqc5P1iKtlnWLfF
+ iD8K4aC9/cam4a6xH61tILBzHhweYGiCJ4hDwAiL02gYZz09D73SBGyrm5zCUIzR
+ VL4Drt6oehMT7L/97GC9TiHuNmwneikcbZGBClxxPlU5JWZOVsyf0TkEnj3fSKBN
+ n8ZzQqP3STswUx6BUQML
+ =wehA
+ -----END PGP SIGNATURE-----
+ 
+
+security(auth): regenerate session id on authentication (session fixation) (#8074)
+
+* security(auth): regenerate session id on authentication (session fixation)
+
+GHSA-73h9-c5xp-gfg4. Etherpad never rotated the express-session id when
+an anonymous session was upgraded to an authenticated one. Any auth
+scheme that establishes a pre-authentication session — every OIDC/OAuth
+RP, including the official ep_openid_connect plugin, which persists OAuth
+state before redirecting to the IdP — was exposed to CWE-384: an attacker
+who planted or captured the pre-auth cookie ends up owning the victim's
+authenticated (possibly admin) session after they log in.
+
+webaccess now calls req.session.regenerate() at the authentication
+boundary (after the authenticate hook / HTTP-Basic path establishes
+req.session.user), preserving the session data onto the new id. It fires
+only on a *fresh* login (already-authenticated requests short-circuit in
+Step 2) and no-ops when the store doesn't expose regenerate(). This lives
+in core, so it protects every SSO/auth plugin.
+
+Adds a regression test proving the session id changes across the auth
+boundary and that the rotated session stays authenticated.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* security(auth): rotate session on identity/privilege change, not just anon->auth
+
+Addresses Qodo review on #8074. The first cut only regenerated when the
+request started with no session.user, so a privilege upgrade reaching the
+authenticate step for an already-authenticated session (e.g. non-admin ->
+admin re-authentication) would NOT rotate the id, leaving a fixation
+window on the privilege change.
+
+Rotate whenever authentication changes the principal — anonymous -> user,
+or a username / is_admin change — while still leaving a no-op re-auth of
+the same principal alone (no per-request churn). Adds a deterministic
+test for the non-admin -> admin rotation. Also derives the session cookie
+name from settings.cookie.prefix in the test instead of hardcoding
+'express_sid'.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

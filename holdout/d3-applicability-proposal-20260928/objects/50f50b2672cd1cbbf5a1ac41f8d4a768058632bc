@@ -1,0 +1,12 @@
+tree 90f9cc941a37bb49f6b6bd3598ced22a4582e93e
+parent fb8c73be76cec5cdd8c2e6b6fb35f24c2cce515b
+author Amruth Pillai <im.amruth@gmail.com> 1785221803 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1785221803 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQLmVj4bsU+IOrgtoV130dkpLFrz+zCD7RcYufS6NL9htqXBBEA7qvZny9t9vOE+96u
+ IwYzgmA2PXyVQ2d4rEvAU=
+ -----END SSH SIGNATURE-----
+
+fix(server): use public URL for homepage metadata

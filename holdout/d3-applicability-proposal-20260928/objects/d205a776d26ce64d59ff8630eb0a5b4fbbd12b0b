@@ -1,0 +1,46 @@
+tree 4ca1be139a17f3f26b1c582f13d116f1c646ae7c
+parent 8be68100febd1e7f309db0538787a5ef2f45f92c
+author Marco Frömbgen <23717573+mfroembgen@users.noreply.github.com> 1787243076 +0200
+committer GitHub <noreply@github.com> 1787243076 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhypECRC1aQ7uu5UhlAAAPKgQAI4acCijnFUPsFw/6d/fFoLx
+ LSckDwgMwm6EVq+Qls4aG2FGJZopeMBpV4tjdafKnCw4LCxyuPtcfblgqYUnbiIQ
+ G9Z/yN9DFhNmfylX1Mqybi7sapJ8wXK50WDEbvGYko9z1f2N7KBbhBkz+4fYyL7t
+ ehdPj/Z1/tDPY3kCYlG8nGmLvQz3F0Inw2NS5ahXDPQUg2QhlIawaGIMZBLHcdzA
+ +4+zXh187YHKNrzqXCfdcPVzsa/EBzF1uoOOP2VontN3MIHgJXyZsmajLobYSAxi
+ B0eostZ4ThvknS0hxbCV7e1/ogUMCpEBkAdCE66bKMTlgbmgrK7mY+AQmoKnP/I2
+ RcRwFuylgvMy5zoRb80bQd7eWlOwWNVhuPgnrA05JvGx+tq/TiSvov0i0f6QLOAA
+ vY+a/th7v7TCvPKHUoZ5hWO8uoavdQG8qQ0S7pNIQ+8sibUz6W3/jAyOt7YVjf5p
+ RYZ9QEnAbNyE2OgkM/ZPIaZQ6hAK0cy2O/bltPq+sU2yPnHCNcTkXAAJC5YBNYwg
+ 1ricnNAfdrMR2SMN3arfYAzydJJCFdQeQJqTDTK19pukcPEtMXjcYZaCKgE/USjm
+ 5sMLxf4R0hkVot40Aff3F3WltwBYymQvDV7k7cTbLdCNpItVvEeH/2CEkp/uZtM3
+ 6M/z2cHWxnrL0m74D3J3
+ =6fcn
+ -----END PGP SIGNATURE-----
+ 
+
+fix(otel): make ClickHouse exporter timeout configurable (#2899)
+
+## Summary
+
+The OpAMP-managed and standalone ClickHouse exporters hardcode a five-second request timeout. Larger inserts can legitimately take longer to acknowledge, but deployments cannot tune that deadline.
+
+This changes both exporters to read `HYPERDX_OTEL_EXPORTER_TIMEOUT` while preserving the existing `5s` default. It includes a focused OpAMP test and a changeset for the API and collector packages.
+
+### How to test on Vercel preview
+
+N/A — non-UI change.
+
+### Validation
+
+- `yarn build:common-utils`
+- `yarn workspace @hyperdx/api tsc --noEmit`
+- focused `@hyperdx/api` unit test (6/6 passing)
+- touched-file ESLint, Prettier, YAML parse, and `git diff --check`
+- Full API lint reaches the current repository warning ratchet (`363 > 357`); changed files add no warnings or errors.
+
+### References
+
+- Fixes #2900
+- Related PRs: N/A

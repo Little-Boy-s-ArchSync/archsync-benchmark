@@ -1,0 +1,26 @@
+tree 88536e8c1d21adb2d5a919ef8995c461dd427ab9
+parent 395ae8d6ec2b9efc02d2ad260cc83909a95a74cf
+author Egor Orlov <40111175+truehazker@users.noreply.github.com> 1787340329 +0400
+committer GitHub <noreply@github.com> 1787340329 -0700
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiKYpCRC1aQ7uu5UhlAAACCIQAJz7dr0IVeSuzj+HeOiX8f2R
+ 1OUWQmYop5XudjchvBlQrtMTDlVaPwY9rGVFYoQ5IRRUzV/7V+3pJojBI7KheB/+
+ Nsdpt447ots+OXO5oPNwJ2zIWmAhteFcDGWgWCVdKVGZaxPM+Vtp9EuuDAg8fQCC
+ VDUlEazwKPaKup5VQvKhzT6KExexHWnNnthFt8q2bvTeaeGJBxGaFS+g07JdBfaF
+ SiLhAzRqjTla8HFCJu647rKv8xfSpJO9t8kaRuioxkeBx/Jd9vfc6kc/+xClhofu
+ q7Cfkb7XjfWlfeKB1HhbRExOySEeC2yzXjhQyjCCR8PqmYMWqAkBlEFZhC0KhxGP
+ ANB+K1W/uoGWxMT04L9dmcbU8gxxfWwLd79BfByT2dUSdQSRlyAfg3yhxJTMg0t2
+ EAjvVHRTjv3MjU0KOWv6uCCFlQ7J0YggGng1XOfjvWWfU5UwloBLc8yxGCxlDs3x
+ d0PM9Bjp7OZ6dpm/12xQ9RxuBFR7ZOtsOtjhP7FFO/+mFJuMg1ybwro8VyVPbLfN
+ 8UI7sJCS+toyntqlte3U2kIfmlCnDZoaQnckcpsagMvFhBaS0u+0VoBrpPAgTzVQ
+ qgas/TYB5AqVQ1E7o4dCCfV9SoEkpMD8w8k08hYfUBZh5+IKX1VVKh0PxMCn/g9+
+ LZlsvt+JPBtXbAwopeaF
+ =DsNd
+ -----END PGP SIGNATURE-----
+ 
+
+fix: route ClickHouse query debug logging through injectable loggers (pino on API, devtools in app) (#2679)
+
+Co-authored-by: Skrrt Bot <bot@skrrt.sh>
+Co-authored-by: kodiakhq[bot] <49736102+kodiakhq[bot]@users.noreply.github.com>

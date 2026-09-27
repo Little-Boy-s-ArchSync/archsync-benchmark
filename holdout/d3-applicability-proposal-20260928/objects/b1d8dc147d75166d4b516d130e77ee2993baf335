@@ -1,0 +1,23 @@
+tree 7e19eee52f823ffe802ac236df17cb76f329d1fc
+parent f31a1458312b9596960eba5c36ab303d1fb853e9
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787325002 -0700
+committer GitHub <noreply@github.com> 1787325002 -0700
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiGpLCRC1aQ7uu5UhlAAACocQADKyh8afFLszZgvuw4nHTfwb
+ pMGYWA39G1M+G7oGaEzEz6CodXu0PAztuda9h84Oj5ERfJuyumqmvHOE5HjFtFx9
+ CiULCsXyR3SwUaJep+WyJAddwV0coypVkfJH6Q5sgkV9HDHZm1XKR2XmRavOvUhA
+ 83cXPN6QbpZYEBLBMBRfAyn7AeCxeaAnGUSMw/3JTJ/deatq0QZkvzcSQPixaYf3
+ XgRRtmwROScrgid0rIHEfkLCHm4TbVWtCT4SEQr3h/SFhM/FG4GpgIG5ls84oE/S
+ LODjFzy5qHhiIdBAHfNVvQmyRVZyW0Pv5BWQwXBJ7HlqCqvoqlA5CFQOP7utZaL/
+ XdgWkHowoVXP0DWKEHmvONi4NZz3whKQRCAL+Ss8McRm6R8VmoyB2Frt9buIWeDe
+ GaIYGZdvnsRYJ3vR8uNEoGptwbML+Rn6XQjWHbmEjRfiqlXsVKYkxwRKYO+mbGWW
+ 1Ooy3A4ZXTf+UrsyvxryyQcwpOT4vZkpirPCEKEIm1WaUqHPnNjR3M7LqlBnoCzo
+ JD4ta746p+iVIvzAALyQiTH46ezvCwXqyPdY6qYQ/AQHxfEmgYnhEjz1NbeAC3lR
+ zMhoyg/2eZY5XqkUNEJd2HoSBgWTM/jzffHpi59qJDom6bAd2RitiD8Ge0iY/gRV
+ E38skj3vwnKWkKBd3FQm
+ =LH9H
+ -----END PGP SIGNATURE-----
+ 
+
+[HDX-5132] Formula support for log/trace event sources (#2953)

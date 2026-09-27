@@ -1,0 +1,12 @@
+tree 7e2ef92d488ef6bf9361cb6c974f020359b3c7a0
+parent 25021507a0091f83d0ed8ada28847b00e61801fd
+author Amruth Pillai <im.amruth@gmail.com> 1783443007 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1783443007 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQOf1m28y9uD3EpNK4ohkgGWxpBQeXelR18gebW3yLIiV0ZDfh8PL1OOh94uLbwpnKi
+ hetuhC7kzzug76tFPabgI=
+ -----END SSH SIGNATURE-----
+
+docs: publish MCP registry metadata

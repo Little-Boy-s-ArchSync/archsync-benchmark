@@ -1,0 +1,12 @@
+tree 82e3510434b44b03a7e6471226fc3ea1c67e8983
+parent a2901bfb2e32b36082d79e3c6c82a4b312e06b35
+author Amruth Pillai <im.amruth@gmail.com> 1785220286 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1785220286 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQKtBrP4ljWO3LBXza5yD9rHvWshE/IJLnRAUSceV6IjCfJMfNWoDUqu17EeSYXnHk5
+ 0NZX4mIVA84+/vKNiXJQY=
+ -----END SSH SIGNATURE-----
+
+fix(server): limit immutable media cache headers

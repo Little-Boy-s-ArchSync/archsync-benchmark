@@ -1,0 +1,47 @@
+tree 1849e4e9dbc18b4caaa51baa3bcff79c1a51bdf1
+parent 0aee6a7d7da2e9451aa30364425b874d12a9470b
+author John McLear <john@mclear.co.uk> 1785179001 +0100
+committer GitHub <noreply@github.com> 1785179001 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6t5CRC1aQ7uu5UhlAAAtxUQACFn2yjJHZ0JMLhLMqGVvLr0
+ d8GvfDFAXoUXCFhZu/IfbXnlTENljiH3und04+lt7H5KK+UmlTlQmxhc3eZ8J3D6
+ bKvUtThtxEttzw9IBz1NV6gjZubWZYFtl8p37q4x+sTbssfrSGIckN6OU3KcLjZB
+ 52dI44algiMHTNfL+m3LxdkcjomUGiuqhO3hwiv2KYvDtaLc9dXsgOSx9akh0B/r
+ G/Nf7VfN8tHSIIsm+vq10mjgARZ5CRQgUpG7IoWljb75he1NSy1dk5wtEhoEpW/H
+ zP+kBtFOGzUBmMv/F6yOFEon1FZsQMqCXENjXMXJXowcZ4IaOYnqr/q3l9KKT2nk
+ JVRVW4y5EpHcSmgVDpBJqWniIK8VGHB7iejRDWagSIp5grSQj2+mj7z9g/1Kphq3
+ 9aCVpbhcBP2Nz0e/Nk/oTJ9iAV3B3iJyZuSrnjV3Eo6isM40hCGf66vX1RfPpGmB
+ BXkrYD3m8DasSmuqQTF2tvSK18XrgZP4WLCuWFn2Bqzxz6LZAE/MhWjC4WhPtasJ
+ 5lSeJbr2qpxB0Xhb7Z/TZAFxtdAHfmBReGpU14Bi+ZC86H94hYsFtYatJSJpPsFP
+ SDYOaw7FpaPSqyr6wYzDFACoys3SAVPmL2ymyJJxx4CmiXllAaYS93KNDdgg+SzO
+ bDS0scMJp2W0BamCZz8y
+ =AASU
+ -----END PGP SIGNATURE-----
+ 
+
+perf: avoid throw-as-control-flow in SessionManager hot path (#7756) (#7775)
+
+CPU profile of the SUT at the 100-400 author dive sweep
+(load-test workflow run 25956384097) attributed about 6% of total
+process CPU to the throw + catch around getSessionInfo:
+
+  - ~1.82% to `new CustomError('sessionID does not exist', 'apierror')`
+    construction (stack trace capture)
+  - ~4.12% downstream, via the catch block's `console.debug(...)`
+    routed through log4js -> sendToListeners -> sendLogEventToAppender
+
+Both call sites (`findAuthorID` on every CLIENT_READY, and
+`listSessionsWithDBKey` on session listing) immediately caught
+`apierror` and discarded it. The public `exports.getSessionInfo`
+contract still has to throw for the HTTP API (returning code:1 for
+missing sessionID), so introduce a private `getSessionInfoOrNull`
+helper that returns null and have the hot-path callers use it
+directly. `exports.getSessionInfo` is kept as a thin wrapper that
+preserves the existing throw semantics.
+
+No behaviour change for the HTTP API — sessionsAndGroups.ts test
+file (32 cases, including "getSessionInfo of deleted session"
+expecting code:1) passes unchanged.
+
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>

@@ -1,0 +1,51 @@
+tree 473408a31a848af6bd24879060c2480e3a5989e2
+parent 08e5b62fd81f5129556e13ff9b0a548446a9ab48
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787208971 -0700
+committer GitHub <noreply@github.com> 1787208971 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhqULCRC1aQ7uu5UhlAAAPmsQAHhzBamn7RpnnQRj4gapZ2R+
+ 7ASLQKYMHJGluWui8Q48Gj75/u9r7x3z9nM5ewDyddEduVWvRv58UQDvGB+a4jHe
+ zcaQvptQClStTkrT1MbX3FEedUSyYtl1NjJbnwTJdVUCyBdnZ+zUplluxB+A+Q5Q
+ KJXc9Bh2EZDpaYJcJRQTAToOeEwTzWJRnfqGtxf5kewfNpK0Qgrtch3mN2LTRh4W
+ jKxs06krxt3t7hjMkUaM/UNE+MktBX1q6TfqROKRXizStAFvfvmD7DAoytK6jes9
+ d8238+/SizYdckvr9bTColvVoWEQfSHMrgtuF7QaQSTZx+Cfh+nn0RFaLVgzQL5u
+ tDk831vCJNaSXXjFApIwIKpfPjSEwfBikwRMuQRh84GXmwpiABQrYJMyPaFTpzYZ
+ 4VhZ22Vbz/wiFqneniEc7q0BBLxcwEVfvOZXmRVMwBRIYUuK4DMI4bVOb9wnS+P3
+ rD19Vo/gLiNmTXHn5qtihYvNE3moKTU0M1Z/fB5eq4iVn/v/RnWCQjK8k3ixNrYO
+ Q9Tx4H5wPxbIXLPTyFMh0AJYFtXZNaVujom/pGPgJgh5Xb0iX+gJ4PFSZ/LktCww
+ I0c8PHwp3qSxkSBef0kb7aEb3p3TwNVBCFNFKAM2lYjq2HTmMSpgCb/wtmM1uIdS
+ aJSeNdjj+xU7U1NyI2eN
+ =Tn+G
+ -----END PGP SIGNATURE-----
+ 
+
+[HDX-5126] Apply HAVING/ORDER BY/LIMIT to the composed metric join, not per-series branches (#2946)
+
+Fixes [HDX-5126](https://linear.app/clickhouse/issue/HDX-5126/apply-having-order-by-limit-to-the-composed-metric-join-not-per-series) — follow-up to [review feedback on #2909](https://github.com/hyperdxio/hyperdx/pull/2909): "HAVING is applied within each CTE instead of to the final join … Same with order by."
+
+## Why
+
+The composed multi-series metric query (HDX-5077) builds each per-series branch as `{ ...chartConfig, select: [...] }`, so `having`, `orderBy` and `limit` leaked into every UNION branch:
+
+- **HAVING** ran in a scope where the user-facing output names don't exist (the value column is renamed `__hdx_value`), and filtered each series independently before the join — making it impossible to know what aliases/series/formulas can be referenced.
+- **ORDER BY** ran per branch and was then discarded by the outer join — the final row order was nondeterministic. This also made table header-click sorting and `convertToTableChartConfig`'s default group ordering silent no-ops on composed metric tables.
+- **LIMIT/OFFSET** truncated each series to its own arbitrary group window before the join → mismatched group sets across series (spurious NULL cells) and incoherent table pagination (`useOffsetPaginatedQuery` injects page offsets into `limit`).
+
+## What
+
+All three clauses now render once, on the final joined SELECT, where they reference the **output columns**: operand aliases (when shown), formula names/aliases, the ratio column, group-by passthroughs and the time bucket. Time charts stay bucket-ordered first, with the user sort as a tiebreaker. Row-level filters (`where`, `filters`, per-series `aggCondition`) stay per-branch, where they belong.
+
+### Reference contract (pinned by integration tests on CH 26.5)
+
+Quoted output names or user aliases — e.g. `HAVING "err rate" > 0.5`, `ORDER BY "avg(metric.total)" DESC`, or a group-by `alias`. Raw expressions over source columns (e.g. `ResourceAttributes['service.name']`) do **not** resolve in the outer scope — verified `UNKNOWN_IDENTIFIER` under the new analyzer — so an expression group-by is referenced via its quoted ClickHouse-derived name (`"arrayElement(ResourceAttributes, 'service.name')"`) or, better, a group-by alias. Hidden operand series (`showOperandSeries: false`) are not referenceable: the contract is "reference what the result outputs".
+
+## Tests
+
+- **Unit/snapshot** (`renderChartConfig.test.ts`): clauses render exactly once, on the outer statement, in HAVING → ORDER BY → LIMIT order; bucket ordering stays first with the user sort appended; HAVING can reference a formula output column. Existing composed snapshots are byte-identical (no clause fields → no change).
+- **Integration** (`queryChartConfig.int.test.ts`, 8 new): HAVING on an operand output column (including dropping a group whose *other* series fails the predicate — inexpressible per-branch) and on a formula alias; ORDER BY on a plain group column, an output value column, a quoted derived expression-group-by name, and a group-by alias; bucket-first ordering on time series; ratio-column HAVING/ORDER BY; LIMIT/OFFSET pages are disjoint windows of one consistent joined ordering.
+
+## Out of scope (noted in HDX-5126)
+
+- `seriesLimit` top-N ranking still runs per-branch.
+- App-side: `DBTableChart` header-click sorting only quotes explicit user aliases — auto-aliased metric columns and formula columns produce unquoted `orderBy` expressions that don't resolve (broken before this change too, since branch scopes couldn't resolve them either). Editor autocomplete for output names in the Having/Order By inputs is a separate follow-up.

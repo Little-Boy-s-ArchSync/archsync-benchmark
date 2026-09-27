@@ -1,0 +1,86 @@
+tree d94191669ea3c5994216b884846140ab704014f3
+parent 9706e082609fc10bfdc681592497694fd1495844
+author John McLear <john@mclear.co.uk> 1785177387 +0100
+committer GitHub <noreply@github.com> 1785177387 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6UrCRC1aQ7uu5UhlAAA4jIQAA27mnDXDRrmtZB47SD4/t76
+ KP+44dmH3eO6gwsTbqZQ/b0bZ70IrL87DaFrIb6y7yg9fD36XdCIYwFDBhIHV/Cm
+ Zt4JOA0Ha64XJ37zzDnBcDNOdatGwjZFc9EhNDq20T/Rw8kzna9COpL6+9rb3KGM
+ JWtAcIiXyvfuPXuRB92ChkNGJMu+v3vHX/sip/Uw6F6Ca6NUN8CAhd03Qq/JtBDw
+ lvHWkSHBZ+Dj5xTOhpNiO8O0whC+HPWurlQ/+vHRXE34kSxq0/DdiebrlDhJEVo2
+ K5gGbIHxGbStiTvfN9dVMR2UBYTsFdSwjVVqITskpwW2n61OYE0uXpC9um5DdMsq
+ 3lskbqWeyNzR/yI2AKy+aKKgnUiqouukl7GOF6yKmOkiblGGBmI3Qkm8EdvCUp16
+ uaa+x/pfNiVO+GsVUyIHysztkmZCJ9JFfxAZZ5T1z+rIihzbXQKITIh+uOzdwcVi
+ va2JKtOQ8guVoxHByHRovQGNnIFmJJdz7nRs8DJ8tOQ5AM66pGQ002f4olLfu9xp
+ C73wgzwFa1KjfdcW/pvT5C432bubMOX+CqCstv08vOsvqoD/sa5lyUYWF1FG1DS9
+ 7W8NQ6nZHR1JOkfX0AzVmKUGWxp+HJiSP0AFfwc3DSQsFkcRbDIkXpsf0qgWO4Qx
+ Jr5AJ2bWNVHnDngBZIvr
+ =xmX2
+ -----END PGP SIGNATURE-----
+ 
+
+security(oidc): stop shipping a hardcoded cookie key and reflecting all CORS origins (#8070)
+
+* security(oidc): stop shipping a hardcoded OIDC cookie key and reflecting all CORS origins
+
+The embedded OIDC provider signed its interaction/session/grant cookies
+with the committed literal key `['oidc']`, so anyone with the public
+source could forge valid `.sig` cookies (defeating the provider's
+cookie-integrity boundary), and `clientBasedCORS` returned `true` for
+every origin, reflecting arbitrary `Origin` values into
+`Access-Control-Allow-Origin` on the token/userinfo endpoints.
+
+Adds OidcProviderSecurity.ts with two unit-tested pure helpers:
+
+- resolveOidcCookieKeys(): prefers an operator-supplied
+  `settings.sso.cookieKeys` (ordered array for rotation), otherwise
+  derives a secret key from the persisted session secret via a
+  domain-separated SHA-256 — stable across restarts and multi-pod, never
+  committed to source; falls back to an ephemeral random key.
+- isOriginAllowedForOidcClient(): allows a CORS origin only when it
+  matches the origin of one of the client's registered redirect URIs.
+
+Verified end-to-end against a real oidc-provider@9.9.1 instance
+(cookies.keys accepted, Client.redirectUris read correctly, attacker
+origin blocked). Reported privately by meifukun.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* security(oidc): use DB-backed SecretRotator for cookie keys under default rotation config
+
+Addresses Qodo review on #8070. With Etherpad's default cookie settings
+(keyRotationInterval + sessionLifetime set), key rotation is enabled and
+`settings.sessionKey` stays null unless SESSIONKEY.txt is provisioned, so
+the previous fallback handed the OIDC provider a per-process random key —
+breaking in-flight OIDC cookies on restart and across horizontally-scaled
+pods on a default install.
+
+resolveOidcCookieKeys() now takes an optional rotatedSecrets array
+(priority: operator cookieKeys > rotated secrets > session-key
+derivation > random) and returns it by reference so a live rotation
+propagates to keygrip. OAuth2Provider.expressCreateServer() creates a
+dedicated `oidcCookieSecrets` SecretRotator — the same DB-backed
+mechanism the Express session cookies use — when the operator hasn't
+pinned settings.sso.cookieKeys and rotation is enabled.
+
+Adds unit tests for the rotatedSecrets priority/by-reference behavior and
+an integration test proving the default config yields stable DB-backed
+secrets rather than a random key.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* docs(settings): give sso.cookieKeys a real key in the template
+
+The doc block sat above `sso.clients` with no `cookieKeys` property, so the admin
+UI's template-comment extractor (which attaches leading comments to the next
+property node) would have shown it as documentation for `clients`. An unset
+OIDC_COOKIE_KEY yields [""], which resolveOidcCookieKeys() filters out, so the
+derived/rotated key path is unchanged.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+Co-authored-by: SamTV12345 <40429738+samtv12345@users.noreply.github.com>

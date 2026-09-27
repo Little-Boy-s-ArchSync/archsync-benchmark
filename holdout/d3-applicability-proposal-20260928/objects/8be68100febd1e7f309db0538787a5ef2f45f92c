@@ -1,0 +1,51 @@
+tree 038be0a286acd1f5c6eb47d49ff7720fbdde4b29
+parent 47fe0cd95c5ccf5fe12b3f56c60b64841cc6cebe
+author Drew Davis <drew.davis@clickhouse.com> 1787239672 -0400
+committer GitHub <noreply@github.com> 1787239672 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhxz4CRC1aQ7uu5UhlAAArVAQAKKvJaz4Mi2ObSmenJDvMchR
+ 7tmqyIUR5N4kO3EkaW29D0U2jsjuTPSncyjYNDK2iQ+BjefAjNTqhahkYVEW/9kJ
+ bLL0yva6Ygwcpl2zIbTXPYoqHZ2wAVjFq8H9cYOMHi2XdpeIobAcz1B2rx0Onkvx
+ vjMHIceicsH5haWvchRckSrNMHJstCFB/VIupNhiDoQ+gi3srKHobJJLtM8aTlmG
+ yuhmvHEGo3T0g1V8bQLzSLZ4VvXzdaV3ddXvhl1pYbhDQCbKk/AZjlTCIHwjgeUx
+ RhNyFGiNb+/djraN8KxpMw68XNMW2rbp5gOPt0L4iVcr5Q4RYJLw+oVeP1HGEpxZ
+ Pz88MPR4M7bM/2iKopk7SQELY3JSkh/1dgY3sla12DNzKxAn8Ao5oVLnTGXJ/sUP
+ WIprJLKlLztoz0wyU3EWD/yNepe8UGSx37XZ/UEZIYKrSGOhqZS6hC96G9QrHO7f
+ BTNU0eHbg/hh6v0GgTgMHc6xwG1i6EHl/Ju0U/BxVIyxAupDAvhmH9Ch0J+RnSxF
+ /CU+61OzSzcUcC93SVTNdhqB4JcTmGSK+n8C99kQO6E3FAe2QP59HDNv9y7auWB8
+ +w456vRsPPB8lK2CjdvtWpzfja2Y6uxFb4gfYPeYsAF68tkCQC1D6u2rFN4/znjr
+ enCSf4vuV6haKXbs51zW
+ =rK6U
+ -----END PGP SIGNATURE-----
+ 
+
+Fix dashboard filter selection state breaking on complex expressions (#2950)
+
+## Why
+
+Dashboard filters are defined by an expression — usually a bare column (e.g. `ServiceName`), but sometimes a more complex expression used to transform the queried options. The selection state is serialized to/from URL state by `parseQuery`, the filter parser shared with the search page.
+
+That parser tracked single-quote **string** depth but not **parenthesis** depth, so it mis-parsed valid selection state whenever the filter expression contained operators or keywords nested inside parentheses. Examples:
+
+1. `if(SeverityText = 'error' or SeverityText = 'fatal', 'Errors', 'Non-errors')` — the selection was **dropped** because the parser saw the `=`/`OR` inside `if(...)` and treated the whole clause as an unsupported.
+2. `if(SeverityText IN ('error','fatal'), 'Errors', 'Non-errors')` — the selection was **mis-split** on the first `IN` (the one *inside* the `if(...)`)
+
+## What
+
+Made the parser's scanning helpers in `packages/common-utils/src/filters.ts` parenthesis-depth aware. Operators (`=`, `<`, `>`, ` OR `), the ` AND ` conjunct splitter, the ` IN `/` NOT IN ` split point, and ` BETWEEN ` detection are now only recognized at the **top level** (depth 0, outside quotes). Anything nested inside parentheses is treated as part of a key sub-expression.
+
+Note: wrapping the *entire* condition including the `IN` and value list in parens (e.g. `(col IN ('x'))`) is not something `filtersToQuery` ever emits, and was not parsed correctly prior to these changes, so we're not breaking anything here.
+
+## Testing
+
+- Create a dashboard filter with a complex expression
+- Ensure that the dropdown values populate, can be selected, and properly broadcast to the dashboard's tiles
+
+## References
+
+Linear Issue: Closes HDX-5129
+
+
+
+Co-authored-by: Cursor Agent <199161495+cursoragent@users.noreply.github.com>

@@ -1,0 +1,61 @@
+tree d4d474b2bf99b387316c5edbf4fb945950898c92
+parent fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828
+author John McLear <john@mclear.co.uk> 1785176324 +0100
+committer GitHub <noreply@github.com> 1785176324 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6EECRC1aQ7uu5UhlAAALbsQAHcj7DJ5VT2QSNMDtWGlPpuX
+ 0v2aqnuCOGeIln4XtDi/iRI7eV4fcupHe+T1Comrx0+osS2ACuNoiCwdqO8S6hb9
+ woQJm14rSLkHKVPIm1tTh31GtF0WypExIOigGZDGWZz+j7u2rxCunloEGVBJmAJ1
+ H6xwNhjh+1yT0mFJ+O2oXydpUSSq2/S83WCxb5KJxUFXspTZ2FmUhC/Bbo2n/TQI
+ WhS8bsxzTcdAPKB7Uecswb+hPmqDMsBXRSOzuc4Ys1aM6ukhR/CQ2/qFowf22b9e
+ l+y64a69xUzc6LYt6SNqUINGMSvX2j3U8TMKmob7+Z1FIQAOVYntO13CKpzw0OED
+ pUljCvencc4JYU/FzMVcqcZ+lK5+cOWEoGMtJhyMIfaELAjd2Nr5/fSK9LxjBfze
+ zRrwT5ozvJkVboVCcLvW+ZFX4nl3dlv+iA8sPih24mIQep/OLRUM/IOI+QYInY3H
+ UUGlsc5cGVAdObPiQnZRYQ2w0QH9fzuILiR4EthxCGJf/jGLvt7HFWeX6ffi0oCp
+ N6ZJxhtfvFjkeDssPl5MScctK/fC/gt+lQwlJud6O/4kmzM29r2stTG1IKwOUQVa
+ cduFNF6D9GCTD9KeQB8zHmyzSLQgCyKufQuwlokLbMKnN96yvSe2fra1hG2dOAdw
+ Iw3mBz2mGHbKNvStitBD
+ =9weS
+ -----END PGP SIGNATURE-----
+ 
+
+security(proxy-path): set Vary on public routes that echo x-proxy-path (cache poisoning) (#8072)
+
+* security(proxy-path): set Vary on public routes that echo x-proxy-path (cache poisoning)
+
+The home page, pad page and timeslider (and the legacy timeslider
+redirect) echo the sanitised x-proxy-path prefix into rendered URLs,
+social-preview metadata, manifest links and the redirect target, but did
+not advertise Vary. A shared cache/CDN keyed on URL alone could store a
+prefix injected by one client and serve it to others.
+
+The admin routes already emit Vary: x-proxy-path (GHSA-fjgc-3mj7-8rg8);
+this extends the same protection to the public routes the earlier fix
+left uncovered. The value is still passed through sanitizeProxyPath
+(quotes/angle-brackets/protocol-relative/.. already blocked), so this is
+cache-correctness hardening, not XSS/open-redirect.
+
+Adds a varyOnProxyPath() helper applied at every sanitizeProxyPath call
+site, plus a regression test asserting Vary: x-proxy-path on /, /p/:pad,
+the timeslider embed page and the legacy redirect. Reported by meifukun.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* security(proxy-path): only Vary on trust-gated headers when trustProxy is enabled
+
+Addresses Qodo review on #8072. varyOnProxyPath() unconditionally varied
+on x-forwarded-prefix and x-ingress-path, but sanitizeProxyPath() ignores
+those two headers unless settings.trustProxy is true. Advertising them in
+Vary when trustProxy is false does not reflect a real dependency and only
+fragments shared caches on attacker-supplied header values.
+
+Always vary on x-proxy-path (always honored); add the two standard
+headers only when trustProxy is enabled. Test asserts the exclusion when
+trustProxy=false and inclusion when true.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

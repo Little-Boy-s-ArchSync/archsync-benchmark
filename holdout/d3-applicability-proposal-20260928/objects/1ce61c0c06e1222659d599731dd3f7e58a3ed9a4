@@ -1,0 +1,23 @@
+tree 492b3d656acadd0f7582d89ac4579ad4d79497e5
+parent d205a776d26ce64d59ff8630eb0a5b4fbbd12b0b
+author Drew Davis <drew.davis@clickhouse.com> 1787247431 -0400
+committer GitHub <noreply@github.com> 1787247431 -0400
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhztHCRC1aQ7uu5UhlAAAJPIQAKXwc+WEClQ9l0qnkYl/KmsB
+ Orax/vKlcw0iTzt8Ku5IkFIS/oruHQcIqo6Lb+qM3eW/uipX6j0adslOBddAQ2xY
+ 7z7BCI/Of3Ppui6BBUC4LEyNVONF3sxL2RKtCF6bEF9Rb7JNREN4FgGhmFNTZr6q
+ WKsaCMnDC6GJn5cKLQaSrN2eB9StT6lvH+V2LOmZOZsc4GGteE0L7BShqdmvnTYI
+ prtiABKPbjZ7ND5rtMGjlDeuNplvNeb9/vP4erL0e03Op2vjvHHq+KP614rhw5Ae
+ r5UkeQDdCZJoyfy3M/lY0o1K6PaYNYFOK9WgzFYYEsg6jawN8IckvI7E6v5RSQ0O
+ AlLLQAs3s8e/Ahp4+fkxP9jeeS/a+Rw2zuSUOvkto4s+SKXMYYzplkvRh9TSox9H
+ hg5WSbZTAqKoM0TnuvoZk/4JnajZBZFQV6KU0Kg62l5sfEx1MP0wPjw2o1QahUih
+ +3EGX0LosVV903fxwxCDxvuqu+yXnGtTpL1Cf8sU0uYGC3ZEU7F5ACaHy5NN4qzV
+ VMy3GL59WuDsRK82+NyfZoQiAVfZPsy6EmcmvHrTmj55rGFOtcU8eBYOe1nSqAVy
+ YSqjKlFC+bF5jmnVjBoGi0lwJvqfys4Fq6gAvYxM7Gv/pa8wTgMxjgnGHEREd1bs
+ AVnzPZUgXlEYn6B9kxBn
+ =sq10
+ -----END PGP SIGNATURE-----
+ 
+
+feat: Support nested macros and variable references in macros (#2937)
