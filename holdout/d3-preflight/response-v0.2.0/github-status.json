@@ -1,0 +1,90 @@
+{
+  "checked_at_utc": "2026-09-27T16:56:52.9948012Z",
+  "reader_account": "L1nkinPark",
+  "mutation_performed": false,
+  "scope": "Live PR metadata and hosted checks only, not a complete code review",
+  "pull_requests": [
+    {
+      "headRefName": "fix/d3-portable-source-review-20260927",
+      "headRefOid": "4b5eafda17eafc7767b71bda13ae9c6aaaeb3e70",
+      "mergeStateStatus": "BLOCKED",
+      "number": 14,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-27T15:55:49Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/actions/runs/36331297435/job/108653614939",
+          "name": "full benchmark (ubuntu-latest)",
+          "startedAt": "2026-09-27T15:55:07Z",
+          "status": "COMPLETED",
+          "workflowName": "Benchmark evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-27T15:57:55Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/actions/runs/36331297435/job/108653615115",
+          "name": "full benchmark (windows-latest)",
+          "startedAt": "2026-09-27T15:55:07Z",
+          "status": "COMPLETED",
+          "workflowName": "Benchmark evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-27T15:56:32Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/actions/runs/36331297435/job/108653615114",
+          "name": "full benchmark (macos-latest)",
+          "startedAt": "2026-09-27T15:55:13Z",
+          "status": "COMPLETED",
+          "workflowName": "Benchmark evidence"
+        }
+      ],
+      "url": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/pull/14"
+    },
+    {
+      "headRefName": "fix/d3-unknown-metric-guard-20260928",
+      "headRefOid": "136b0e970c06d6062bdf96a3737815042e97c9d3",
+      "mergeStateStatus": "BLOCKED",
+      "number": 15,
+      "reviewDecision": "REVIEW_REQUIRED",
+      "state": "OPEN",
+      "statusCheckRollup": [
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-27T16:14:33Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/actions/runs/36332454833/job/108656882668",
+          "name": "full benchmark (ubuntu-latest)",
+          "startedAt": "2026-09-27T16:13:50Z",
+          "status": "COMPLETED",
+          "workflowName": "Benchmark evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-27T16:16:36Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/actions/runs/36332454833/job/108656882525",
+          "name": "full benchmark (windows-latest)",
+          "startedAt": "2026-09-27T16:13:50Z",
+          "status": "COMPLETED",
+          "workflowName": "Benchmark evidence"
+        },
+        {
+          "__typename": "CheckRun",
+          "completedAt": "2026-09-27T16:15:13Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/actions/runs/36332454833/job/108656882779",
+          "name": "full benchmark (macos-latest)",
+          "startedAt": "2026-09-27T16:13:57Z",
+          "status": "COMPLETED",
+          "workflowName": "Benchmark evidence"
+        }
+      ],
+      "url": "https://github.com/Little-Boy-s-ArchSync/archsync-benchmark/pull/15"
+    }
+  ]
+}
