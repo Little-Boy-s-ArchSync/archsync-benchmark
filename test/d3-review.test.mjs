@@ -6,8 +6,10 @@ import { join, resolve } from 'node:path';
 import test from 'node:test';
 import { checkReview, collectCases, compareReviews, digest, encode, reviewTemplate, selectProposedCases, sourceLines, validateAcceptedScope, validateCases, validateMethod, validateReadyModuleContract } from '../scripts/d3-review/review.mjs';
 import { buildApplicabilityChecklist } from '../scripts/d3-review/applicability.mjs';
+import { historicalFile } from '../scripts/d3-review/contracts.mjs';
 import { summarizeRuleSourceCoverage } from '../scripts/d3-review/coverage.mjs';
 import { gitId, sha256 } from '../scripts/d3-source-review/files.mjs';
+import { fixture } from '../test-support/holdout-git-fixture.mjs';
 
 // Controlled fixtures only. These names, dates, declarations and labels are NOT D3 evidence.
 function setup(count = 4) {
@@ -71,7 +73,7 @@ test('proposed scope selects only primary cases and retains every excluded case 
   assert.throws(() => selectProposedCases(bundle, accepted, 'c'.repeat(64)), /cannot silently accept/);
 });
 
-test('historical applicability preparation retains anchors but invents no rule decision', () => {
+test('historical applicability preparation retains anchors but invents no rule decision', async (t) => {
   const { bundle } = setup();
   const repositories = ['hyperdxio/hyperdx', 'amruthpillai/reactive-resume', 'ether/etherpad', 'ether/etherpad'];
   bundle.cases.forEach((item, index) => {
@@ -99,6 +101,25 @@ test('historical applicability preparation retains anchors but invents no rule d
   const missing = structuredClone(historical);
   missing.rows.pop();
   assert.throws(() => buildApplicabilityChecklist(bundle, contract, missing, selection, { contract_sha256: 'd'.repeat(64) }), /Missing undecided historical anchor/);
+  const source = await fixture(t);
+  const gitDir = join(source.source, '.git');
+  const absent = historicalFile(gitDir, source.pin.commit, 'missing.ts', '0'.repeat(64));
+  assert.equal(absent.status, 'absent-at-commit');
+  const symlinkBlob = await source.git('rev-parse', `${source.pin.commit}:packages/api/index.ts`);
+  await source.git('update-index', '--add', '--cacheinfo', `120000,${symlinkBlob},link.ts`);
+  await source.git('commit', '-m', 'Controlled symlink object, never checked out');
+  const symlinkCommit = await source.git('rev-parse', 'HEAD');
+  const symlink = historicalFile(gitDir, symlinkCommit, 'link.ts', '0'.repeat(64));
+  assert.equal(symlink.status, 'symlink-not-followed');
+  historical.rows[0] = { ...historical.rows[0], ...absent };
+  historical.rows[1] = { ...historical.rows[1], ...symlink };
+  const retained = buildApplicabilityChecklist(bundle, contract, historical, selection, { contract_sha256: 'd'.repeat(64) });
+  assert.deepEqual(retained.rows[0].anchors.map((anchor) => anchor.anchor_status), ['absent-at-commit']);
+  assert.deepEqual(retained.rows[1].anchors.map((anchor) => anchor.anchor_status), ['symlink-not-followed']);
+  assert(retained.rows.every((row) => row.applicability === null && row.rationale === null));
+  const invalid = structuredClone(historical);
+  invalid.rows[0].status = 'missing-in-commit';
+  assert.throws(() => buildApplicabilityChecklist(bundle, contract, invalid, selection, { contract_sha256: 'd'.repeat(64) }), /Unknown historical anchor status/);
 });
 
 test('source-path preflight distinguishes an exact file from its directory and excludes test-only paths', () => {

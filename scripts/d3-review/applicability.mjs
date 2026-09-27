@@ -3,6 +3,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../d3-source-review/files.mjs';
+import { HISTORICAL_ANCHOR_STATUSES } from './contracts.mjs';
 import { digest, encode, validateCases } from './review.mjs';
 
 const active = ['D3-HDX-MOD-001', 'D3-RR-MOD-001', 'D3-EP-MOD-001', 'D3-EP-MOD-002'];
@@ -42,7 +43,7 @@ export function buildApplicabilityChecklist(bundle, contract, historical, select
         const evidence = rule.historical_anchor_paths.map((path) => {
           const row = anchors.get(`${item.id}\0${item.repository}\0${side}\0${commit}\0${path}`);
           assert(row && row.rule_applicability === 'not-decided-by-this-check', `Missing undecided historical anchor ${item.id} ${id} ${side} ${path}`);
-          assert(['same-bytes-as-reference', 'different-from-reference', 'missing-in-commit'].includes(row.status));
+          assert(HISTORICAL_ANCHOR_STATUSES.includes(row.status), `Unknown historical anchor status: ${row.status}`);
           return { path, anchor_status: row.status, sha256: row.sha256 ?? null, git_blob: row.git_blob ?? null };
         });
         rows.push({ case_id: item.id, repository: item.repository, rule_id: id, side, commit,

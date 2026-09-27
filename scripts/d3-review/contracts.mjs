@@ -14,6 +14,12 @@ const defaultProposal = resolve(dirname(fileURLToPath(import.meta.url)), '../../
 const hex = /^[a-f0-9]{64}$/u;
 const oid = /^[a-f0-9]{40}$/u;
 const nonempty = (s) => typeof s === 'string' && s.trim().length > 0;
+export const HISTORICAL_ANCHOR_STATUSES = Object.freeze([
+  'absent-at-commit',
+  'symlink-not-followed',
+  'same-bytes-as-reference',
+  'different-from-reference',
+]);
 
 export async function validateProposal(proposal) {
   assert.equal(proposal.schema, 'd3-research-contract-proposal/1');

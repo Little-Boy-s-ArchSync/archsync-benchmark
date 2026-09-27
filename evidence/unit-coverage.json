@@ -25,7 +25,7 @@
     "files": [
       {
         "file": "scripts/d3-review/contracts.mjs",
-        "sha256": "eac6028a8cc1306ff580a96464d65f433d1138b6305def4f8eba1a594adf90be"
+        "sha256": "5bd8255e8738552e2a24156847eb99b0738db7b4155bc7a93130ee2b2fb123d4"
       },
       {
         "file": "test/d3-contracts.test.mjs",
@@ -49,11 +49,11 @@
       },
       {
         "file": "scripts/d3-review/applicability.mjs",
-        "sha256": "73768e04e7f2b4e2ed313d6af07d5cb16c8557d7a4ccae651f437eaa2b016666"
+        "sha256": "1479f6f9c36c7f77f06837236c242a9c9000a46f0e6177f202ff432d0a5ed53d"
       },
       {
         "file": "test/d3-review.test.mjs",
-        "sha256": "aef366ebe61255d1215243616bf86bf64856ebd52a1e93610ed048aaf5ef663f"
+        "sha256": "20f5d64a9898d95e876dea965b73b16d248bd5a0beb2f7643f1a7265f1d22180"
       },
       {
         "file": "holdout/D3-TWO-AUTHOR-REVIEW.md",
@@ -360,6 +360,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "0613f4fa4d713dc2b94406045ed779d443b98898542fdc932de62c1ca2b3fb68"
+    "manifest_sha256": "35da15f6a46c5d4ddb1248c7c7ed354c62969209b13cd4697a7a903940ebb25d"
   }
 }
