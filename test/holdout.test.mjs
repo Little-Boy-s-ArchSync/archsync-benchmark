@@ -444,6 +444,8 @@ test("holdout metrics cannot count unresolved Unknown as correct or negative bef
     metricRow("unknown-truth", "a", "edge", { truth_positive: false, prediction: "negative", truth_label: "unknown", predicted_label: "unknown" }),
     metricRow("unknown-prediction", "a", "edge", { prediction: "negative", predicted_label: "unknown" }),
     metricRow("unknown-failed", "a", "edge", { prediction: "failed", truth_label: "unknown", predicted_label: null }),
+    metricRow("unknown-casefolded", "a", "edge", { truth_positive: false, prediction: "negative", truth_label: " Unknown ", predicted_label: "NO-IMPACT" }),
+    metricRow("unknown-prediction-casefolded", "a", "edge", { prediction: "negative", predicted_label: " UNKNOWN " }),
   ]) assert.throws(() => calculateHoldoutMetrics([row]), /HOLDOUT_UNKNOWN_SCORING_POLICY_REQUIRED/);
 });
 

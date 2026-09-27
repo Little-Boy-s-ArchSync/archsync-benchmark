@@ -61,7 +61,7 @@
       },
       {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "ba6211426e7710daee665ad8833f8bb59a2cd896f86120b7b9a7cd7e119134cb"
+        "sha256": "5ec138c01be3e4d3c2e6e26efd6ab1272e688177bffae832fd346d120598f77a"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -157,7 +157,7 @@
       },
       {
         "file": "test/holdout.test.mjs",
-        "sha256": "f8aec74c4d2a5117c9cfcdcc220b87cf8648bc7d27322d4415decc78177304dd"
+        "sha256": "be41c122c52c97240bdc16a781d5e2020c35a4c030296026d0867a7afceab8ea"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -224,6 +224,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "4930bdc2c21a6295c5debf43f88c090b6928ace167339e4fa9b33b337b95a982"
+    "manifest_sha256": "05d18eb44144581e51b15a8e2ddd6a4a3e9071709ae9a253199f7bf74a79f77b"
   }
 }
