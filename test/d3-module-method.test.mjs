@@ -13,14 +13,15 @@ import {
   validateFreezeManifest,
   validateModuleReview,
 } from '../scripts/d3-review/module-method.mjs';
-import { sha256 } from '../scripts/d3-source-review/files.mjs';
+import { gitId, sha256 } from '../scripts/d3-source-review/files.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
 function sealedReviewFixture() {
   const base = 'a'.repeat(40), head = 'b'.repeat(40);
-  const sourceSha = 'c'.repeat(64), targetSha = 'd'.repeat(64);
-  const sourceBlob = 'e'.repeat(40), targetBlob = 'f'.repeat(40);
+  const sourceText = "import './b.js';\n", sourceBytes = Buffer.from(sourceText);
+  const sourceSha = sha256(sourceBytes), targetSha = 'd'.repeat(64);
+  const sourceBlob = gitId('blob', sourceBytes), targetBlob = 'f'.repeat(40);
   const case_envelopes = Array.from({ length: 56 }, (_, index) => {
     const case_id = `FIXTURE-${String(index + 1).padStart(2, '0')}`;
     const occurrence = {
@@ -128,11 +129,36 @@ test('each occurrence must match its reviewed regular source object and per-file
 test('case-bound review cannot add unselected source paths to its coverage', () => {
   const review = sealedReviewFixture();
   const cases = { cases: review.case_envelopes.map((e) => ({ repository: e.repository, id: e.case_id,
-    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }] })),
+    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }],
+    files: e.file_coverage.map((f) => ({ path: f.path, side: f.side, mode: f.tree_mode, git_blob: f.git_blob,
+      sha256: f.sha256, citable: true, text: "import './b.js';\n" })) })),
   context_only_cases: [{}, {}, {}, {}] };
   assert.equal(validateModuleReview(review, cases).cases, 56);
   review.case_envelopes[0].file_coverage.push({ ...review.case_envelopes[0].file_coverage[0], path: 'src/extra.ts' });
   assert.throws(() => validateModuleReview(review, cases), /differs from primary-candidate scope/);
+});
+
+test('case-bound review verifies pinned source bytes and exact occurrence position', () => {
+  const review = sealedReviewFixture();
+  const cases = { cases: review.case_envelopes.map((e) => ({ repository: e.repository, id: e.case_id,
+    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }],
+    files: e.file_coverage.map((f) => ({ path: f.path, side: f.side, mode: f.tree_mode, git_blob: f.git_blob,
+      sha256: f.sha256, citable: true, text: "import './b.js';\n" })) })),
+  context_only_cases: [{}, {}, {}, {}] };
+  assert.equal(validateModuleReview(review, cases).cases, 56);
+
+  const changedSource = structuredClone(cases);
+  changedSource.cases[0].files[1].text = "import './different.js';\n";
+  assert.throws(() => validateModuleReview(review, changedSource), /source text differs from the pinned SHA-256/);
+
+  const shiftedQuote = structuredClone(review);
+  shiftedQuote.case_envelopes[0].occurrences[0].start_column = 2;
+  shiftedQuote.case_envelopes[0].edges[0].occurrence_keys = [occurrenceKey(shiftedQuote.case_envelopes[0].occurrences[0])];
+  assert.throws(() => validateModuleReview(shiftedQuote, cases), /quote differs from the exact source position/);
+
+  const missingSource = structuredClone(cases);
+  missingSource.cases[0].files.pop();
+  assert.throws(() => validateModuleReview(review, missingSource), /File-side source is missing/);
 });
 
 test('freeze manifest binds the merged development receipt without pretending method acceptance', async () => {

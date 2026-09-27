@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { sha256 } from '../d3-source-review/files.mjs';
+import { gitId, sha256 } from '../d3-source-review/files.mjs';
 import { isSafeHoldoutPath } from '../lib/holdout.mjs';
 import { verifyReceipt as verifyCommonCapabilityReceipt } from '../../development/common-module-capability/verify.mjs';
 
@@ -187,6 +187,42 @@ export function validateModuleReview(review, cases = null) {
       const expectedCoverage = new Set(['base', 'head'].flatMap((side) => expectedPaths.map((path) => JSON.stringify([side, path]))));
       assert.deepEqual(new Set(envelope.file_coverage.map((r) => JSON.stringify([r.side, r.path]))), expectedCoverage,
         `File-side coverage differs from primary-candidate scope: ${envelope.case_id}`);
+      assert(Array.isArray(item.files), 'Verified case source files are required for a case-bound review');
+      const sourceBySidePath = new Map();
+      for (const source of item.files) {
+        const sourceKey = JSON.stringify([source.side, source.path]);
+        assert(!sourceBySidePath.has(sourceKey), 'Duplicate source file-side in case packet');
+        sourceBySidePath.set(sourceKey, source);
+      }
+      for (const coverage of envelope.file_coverage) {
+        const source = sourceBySidePath.get(JSON.stringify([coverage.side, coverage.path]));
+        if (coverage.tree_mode === 'absent') {
+          assert.equal(source, undefined, 'An absent file-side has source bytes in the case packet');
+          continue;
+        }
+        assert(source, 'File-side source is missing from the case packet');
+        assert.equal(coverage.tree_mode, source.mode, 'File-side Git mode differs from the case packet');
+        assert.equal(coverage.git_blob, source.git_blob, 'File-side Git blob differs from the case packet');
+        if (coverage.tree_mode === '120000') continue;
+        assert.equal(coverage.sha256, source.sha256, 'File-side SHA-256 differs from the case packet');
+        if (coverage.review_status !== 'reviewed') continue;
+        assert(source.citable === true && typeof source.text === 'string', 'Reviewed source is not citable text');
+        const bytes = Buffer.from(source.text, 'utf8');
+        assert.equal(sha256(bytes), coverage.sha256, 'Reviewed source text differs from the pinned SHA-256');
+        assert.equal(gitId('blob', bytes), coverage.git_blob, 'Reviewed source text differs from the pinned Git blob');
+      }
+      for (const occurrence of envelope.occurrences) {
+        const source = sourceBySidePath.get(JSON.stringify([occurrence.side, occurrence.source_path]));
+        assert(source?.citable === true && typeof source.text === 'string', 'Occurrence has no citable source text');
+        const lines = source.text.split(/\r\n|[\r\n\u2028\u2029]/u);
+        if (source.text === '' || /[\r\n\u2028\u2029]$/u.test(source.text)) lines.pop();
+        const line = lines[occurrence.start_line - 1];
+        assert(line !== undefined && occurrence.start_column <= line.length + 1, 'Occurrence location is outside source text');
+        const starts = [0];
+        for (const match of source.text.matchAll(/\r\n|[\r\n\u2028\u2029]/gu)) starts.push(match.index + match[0].length);
+        const offset = starts[occurrence.start_line - 1] + occurrence.start_column - 1;
+        assert(source.text.startsWith(occurrence.quote, offset), 'Occurrence quote differs from the exact source position');
+      }
     }
   }
   return { status: 'STRUCTURALLY_VALID_NOT_SCIENTIFICALLY_VERIFIED', research_complete: false, cases: seenCases.size };
