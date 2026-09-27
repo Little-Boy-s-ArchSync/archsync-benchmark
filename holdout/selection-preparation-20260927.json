@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "id": "D3-SOURCE-PREP-20260927",
+  "status": "source-preparation-only",
+  "selection_rule": "First three pre-existing inventory ranks; retain capture failures without outcome-based replacement.",
+  "inventory": "holdout/candidates.eval-102.json",
+  "inventory_commit": "5e6db8b7ac0d0c7e8c0d4ffd8732a5889dab7535",
+  "authorization_scope": "Current user instruction permits autonomous repository discovery and preparation toward D3 completion; it is not another person's role declaration, independent labels, final protocol acceptance, or permission to bypass the official execution gate.",
+  "predictions_permitted": false,
+  "human_labels_present": false,
+  "repositories": [
+    {
+      "rank": 1,
+      "id": "hyperdxio/hyperdx",
+      "url": "https://github.com/hyperdxio/hyperdx",
+      "commit": "e0d2932802bf1b315b420a8a4214a6c0691a7835",
+      "scope": "packages/api/src",
+      "license_file": "LICENSE",
+      "license_spdx": "MIT"
+    },
+    {
+      "rank": 2,
+      "id": "amruthpillai/reactive-resume",
+      "url": "https://github.com/amruthpillai/reactive-resume",
+      "commit": "3c195dc3f8db5ccae4aa4aff0cefe54980c02b74",
+      "scope": "apps/server/src",
+      "license_file": "LICENSE",
+      "license_spdx": "MIT"
+    },
+    {
+      "rank": 3,
+      "id": "ether/etherpad",
+      "url": "https://github.com/ether/etherpad",
+      "commit": "d85d254ac093dc0801188fd954751c33b181e45c",
+      "scope": "src/node",
+      "license_file": "LICENSE",
+      "license_spdx": "Apache-2.0"
+    }
+  ]
+}

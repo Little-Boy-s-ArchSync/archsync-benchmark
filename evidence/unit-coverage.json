@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 184,
-    "passed": 184,
+    "total": 193,
+    "passed": 193,
     "failed": 0
   },
   "provenance": {
@@ -101,7 +101,27 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "166d79485bc0670136be79e0c67a2e13e8644e34e093bdc89a9575c0444dd846"
+        "sha256": "d7e17e47f25446eada2c4fd37c96d3a822379ee258c9abd5038c908a3b260809"
+      },
+      {
+        "file": "scripts/prepare-d3-sources.mjs",
+        "sha256": "cf3d65bac5e0e30a488dbfd828284027470053da910eec1365fd3072b2d86489"
+      },
+      {
+        "file": "scripts/capture-d3-object-packet.mjs",
+        "sha256": "afca2ddcbcc1880e16a0e11853f7a58934eaac298abbb4406713190d3358aca6"
+      },
+      {
+        "file": "scripts/collect-d3-history.mjs",
+        "sha256": "ace4171cb6a33cccf4c28ab5a075b72b39664c4b5d285b21f1c5bde730ce1ba2"
+      },
+      {
+        "file": "scripts/verify-d3-history.mjs",
+        "sha256": "0f4d134ad4a0275d3f97e69530b1ed057cbc8ed4b9523af90ced5ac76441f6e9"
+      },
+      {
+        "file": "scripts/verify-d3-preparation.mjs",
+        "sha256": "2053f322044ff87a010f3eeed6231ca1acff9c0f39f942b953b78b74b24156c8"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -134,6 +154,14 @@
       {
         "file": "test/ground-truth.test.mjs",
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
+      },
+      {
+        "file": "test/d3-preparation.test.mjs",
+        "sha256": "e906e8343a0fe9fbda7c9cc4d5f3c87bd8cbd6220bb6af65f135b22f582657f8"
+      },
+      {
+        "file": "test/d3-object-packet.test.mjs",
+        "sha256": "ff23fcb3d94c1019d66f942a39e663a255c2065f7f1a824984ad38f1d1352786"
       },
       {
         "file": "test/holdout-annotation-source.test.mjs",
@@ -220,10 +248,14 @@
         "sha256": "189d5efc2f487ce2bb8f6990dc543ee1952bd1be4beb6f2e4051f0d2c37e33f3"
       },
       {
+        "file": "holdout/selection-preparation-20260927.json",
+        "sha256": "7f146571d652f6eeaf6f07633c4e7df5d053361517dacbe6803d901393dfbc32"
+      },
+      {
         "file": "evidence/holdout/eval-102-candidates.validation.json",
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "90a5f0789d1accd412962b5dc8fda9de677d49da602e136b7771a65b0033fd4f"
+    "manifest_sha256": "784d1ea72ab7a2a1c7e9cc741cca5a244f2f0a38678a3930240cef302dac2a3e"
   }
 }

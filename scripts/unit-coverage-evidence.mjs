@@ -70,6 +70,11 @@ const provenanceFiles = [
   "scripts/lib/runtime-provenance.mjs",
   "scripts/lib/study-artifact-store.mjs",
   "scripts/unit-coverage-evidence.mjs",
+  "scripts/prepare-d3-sources.mjs",
+  "scripts/capture-d3-object-packet.mjs",
+  "scripts/collect-d3-history.mjs",
+  "scripts/verify-d3-history.mjs",
+  "scripts/verify-d3-preparation.mjs",
   "scripts/validate-analysis-notebook.mjs",
   "scripts/validate-holdout-candidates.mjs",
   "scripts/validate-measurement-scaffold.mjs",
@@ -78,6 +83,8 @@ const provenanceFiles = [
   "test/analysis-notebook.test.mjs",
   "test/analysis-pipeline.test.mjs",
   "test/ground-truth.test.mjs",
+  "test/d3-preparation.test.mjs",
+  "test/d3-object-packet.test.mjs",
   "test/holdout-annotation-source.test.mjs",
   "test/holdout-candidates.test.mjs",
   "test/holdout-repository.test.mjs",
@@ -99,6 +106,7 @@ const provenanceFiles = [
   "analysis/analysis-101.ipynb",
   "holdout/candidate-inventory.schema.json",
   "holdout/candidates.eval-102.json",
+  "holdout/selection-preparation-20260927.json",
   "evidence/holdout/eval-102-candidates.validation.json",
 ];
 const provenance = [];
