@@ -261,7 +261,8 @@ export async function runFrozenHoldoutTwice({ frozen: suppliedFrozen, artifacts,
     const repositories = [];
     for (const repository of frozen.manifest.repositories) {
       try {
-        const output = await analyze({ repository: structuredClone(repository), run, packages: structuredClone(packages), environment: structuredClone(environment) });
+        // Capture each return before the analyzer can reuse or mutate it on a later call.
+        const output = structuredClone(await analyze({ repository: structuredClone(repository), run, packages: structuredClone(packages), environment: structuredClone(environment) }));
         if (!object(output) || !object(output.normalized) || !Number.isFinite(output.duration_ms) || output.duration_ms < 0) throw new Error("INVALID_ANALYZER_OUTPUT");
         repositories.push({
           repository_id: repository.id,
@@ -290,10 +291,15 @@ export async function runFrozenHoldoutTwice({ frozen: suppliedFrozen, artifacts,
   }
   const first = Object.fromEntries(runs[0].repositories.map((item) => [item.repository_id, item.normalized_sha256]));
   const second = Object.fromEntries(runs[1].repositories.map((item) => [item.repository_id, item.normalized_sha256]));
-  const deterministic = stable(first) === stable(second);
+  const normalizedRecordsMatch = stable(first) === stable(second);
+  const failedRuns = runs.flatMap((run) => run.repositories).filter((item) => item.status === "failed").length;
+  // Matching error classes do not constitute a successful deterministic analysis.
+  const deterministic = failedRuns === 0 && normalizedRecordsMatch;
   return {
-    schema_version: 1,
-    status: deterministic ? "PREPARATORY_REPLAY_COMPLETE" : "BLOCKED_NONDETERMINISTIC",
+    schema_version: 2,
+    status: failedRuns > 0 ? "BLOCKED_ANALYZER_FAILURE" : deterministic ? "PREPARATORY_REPLAY_COMPLETE" : "BLOCKED_NONDETERMINISTIC",
+    normalized_records_match: normalizedRecordsMatch,
+    failed_runs: failedRuns,
     deterministic,
     freeze_sha256: frozen.freeze_sha256,
     packages: structuredClone(packages),
@@ -340,7 +346,7 @@ function groupedMetricSummary(rows) {
     classification: ratioRecord(rows.filter((row) => row.prediction !== "failed" && row.truth_label === row.predicted_label).length, rows.length),
     rule_match: ratioRecord(ruleRows.filter((row) => row.prediction !== "failed" && row.rule_match).length, ruleRows.length),
     evidence_file: ratioRecord(evidenceRows.filter((row) => row.prediction !== "failed" && row.evidence_file_exact).length, evidenceRows.length),
-    evidence_line: ratioRecord(evidenceRows.filter((row) => row.prediction !== "failed" && row.evidence_line_exact).length, evidenceRows.length),
+    evidence_line: ratioRecord(evidenceRows.filter((row) => row.prediction !== "failed" && row.evidence_file_exact && row.evidence_line_exact).length, evidenceRows.length),
   };
 }
 
@@ -356,7 +362,7 @@ export function calculateHoldoutMetrics(rows) {
   }
   const repositories = [...new Set(rows.map((row) => row.repository_id))].sort();
   return {
-    schema_version: 1,
+    schema_version: 2,
     pooled: groupedMetricSummary(rows),
     by_repository: Object.fromEntries(repositories.map((repository) => [repository, groupedMetricSummary(rows.filter((row) => row.repository_id === repository))])),
   };

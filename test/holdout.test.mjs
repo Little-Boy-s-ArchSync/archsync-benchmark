@@ -247,18 +247,66 @@ test("holdout harness verifies pins, retains failures, and replays exactly twice
       return { raw: { order: [2, 1] }, normalized: { repository_id: source.id, findings: [] }, duration_ms: 2 };
     },
   });
-  assert.equal(result.status, "PREPARATORY_REPLAY_COMPLETE");
-  assert.equal(result.deterministic, true);
+  assert.equal(result.status, "BLOCKED_ANALYZER_FAILURE");
+  assert.equal(result.schema_version, 2);
+  assert.equal(result.normalized_records_match, true);
+  assert.equal(result.failed_runs, 2);
+  assert.equal(result.deterministic, false);
   assert.equal(result.runs.length, 2);
   assert.equal(result.runs.flatMap((run) => run.repositories).filter((row) => row.status === "failed").length, 2);
-  assert.match(result.normalized_replay_sha256, /^[0-9a-f]{64}$/u);
+  assert.equal(result.normalized_replay_sha256, null);
 
   const noRaw = await runFrozenHoldoutTwice({ ...input, analyze: async ({ repository: source }) => ({ normalized: { id: source.id }, duration_ms: 0 }) });
+  assert.equal(noRaw.status, "PREPARATORY_REPLAY_COMPLETE");
+  assert.equal(noRaw.deterministic, true);
+  assert.equal(noRaw.failed_runs, 0);
+  assert.match(noRaw.normalized_replay_sha256, /^[0-9a-f]{64}$/u);
   assert.equal(noRaw.runs[0].repositories[0].raw, null);
   const nonError = await runFrozenHoldoutTwice({ ...input, analyze: async () => { throw "synthetic"; } });
+  assert.equal(nonError.status, "BLOCKED_ANALYZER_FAILURE");
+  assert.equal(nonError.failed_runs, 4);
+  assert.equal(nonError.deterministic, false);
   assert.equal(nonError.runs[0].repositories[0].normalized.error_class, "NonErrorFailure");
   const invalidOutput = await runFrozenHoldoutTwice({ ...input, analyze: async () => null });
+  assert.equal(invalidOutput.status, "BLOCKED_ANALYZER_FAILURE");
+  assert.equal(invalidOutput.normalized_replay_sha256, null);
   assert.equal(invalidOutput.runs[0].repositories[0].normalized.error_class, "Error");
+});
+
+test("a one-off analyzer failure stays blocked even when the other replay succeeds", async () => {
+  const result = await runFrozenHoldoutTwice({
+    ...frozenInputs(),
+    analyze: async ({ repository, run }) => {
+      if (repository.id === "beta" && run === 1) throw new Error("synthetic intermittent failure");
+      return { normalized: { id: repository.id }, duration_ms: 0 };
+    },
+  });
+  assert.equal(result.status, "BLOCKED_ANALYZER_FAILURE");
+  assert.equal(result.failed_runs, 1);
+  assert.equal(result.normalized_records_match, false);
+  assert.equal(result.deterministic, false);
+  assert.equal(result.normalized_replay_sha256, null);
+});
+
+test("replay snapshots output bytes before a reused analyzer object can change the retained evidence", async () => {
+  const shared = { raw: { item: "" }, normalized: { item: "" }, duration_ms: 0 };
+  const result = await runFrozenHoldoutTwice({
+    ...frozenInputs(),
+    analyze: async ({ repository }) => {
+      shared.raw.item = repository.id;
+      shared.normalized.item = repository.id;
+      return shared;
+    },
+  });
+  shared.raw.item = "mutated-after-return";
+  shared.normalized.item = "mutated-after-return";
+  for (const run of result.runs) {
+    for (const record of run.repositories) {
+      assert.deepEqual(record.raw, { item: record.repository_id });
+      assert.deepEqual(record.normalized, { item: record.repository_id });
+    }
+  }
+  assert.equal(result.status, "PREPARATORY_REPLAY_COMPLETE");
 });
 
 test("holdout harness fails closed on freeze, configuration, pin, and replay drift", async () => {
@@ -276,6 +324,9 @@ test("holdout harness fails closed on freeze, configuration, pin, and replay dri
   await assert.rejects(runFrozenHoldoutTwice({ ...input, observations: { ...input.observations, alpha: {} }, analyze: async () => ({}) }), /PIN_INVALID/);
   const drift = await runFrozenHoldoutTwice({ ...input, analyze: async ({ repository: source, run }) => ({ raw: {}, normalized: { id: source.id, run }, duration_ms: 1 }) });
   assert.equal(drift.status, "BLOCKED_NONDETERMINISTIC");
+  assert.equal(drift.normalized_records_match, false);
+  assert.equal(drift.failed_runs, 0);
+  assert.equal(drift.deterministic, false);
   assert.equal(drift.normalized_replay_sha256, null);
 });
 
@@ -355,6 +406,20 @@ test("holdout metrics reject incomplete rows and duplicate IDs", () => {
     { predicted_label: "" }, { rule_match: null }, { evidence_required: null }, { evidence_file_exact: null }, { evidence_line_exact: null },
   ]) assert.throws(() => calculateHoldoutMetrics([metricRow("x", "a", "node", changes)]), /invalid/);
   assert.doesNotThrow(() => calculateHoldoutMetrics([metricRow("failed", "a", "node", { prediction: "failed", predicted_label: null })]));
+});
+
+test("exact line evidence requires the correct file, and failed predictions cannot earn evidence credit", () => {
+  const result = calculateHoldoutMetrics([
+    metricRow("wrong-file-right-line", "alpha", "edge", { evidence_file_exact: false, evidence_line_exact: true }),
+    metricRow("right-file-right-line", "alpha", "edge"),
+    metricRow("failed-with-stale-flags", "beta", "edge", { prediction: "failed", predicted_label: null }),
+    metricRow("not-evidence-unit", "beta", "node", { evidence_required: false }),
+  ]);
+  assert.deepEqual(result.pooled.evidence_line, { numerator: 1, denominator: 3, value: 1 / 3 });
+  assert.equal(result.schema_version, 2);
+  assert.deepEqual(result.pooled.evidence_file, { numerator: 1, denominator: 3, value: 1 / 3 });
+  assert.deepEqual(result.by_repository.alpha.evidence_line, { numerator: 1, denominator: 2, value: 0.5 });
+  assert.deepEqual(result.by_repository.beta.evidence_line, { numerator: 0, denominator: 1, value: 0 });
 });
 
 test("error taxonomy requires every declared causal category plus evidence and action", () => {

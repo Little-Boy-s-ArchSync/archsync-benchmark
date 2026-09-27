@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 174,
-    "passed": 174,
+    "total": 184,
+    "passed": 184,
     "failed": 0
   },
   "provenance": {
@@ -44,6 +44,10 @@
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
       },
       {
+        "file": "scripts/lib/holdout-annotation-source.mjs",
+        "sha256": "4d309bcec82e7136c62108dd1674792a99b9ab64b4b99eea77e1d3be11294de7"
+      },
+      {
         "file": "scripts/lib/holdout-candidates.mjs",
         "sha256": "1d95f28f3875e896bb190cabed6c715bfebea1ede97dd81aaf9c7adf629a6a04"
       },
@@ -57,7 +61,7 @@
       },
       {
         "file": "scripts/lib/holdout.mjs",
-        "sha256": "7e1b7c0a85bd4b5fd7819cb581cc494fd17ffa58e84c04ce4d5c979591430b4e"
+        "sha256": "daac868530176ab3c1948ad5dd778315b9aa0a0e4c125c390c9f032cebb12db1"
       },
       {
         "file": "scripts/lib/iac-benchmark.mjs",
@@ -97,7 +101,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "7345245cdb5776246de24efe07f6185e662a2c3efb9f0dfab6dbccfbf726fcb8"
+        "sha256": "166d79485bc0670136be79e0c67a2e13e8644e34e093bdc89a9575c0444dd846"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -132,6 +136,10 @@
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
       },
       {
+        "file": "test/holdout-annotation-source.test.mjs",
+        "sha256": "94d9c22a91cbc963184c6c3696372c877be01186fb24b567fbab7c05b1199fe9"
+      },
+      {
         "file": "test/holdout-candidates.test.mjs",
         "sha256": "dfce92aa62664b443ca8a4bd74c98e6685e6bcb7eb3c6b6ccc4de6a7e3e19b10"
       },
@@ -149,7 +157,7 @@
       },
       {
         "file": "test/holdout.test.mjs",
-        "sha256": "25f1052500870550ed070e692292b73248d7c3e01342e875ff6f9716f5f96e36"
+        "sha256": "adac3067c05951cd1290ee1a0fec003a407d918d0f048e13aa11bd58bf84884c"
       },
       {
         "file": "test/iac-benchmark.test.mjs",
@@ -216,6 +224,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "01c8a3f19ff666ab6c3dba7d7aa2a46061488b02fc9b42d667347863cf7da0a3"
+    "manifest_sha256": "90a5f0789d1accd412962b5dc8fda9de677d49da602e136b7771a65b0033fd4f"
   }
 }
