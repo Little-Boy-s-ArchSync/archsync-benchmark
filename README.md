@@ -169,3 +169,7 @@ pnpm verify
 ```
 
 The complete TV3 preparatory task/gate mapping is recorded in [`TV3-TECHNICAL-PREPARATION.md`](TV3-TECHNICAL-PREPARATION.md).
+
+## Non-D3 module comparison development check
+
+The [common module capability fixture](development/common-module-capability/README.md) pins the merged Guardian module adapter and dependency-cruiser on synthetic source only. It preserves shared cases and package-export, unresolved, computed-import, shadowed-require and symlink limitations, with raw receipts and tamper tests. This is proposed research tooling, not a D3 result or an execution authorization. Run `pnpm module:common:verify` to check retained evidence.
