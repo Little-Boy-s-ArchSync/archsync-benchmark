@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 177,
-    "passed": 177,
+    "total": 184,
+    "passed": 184,
     "failed": 0
   },
   "provenance": {
@@ -42,6 +42,10 @@
       {
         "file": "scripts/lib/ground-truth.mjs",
         "sha256": "5f2f7cc2760d9edd70bd91f546f9dceba5c6f8f2f1c5de38c47f3ab344490148"
+      },
+      {
+        "file": "scripts/lib/holdout-annotation-source.mjs",
+        "sha256": "4d309bcec82e7136c62108dd1674792a99b9ab64b4b99eea77e1d3be11294de7"
       },
       {
         "file": "scripts/lib/holdout-candidates.mjs",
@@ -97,7 +101,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "7345245cdb5776246de24efe07f6185e662a2c3efb9f0dfab6dbccfbf726fcb8"
+        "sha256": "166d79485bc0670136be79e0c67a2e13e8644e34e093bdc89a9575c0444dd846"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -130,6 +134,10 @@
       {
         "file": "test/ground-truth.test.mjs",
         "sha256": "375c5b932b8e95d244f65aa4b9fecc9b5feed719e2b8aa58cea508b73835d550"
+      },
+      {
+        "file": "test/holdout-annotation-source.test.mjs",
+        "sha256": "94d9c22a91cbc963184c6c3696372c877be01186fb24b567fbab7c05b1199fe9"
       },
       {
         "file": "test/holdout-candidates.test.mjs",
@@ -216,6 +224,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "d52c0a4a8cdcf7761f6e25c767b6a4858cf778e008df6ca79eb7b22720458822"
+    "manifest_sha256": "90a5f0789d1accd412962b5dc8fda9de677d49da602e136b7771a65b0033fd4f"
   }
 }

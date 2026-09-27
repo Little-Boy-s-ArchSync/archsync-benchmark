@@ -25,6 +25,54 @@ declarations and review evidence required by the approved protocol. A source
 file/line supplied in a row is not automatically checked against the source
 snapshot by this structural validator.
 
+For the separate mechanical source check, use
+[`verifyAnnotationSourceEvidence`](../scripts/lib/holdout-annotation-source.mjs).
+It accepts one repository's full capture manifest and a separately retained
+reviewed capture digest, the complete tracked file bytes, and both reviewer
+rows. Each row additionally requires `repository_id` and `repository_commit`
+matching that exact capture. The existing minimal annotation templates remain
+structural examples, not source-bound or accepted evidence.
+
+```js
+import { verifyAnnotationSourceEvidence } from "../scripts/lib/holdout-annotation-source.mjs";
+
+const receipt = verifyAnnotationSourceEvidence({
+  annotations: bothReviewerRowsForOneRepository,
+  captureManifest: reviewedCaptureManifest,
+  expectedCaptureSha256: separatelyRetainedReviewedDigest,
+  trackedEntries: completeCapturedFiles, // [{ path, content: Buffer }, ...]
+});
+```
+
+This read-only API performs no fetch, analyzer run, approval or write. It checks
+all captured paths/bytes against the tree SHA-256 and retained Git blob IDs,
+then requires exact case-sensitive cited paths within the declared scope and
+existing physical lines in valid UTF-8 text. LF, CRLF, CR, U+2028 and U+2029
+are supported, matching TypeScript's line boundaries;
+empty files have zero physical lines and a terminal newline does not create an
+extra citable line. Binary/invalid text, wrong commits, missing/extra/changed
+files, unsafe/out-of-scope paths, oversized captures and invalid rows fail
+closed. Collect complete bytes through the trusted, inspected capture under
+exclusive coordinator control, not by executing repository code or following
+unreviewed filesystem paths.
+
+The receipt binds the capture digest and the parsed annotation array serialized
+as two-space JSON plus a final newline. That hash is not a hash of the original
+JSONL file; retain the untouched original annotation file and its separate hash
+in the governed freeze. The receipt contains locations and hashes, not copied
+labels or snippets; handle it under the same private-data policy as the packet.
+
+`SOURCE_LOCATIONS_VERIFIED` means only source-location consistency with supplied
+reviewed inputs. It does not independently establish that a Git commit came
+from the claimed upstream, that reviewers are independent/blind, that the
+referenced line supports a label, or that the inspection is complete enough to
+measure recall. These need the capture provenance and actual human review.
+`research_closure` stays false. The legacy structural/adjudication/freeze
+helpers do not automatically invoke this API; a reviewed final orchestration
+must require this check before accepting a source-grounded packet. No current
+D3 or research gate is opened by adding it. Controlled in-memory and local-Git
+tests are engineering fixtures only, not D3 or measured research accuracy.
+
 The `holdout` validation library provides manifest, URL/commit/scope/tree/license pin materialization, dual-review, immutable adjudication, freeze, exact two-pass replay, metric, error-taxonomy, and scalability/oracle checks at 100% line/branch/function coverage. The materialization API accepts separately injected clone and inspect adapters; [`createGitRepositoryAdapters`](../scripts/lib/holdout-repository.mjs) supplies the Git implementation. It never substitutes a mutable branch for the full commit. Templates are intentionally incomplete so they cannot be mistaken for frozen evidence.
 
 ## Repository capture preparation (EVAL-103)
