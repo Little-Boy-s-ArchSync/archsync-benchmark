@@ -4,9 +4,12 @@ import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { sha256 } from '../d3-source-review/files.mjs';
 import { isSafeHoldoutPath } from '../lib/holdout.mjs';
+import { verifyReceipt as verifyCommonCapabilityReceipt } from '../../development/common-module-capability/verify.mjs';
 
 export const METHOD_VERSION = '0.2.0';
 export const GUARDIAN_SOURCE_COMMIT = 'e32ef53eeb07bc8c904b6a1e6a8b897d16def820';
+export const COMMON_CAPABILITY_MERGE_COMMIT = 'efc1a14bc650056f98fd2093c79effb79ce7cc87';
+export const COMMON_CAPABILITY_RECEIPT_SHA256 = '83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9';
 export const LEGACY_REVIEW_SCHEMAS = Object.freeze(['d3-author-review/1', 'd3-change-case-review/1']);
 const hex = /^[a-f0-9]{64}$/u;
 const oid = /^[a-f0-9]{40}$/u;
@@ -26,6 +29,17 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   `${methodDir}/review.template.json`,
   `${methodDir}/statistical-plan.template.json`,
   `${methodDir}/tool-pins.template.json`,
+  'development/common-module-capability/README.md',
+  'development/common-module-capability/capture.mjs',
+  'development/common-module-capability/dependency-cruiser.json',
+  'development/common-module-capability/fixtures.json',
+  'development/common-module-capability/guardian-pin.json',
+  'development/common-module-capability/receipt/manifest.json',
+  'development/common-module-capability/tools/guardian/module-dependencies.js',
+  'development/common-module-capability/tools/guardian/module-dependencies.ts',
+  'development/common-module-capability/tools/package-lock.json',
+  'development/common-module-capability/tools/package.json',
+  'development/common-module-capability/verify.mjs',
   'scripts/d3-review/module-method.mjs',
   'test/d3-module-method.test.mjs',
 ].sort());
@@ -186,8 +200,20 @@ export function validateToolPins(pins) {
   assert.equal(pins.tools.guardian.source_commit, GUARDIAN_SOURCE_COMMIT);
   assert.equal(pins.tools.guardian.repository, 'Little-Boy-s-ArchSync/archsync-guardian');
   assert.equal(pins.tools.dependency_cruiser.package_name, 'dependency-cruiser');
+  assert.equal(pins.tools.dependency_cruiser.package_version, '18.3.0');
+  assert.equal(pins.tools.guardian.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
+  assert.equal(pins.tools.dependency_cruiser.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
+  assert.equal(pins.common_capability_packet.merged_benchmark_commit, COMMON_CAPABILITY_MERGE_COMMIT);
+  assert.equal(pins.common_capability_packet.receipt_manifest_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
+  assert.equal(pins.common_capability_packet.comparison_capability, 'cross-group-file-edge-only');
+  assert.equal(pins.common_capability_packet.occurrence_scoring_supported, false);
+  assert.deepEqual([pins.common_capability_packet.cases, pins.common_capability_packet.common_fixture_passes,
+    pins.common_capability_packet.failed_common_candidates, pins.common_capability_packet.unsupported_probes], [7, 2, 1, 4]);
+  assert.equal(pins.common_capability_packet.d3_executed, false);
+  assert.equal(pins.common_capability_packet.research_complete, false);
   assert.equal(pins.human_acceptance.hieu, null); assert.equal(pins.human_acceptance.hoang, null);
-  return { guardian_source_pinned: true, fixture_freeze_complete: false, accepted: false };
+  return { guardian_source_pinned: true, development_packet_bound: true, occurrence_scoring_supported: false,
+    fixture_freeze_complete: false, accepted: false };
 }
 
 export async function buildFreezeManifest(repoRoot = root) {
@@ -222,8 +248,13 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   const plan = JSON.parse(await readFile(join(repoRoot, `${methodDir}/statistical-plan.template.json`)));
   const pins = JSON.parse(await readFile(join(repoRoot, `${methodDir}/tool-pins.template.json`)));
   const review = JSON.parse(await readFile(join(repoRoot, `${methodDir}/review.template.json`)));
-  return { status: 'VERIFIED_PROPOSAL_BLOCKED_ON_HUMANS_AND_FIXTURES', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
-    resolver: validatePolicyScaffold(policy), statistics: validateStatisticalPlan(plan), tools: validateToolPins(pins), review: validateModuleReview(review) };
+  assert.equal(sha256(await readFile(join(repoRoot, 'development/common-module-capability/receipt/manifest.json'))), COMMON_CAPABILITY_RECEIPT_SHA256);
+  const capability = await verifyCommonCapabilityReceipt(join(repoRoot, 'development/common-module-capability'),
+    join(repoRoot, 'development/common-module-capability/receipt'));
+  assert.deepEqual(capability, { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
+  return { status: 'VERIFIED_PROPOSAL_BLOCKED_ON_HUMAN_ACCEPTANCE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
+    resolver: validatePolicyScaffold(policy), statistics: validateStatisticalPlan(plan), tools: validateToolPins(pins),
+    common_capability_receipt: capability, review: validateModuleReview(review) };
 }
 
 async function main() {

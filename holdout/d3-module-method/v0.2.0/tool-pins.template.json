@@ -1,7 +1,7 @@
 {
   "schema": "d3-module-tool-pins/2",
   "version": "0.2.0",
-  "status": "source-pin-recorded-fixture-freeze-pending",
+  "status": "merged-development-packet-bound-method-acceptance-pending",
   "tools": {
     "guardian": {
       "repository": "Little-Boy-s-ArchSync/archsync-guardian",
@@ -10,17 +10,36 @@
       "package_version": null,
       "package_sha256": null,
       "configuration_sha256": null,
-      "non_d3_fixture_output_sha256": null
+      "non_d3_fixture_receipt_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+      "adapter_version": "0.1.0-development",
+      "adapter_javascript_sha256": "c76202d04ad29bcff5d003b7d9597d04cc220639f335b6d97f07304dc0b2b103",
+      "adapter_typescript_sha256": "4ae07fdee62156bdee108c55469aefc171fc99ae21c5cfea236ae81498a35aca"
     },
     "dependency_cruiser": {
       "package_name": "dependency-cruiser",
-      "package_version": null,
+      "package_version": "18.3.0",
       "package_sha256": null,
-      "configuration_sha256": null,
-      "non_d3_fixture_output_sha256": null
+      "configuration_sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6",
+      "non_d3_fixture_receipt_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+      "lockfile_sha256": "a20c472442cfdf0fb1e710c39c3654125e3a89b7805728a0b14fe94243ac01fd"
     }
   },
-  "runtime_versions": {},
-  "repeat_count": null,
+  "common_capability_packet": {
+    "merged_benchmark_commit": "efc1a14bc650056f98fd2093c79effb79ce7cc87",
+    "receipt_manifest_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+    "fixtures_sha256": "0565e331ad813affd0e53c1bc6f44c54d25f8b79af941cf8fac061ba79db86a4",
+    "guardian_pin_sha256": "1d7a5e55adb19e1172a2c0d8e0a273c8885c1967c230e2e4edf5f5606ec1d6e4",
+    "verifier_sha256": "ea2eb158df64e8c5f22278d6b850778c791ee273b0a32195cc99b0f881aa66a9",
+    "comparison_capability": "cross-group-file-edge-only",
+    "occurrence_scoring_supported": false,
+    "cases": 7,
+    "common_fixture_passes": 2,
+    "failed_common_candidates": 1,
+    "unsupported_probes": 4,
+    "d3_executed": false,
+    "research_complete": false
+  },
+  "runtime_versions": { "node": "22.16.0", "typescript": "5.9.3" },
+  "repeat_count": 1,
   "human_acceptance": { "hieu": null, "hoang": null }
 }

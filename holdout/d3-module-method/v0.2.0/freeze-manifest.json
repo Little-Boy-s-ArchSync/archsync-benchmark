@@ -10,9 +10,64 @@
   ],
   "artifacts": [
     {
+      "path": "development/common-module-capability/README.md",
+      "sha256": "fad074d2fd2efe6c90048c4b20a19334b9d89b94ab5b72515b560d1852d3a607",
+      "bytes": 6441
+    },
+    {
+      "path": "development/common-module-capability/capture.mjs",
+      "sha256": "48c11fcc5d71678bcdbebb95fa483f0db88747d14b7b3d58989a4ab7cc2ab400",
+      "bytes": 4848
+    },
+    {
+      "path": "development/common-module-capability/dependency-cruiser.json",
+      "sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6",
+      "bytes": 403
+    },
+    {
+      "path": "development/common-module-capability/fixtures.json",
+      "sha256": "0565e331ad813affd0e53c1bc6f44c54d25f8b79af941cf8fac061ba79db86a4",
+      "bytes": 8790
+    },
+    {
+      "path": "development/common-module-capability/guardian-pin.json",
+      "sha256": "1d7a5e55adb19e1172a2c0d8e0a273c8885c1967c230e2e4edf5f5606ec1d6e4",
+      "bytes": 726
+    },
+    {
+      "path": "development/common-module-capability/receipt/manifest.json",
+      "sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+      "bytes": 25965
+    },
+    {
+      "path": "development/common-module-capability/tools/guardian/module-dependencies.js",
+      "sha256": "c76202d04ad29bcff5d003b7d9597d04cc220639f335b6d97f07304dc0b2b103",
+      "bytes": 9366
+    },
+    {
+      "path": "development/common-module-capability/tools/guardian/module-dependencies.ts",
+      "sha256": "4ae07fdee62156bdee108c55469aefc171fc99ae21c5cfea236ae81498a35aca",
+      "bytes": 10364
+    },
+    {
+      "path": "development/common-module-capability/tools/package-lock.json",
+      "sha256": "a20c472442cfdf0fb1e710c39c3654125e3a89b7805728a0b14fe94243ac01fd",
+      "bytes": 19054
+    },
+    {
+      "path": "development/common-module-capability/tools/package.json",
+      "sha256": "63e2e81727c7242d4d024da77a00d632f12a9d706c1ba30b53d6bec55dd6e86a",
+      "bytes": 205
+    },
+    {
+      "path": "development/common-module-capability/verify.mjs",
+      "sha256": "ea2eb158df64e8c5f22278d6b850778c791ee273b0a32195cc99b0f881aa66a9",
+      "bytes": 10663
+    },
+    {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "de4ffd5985f939fabbfd8f0df7cdeb8931e2807f6b014ebd68e96f77bdbb7aef",
-      "bytes": 4498
+      "sha256": "8be2455cb0ac014bb1b5e46ef1e633a2fd0074bdfbd49a314bb00a0d82b07423",
+      "bytes": 4916
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -61,18 +116,18 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
-      "sha256": "f59caa764faadc1c076ab5af8f052d66747b2a57b17da69d2771f9702f985ed6",
-      "bytes": 800
+      "sha256": "d383e0882b83c244e0d4a4226bed80f94e11a35714de7cd9432f19bd15eba00e",
+      "bytes": 2150
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "4ff53868a2c15f264575cb83c9f745c4d11160a0e5887c5c5ba72b065a8b7fda",
-      "bytes": 16436
+      "sha256": "251b42c206a73c2f678522ad683b5bce2e23bbbac5e21dcc77ee6470ad1eaf50",
+      "bytes": 19094
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "27a1b53f8f9b734cced262429d1f280f81043e27498dc24290207ceae52e3417",
-      "bytes": 8028
+      "sha256": "fbfd45d5d16d68d63dadd4e88fb0875ec46ceb6c068a62476d868ca7cc0ae618",
+      "bytes": 8560
     }
   ],
   "scientific_claims": {

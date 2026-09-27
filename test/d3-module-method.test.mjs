@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { cp, mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -91,21 +91,28 @@ test('review graph rejects wrong side, wrong groups, unresolved references and m
   }
 });
 
-test('freeze manifest verifies raw bytes and pins merged Guardian source without pretending fixture freeze', async () => {
+test('freeze manifest binds the merged development receipt without pretending method acceptance', async () => {
   const manifest = await buildFreezeManifest(root);
   assert.equal(manifest.guardian_source_commit, GUARDIAN_SOURCE_COMMIT);
   assert.deepEqual(manifest.artifacts.map((row) => row.path), [...METHOD_ARTIFACT_PATHS]);
   assert.deepEqual(manifest.human_acceptance, { hieu: null, hoang: null });
   const report = await validateFreezeManifest(manifest, root);
-  assert.equal(report.status, 'VERIFIED_PROPOSAL_BLOCKED_ON_HUMANS_AND_FIXTURES');
+  assert.equal(report.status, 'VERIFIED_PROPOSAL_BLOCKED_ON_HUMAN_ACCEPTANCE');
   assert.equal(report.tools.guardian_source_pinned, true);
+  assert.equal(report.tools.development_packet_bound, true);
+  assert.equal(report.tools.occurrence_scoring_supported, false);
   assert.equal(report.tools.fixture_freeze_complete, false);
+  assert.deepEqual(report.common_capability_receipt,
+    { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
   assert(report.resolver.unresolved.includes('source_eligibility'));
 });
 
 test('freeze manifest fails closed after a byte changes', async (t) => {
   const temp = await mkdtemp(join(tmpdir(), 'd3-module-method-'));
   t.after(() => rm(temp, { recursive: true, force: true }));
+  await mkdir(join(temp, 'development/common-module-capability'), { recursive: true });
+  await cp(join(root, 'development/common-module-capability/receipt'),
+    join(temp, 'development/common-module-capability/receipt'), { recursive: true });
   for (const path of METHOD_ARTIFACT_PATHS) {
     const destination = join(temp, path); await mkdir(dirname(destination), { recursive: true });
     await writeFile(destination, await readFile(join(root, path)));

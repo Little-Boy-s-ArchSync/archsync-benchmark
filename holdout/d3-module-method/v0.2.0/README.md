@@ -2,7 +2,7 @@
 
 Status: **proposal only; not accepted, not runnable and not a D3 result**.
 
-This directory defines the files that Hiếu and Hoàng must jointly freeze before either tool is run on D3. It records the merged Guardian source commit `e32ef53eeb07bc8c904b6a1e6a8b897d16def820`, but package/configuration hashes and the dependency-cruiser pin remain empty until the common non-D3 fixture work is complete. Human acceptance and personal declaration fields intentionally remain `null`.
+This directory defines the files that Hiếu and Hoàng must jointly freeze before either tool is run on D3. It records the merged Guardian source commit `e32ef53eeb07bc8c904b6a1e6a8b897d16def820` and binds the development common-capability packet merged at Benchmark `efc1a14bc650056f98fd2093c79effb79ce7cc87`. That packet supports only the cross-group file-edge task: dependency-cruiser supplies no physical occurrence positions, so occurrence scoring remains unsupported. Package publication hashes and scientific method acceptance remain pending. Human acceptance and personal declaration fields intentionally remain `null`.
 
 ## Endpoint
 
@@ -21,14 +21,14 @@ The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets 
 - `resolver-policy.template.json` exposes every unresolved resolver/common-capability dimension.
 - Its `unknown_policy` freezes propagation from occurrences to file-sides, case-sides and change comparisons, while keeping tool failures in attempted coverage.
 - `statistical-plan.template.json` freezes denominators and zero-denominator behavior. Unsupported, failed and truth-Unknown attempts stay visible.
-- `tool-pins.template.json` records the merged Guardian source pin; package, configuration, fixture-output, runtime and dependency-cruiser pins remain pending.
+- `tool-pins.template.json` binds the merged Guardian adapter source, dependency-cruiser 18.3.0 configuration/lockfile and the merged non-D3 receipt. It leaves package-publication hashes empty and keeps the development receipt distinct from joint method acceptance.
 - `applicability-reviewed.template.json` is a blank destination shape only. The immutable 152-row checklist must be copied by the controlled builder and filled through actual source review; this file is not that review.
 - `freeze-manifest.json` hashes the raw bytes and sizes of the preceding artifacts. It does not hash itself. Archive its raw SHA-256 externally when both authors accept a completed version.
 - The manifest also pins `scripts/d3-review/module-method.mjs` and `test/d3-module-method.test.mjs`, so validator or deterministic-test changes invalidate the proposal hash.
 
 ## Required sequence
 
-1. Run Guardian and dependency-cruiser against the same fixtures outside D3. Store input, expected output, raw output, exit code, version, configuration and hashes; decide the common supported constructs before viewing new D3 predictions.
+1. Review the merged Guardian/dependency-cruiser development receipt and its retained inputs, expected output, raw output, exit code, version, configuration and hashes. Jointly decide whether its narrow cross-group file-edge capability is accepted before viewing new D3 predictions; it does not establish occurrence scoring.
 2. Complete the resolver policy and all 152 historical applicability rows with exact source evidence. Both authors accept one manifest version and raw hash.
 3. Generate two separate 56-case review files. Each must include complete file-side coverage, occurrences and edges plus the reviewer's actual development/output/AI declaration. Preserve each original file and raw hash before comparison.
 4. Resolve differences only after originals are sealed. Unresolved differences remain Unknown.
