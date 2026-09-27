@@ -1,5 +1,14 @@
 # Decisions for Hiếu as Repository Lead
 
+## Status update — 2026-09-28
+
+Hiếu's direct reply, relayed by Hoàng, settles the 56+4 scope, module-only
+comparison, two nonblind author reviewers and four conditional rules. See
+`HIEU-DECISION-UPDATE-20260928.md`. The detailed items below remain the audit
+context for those decisions and the unresolved operational requirements; they
+must not be read as a statement that the entire protocol still awaits a
+decision.
+
 Record a named decision, current UTC time, rationale and exact artifact hash for each accepted revision. Hoàng's coauthor approval is recorded separately. The received response 0.2.0 is SHA-256 `2d0330b0a27f79425f5071f0f3e4ed6d66f3f11c2e85bf932d00a6ac94cb59af`; its scope proposal is SHA-256 `85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3`.
 
 ## 1. Protocol and reviewer design
