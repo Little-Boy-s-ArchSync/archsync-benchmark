@@ -1,10 +1,15 @@
 {
   "schema": "non-d3-common-capability-receipt/1",
   "status": "development-only-proposed-research-tooling",
-  "started_at": "2026-09-27T21:42:46.470Z",
-  "finished_at": "2026-09-27T21:42:54.123Z",
+  "started_at": "2026-09-27T21:53:53.750Z",
+  "finished_at": "2026-09-27T21:54:00.501Z",
   "node": "v22.16.0",
   "platform": "darwin",
+  "capture_context": {
+    "node_executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
+    "tools_root": "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability",
+    "scratch_root": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD"
+  },
   "arch": "arm64",
   "guardian_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
   "versions": {
@@ -26,11 +31,11 @@
     },
     {
       "path": "capture.mjs",
-      "sha256": "30c41c6422c51de6fcf558759792e5ea2c15ce17d35e1c7b12fce79ff7e794fa"
+      "sha256": "48c11fcc5d71678bcdbebb95fa483f0db88747d14b7b3d58989a4ab7cc2ab400"
     },
     {
       "path": "verify.mjs",
-      "sha256": "b3413b81b896bc688357e868ab030e8a48b0e315c72cb230c76ae08b541eed97"
+      "sha256": "ea2eb158df64e8c5f22278d6b850778c791ee273b0a32195cc99b0f881aa66a9"
     },
     {
       "path": "tools/guardian-run.mjs",
@@ -62,12 +67,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/value-syntax",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/value-syntax/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/value-syntax",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/value-syntax/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/value-syntax",
-          "started_at": "2026-09-27T21:42:46.479Z",
-          "finished_at": "2026-09-27T21:42:47.093Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/value-syntax",
+          "started_at": "2026-09-27T21:53:53.761Z",
+          "finished_at": "2026-09-27T21:53:54.314Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "ea61432d050832e964e333a8d696a8ec355f566af2a78a68d47510f23d81ae53",
@@ -84,12 +89,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/value-syntax",
-          "started_at": "2026-09-27T21:42:47.094Z",
-          "finished_at": "2026-09-27T21:42:47.651Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/value-syntax",
+          "started_at": "2026-09-27T21:53:54.314Z",
+          "finished_at": "2026-09-27T21:53:54.832Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "7afd6d956088e57ee28fa03c794db625d18ad8e1bb1d31161f95a253d17e886c",
+          "stdout_sha256": "27e68370ea50730be5620d24a6d6dfb0c0a97aee698c3454f88478adf4277431",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -167,6 +172,10 @@
         "guardian_unresolved": [],
         "comparator_unresolved": [],
         "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [
           "dynamic-import",
           "export",
@@ -188,12 +197,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/alias",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/alias/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/alias",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/alias/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/alias",
-          "started_at": "2026-09-27T21:42:47.656Z",
-          "finished_at": "2026-09-27T21:42:48.261Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/alias",
+          "started_at": "2026-09-27T21:53:54.836Z",
+          "finished_at": "2026-09-27T21:53:55.342Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "b28190e88190319113deb3414cea0d8ee089ac9bf26698d3e07a4b47c81fe1ee",
@@ -210,12 +219,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/alias",
-          "started_at": "2026-09-27T21:42:48.261Z",
-          "finished_at": "2026-09-27T21:42:48.739Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/alias",
+          "started_at": "2026-09-27T21:53:55.342Z",
+          "finished_at": "2026-09-27T21:53:55.796Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "099d041d88b584dcfc6d125d6338db5f37fe5d509fffba282030bbd384338bac",
+          "stdout_sha256": "e15239c276dde95db522330d163a6d3e7a8b98c9066f9482266e8fcbddd11516",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -247,9 +256,14 @@
         "comparator_outside_comparison": [
           {
             "from": "src/app/main.ts",
-            "target": "src/app/helper.ts"
+            "target": "src/app/helper.ts",
+            "reason": "same-group"
           }
         ],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [
           "import"
         ],
@@ -267,12 +281,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/self-package-export",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/self-package-export/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/self-package-export",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/self-package-export/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/self-package-export",
-          "started_at": "2026-09-27T21:42:48.742Z",
-          "finished_at": "2026-09-27T21:42:49.302Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/self-package-export",
+          "started_at": "2026-09-27T21:53:55.799Z",
+          "finished_at": "2026-09-27T21:53:56.320Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "81c0b52a6e8460179ca46c0664462bd7f55673a5ee8dd9615d9ac2666e02abd1",
@@ -289,12 +303,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/self-package-export",
-          "started_at": "2026-09-27T21:42:49.302Z",
-          "finished_at": "2026-09-27T21:42:49.784Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/self-package-export",
+          "started_at": "2026-09-27T21:53:56.320Z",
+          "finished_at": "2026-09-27T21:53:56.736Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "ff0c6d71019cfed4949211427d9f1cfa45d49186426c41317cb9ce1a77ed9408",
+          "stdout_sha256": "b2ebd4ba5f8b85698e149d83f6bff4cf85ddc61b337e58643fd52dd8bf504851",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -324,6 +338,10 @@
           }
         ],
         "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [
           "import"
         ],
@@ -341,12 +359,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/unresolved",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/unresolved/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/unresolved",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/unresolved/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/unresolved",
-          "started_at": "2026-09-27T21:42:49.787Z",
-          "finished_at": "2026-09-27T21:42:50.401Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/unresolved",
+          "started_at": "2026-09-27T21:53:56.738Z",
+          "finished_at": "2026-09-27T21:53:57.251Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "382cf3f54e119cd322d82d5977bc68afe9009a0290b6c25d2661ec1903b0adaa",
@@ -363,12 +381,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/unresolved",
-          "started_at": "2026-09-27T21:42:50.401Z",
-          "finished_at": "2026-09-27T21:42:50.907Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/unresolved",
+          "started_at": "2026-09-27T21:53:57.251Z",
+          "finished_at": "2026-09-27T21:53:57.648Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "dc0f37eace7311d4508858b7ec3ea82dbeab49a12e605920a6a3af4232e237b6",
+          "stdout_sha256": "e38911015a0c4a84e2538cca4c625476dccfad8388356b83fe2f86a6a1810786",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -396,6 +414,10 @@
           }
         ],
         "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [],
         "shared_fixture_pass": false,
         "meaning": "unsupported-probe-never-scored-as-common-success",
@@ -411,12 +433,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/computed-dynamic",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/computed-dynamic/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/computed-dynamic",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/computed-dynamic/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/computed-dynamic",
-          "started_at": "2026-09-27T21:42:50.911Z",
-          "finished_at": "2026-09-27T21:42:51.523Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/computed-dynamic",
+          "started_at": "2026-09-27T21:53:57.650Z",
+          "finished_at": "2026-09-27T21:53:58.152Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "d345d6d8f91a4bceffae82bb07084d612d68c03290c61186e0acc46fb83b22d0",
@@ -433,12 +455,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/computed-dynamic",
-          "started_at": "2026-09-27T21:42:51.523Z",
-          "finished_at": "2026-09-27T21:42:52.018Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/computed-dynamic",
+          "started_at": "2026-09-27T21:53:58.152Z",
+          "finished_at": "2026-09-27T21:53:58.576Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "f274e6999d43e379b3422f4e3c9fc53c4252d92c57c1e95bb3a941b6dcca0fb5",
+          "stdout_sha256": "e1305beb15fddc8c5e213cc56f7d3e9c540caab0eb3f28a2c687748b9911e9e6",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -453,6 +475,10 @@
         "guardian_unresolved": [],
         "comparator_unresolved": [],
         "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [],
         "shared_fixture_pass": false,
         "meaning": "unsupported-probe-never-scored-as-common-success",
@@ -468,12 +494,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/shadowed-require",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/shadowed-require/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/shadowed-require",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/shadowed-require/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/shadowed-require",
-          "started_at": "2026-09-27T21:42:52.022Z",
-          "finished_at": "2026-09-27T21:42:52.610Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/shadowed-require",
+          "started_at": "2026-09-27T21:53:58.579Z",
+          "finished_at": "2026-09-27T21:53:59.090Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "d345d6d8f91a4bceffae82bb07084d612d68c03290c61186e0acc46fb83b22d0",
@@ -490,12 +516,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/shadowed-require",
-          "started_at": "2026-09-27T21:42:52.610Z",
-          "finished_at": "2026-09-27T21:42:53.082Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/shadowed-require",
+          "started_at": "2026-09-27T21:53:59.090Z",
+          "finished_at": "2026-09-27T21:53:59.500Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "88dc80fdefb00dd088c4796037307c8ccb35e9ee1b6b45ea143999979f7c71eb",
+          "stdout_sha256": "5e06259dff57395b54346fce6285915ef08691b6cf0b7d06c69663642af7445e",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -515,6 +541,10 @@
         "guardian_unresolved": [],
         "comparator_unresolved": [],
         "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [],
         "shared_fixture_pass": false,
         "meaning": "unsupported-probe-never-scored-as-common-success",
@@ -530,12 +560,12 @@
           "executable": "/Users/andytran/.npm/_npx/2ad0c2d1aba2dd61/node_modules/node/bin/node",
           "args": [
             "/Users/andytran/Coding/Little Boy's/acsidan/preparation/2026-09-28-common-capability/benchmark/development/common-module-capability/tools/guardian-run.mjs",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/symlink",
-            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/symlink/mapping.json"
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/symlink",
+            "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/symlink/mapping.json"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/symlink",
-          "started_at": "2026-09-27T21:42:53.084Z",
-          "finished_at": "2026-09-27T21:42:53.644Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/symlink",
+          "started_at": "2026-09-27T21:53:59.503Z",
+          "finished_at": "2026-09-27T21:54:00.004Z",
           "exit_code": 0,
           "signal": null,
           "stdout_sha256": "1017965e264ede205c4ddbfe8f39c5fd7904093d5c69d9f25a7548d06a81269d",
@@ -552,12 +582,12 @@
             "json",
             "src"
           ],
-          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/symlink",
-          "started_at": "2026-09-27T21:42:53.644Z",
-          "finished_at": "2026-09-27T21:42:54.121Z",
+          "cwd": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/symlink",
+          "started_at": "2026-09-27T21:54:00.004Z",
+          "finished_at": "2026-09-27T21:54:00.499Z",
           "exit_code": 0,
           "signal": null,
-          "stdout_sha256": "f7854dee73c67fded39ab88b04c34c2c6c2177a60b221ea9f4aa77aecb47ca11",
+          "stdout_sha256": "7588ee7dc5fc16b17e9ae7d8cb43346214d458fd96f2906334c130da1f963630",
           "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
         }
       ],
@@ -585,6 +615,10 @@
         ],
         "comparator_unresolved": [],
         "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
         "guardian_syntax": [],
         "shared_fixture_pass": false,
         "meaning": "unsupported-probe-never-scored-as-common-success",

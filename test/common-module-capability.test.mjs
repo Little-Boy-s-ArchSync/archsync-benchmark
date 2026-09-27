@@ -46,3 +46,38 @@ test('shared fixture detects missing comparator edge and unsupported emptiness n
   g.edges[0].evidence[0].line = 999;
   assert.throws(() => normalize(spec, g, d), /source evidence/);
 });
+test('command provenance and sequential UTC timing reject tampering', async (t) => {
+  for (const mutation of [
+    (m) => { m.cases[0].invocations[0].tool = 'comparator'; },
+    (m) => { m.cases[0].invocations[0].executable += '-other'; },
+    (m) => { m.cases[0].invocations[1].args[5] = 'external'; },
+    (m) => { m.cases[0].invocations[0].cwd += '/other'; },
+    (m) => { m.cases[0].invocations[0].started_at = 'yesterday'; },
+    (m) => { m.cases[0].invocations[0].finished_at = '2000-01-01T00:00:00.000Z'; },
+    (m) => { m.cases[0].invocations[1].started_at = m.started_at; },
+    (m) => { m.finished_at = m.started_at; },
+    (m) => { m.capture_context.scratch_root = 'relative'; },
+  ]) await assert.rejects(verifyReceipt(base, await altered(t, mutation)));
+});
+test('unmapped resolved production endpoints fail qualification while same-group edges remain explicit', async () => {
+  const fixtures = await json(join(base, 'fixtures.json'));
+  const spec = fixtures.cases.find((c) => c.id === 'alias');
+  const g = await json(join(base, 'receipt/alias/guardian.stdout.txt'));
+  const d = await json(join(base, 'receipt/alias/comparator.stdout.txt'));
+  const original = normalize(spec, g, d);
+  assert.equal(original.shared_fixture_pass, true);
+  assert(original.comparator_outside_comparison.some((e) => e.reason === 'same-group'));
+  assert.equal(original.comparison_capability, 'cross-group-file-edge-only');
+  assert.equal(original.comparator_source_positions, 'not-provided');
+  assert.equal(original.occurrence_scoring_supported, false);
+  spec.files['src/unmapped/value.ts'] = 'export const value = 1;\n';
+  for (const endpoint of ['source', 'target']) {
+    const changed = structuredClone(d);
+    if (endpoint === 'target') changed.modules.find((m) => m.source === 'src/app/main.ts').dependencies.push({ resolved: 'src/unmapped/value.ts', couldNotResolve: false });
+    else changed.modules.push({ source: 'src/unmapped/value.ts', dependencies: [{ resolved: 'src/lib/value.ts', couldNotResolve: false }] });
+    const result = normalize(spec, g, changed);
+    assert.deepEqual(result.comparator_pairs, original.comparator_pairs);
+    assert.equal(result.shared_fixture_pass, false);
+    assert.deepEqual(result.comparator_normalization_errors[0].unmapped, [endpoint]);
+  }
+});

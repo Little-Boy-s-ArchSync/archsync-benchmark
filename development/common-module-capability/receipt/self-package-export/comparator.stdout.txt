@@ -57,7 +57,7 @@
     "totalCruised": 3,
     "totalDependenciesCruised": 1,
     "optionsUsed": {
-      "baseDir": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/self-package-export",
+      "baseDir": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/self-package-export",
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,

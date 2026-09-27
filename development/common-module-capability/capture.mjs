@@ -56,5 +56,5 @@ for (const spec of fixtures.cases) {
   console.log(`${spec.id}: ${JSON.stringify(records.at(-1).normalized)}`);
 }
 for (const input of inputs) assert.equal(hash(await readFile(resolve(base, input.path))), input.sha256, 'Inputs changed during capture');
-await writeFile(resolve(output, 'manifest.json'), encode({ schema: 'non-d3-common-capability-receipt/1', status: 'development-only-proposed-research-tooling', started_at: started, finished_at: new Date().toISOString(), node: process.version, platform: process.platform, arch: process.arch, guardian_commit: pin.commit, versions, inputs, cases: records, d3_executed: false, research_complete: false }), { flag: 'wx' });
+await writeFile(resolve(output, 'manifest.json'), encode({ schema: 'non-d3-common-capability-receipt/1', status: 'development-only-proposed-research-tooling', started_at: started, finished_at: new Date().toISOString(), node: process.version, platform: process.platform, capture_context: { node_executable: process.execPath, tools_root: base, scratch_root: scratch }, arch: process.arch, guardian_commit: pin.commit, versions, inputs, cases: records, d3_executed: false, research_complete: false }), { flag: 'wx' });
 console.log(`Retained temporary developer fixture source: ${scratch}`);

@@ -24,7 +24,7 @@
     "totalCruised": 2,
     "totalDependenciesCruised": 0,
     "optionsUsed": {
-      "baseDir": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-AVQIR4/computed-dynamic",
+      "baseDir": "/private/var/folders/mt/zhvthc515kgg9pxt4wjcjpyr0000gn/T/archsync-non-d3-common-3NPPwD/computed-dynamic",
       "combinedDependencies": false,
       "detectJSDocImports": false,
       "detectProcessBuiltinModuleCalls": false,

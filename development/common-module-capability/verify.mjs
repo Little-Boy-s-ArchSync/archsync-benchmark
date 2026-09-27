@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
-import { resolve, relative, isAbsolute } from 'node:path';
+import { resolve, relative, isAbsolute, posix, win32 } from 'node:path';
 import { pathToFileURL } from 'node:url';
 export const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 export const encode = (value) => `${JSON.stringify(value, null, 2)}\n`;
@@ -22,14 +22,15 @@ export function normalize(spec, guardian, comparator) {
     assert(Number.isSafeInteger(e.line) && e.line > 0 && spec.files[e.file].split(/\r?\n/)[e.line - 1]?.includes(e.specifier), 'Guardian source evidence does not match developer fixture');
     return [e.file, e.target_file];
   })));
-  const observations = [], outside = [], unresolved = [];
+  const observations = [], outside = [], unresolved = [], normalizationErrors = [];
   for (const module of comparator.modules) {
     assert(typeof module.source === 'string', 'Comparator source identity missing'); // Unresolved pseudo-modules may contain ../; never use them as filesystem paths.
     for (const dependency of module.dependencies) {
       const target = dependency.resolved ?? dependency.module;
       if (dependency.couldNotResolve) unresolved.push({ from: module.source, target });
       else if (production.has(module.source) && production.has(target) && group(module.source) && group(target) && group(module.source) !== group(target)) observations.push([module.source, target]);
-      else outside.push({ from: module.source, target });
+      else if (production.has(module.source) && production.has(target) && (!group(module.source) || !group(target))) normalizationErrors.push({ from: module.source, target, reason: 'unmapped-production-dependency', unmapped: [!group(module.source) ? 'source' : null, !group(target) ? 'target' : null].filter(Boolean) });
+      else outside.push({ from: module.source, target, reason: production.has(module.source) && production.has(target) ? 'same-group' : 'outside-declared-production' });
     }
   }
   const comparatorPairs = pairs(observations);
@@ -40,9 +41,10 @@ export function normalize(spec, guardian, comparator) {
     guardian_pairs: guardianPairs, comparator_pairs: comparatorPairs, expected_pairs: expected,
     guardian_matches_developer_expectation: same(guardianPairs, expected),
     comparator_matches_developer_expectation: same(comparatorPairs, expected),
-    guardian_unresolved: guardian.unresolved, comparator_unresolved: unresolved, comparator_outside_comparison: outside,
+    guardian_unresolved: guardian.unresolved, comparator_unresolved: unresolved, comparator_outside_comparison: outside, comparator_normalization_errors: normalizationErrors,
+    comparison_capability: 'cross-group-file-edge-only', comparator_source_positions: 'not-provided', occurrence_scoring_supported: false,
     guardian_syntax: guardian.edges.flatMap((edge) => edge.evidence.map((e) => e.syntax)).sort(),
-    shared_fixture_pass: common && same(guardianPairs, expected) && same(comparatorPairs, expected) && guardian.unresolved.length === 0 && unresolved.length === 0,
+    shared_fixture_pass: common && same(guardianPairs, expected) && same(comparatorPairs, expected) && guardian.unresolved.length === 0 && unresolved.length === 0 && normalizationErrors.length === 0,
     meaning: common ? 'bounded-development-fixture-only' : 'unsupported-probe-never-scored-as-common-success',
     d3_eligible: false, research_result: false };
 }
@@ -55,6 +57,14 @@ export async function verifyReceipt(base, receiptDirectory) {
   assert.equal(manifest.guardian_commit, 'e32ef53eeb07bc8c904b6a1e6a8b897d16def820');
   assert.equal(manifest.node, 'v22.16.0');
   assert.deepEqual(manifest.versions, { 'dependency-cruiser': '18.3.0', typescript: '5.9.3' });
+  assert(['darwin', 'linux', 'win32'].includes(manifest.platform), 'Unsupported capture platform');
+  const paths = manifest.platform === 'win32' ? win32 : posix;
+  const context = manifest.capture_context;
+  for (const key of ['node_executable', 'tools_root', 'scratch_root']) assert(typeof context?.[key] === 'string' && paths.isAbsolute(context[key]) && paths.normalize(context[key]) === context[key], `Invalid capture context: ${key}`);
+  const time = (value) => { assert(typeof value === 'string' && /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/.test(value) && Number.isFinite(Date.parse(value)) && new Date(value).toISOString() === value, 'Invalid UTC timestamp'); return Date.parse(value); };
+  let previousFinish = time(manifest.started_at);
+  const captureFinish = time(manifest.finished_at);
+  assert(previousFinish <= captureFinish, 'Capture timestamp ordering invalid');
   assert.deepEqual(manifest.inputs.map((row) => row.path), inputNames, 'Input inventory incomplete');
   for (const row of manifest.inputs) {
     assert(within(row.path)); assert.equal(hash(await readFile(resolve(base, row.path))), row.sha256, `Input changed: ${row.path}`);
@@ -65,8 +75,19 @@ export async function verifyReceipt(base, receiptDirectory) {
   const expectedFiles = new Set(['manifest.json']);
   assert.equal(manifest.cases.length, 7, 'Declared development population changed');
   for (const record of manifest.cases) {
-    assert.equal(record.invocations.length, 2);
+    assert.deepEqual(record.invocations.map((invocation) => invocation.tool), ['guardian', 'comparator'], 'Invocation tool/order mismatch');
+    const root = paths.join(context.scratch_root, record.id);
+    const expectedArgs = {
+      guardian: [paths.join(context.tools_root, 'tools/guardian-run.mjs'), root, paths.join(root, 'mapping.json')],
+      comparator: [paths.join(context.tools_root, 'tools/node_modules/dependency-cruiser/bin/dependency-cruiser.mjs'), '--config', 'dependency-cruiser.json', '--output-type', 'json', 'src'],
+    };
     for (const invocation of record.invocations) {
+      assert.equal(invocation.executable, context.node_executable, 'Invocation executable mismatch');
+      assert.equal(invocation.cwd, root, 'Invocation working directory mismatch');
+      assert.deepEqual(invocation.args, expectedArgs[invocation.tool], 'Invocation arguments mismatch');
+      const start = time(invocation.started_at), finish = time(invocation.finished_at);
+      assert(previousFinish <= start && start <= finish && finish <= captureFinish, 'Invocation timestamp ordering invalid');
+      previousFinish = finish;
       assert.equal(invocation.exit_code, 0, 'Failed tool invocation cannot count as fixture success');
       assert.equal(invocation.signal, null);
       for (const channel of ['stdout', 'stderr']) {

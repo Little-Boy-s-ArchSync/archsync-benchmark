@@ -17,27 +17,27 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 249,
-    "passed": 249,
+    "total": 251,
+    "passed": 251,
     "failed": 0
   },
   "provenance": {
     "files": [
       {
         "file": "test/common-module-capability.test.mjs",
-        "sha256": "caeed5b39f4790b7319ae4ee2a8ee171930ba4fb1a664f8ee26825cee9194da1"
+        "sha256": "c53f391070afe48f0c10f6419edf4422a33c9e2a6ffd8aa1935a788e7df86039"
       },
       {
         "file": "development/common-module-capability/README.md",
-        "sha256": "ac1b3069531f0a2900e20bfe3778815ac5a038d2ab1313aad57558ae3c9d765d"
+        "sha256": "fad074d2fd2efe6c90048c4b20a19334b9d89b94ab5b72515b560d1852d3a607"
       },
       {
         "file": "development/common-module-capability/verify.mjs",
-        "sha256": "b3413b81b896bc688357e868ab030e8a48b0e315c72cb230c76ae08b541eed97"
+        "sha256": "ea2eb158df64e8c5f22278d6b850778c791ee273b0a32195cc99b0f881aa66a9"
       },
       {
         "file": "development/common-module-capability/capture.mjs",
-        "sha256": "30c41c6422c51de6fcf558759792e5ea2c15ce17d35e1c7b12fce79ff7e794fa"
+        "sha256": "48c11fcc5d71678bcdbebb95fa483f0db88747d14b7b3d58989a4ab7cc2ab400"
       },
       {
         "file": "development/common-module-capability/fixtures.json",
@@ -57,7 +57,7 @@
       },
       {
         "file": "development/common-module-capability/receipt/manifest.json",
-        "sha256": "d690f15ec0a81ddc7af4153133c1ac72425516c96047f3ea9862288f2bc8e6d5"
+        "sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -424,6 +424,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "89d07edfb8674f4ff9799991ec4059549a9c78b7daa7abda70e96bab60f0157c"
+    "manifest_sha256": "1891d34d6fe8238d2c67574c88c9508f768736c0716d4f287123eca9ebb39fec"
   }
 }
