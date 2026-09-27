@@ -1,0 +1,52 @@
+{
+  "schema": "d3-preflight-reconciliation/1",
+  "status": "source-reconciled-not-scientifically-approved",
+  "verified_at_utc": "2026-09-27T16:55:28.0374825Z",
+  "archive_sha256": "76fa9d3ad76c3885ca7125d9e6a209f212b4534daaa127ee0c6e581fd5dcfe4a",
+  "checks": [
+    "All 20 manifest files match bytes and SHA-256",
+    "Exact three repository pins/scopes match retained original",
+    "All 434 snapshot rows match scoped original inventory, source SHA-256 and Git blobs",
+    "All 60 cases and 214 path occurrences match original receipt metadata and retained blobs",
+    "Human decision fields and architecture rule register remain blank"
+  ],
+  "counts": {
+    "proposed_primary_snapshot_files": 322,
+    "changed_path_occurrences": 214,
+    "proposed_primary_ts_path_occurrences": 150,
+    "non_ts_path_occurrences": 1,
+    "test_path_occurrences": 63,
+    "unique_repo_endpoint_commits": 99,
+    "candidate_cases": 60,
+    "repositories": 3,
+    "snapshot_files": 434,
+    "unique_repo_paths": 138
+  },
+  "by_repository": [
+    {
+      "repository": "hyperdxio/hyperdx",
+      "snapshot_files": 268,
+      "proposed_primary_files": 167
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "snapshot_files": 33,
+      "proposed_primary_files": 22
+    },
+    {
+      "repository": "ether/etherpad",
+      "snapshot_files": 133,
+      "proposed_primary_files": 133
+    }
+  ],
+  "candidate_context_only_cases": [
+    "hyperdxio--hyperdx-H016",
+    "amruthpillai--reactive-resume-H002",
+    "amruthpillai--reactive-resume-H012",
+    "amruthpillai--reactive-resume-H018"
+  ],
+  "scientific_truth_verified": false,
+  "human_approval_created": false,
+  "labels_created": false,
+  "predictions_executed": false
+}
