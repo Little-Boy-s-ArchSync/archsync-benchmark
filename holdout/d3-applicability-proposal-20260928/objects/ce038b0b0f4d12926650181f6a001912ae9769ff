@@ -1,0 +1,78 @@
+tree 50fbd876c87e3fbaae5e7267f9907641e2d26984
+parent d67aa3ebd3eb6a9e6ededf45e52a4f27e25e4a50
+author John McLear <john@mclear.co.uk> 1781705903 +0100
+committer GitHub <noreply@github.com> 1781705903 +0100
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqMqyvCRC1aQ7uu5UhlAAARzMQACWNs3bnS/PRnQRGC1wEc4mt
+ BHT6/wlkhu2VLHzWmUgf5i4jXno8x6cl5IBQnyXndFkAl/m8OTxD4Nml0wT2FiaW
+ 5//avTmsmu3Qauc+8OvP4nj6ByoFFTCdk/3ot113selskNPQjbeD07OPq9pGrwP7
+ ozgjhbPlIkhNYDNKFSNM7k18NIJJd9UHwAnmTCJ2rWjaLLc1jurHfqSaQe/Zxx0S
+ 15/JW/Bk0muAGCGwXCRwlid6iyK0F3FkQIIpYp9rhD0LE4EFf/wQUKc58R1X+YDu
+ hLKjvwNNWr+4NXM3nGz2UbgSJFE4QYoxY6wx1cn98K8ncdWmcwFbUXMLDGwfRxge
+ obIjYS/ErTrIYTtcB7QEvK6ofBgkSAPmIBrKKumIJO+d1CxNtp7kdvJ4lKOLYClU
+ Dfi7PHis6oTNCsQUafZ1FrsRvD/1baxElqCSOV7v5LEpQfzvVU2p+2K9Uz9c9HTT
+ 5eFU+xyt5XcmWYTEfGo9Fswm+2LQ2xSBvoLIoEm0GyyrXV2/kwm7FseqaIePh2I+
+ kQiwB1WBmz62ZVP6xnViBXGQQWWZQ+RuKrQsZL3Eo3URuuzW9bvTt7e4nlWTgZ5N
+ Tb6LsjVpjBfguWvuHnF6kmpKUUFTDoDyXFDV+Aim5+y6Tdrx9VP0L63zQrscjA4L
+ 2B5LxL8jaK161yT8fiI/
+ =YWU3
+ -----END PGP SIGNATURE-----
+ 
+
+fix(pad): keep token-less Delete pad reachable without pad-wide settings (#7959) (#7960)
+
+* fix(pad): keep token-less Delete pad reachable without pad-wide settings (#7959)
+
+The token-less "Delete pad" button (#delete-pad) was nested inside the
+enablePadWideSettings-gated pad-settings section, so disabling pad-wide
+settings removed the only way to delete a pad without a recovery token.
+Combined with #7926 hiding the token disclosure when deletion needs no
+token (e.g. allowPadDeletionByAllUsers), a user who was allowed to delete
+could be left with no deletion UI at all.
+
+Pad deletion is unrelated to pad-wide settings, so:
+
+- Move #delete-pad out of the enablePadWideSettings block in pad.html; it
+  is now always rendered and hidden by default.
+- Add a canDeletePad clientVar (isCreator || allowPadDeletionByAllUsers)
+  and drive the button's visibility from it in pad_editor.ts, mirroring the
+  existing canDeleteWithoutToken handling for the token disclosure.
+
+The two controls are now mutually coherent and neither depends on
+enablePadWideSettings: the plain button shows when this session can delete
+without a token, the recovery-token disclosure shows otherwise.
+
+Tests:
+- backend padDeletionUiPlacement.ts: #delete-pad is rendered with
+  enablePadWideSettings both on and off (fails without the template move).
+- backend socketio.ts: canDeletePad reflects the creator/allow-all matrix,
+  including a non-creator who only gains it under allowPadDeletionByAllUsers.
+- frontend pad_settings.spec.ts: asserts #delete-pad is no longer a
+  descendant of #pad-settings-section.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* fix(pad): never let readonly sessions delete via token-less paths (#7959)
+
+Qodo review of #7960: `canDeletePad` was `isCreator || allowPadDeletionByAllUsers`,
+so under allowPadDeletionByAllUsers a readonly viewer received
+canDeletePad=true and the relocated #delete-pad button unhid for them.
+Worse, the server-side handlePadDelete `flagOk`/`creatorOk` branches never
+checked session.readonly either, so a readonly-link holder could actually
+delete the pad without a token — a data-loss hole that the new always-rendered
+button would expose.
+
+Exclude readonly sessions from both the clientVar and the server's token-less
+authorization paths. A valid recovery token (tokenOk) stays a sufficient
+credential regardless of session mode.
+
+Test: socketio.ts asserts a readonly viewer gets canDeletePad=false and that a
+token-less PAD_DELETE from a readonly session leaves the pad intact (red before
+this change on the clientVar assertion).
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

@@ -1,0 +1,23 @@
+tree 9cca2ec49752207ea53b502e6cf68e22e555336f
+parent 59b96e995f2a1c0e8aefcb92bf346494f654fb84
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787275432 +1000
+committer GitHub <noreply@github.com> 1787275432 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqh6ioCRC1aQ7uu5UhlAAAzxsQADs4NDLb3O6bvcqIpsur7SJa
+ vp4K1QgA+9uI3fBe4eOzKsdl/99BQ36aSimDoDGfha6XsaLcBOGjGVSshReegBNB
+ 3yDei+Jie9L2vB0WL9JH/R4MjVwBJIfyg+omeW04chQppDm+jojN5HauuOq1rxtx
+ TMpoWxf83dOjWWmomYQNI2mLZx+rl8S+VjUae2OHEtiCuBlgenZQ3cQXAHJRjG4K
+ jQLe4hVb4iKOGh56y76GxXJ7x1JmYyEQK2thWOQMZVMF9PX8kK0mjGlQqirk4YJZ
+ mMEtHNdXAEEpYM3o/M0vqTUUNWsK3Hu3P8suE6x+Uw9yRI/lT9n+C9btFafROUw6
+ X5Fvi1VuUhhetmTtz2eM8SqEk620b5lGlress/45uu2g2TdRJxs40WjsSGMymM7i
+ CYLA4QZ8lrgCGwkuiWxIVflAE1TKaWfEo19gXf+FPaG/l/SSgAZyCygj8/43oldY
+ UD/vBFTLDnOFanvy4bBqj9YjxBX+E1Q7WfwKU7jPg6NC9a9i0KFNZawumkUYvbgq
+ fAVAxMOicQKX4TShS9zVQ7gf+h76J3/34MhzUkbgjA/qqmATSZfxkWdg52qc9HeZ
+ DdwWB5AZOPGKK4lPpuf+dQIxeFB5GZcFy/HS4vLFMWBnpINXTXYlqZ0paEBxgYi7
+ /E/axEbREjOz40Hz8u5e
+ =ZBld
+ -----END PGP SIGNATURE-----
+ 
+
+refactor(alerts): extract notification transports behind a registry (#2844)

@@ -1,0 +1,73 @@
+tree 5132a720e5e9298974303219f5f69bea0f7a0325
+parent f973a801370542b052c049bd41a5c76ff15a8964
+author John McLear <john@mclear.co.uk> 1787322790 +0100
+committer GitHub <noreply@github.com> 1787322790 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiGGmCRC1aQ7uu5UhlAAARJUQABMui675hQBNc9PZdAhKbB8B
+ 1sdz0SlMZuKBdurHwoKS4FHWbmoKs90zRqMyeCzUj4qRSoY8ajolReSKxT3Xmd0E
+ v+3KIYYz7Upht89ydTPSUb1kJZi7nlzSUcc/zDNA2bNe1FczkjwcB+wzgllC3DbW
+ ToSlnPXel0XEwaDp6bOd1AtXh6yQ5VBfxU0v280I9bwQmniJe/tVaA2TalPzOaTC
+ YmaITdUwoszL2pkbGQ9B+nGPNzQ+1O6/vqFeUkTdtLMx0boeye0r0Ch9AObO+rE+
+ Vdoexn75fesbH5OWK2GU0JG54QjoHdMnjRcShoEQ9WTU8WpeV6qcVdpCYeIU5IYC
+ rVC6fztg+u5ayrlzr/WIfMT4wY+O/TPvP/IzxhadPWpPSlEX1Lk2y7WTNqLelBsS
+ BjePlSlAPERhXVsApez7LHR/12MArJbBqOlw2doG+AiZWMHJ2zUl0CpwvJCgspOG
+ d2ftlDrWsJhmQLCkzXnlUXw3Fpu9YvERg9e10Ibhgfu3rX0KkVDl54TQWsqZI7tT
+ vb8yU6BEErbSAklamCG9+BGPnatyMJhlNE5UvppOo6PK3pCPuZ+V1WX1DaKyqs1o
+ dSqSsJbTvIdgbwy0rbMHcPxEj93T1GsO5RZyJmGlo1IPTuyztKZsm3xdqxf1Y8R9
+ n4UQ27Cera06OFYJ4QJX
+ =k5q6
+ -----END PGP SIGNATURE-----
+ 
+
+fix: carry the pad deletion token across movePad (#7995) (#8089)
+
+* fix: carry the pad deletion token across movePad (#7995)
+
+`movePad` is `Pad.copy()` + `Pad.remove()`, but `copy()` only replicates
+the `pad:<id>`, `:revs:N` and `:chat:N` records — never
+`pad:<id>:deletionToken` — and `remove()` then dropped the source pad's
+token. So a renamed pad had no token at all: the token the creator was
+told to save stopped deleting anything, and because the copy preserves
+the revision-0 author the creator is still `isCreator` on arrival, so
+`createDeletionTokenIfAbsent()` minted a fresh one and popped a second
+"save your pad deletion token" modal.
+
+Hand the token record over to the destination as part of the move, so
+the saved token keeps working and the modal does not reappear.
+`force`-overwriting an existing destination discards that pad's own
+token along with its content. `copyPad` deliberately does not do this:
+two pads sharing one secret would let a token saved for one delete the
+other.
+
+Adds backend coverage for all four cases (three of them fail on the
+pre-fix code) plus http_api.md and CHANGELOG notes.
+
+Reported by @dcht00.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+* fix: harden the deletion-token transfer against partial moves and races
+
+Review feedback on #8089:
+
+- Don't remove the source token in `transferDeletionToken()`. `movePad`
+  calls it before `pad.remove()`, which drops the record itself on
+  success — so the eager removal only mattered when `remove()` failed,
+  and there it stranded the creator of a source pad that survived.
+- Don't overwrite a token the destination has already issued. `Pad.copy()`
+  writes the destination records before the transfer runs, so a creator
+  opening the new id in that window is shown a freshly minted token; that
+  token has been handed out in plaintext and has to keep working.
+- Run the transfer through the same per-pad queue as
+  `createDeletionTokenIfAbsent()` (extracted as `withPadTokenLock`), so a
+  concurrent mint can't interleave with the transfer's read-then-write.
+- Drop the "source has no token" branch that cleared the destination's:
+  a force-overwrite already drops the replaced pad's token via
+  `Pad.remove()`, so the branch could only clobber a live token.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

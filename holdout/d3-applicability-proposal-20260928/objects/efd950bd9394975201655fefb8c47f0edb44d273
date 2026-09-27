@@ -1,0 +1,20 @@
+tree 2c62ba8035ee2424ec6aa25ae63401eb691a86ef
+parent 04100aa9efd3ef4332fec9ed9052686fdf3bbeb6
+author Amruth Pillai <im.amruth@gmail.com> 1786284083 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786284083 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQMhmOkq7JEsu2fRrBE9UKmYAplvjeliWu/DriWJyHIO2FwVbCS41XWGWnkYl2EUkjS
+ 9tggxPxgqHlr8n+p4lTQE=
+ -----END SSH SIGNATURE-----
+
+fix(server): log unhandled rejections instead of crashing the process
+
+Node 24 terminates the whole process on an unhandled promise rejection, so a
+single request's stray rejection could take the server down for every user
+(as the USER_STOPPED agent-abort bug did). Add a process-level unhandledRejection
+handler that logs and keeps serving. Uncaught exceptions are intentionally left
+on Node's default crash-and-restart, since process state is unsafe afterward.
+
+Claude-Session: https://claude.ai/code/session_01ULhhLQ24DvnYwzP4afDuye

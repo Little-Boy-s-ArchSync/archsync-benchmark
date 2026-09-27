@@ -1,0 +1,23 @@
+tree 3d607678371ee9c36c7ab801e85d6391bf7aa3a2
+parent a94d6da87560e587fa2a5cfe5eff14688eda054c
+author Drew Davis <drew.davis@clickhouse.com> 1787141056 -0400
+committer GitHub <noreply@github.com> 1787141056 -0400
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhZvACRC1aQ7uu5UhlAAAN4sQAEHHKpahYx1SnqnFX2GBexm/
+ O3iKAli75YD2a3wM2ZQXsXfqmeNEXscBpQHqI8sOmS5RDwBcMRqOz8y3wZrQPNo6
+ vCkILBWImTaL7cmA/3vfsotGi1jBg2u08gtrRDV9893ZmjuW53BY+OujTVF6lBL4
+ /uKSbyuXzKqaAVXDpZWTdT0O9NxNQBKLiIBKMLG60UEZgkCSnm3wi7Tuj/SJOTEd
+ /bkDzOpqAIr4nEw4+Q/K3+2OCU/X74reA7bWm6q7ckwmFffOCey8hiwfXThqaxv2
+ eAXYxc0RbI4Bsugo2E1HdeA797vifj/cIQ18MeYoZ3hymG1v2GUMMFZ+dNh2Eqt3
+ irR8ERvdA9Kda+g2vdp3WAc/XY0XsJ/jhh3ljMneZQVCWp2M1uqanCAtVX2DvhHL
+ HJNiMqNh8RKuxHJpdvPNTWhMHKpERI5Sd4RwGA4e/14IoaalE1u576GbRJxtFGzI
+ PotAUpdwOn0SgIj7usl3+WYTZsuu5BsowrULWXU3/jIqCKLfMx3vDjYH7YsCxguB
+ KvGb0EB3milQKj0dm5K4t2uF0wqU49M9/kHZhG8DzPqXh+b5U2uV2zdUD71QZiWG
+ rUs8WrfaJTURiBboEziB1icVGTxrzZhQS9HVkyI9NzcJR2LGVvF6x9sD3+Q7ABg1
+ yS5ziIvjDyWOWvX0aytC
+ =R6dw
+ -----END PGP SIGNATURE-----
+ 
+
+feat: Add dashboard variables to external API (#2944)

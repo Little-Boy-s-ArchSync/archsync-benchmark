@@ -1,0 +1,82 @@
+tree 91228e542ce81082d1cca3c63924eb5cd3877961
+parent 6808516b1433160794394c3bc89cf8b377fce229
+author John McLear <john@mclear.co.uk> 1787321167 +0100
+committer GitHub <noreply@github.com> 1787321167 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiFtPCRC1aQ7uu5UhlAAAV8AQAArqGu479SOTOYqRwGIAaU0F
+ DVskrPaj5BesDVWZEQqA6J/gPvLbDTG+kJ9l38CR54BboZ8pWFb1rflISCi8CAhx
+ apJ++H5ggwT7MG8bVkstcR5YIeP7mK7QEbmj7H32p0/Yid6/rOpWqykCMcvihGf7
+ kR/ska3Ks8cIFj4Q3VIn3UPrzWTa1y9udLEhk1keq+UfFB0fKDPB2rtpP/iWGNpB
+ /rth6/JbIgQg1sJY8rRaftuA1qFW/4N6f7wIsgDQUOlYwWl5m97WJyD69SktBQXx
+ 8KInfJkualPwSgWrdnLuc1fMIfcA4ivcPOzOBqPe8hyILlF0Wn107chlwQgr1iw2
+ qaZ92RJuEyqGFzOpGRn6fQ1Non917dtrXuToTBaxie83CFXm0o/ekBLH2LT4OXc3
+ f+0abln7jMitMh/jPbKdLddzpMza1E4TbX/PAujMjCuaCiWImniWjij0qTVe8m/j
+ EzKL1aFj7b/dJYQ2JByhue3/5msxnP0O+6nVZiA3tMCMmN5rdYDIG8i8ZoqxSBuQ
+ NGuJyZkhTGAlSgSlYbav4/CuCiFbWbvYLGoeOGFwmj2YVKFaMFGPp1YVzZj1/6+I
+ 7f92G80tdGApsQgUg+9CgJrUozJ1cz19W/V7vpiaZPmtQQKg5DqW5rFpwPAYpDKH
+ Zu7q5PXGYTYIGIgCSo+H
+ =43Ys
+ -----END PGP SIGNATURE-----
+ 
+
+fix: don't let a failed revision write leave a hole in pad history (#8141)
+
+* fix: don't let a failed revision write leave a hole in pad history
+
+appendRevision() writes the revision record and the pad record (which
+carries `head`) as two independent writes in one Promise.all. When the
+revision write failed and the pad record landed, the pad claimed a
+revision that was never stored. The next successful append then wrote
+head+1 straight over it, so the gap became permanent, and every later
+pad.check() tripped on the missing revision -- which blocks cleanup and
+compaction forever, with no way back.
+
+That is what #8134 reports: revisions 599 and 601 present, 600 absent,
+"Cleanup revisions" refusing to run. Revision 600 is a key revision
+(`Math.floor(rev/100)*100`), so it embeds the whole attribute pool and
+atext -- by far the largest record written, and the one most likely to
+exceed max_allowed_packet or time out.
+
+Keep the two writes concurrent (sequencing them would add a write
+round-trip to every commit on the editing hot path) and instead roll the
+in-memory head and atext back on failure, then re-persist the pad
+record, so the pad never points past its own history. If the rollback
+write also fails we log loudly rather than leaving a silent hole for an
+admin to discover months later via a failed cleanup run.
+
+Hook and author-index calls move out of the storage Promise.all so a
+throwing padUpdate hook cannot roll back a revision that was stored
+successfully. They still run concurrently with the writes.
+
+The attribute pool is deliberately not rolled back: pool entries are
+addressed by position, so removing one would invalidate the attribute
+numbers in every changeset already written. A pool author with no
+revisions is harmless -- pad.check() derives both sides of its author
+comparison from the pool.
+
+Fixes #8134
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+* test: don't assume which nullish value an absent key returns
+
+The Windows backend-test jobs failed on
+
+  AssertionError: the failed revision should not exist
+  + actual: undefined
+  - expected: null
+
+`assert.strict.equal(rec, null)` distinguishes null from undefined, and
+the storage driver yields null for an absent key on Linux but undefined
+on Windows. The assertion, not the behaviour, was platform-specific --
+the revision is absent either way, and the code under test compares with
+`== null` throughout.
+
+Assert nullish-ness instead.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

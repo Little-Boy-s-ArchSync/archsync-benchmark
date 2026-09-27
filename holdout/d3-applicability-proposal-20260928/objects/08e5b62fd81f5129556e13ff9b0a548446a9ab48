@@ -1,0 +1,23 @@
+tree 44e912008b5657dfd1be5aff9faa776bd56a4da2
+parent 68d2ed20f33e8cf9149ee4cbbf94fc6a6b6dcd29
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787208160 +1000
+committer GitHub <noreply@github.com> 1787208160 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhqHgCRC1aQ7uu5UhlAAA25YQAE7YAjH+79ahBdOTNEzkDq0d
+ JFgxSJOUDj8tCkhw+UZ0kmsyVB8QQeyPIxZY6ZF0a4yLOMGVJdLfK3VgZDkYhMfF
+ 1iHB5T13ZDI+h0VZ0d0Il85vFBNVm3Fvnh5l2I/IEoNiqS7mrqOoQhhDvifZudU0
+ ez8RdoN+cEiisG6I3zjvSOci8/dGWcwgUpvFkPyhEX0cgHFN9TQfC5x1FslHfCZB
+ TnX+B2GUfLHaLljBS5QZ3RwtIsff0Vro65Wuwqs+hWaZxDepzWvtVLDCFM+zTrbq
+ U39XZDtXiWq+QhfnCWl1wHqOWUk3EMtDdvxIv49QVUo0BRzLuKi81+HGMWdBLhrI
+ kx+NKM3wLq/hKUb5oXd6zlpT74BnEO9CJ1du1ofJ9SjUn7H8CbJZ+zEN6w/4Rfa1
+ tS9/60z63grJu+dKG+VQupPyCsItHq30gB5SAn0foF1rRtLjBOe8O8Upv6LjFQQS
+ Hy2zh7umkAScFGPYZm5dJQmzBlDuN7a7ueMSEK/OxNG7Kmqs2eceFo2gxwoCJgi/
+ ACv+CMLc6cvvybowjhVPusaKIzMTJB9FstPQpdEc/dblCk7eFtSYMgqB2+3uYbe1
+ ni8ozNdo9DWHsVswfMM+BsnxDp/0Qpm5Le6G8M/78TySso9hIl3svKATY9vD/50X
+ 5H5R2n18lGgb/GJfQJZ5
+ =j6B3
+ -----END PGP SIGNATURE-----
+ 
+
+fix(api): drop stale aggregation params from the external dashboards API (#2945)

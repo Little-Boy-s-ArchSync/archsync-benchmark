@@ -1,0 +1,25 @@
+tree 4063a9f453c27bb7d4fd00039cc3a3c0a321379d
+parent e34e7be6e0dc823ebe0d656fc94384bc28030f45
+author ServaTilis <265587706+nSimonFR-ai@users.noreply.github.com> 1785152527 +0200
+committer GitHub <noreply@github.com> 1785152527 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ0QPCRC1aQ7uu5UhlAAAgmkQAFX30j6kTVyytzcQDaRzcuS+
+ LovAqKNobhdLASGlHgtHBnRqHktsuj1aa9S3vX97+o7TBeTKNcdeo5bK6SzALTQK
+ sS0HgwKVbLZ7wMBnpBoRmXf4YbrJCs2zd+cgQgLXyxar6J1cvIIb2VaaaqmyXX2q
+ yiji3kolNhUEIuBCEtCEl6xjoG6djMQB3EaJJ3LpgxutBr1MDDvzPP8ZykDdE2iy
+ LkHjRli5ZafOiLtRr4sJ30H0hcnmaxqlgujAhvinVlevg6SD6ThJEKyAtSmIkYBV
+ vLRFp4UTfWu5VsbKkq7xK6N1lcuDx787CTbMIShIDnkazi6PBZOe7ZVdaLdAYI6Z
+ XDkd+VreTfwj7r2FXuzbJON1ZQzCumhjd1VIgbANBot05TkgRYr7Y4GoYzTG1ZkS
+ P29yLWM7Mbzfa1X7oeMUc+giOv9tPoQIguUVQh/FS1Tp3VKfyYywR4GaaR3OWmZS
+ 1FAPrAW3FBQkwNozWJS8/ioOK7XHLX2xV/I1aIQwQNbFWCyrbR0wR5uOzMU6xudH
+ H3BbntXniu8A1y9/S/OAWPlysoyoHBZjJel3J+4bMudEEbF50F6WwPoS+i7ZiiV7
+ +F6fkZin6PuNKtuB5I9yTPs/OPyOVWdofjgpzYLrC6sBzK2qWOx5P4raGdoeNk+F
+ cFIYdifnml3t9Ouzw5QX
+ =ZlOr
+ -----END PGP SIGNATURE-----
+ 
+
+perf(api): lazy-load PDF renderer to cut server cold-start (#3244)
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

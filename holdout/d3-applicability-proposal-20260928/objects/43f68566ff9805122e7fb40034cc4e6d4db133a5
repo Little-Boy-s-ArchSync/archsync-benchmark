@@ -1,0 +1,65 @@
+tree 4ea6378f4ecb18459e84a08a28b740879fc944b3
+parent e60a7d3089461487185f616ee5b5cc7783e079c6
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787065017 -0700
+committer GitHub <noreply@github.com> 1787065017 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhHK5CRC1aQ7uu5UhlAAAg/kQAKv+sbjtIC0JPEsRnmi+Hth5
+ /mKqwfYgU7HhoN9qdDJCj+Xp5t6ZIRVit0ADXVkaBbBjVDw6dh2T38u/CrA5glFC
+ WS1ICZYchrcfTIAks0QocbV9BgyptQCwAIZdsfk2Z0SITi9S5+Uk2IS3tURlKi5h
+ /0FUkrp0fjEd12noirIlE4EvpvAJTVEifdISJXVkaPq9PCL31N5rMmf1SMZx9W/U
+ L5ia5+B8lf4QCpvNuQAhLXFejHPHP5OsyDbh/CRIZJ8Vhe5kh6Ve9EO4cY2ugWEY
+ a2WkSs3QhiqXNXUGPC62HBKmPjuuDetls6iEbD76BgrIxnHeEumbnoNVVB2ZrRkr
+ OPh6ex4LppbY2TEvMLQtOBQxSebfJJN8DVac/2fTZtWpPX9MECQo2+ImtWJeLDF3
+ nOLqwyXSIr1pA4mWvip4EdMWPtB4qTp4i8SMu9VmTi+fkt36Qy7o5kgtuoBYntFh
+ bibHzSHgL9puP3Xf0pA3P+mkMm/6LdU5RCbnKi+uxXRIjmVY69J3Ymt4cTBKsApH
+ w+x9pgC1JQRM8dMcxNhuP9UiAHdjvBoT171/colKqJwgirGG6SnV301lzz8K3gly
+ cqI99tMoXCs++2aSDIimUUk11sERVC4ZTEWBBIPZeNaJE9MqFBLdcBVdfKnFaM34
+ A7G1F7vZxEqDqFNwshN7
+ =Op+p
+ -----END PGP SIGNATURE-----
+ 
+
+[HDX-5089] Allow editing and deleting alerts from the alert details page (#2931)
+
+## Summary
+
+Allows users to **edit an alert's configuration and delete the alert directly from the alert details page** (`/alerts/[alertId]`, behind `NEXT_PUBLIC_ENABLE_ALERT_DETAILS`), instead of having to navigate back to the saved search modal or dashboard tile editor.
+
+**App:**
+
+- New `EditAlertModal` opened from an "Edit alert" header action. Edits threshold type/value(s), evaluation interval, schedule (offset / start anchor / consecutive windows), notification webhook, and note for both saved-search and tile alerts. Saved-search alerts additionally expose the group-by SQL expression (tile alerts derive grouping from the chart config), with autocomplete backed by the saved search's source.
+- New "Delete" header action using the existing `ConfirmDeleteMenu` confirmation pattern; on success it redirects back to `/alerts`.
+- Saves validate via the same zod schema as the existing saved-search alert modal, invalidate the alert/alerts/saved-search/dashboards queries so the details view reflects changes immediately, and keep the modal open on error (with a notification) so edits aren't lost.
+
+**API / common-utils:**
+
+- `GET /alerts` and `GET /alerts/:id` now include `channel.webhookId` plus the alert's `name`/`message` template. Without these, the edit form couldn't prefill the webhook selector, and a save would silently clear `name`/`message` (the PUT nulls omitted fields). Webhook ids are already visible to team members via `GET /webhooks`, so this is not new exposure.
+- `AlertsPageItemSchema.channel` gains an optional `webhookId`.
+
+Edits and deletes go through the existing team-scoped `PUT/DELETE /alerts/:id` endpoints, so existing permission enforcement applies unchanged.
+
+### Screenshots or video
+
+| Before | After |
+| :----- | :---- |
+|        | Alert details header gains "Edit alert" (opens config modal) and "Delete" (confirm menu) actions |
+
+### How to test on Vercel preview
+
+N/A — non-testable in preview: alerts require cloud mode (LOCAL_MODE has no alert API), and the alert details page is gated behind `NEXT_PUBLIC_ENABLE_ALERT_DETAILS`.
+
+### References
+
+- Linear Issue: [HDX-5089](https://linear.app/clickhouse/issue/HDX-5089/allow-users-to-edit-alert-configs-from-the-alert-details-page)
+- Related PRs: N/A
+
+### Testing
+
+- `make ci-lint` — passes (0 errors)
+- `make ci-unit` — passes across all packages, including new `EditAlertModal` unit tests (saved-search payload with preserved name/message/webhookId, tile payload with dashboardId+tileId, edited threshold round-trip)
+- `make dev-int FILE=alerts.int` — all 288 alert-router integration tests pass, including a new test asserting `channel.webhookId`/`name`/`message` are returned by GET list and GET single
+
+### Screenshots
+<img width="1414" height="461" alt="image" src="https://github.com/user-attachments/assets/d66785fd-5187-43e0-8be6-bdfd0e3c643f" />
+<img width="1461" height="838" alt="image" src="https://github.com/user-attachments/assets/191f112a-0a50-4a23-b13b-33e8b3178f91" />

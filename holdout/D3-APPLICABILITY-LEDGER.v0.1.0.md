@@ -11,3 +11,7 @@ Each citation has `repository`, `commit`, `path`, `mode` (100644/100755), `git_b
 `ai_assistance` requires `used` boolean and `human_verification` text. When used, also record `tool_model` (unknown allowed), nonempty `input_sha256` array, `input_scope`, `prediction_exposure`, `output_reference`, `output_sha256`, and `shared` boolean. When unused do not fabricate tool/output details. Structural checks cannot prove the actual reviewer read source or that a rationale is scientifically sound.
 
 API: `validateApplicabilityLedger(ledger, checklistBytes, expectedChecklistSha256, verifiedSources)`. Source-map key is the JSON array `[repository,commit,path]`; each value has `bytes` (Buffer), `mode`, `git_blob`, `receipt_sha256`. Returns only `STRUCTURALLY_VALID_NOT_ACCEPTED` and row counts. No existing completion/acceptance gate is relaxed or replaced. Synthetic tests are development fixtures, not D3 decisions.
+
+## Source-bound proposal available for review
+
+[The 2026-09-28 proposal](d3-applicability-proposal-20260928/README.md) preserves the blank152-row checklist and supplies historical commit/tree/blob proofs with exact quotations. It is a different, deliberately unaccepted schema: all final decisions remain null. It cannot satisfy this reviewed-ledger contract until the authors actually review, reconcile and accept the separate required artifacts.

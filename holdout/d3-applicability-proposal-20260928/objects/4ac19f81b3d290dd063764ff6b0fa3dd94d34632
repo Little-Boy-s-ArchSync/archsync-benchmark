@@ -1,0 +1,26 @@
+tree 8b5aaa6e9234ca8a7f5073fda4e31326ba0bae89
+parent b303b897585ef29df54196834dd5579a5722a0a8
+author EMRAN <139449306+Emran-Y@users.noreply.github.com> 1785341622 +0300
+committer GitHub <noreply@github.com> 1785341622 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqaia2CRC1aQ7uu5UhlAAA2GYQADZmzy0dCDQ8M0yxV/2dk8nS
+ g14a8h7XphwJh1HEPSy15kMOqdvfhFBBj8G6XRz2DKsa/LkY2C9guNm6nSTt37jm
+ 9vy3jvnDADePnNWWuRzkX1z2LmAH0oNXGuJUs4cYSmbPtEZGI2j6WyBbLJH38GWm
+ wvf59wTKLOUcizeM2gCq+mZ3ArTHLD7UUydsYK6I3kjcQALf8mWtpxHVUCL1sW6e
+ G5egIIXjB3OhC2rpr2DZ81eL550E1kpwu7Vffew1ruMsRAFF963fPTSOopk164Fh
+ km+Yil592NHGKg45+b/gQjv2KxIaurC5phWkc/kV+lCQf1DZXBSRsGCnK3rFJZdo
+ T3CQS8QKx7d30Ti4tu3sV2EWlqPwiwNwv9hBV2fkdNFLELuvyhhs/jjBgWNJIxA+
+ A57UX+DjdV+WbIgXDyyj/2RngEfztEQ8cqHRxdjG1P7sK4qCSfgeSk1PI4UK86Dr
+ 6TffiyEHK+Rg5XJyVy67+ayuxdT+VyZlPJQ3xeFl7dVnkL05dY/LD0HXYmrV2Nn9
+ XoLJ+z+RDsKxQIuQR8zEKfJtEmiD3eGDc7qRgHP+HucFOMbflqDIWNj1L7Yj/1xt
+ YaVvZqYEDSnNEWnio8hJ+/Usg4qKQFdHzX+pirS9dLg0MhUpnd5BbnpLCxM7yy4E
+ Wxjo0A8HSQamksP3bs5E
+ =PRYS
+ -----END PGP SIGNATURE-----
+ 
+
+fix: clamp page margin values to [0, 100] to prevent crash on paste (#3277)
+
+Co-authored-by: Amruth Pillai <im.amruth@gmail.com>
+Co-authored-by: Cursor Agent <cursoragent@cursor.com>

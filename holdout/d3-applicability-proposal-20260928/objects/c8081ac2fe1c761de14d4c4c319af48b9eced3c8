@@ -1,0 +1,84 @@
+tree e4656424da27b0886cf8781385a6d1b501012a46
+parent dbbab6fd7610cf1472d0e0377fc0e966faf7acda
+author Amruth Pillai <im.amruth@gmail.com> 1787206013 +0200
+committer GitHub <noreply@github.com> 1787206013 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhpl9CRC1aQ7uu5UhlAAAvTcQACdyzqYiIjjYUKaA1yYz2GwG
+ 7aL8lI8THP2GfHS4S/AA3mbqVv3g98o1MUL5ZLymBL5hIFrFAd/s2wR2l0hE25cU
+ HJl79Dzm2bzEtPQF5WwTkGBLvY/ONLIaxbn++XhY5sagmHxd+7Bmp6ynAfcfXNe3
+ /4Nt8qlwGRD3uAk4zC+Wjb/vmjW5nG7MXBW+EGyCXyXH/noc1To+spUlZqvEKNDT
+ v6nv/dfzhvSVt6vIqwT4uw92tPn5D5G7L9qrGIEtUlC1YB+e9nLtersJieu08bF3
+ 08Ibuk804g1H+MjEM3BKiGjOKyEEBRWhKs/loZXXr1c5YZzRDKCSDtL1PnF+mXxv
+ EbzFK7Uw56k3LwtY9kvez3THzFfcrpUmZSOK5G/2CNFZFfwv/GXtoaA3dxvgryJP
+ hR5kxc1g4epzxMUHjEZKXlnasoVBmEIfOw610jI3yxMFtEmf5GcQTya4sl9eax33
+ JP3f6Kbl6sVtCC/vuXCI3skeeEXLWal5TuQAJKimiyM/AnOpdqR6GsNZ16WGJcN0
+ WBn6LqJIX/4uBxccKvRIuwpZSzqTbMfuxianHqzrEEaRkumOsKdzjHEoiFLtXCgm
+ 4c63+U1yCG8AFqxS/W6aj/ze7S8xeto0YW3V0HzUuqST0R8S0BLA5GPT52y4mmn1
+ BbnAUHUp+u4I8zke61zI
+ =XLOU
+ -----END PGP SIGNATURE-----
+ 
+
+feat(agent): adopt AI SDK v7 — crash safety, context pruning, HITL approvals (#3362)
+
+* docs(adr): propose agent AI SDK v7 adoption plan
+
+* fix(ai): bind analyzeResume through aiService in service test
+
+The test destructured analyzeResume as a named export that does not exist; main was red.
+
+* test(agent): keep pure ai helpers real via spread-actual mock factory
+
+* feat(agent): add run guards, patch version guard, run wall-clock timeout
+
+* feat(agent): validate UI messages at the send boundary
+
+* feat(agent): crash-safe draft-row persistence and server-side cancellation
+
+* feat(agent): reap stale run claims at boot, on send, and on thread open
+
+* feat(agent): fresh-document patch output and tiered context pruning
+
+* feat(ai): shared agent tool contracts and message metadata schema
+
+* feat(agent): add per-thread review-patches setting with update endpoint
+
+* feat(agent): gate resume patches behind hmac-signed tool approval
+
+* feat(agent): merge question answers and approval decisions before run claim
+
+* feat(agent): approval ui with composed auto-send and fixture-driven tests
+
+* feat(agent): usage metadata, tool activity cards, smoother streaming
+
+* feat(agent): tool-call repair, input examples, structured step logging
+
+* chore(i18n): translate new agent workspace strings across all locales
+
+* fix(agent): gate stale-run draft cancellation on winning the claim clear
+
+Snapshot streaming drafts before the conditional clear and skip the flip entirely when another reaper or a replacement run already cleared the claim. Also address review nits in eleven locale catalogs.
+
+* fix(agent): flip reaped drafts only when their snapshotted state is unchanged
+
+* fix(agent): address review findings across run lifecycle, context budget, and approval flow
+
+- bind patches to the revision the model read via signed baseUpdatedAt
+- claim the run before consuming a continuation; recorded-but-unexecuted approvals retry as pending continuations
+- keep run ownership on stop() until cancellation persists; preserve the claim for the reaper when final persistence fails
+- estimate tokens without serializing binary attachments (tokenx) and enforce the budget by dropping oldest whole turns
+- mark crash-recovered patch results as snapshot boundaries; strip /data prefixes at execution time
+- retry failed continuations without regenerate; mount a single AgentChat; disable response controls on read-only threads; freeze review toggle during runs (client+server)
+- accumulate usage across continuations and match the SDK's nested usage shape; label-form token strings; reorderable source label; accessible note field; state-neutral web-search label
+
+* chore(i18n): translate revised agent strings across all locales
+
+* fix(agent): harden baseUpdatedAt validation and address review follow-ups
+
+- bundle tokenx in the server runtime dependencies (e2e boot failure)
+- strict ISO schema for baseUpdatedAt plus loud executor rejection of unparseable values
+- it-IT source label consistency (Fonte)
+- prove penultimate-turn retention in the context pruning test
+
+* chore(deps): exempt tokenx from knip for the externalized server bundle

@@ -1,0 +1,41 @@
+tree 6925920fc1aadc3d0c52eea2a9f8eef26a062c11
+parent 66dd45512439abd0ca542e9ccfbb7cf2af071be0
+author John McLear <john@mclear.co.uk> 1785178995 +0100
+committer GitHub <noreply@github.com> 1785178995 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6tzCRC1aQ7uu5UhlAAAMYUQAGZybj81R7X91XDAycOCO81l
+ kLCqJyePccqLTK2dbRTbfckyQcmRCLM9DkZk8DxmyP7yHj8ZMCXuxgoNQL+LczEJ
+ AEgJ+CZoak8Ir7PQcJuW/GXIfjVtHsNLmhfptJDxEfC6lZ2zZeHPmF6Isd5QhP27
+ J6vbzo2UmF35cix38bq1OcJ1mcBaRIRuFCc6o13NofPUpA/Uo0V6XmLKMpmJ5gt0
+ USycv91V4A5bqj1BJQtIzP0/nIPnaIYLpvCUHQJ+CDtT0RIV4I8AW8o8+1fVC5BJ
+ hdqBqoZB/iRzkZ7R7dLFxxhNxkxGIz/Nirc84C0X6pFfDkd1I/FM1DW8JxP4tlEy
+ o2IF1zq/+FdbtlcBmxA5QB0fJgNR5f+ucHYkQfP7NCkPmy4UcG60OWNCOvKhMcNO
+ 66NDZpl6Zl80XhGUr3YsvQ8XJV2iZ357rIUhnaBncMjK0kGzBgrklRheAkTXN7Oi
+ s/L8TZI73Rqoj8qREfQo+KhFGFPDmI9fGfCVDwUuF+24chJeQIdAtgzFjQaQsUtb
+ TekNqcVnFqxoEADcfLJszi02T10dipRowsKtsu3ReiW0u+5l3B+0moNK5CgtpTTw
+ mIJr8Fpq9SdRJkYokl+uX7USV9CXoiNn31RNvgmTyahhjZ+lQTqz1J4pAZN8fJYz
+ xheFblMgDk1tasOxx2ri
+ =qVAG
+ -----END PGP SIGNATURE-----
+ 
+
+fix(editor): PageDown/PageUp now advance on consecutive long wrapped lines (#7555)
+
+The page up/down handler advances the caret by numberOfLinesInViewport
+computed from scroll.getVisibleLineRange(). That helper returns indices
+into rep.lines (logical lines, not visual/wrapped rows), so when one
+wrapped logical line fills the viewport — e.g., three consecutive lines
+of ~2000 chars each — the range collapses to [n, n] and the advance
+count becomes 0. The caret stays on line n, scroll stays at 0, and the
+user sees "PageDown does nothing".
+
+Clamp the advance to at least one logical line so the caret and viewport
+always move.
+
+Includes a Playwright regression test covering the reporter's repro
+(three very long lines, Ctrl+Home, PageDown).
+
+Closes #4562
+
+Co-authored-by: Claude Opus 4.7 (1M context) <noreply@anthropic.com>

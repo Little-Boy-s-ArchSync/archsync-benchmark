@@ -1,0 +1,60 @@
+tree b66065953d551403df1e40e5cff7034b839ecc24
+parent da03e99676a1d0befdbc61716bd0a70512cfc2a8
+author Alazar Keneni <112463751+alazarlemma02@users.noreply.github.com> 1785181470 +0300
+committer GitHub <noreply@github.com> 1785181470 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ7UeCRC1aQ7uu5UhlAAA5j0QAANUX0vrqikpH8IzX29YJ/lH
+ s9QkgNDRFrd20+3zVRT4D2pEa0dT8lWrT8L6pe5s2szL2B/29WFTCtArr//0lEzb
+ OrHudRg81Ky/MtvKHYG1XSTT1n+wCRpeLRboWPHpr0tPPTsoDfo+aSgbt3iyBeyf
+ vuqvT/cetJyTODNDk7qmVdEiMxx4Fs1c23T86pI32QrLOiFgEW8zPPinloPkCxOm
+ edqdyIDTqwOqpcYBYa+lt9ivMrHqCWGA7DYAw92kL1h+4NBycQTMubK0SJcdEQ7p
+ XUuYFS/TT3yWtJg3QJ3IVzls/uhiBoVU5q9Ccu3NIT/aBgIGNjR3LVZP2n6zF+nZ
+ oyxXiONIGehZdRzd406+J/MvP+geH3Fncvz7uX6pPRCU8PycBCAtk+fStM8PL4sL
+ GcqjI/1SIBY9BlNl422KNw+2M7qklA2bNDJRJ2QVlxL87ETzV8KvT8BKy/FhpvjT
+ WgN2BNvAbPDa7KMtbDR0mmz/REsuqMYiAhk2af3j9iDYH3u5D/AqK6ElHTNy6LLz
+ hNQ/9b/gt+kiEB0Rme//BNtlGOpWHInHdJmvC/8XR/I5y59uGvBCTMa4n50QSHlw
+ ZSqJsZnVwkG2MnYXip+UICH9nMUGi/UpUs+ZKvtqVa/6pBub5Zrhkx8Lq03Tpjs5
+ Cv6fLhee/qU4FqTyQper
+ =v1vT
+ -----END PGP SIGNATURE-----
+ 
+
+docker: make `plugin_packages` volume mountpoint writable (#8042)
+
+* docker: prepare plugin volume mountpoint
+
+Create src/plugin_packages in the development and production runtime image stages so a fresh Docker named volume is initialized with Etherpad user ownership instead of root-only ownership.
+
+Fixes #8026
+
+* tests: align docker plugin volume regression test with project style
+
+Replace CommonJS imports with Node.js module imports and reformat the
+test to match the project's coding style. This change is purely
+stylistic and does not alter the regression test's behavior.
+
+* tests: make docker plugin volume test less brittle
+
+Match Dockerfile instructions with regexes instead of exact substrings so
+the regression test validates the required behavior without rejecting
+harmless formatting or equivalent command changes.
+
+* docker: explain the plugin_packages mountpoint, drop the Dockerfile-text test
+
+The reason the two `mkdir`s exist is not obvious from the Dockerfile, so state it
+where the next reader will be: a named volume inherits the mountpoint's ownership
+from the image, and USER is already etherpad at that point.
+
+Removes dockerfilePluginVolume.ts. It asserted that the Dockerfile *text* contains
+`mkdir -p ./src/plugin_packages` after the `COPY ./src` line — it fails when the
+Dockerfile is refactored (a `.gitkeep`, a `VOLUME`, a different order all keep the
+behaviour intact) and it cannot fail when the actual bug returns, since it never
+inspects a built image. The build-test job already builds both runtime stages.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: SamTV12345 <40429738+samtv12345@users.noreply.github.com>
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

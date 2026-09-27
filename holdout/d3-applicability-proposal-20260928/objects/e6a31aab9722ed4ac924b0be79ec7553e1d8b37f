@@ -1,0 +1,30 @@
+tree 9b05aed5ca44f7454d1886d70dc6ab38d4dcf96d
+parent 88a19619daf5fd0fc09c73f5b19fa23860dbd230
+author Amruth Pillai <im.amruth@gmail.com> 1786278655 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786278655 +0200
+gpgsig -----BEGIN SSH SIGNATURE-----
+ U1NIU0lHAAAAAQAAADMAAAALc3NoLWVkMjU1MTkAAAAgqS/5uATWdqZA3Ud3B/z5zmTl6n
+ m2C2tk8LnC4UZnvAQAAAADZ2l0AAAAAAAAAAZzaGE1MTIAAABTAAAAC3NzaC1lZDI1NTE5
+ AAAAQA54N7Vdg8i21ijIRuxWtFHfUqwLEd7w15lpcVPWZY5QsLda5qOcHQQ3KseD2HNuv3
+ NiPQRc5xypjPn3gG5mMgo=
+ -----END SSH SIGNATURE-----
+
+fix(stylesheet): warm and reuse the server PDF preflight worker
+
+The server PDF preflight spawned a fresh worker per semantic-CSS edit, each
+racing a 15s startup deadline to cold-load the ~721kB+5MB PDF runtime. That
+load is super-linear in CPU (~3s at 1 vCPU, >15s on a throttled/shared vCPU),
+so on a constrained box every edit hit the startup-timeout path and returned
+STYLESHEET_PREFLIGHT_WORKER_FAILED. Since the service only advances the applied
+stylesheet when preflight passes, custom styles never applied and the editor
+stuck on Checking.
+
+Warm one worker at boot and reuse it (message-based input, respawn on
+crash/timeout), so the cold load is paid once instead of per edit. Raise the
+render deadline 5s->30s (a rich resume renders ~5-18s on a slow box) and the
+readiness ceiling to 120s so the one-time warm completes even when throttled.
+Surface worker load failures instead of an unhandled-rejection crash, and log
+runner-side failure paths so the previously opaque failure is diagnosable.
+Verified in node:24-slim under --cpus=0.25/0.35/0.5: all reused requests pass.
+
+Claude-Session: https://claude.ai/code/session_01ULhhLQ24DvnYwzP4afDuye

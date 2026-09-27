@@ -1,0 +1,23 @@
+tree e94e1be70b267e0ec0338384c0545098aa504774
+parent be26530f7f6bdf1eee2c9bfa356b4df95acf2df6
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787279527 +1000
+committer GitHub <noreply@github.com> 1787279527 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqh7inCRC1aQ7uu5UhlAAAvX8QADZVU9sQIQ90F2GmuuUVGJfa
+ lFUmjlKXzYfmRK66iPd0onA8AODFRb8/E27g6wUzRXbtnqF1B7C48WUPy0cZ/BJm
+ TSyqxnWpQxU61mqq/0v/8uA4V5EcIDsqCY0GV5jP6aWo86Lav3DaOx9bacE7xyRr
+ sZCQEU3zeahaWyH8SdKyHm3TJag935CbFVnDDS/6+msh+24xsRTTa/BxZ1X3t82Y
+ nfQa/4rRX2O6dawfO8Tac02sWf0KVfUtKKYHpdO42Z1J7PQkzLE+ng1r9UF2zWrh
+ Ais6kFUfKhP3rgFnsLx+FLyM/Edk8HxwQFVX4Vi6tdvKE2MEWQS3e8XNKNGH4ozV
+ k9f5+Mh9cQ0fcr+7aOLgSEdZjKiK8ffEO16eify790L8ziNvK8DKDgilbJVyowPk
+ Y0QqxZG+Pd5tLqdU/1yBeIqXQgLVmAKFOibB9bJohbLC3pa6WIcrldHbAX6EdksH
+ xSFjgX+Ex/xxbv+c5HaKF8n/7SPV4UniyEcgsDpSlAoyVZRCJuvcXNmX+6kpE2pA
+ EboPQHgJb41y/CvSCHgBV3t26XP7CXSDrcnWCPcu5b3j4aJl3o/XV1FA/lmdd1HV
+ AsKds4oAJbnZPiqT1BCBIO/BnjoLiVkStbJUiGszgdwnqOrRpM23wrWGrDcwQ5R1
+ NlCj1MvXftp9rwbXfDZT
+ =fkmv
+ -----END PGP SIGNATURE-----
+ 
+
+feat(api): accept and return multiple alert notification channels (#2846)

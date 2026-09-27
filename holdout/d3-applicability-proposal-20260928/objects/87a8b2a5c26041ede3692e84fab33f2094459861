@@ -1,0 +1,39 @@
+tree 0f60fc39f7f5a6b8574e1ddaa189d7554852bdf8
+parent 111c9c3864178bc83e586c95104a686ba240defe
+author dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> 1785176115 +0200
+committer GitHub <noreply@github.com> 1785176115 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6AzCRC1aQ7uu5UhlAAAX9UQAGqXVT6L5MlmAuiNYTsV3iLA
+ zTgUT7z0jXcTrBTQT5HYxcd7wvkTeOIEI3bWBQNJhhuXpFlsPVryyH4oGEjMfFM9
+ zNkTk2jKbljHcyfHR5goYzlH0QbYK2sRlWYm+MwaPUOnzGmY0XCC5XSzqbMXsP8j
+ SN+rh6P9Utjq2jKvWTG0Qu9dc19Vujcrpu8rHSkWUK/oduTwJpZ2RH9XFRJtsGJs
+ Bs/fd7Fgf5kB1oMd8YiN/uWdtrL9GINSYUuiMoLlkGf2mQcxQYpVtm7LpT6MeD47
+ YKEVo4aymRON/tLyq91jrWPaLqRHxVpxpWCYwrD+yM6oAT6pgnE1jDY6BcKcmuro
+ dAZpNjtT9ucpWVEiMb9RJGeSQClIcBHeFaU9Wmx/mrNBeiRuO8p1Lp9sfITE5DXx
+ Tt8zP35QudLSiqtAhY1WuQirqBlA4xK01a7p5IdEewj9GYLSgpsvkNZZjtmq21Km
+ ogy5hT71it7ECC7xFQy3gZmdusYS5Aj0MMtKg07ckUn665vxpU+b3vizMRm8k9LS
+ XePzgZGzEoENtfEQDCHyZ98irM19DjO01xLXSl+/sNkKoHMZkv51cyYAOC4m8xWO
+ lL3Jt1WNwqPN8J8VrWtzhGjqhk+zj95Ggb/BHdh3/tevTEtjWCTEMLUa+HHMLj9W
+ IJqCK0yHRrGXwOB8P2HB
+ =4qqF
+ -----END PGP SIGNATURE-----
+ 
+
+build(deps): bump @tanstack/react-query from 5.101.2 to 5.101.4 (#8060)
+
+Bumps [@tanstack/react-query](https://github.com/TanStack/query/tree/HEAD/packages/react-query) from 5.101.2 to 5.101.4.
+- [Release notes](https://github.com/TanStack/query/releases)
+- [Changelog](https://github.com/TanStack/query/blob/main/packages/react-query/CHANGELOG.md)
+- [Commits](https://github.com/TanStack/query/commits/@tanstack/react-query@5.101.4/packages/react-query)
+
+---
+updated-dependencies:
+- dependency-name: "@tanstack/react-query"
+  dependency-version: 5.101.4
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>

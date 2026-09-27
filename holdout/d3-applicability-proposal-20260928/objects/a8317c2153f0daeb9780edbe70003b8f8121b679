@@ -1,0 +1,23 @@
+tree b0f7b1f38aa92086b6af9512fb16ed7f817ce752
+parent 43f68566ff9805122e7fb40034cc4e6d4db133a5
+author Drew Davis <drew.davis@clickhouse.com> 1787065872 -0400
+committer GitHub <noreply@github.com> 1787065872 -0400
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhHYQCRC1aQ7uu5UhlAAAn3YQAGqiX9fSVxRXfJZAkw/4iABE
+ EIGv7V8r6QfcrlJ6Gti5zoLbtxAUaFWZ5+UZYsJcFh0mhfzgQoqPDgq4k+sfpBSH
+ /T1IKCMlNQKnQbgLK5STvgdCYujpUnwwqGExSGwleO9hGzxLwrOHaQuRljLPBM7s
+ 3ZCRBO6iG+rxwS9Ei+boxHxMewcsuZ105WeyUfZvxOdX467eVpPpYE/N3Nm8e24B
+ PnZZnZextd7XbnojqUQe/lS7gfncBD4KXWVhFaxvwIhlpOYBd3wqz4BQXl264Z58
+ 0cO9QIFuuboGq8+107ZgknGuTUJwjqYyq5HF0f7ckyvjtahWgtF0r2B7TMlLS9kg
+ 7foqKOPsaVYDHseHLXJ/5REAjIcgTDipVFi5HqnbgTgxc9eUIqiC6bYqPDXIouAr
+ u10Ko+ErAjKoUIeqGAVhy70DrarK449a4zV7lbg/P6AeSsWb+I/mUsTxdDRzc4gE
+ SMLzYP2hFcOjXfMqB5JjBBRzT+7TFDLClFruN4nv6bRbowWhuJcs+ifKoQaLJNKm
+ Aw7jBrYrfWBxAFgcyOZUXWTo5hndNObXsNkZpdHc1TQTI3oNUHWoRwJw2+Q9MSIH
+ 1CgKogZ8IbmwhDJOCMYg7xP91u/SRISQMX7YZccpl9ZNlu/uqiAUpn36IwbldEiD
+ uktBbukMUMhqiDonXcSq
+ =j9CX
+ -----END PGP SIGNATURE-----
+ 
+
+feat: Expand variables as empty in alert queries (#2910)

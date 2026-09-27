@@ -1,0 +1,23 @@
+tree 1d2bd33c31d1a41ca0fb136f351483fb0e5f7c79
+parent c602cbb388df53c67131a2beca0ea5a822285aa5
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787276638 +1000
+committer GitHub <noreply@github.com> 1787276638 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqh61eCRC1aQ7uu5UhlAAAHL4QAIWYv+1kl7ajJ0Skyd+dQCfv
+ dN3JDRsA7xTTHaNh6dNm3nYE0lFGflLY/DKD5QUO2xa78LoIxPbrkEE+7z7+qq5x
+ EQ+WrOYXzmEq6fH8yrQVGmBYzD9mHHzI1GWDM8e8c16PZE8keAJl91U8WCfGe9BD
+ z6cX80kuqivTCGTXIsp5WoZnTGZulMMCjgNkXsJG0X1vNOriI02NZn/BiIbh5bT0
+ IR26Q3TrMXd3VYOxz1zo9G9etpD9TJZUzx9E4baUmREuYz0pd8xbFSgRohAvmp3H
+ /Us+ygd0YNh7UKNjopZue5JReLNfriLtsnCQ5GG6h98bxXxrISiR+zJ8kUW30xVs
+ 7HvpVIqqUNkU5d+Hm1abcXMIlkxMrzypIXQS7QAv4EXfBkOZZUXFeoemvTcpESyV
+ Lz5EkO7y2vb9KJku9oTWw9FoVMbpTkRK+iM+5nOn/5LnatlNo66deaE0RV/Ma90l
+ 8Snu6IC4B+Ddd/V3Wb9wHIozF2unXKpGLAGAbYPF0SIfP9zng2oxjMShBT9bdTBI
+ VKfxF5HWRGfIBpuBjnZF6yoEWq5wRkR8lMEflF9/YU4cXLTM/B/7nWhcqYu9oW8T
+ KFB/OlfNdFT52jaxwUU4WJ5wZVGpQhiL3qY57XZzg4FmD3WJqE00wZpgfsx6xzE8
+ YmD7/LkU5vtt6gu2xg2G
+ =qI+F
+ -----END PGP SIGNATURE-----
+ 
+
+feat(alerts): model and schema groundwork for multiple notification channels (#2845)

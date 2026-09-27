@@ -1,0 +1,38 @@
+tree 0d63db086779ad29e08000d24f8d7665d9c23dca
+parent 4ba72b39195fa5f1c29de3e09ae893956b4c37b8
+author dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> 1781705869 +0100
+committer GitHub <noreply@github.com> 1781705869 +0100
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqMqyNCRC1aQ7uu5UhlAAAILEQAIJp41MfhEAT0AF/IdWhXQ60
+ 3h8PpsAFra2vVFCccOAHmDSNgl2O5TatOXh+C6N5ogvdJJq+aNCtA+MdN96rhIMs
+ 9iaBLgKRcIfflhwbRqPRKs1PnWeTp97ra++CBezK/Ux65Q2JdC12Va7brV6XLcgP
+ AV/TAe3u1U1WjqYtM38VKBskVflWy4QYVNxzT3IBKMxRzoyVi8wEPGgYjIrflucR
+ R9kHA7Q9Ez3kwQmUKVZ4crJHbRECwRJkhh//DmTsa8Gahv1hTbvL/JVMkXNqkvXh
+ rwLhOJj+4pAkuVouzDdcbNbetsD797Aycix6CJ2YFGp1QIa9nD3cuHpknw23OaNo
+ HKjHdZou76BKm/c6XeaA7xI0W30RUdE1LCndY4GOdnaFzQVdSB8EleX3iaHDLgvR
+ TBymsF3xtLAdNtZWqkPnmnebc9BuxkF6q2OSXe6V/njpmYe/Hk5m6eI8yjM/q2CV
+ lHCdQFdyzTBkPum8WaALTV4G/igFUIMIRRd4e+CtW1cBYXlnA7SnVFdEkdwRiifm
+ q9hJKkhdcJ/6stCpsEuT4vrJtXQIv3IehWqVFFJ/q+C0+0L9KRBKuugizJmMRITH
+ oTa8S4CIkvnbBI2EtfTM3s9GsMcHwg61rJJfE+Fz9JshH/D+ThI/FWEEn+OWfBmS
+ aYuLvhCDN4F3vRUq2VHr
+ =UA6B
+ -----END PGP SIGNATURE-----
+ 
+
+build(deps): bump undici from 8.4.1 to 8.5.0 (#7972)
+
+Bumps [undici](https://github.com/nodejs/undici) from 8.4.1 to 8.5.0.
+- [Release notes](https://github.com/nodejs/undici/releases)
+- [Commits](https://github.com/nodejs/undici/compare/v8.4.1...v8.5.0)
+
+---
+updated-dependencies:
+- dependency-name: undici
+  dependency-version: 8.5.0
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>

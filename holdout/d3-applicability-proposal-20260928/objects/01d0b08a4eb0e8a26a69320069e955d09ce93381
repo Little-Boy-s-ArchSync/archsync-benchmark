@@ -1,0 +1,73 @@
+tree c27e799af0aa01b9e4599ecbc80d176fe2168944
+parent 41dc87edf9e078a44cca2cec8a00e513a19176fc
+author John McLear <john@mclear.co.uk> 1782118353 +0100
+committer GitHub <noreply@github.com> 1782118353 +0100
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqOPfRCRC1aQ7uu5UhlAAAxSUQAE4nPE6Ff8isoF0bP5aaVuqB
+ 0mo2gjWfy/SoxGRfaBMf1EF0VKES3WGjgMlOtkKasymWz6eOoT/KKx9KgWcDFV28
+ ZpcHyA1oOpMP0+5rauUiO0Ahu3V13WZ3ShYgF2IXGSXWoGcJ4TdCLuUUZY+T3kzg
+ sp4RVkOF7ZwK2uF34ntX+HrwkULG4VDCGUxxIJIWbKp2juGxtRVoOGMAFUC98Fl3
+ M6H5BQKnSpQUVcw1Ksaiw5A36gxuT9L9G69tly+gu+1MxhlzVcVp8aL978ihxLgP
+ rFm1JAYj9pJqVfCMe3FripuBJf8fQ1L2q1nKLiVXR8FCed14aBxFWF2tLet2AYsY
+ b2ZS78vcNzg9UR96NHs7dIwmQ1HAuwcNuGZpPRETb2okQ/yvACQOGrMHYJs5nTdj
+ tjavbpdMrllRE3xJRX//pre4HuvpfLbJT8JRyt+WDCIX0uIrz9Sb+awJz2HoVQ/B
+ Ofsk95wgbn0nvDZuUiOJboF+TLCvsxMBuNDi67dhdiP8Wog6lTeA5u73NEW8rqCn
+ AZHxX39xygQIoygGZJ8AVy0gKZAmCLp30whdVMqZJaQFOxsWQZWFEiXcOwm0p5Q6
+ CHnw8drTo3xC8VkjfFIkjJO3nzhqxC8C6MrmwYa9XFMIlXlLJevb0QrKRPnp+HNv
+ e842A37dQs3OwXN6utaN
+ =Pl+8
+ -----END PGP SIGNATURE-----
+ 
+
+docs: migrate useful wiki content into the manual (#7990) (#7994)
+
+* docs: migrate useful wiki content into the VitePress manual (#7990)
+
+The GitHub wiki is being retired; documentation should ship with the
+software. This migrates the still-accurate, non-duplicate wiki pages into
+the published VitePress site (doc/**/*.md + the sidebar in
+doc/.vitepress/config.mts) so they are versioned, searchable and portable:
+
+- deployment.md: reverse-proxy configs (Nginx/Apache/Caddy/Traefik/
+  HAProxy) with the WebSocket-upgrade rules, subdirectory hosting via
+  X-Proxy-Path, native HTTPS via the ssl block, a systemd unit, and the
+  Istio manifest (with the Redis-adapter multi-replica caveat).
+- accessibility.md: editor keyboard shortcuts (verified against
+  ace2_inner.ts / broadcast_slider.ts / pad_editbar.ts), toolbar
+  navigation, NVDA notes.
+- faq.md: install methods, URL-path reference, listing/deleting pads
+  (API-first), backup/restore, and history pruning.
+- development.md: source-tree tour, the pad<->format conversion pipeline,
+  the internal DB API, and the Fontello toolbar-icon workflow.
+- database.md: the key/value schema plus connecting MySQL/PostgreSQL/Redis
+  backends and a pgloader MySQL->PostgreSQL migration (database docs were
+  previously absent from the VitePress site).
+
+Every page was checked against the current source before inclusion:
+corrected the apt instructions to the live signed repo (stable/main,
+signed-by key), dropped the unpublished snap, fixed the Redis dbSettings
+(flat host/port/password or url, not the obsolete client_options),
+dropped charset from the PostgreSQL example, and removed a phantom
+getEtherpad API reference. The VitePress site builds cleanly
+(pnpm run docs:build) with the dead-link checker enabled.
+
+Closes #7990
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* docs: add verified hands-on changeset/atext walkthrough (#7990)
+
+Migrate the practical Changeset-library tutorial from the wiki into
+changeset_library.md, rewritten against the current API: unpack(),
+deserializeOps() (replacing the deprecated opIterator) and
+new AttributePool() (replacing the removed AttributePoolFactory). Every
+example output was produced by running the code against the current
+Changeset.ts / AttributePool.ts, not copied from the wiki. Also fixes a
+stale ether/etherpad-lite source link.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

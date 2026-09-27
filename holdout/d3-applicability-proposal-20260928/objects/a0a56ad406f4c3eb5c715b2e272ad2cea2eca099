@@ -1,0 +1,38 @@
+tree 084bfc8d3e102071f8b61f78de506b7926fd58cb
+parent 2eec87cfe483ac24260a0097a6273b0b68283aed
+author dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> 1785177086 +0200
+committer GitHub <noreply@github.com> 1785177086 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6P+CRC1aQ7uu5UhlAAAsLcQAEOizEepJrJLY3PCLMG84iP0
+ jap/1c19aw+H4E48F5F3QQzsJ9NsKl9T9QRMrte5CzfeR95tQOfGZ4jYJfzN/88C
+ DHVTKbqV2gX+bYinsbdFsI7K79hwe5AkJMClCMzL9KSEVAGRkLU14roNfRHgGPr6
+ xS3dF02q/D4DOcW2pWilcd6TrHQOhdFzxZnNreVgNz9KQV4rm2UUwQeR9L8CyisN
+ 7mlp+E1OO9FNJJHhRB/S62oLmMJETE2EsxBqCHQL3wj9C6MiOFI1qRIVWTF5H6jy
+ ODQ/OvjTeJD8HSn5ONgf9B8eo4ybQ9s9QApk2AFhA7sl0OUys6p3JBBM4Om5kQcd
+ YhLea5DO4yZCxG9QCuJ7gQbfo925ZUXqY7eZRYyQ7qRCqJdbF7jaATp4at4WLZJs
+ PkLskTrokhtme4Dbp1xE4wvRvd6wEdig1OPQHWRKE84A9EW7kC825n28OdP3AfXx
+ ZxDEHcKMU00pvVOF0ps+CFtOnMuASU+jIiU0lRWPDKVrKjG3+SVIlWqjm6E7b8xw
+ CzxgpfrqU2/W10lbxG7etQshC4cA9cOeQAOItDQ0HNjvNRzCFB2BDPxhIDxCx6id
+ QJA9YmgHUwnCAuW/OTAoLOkCZg+sYiXbrZHOwlWyiqsc214cL684XPDS/nsfpju4
+ 4NX+macqmV/R+j6vMm8M
+ =mz+G
+ -----END PGP SIGNATURE-----
+ 
+
+build(deps): bump surrealdb from 2.0.4 to 2.0.8 (#8061)
+
+Bumps [surrealdb](https://github.com/surrealdb/surrealdb.js) from 2.0.4 to 2.0.8.
+- [Release notes](https://github.com/surrealdb/surrealdb.js/releases)
+- [Commits](https://github.com/surrealdb/surrealdb.js/compare/v2.0.4...v2.0.8)
+
+---
+updated-dependencies:
+- dependency-name: surrealdb
+  dependency-version: 2.0.8
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>

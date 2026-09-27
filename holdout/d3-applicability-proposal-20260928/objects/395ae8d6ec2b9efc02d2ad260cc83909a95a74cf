@@ -1,0 +1,25 @@
+tree b575199e8b17d2e52d67e27d20d6b49e684d4ccc
+parent dc29d57f37cf985814f011d10cf05115880d64c8
+author Zeynel <48792248+ZeynelKoca@users.noreply.github.com> 1787340264 +0200
+committer GitHub <noreply@github.com> 1787340264 -0700
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiKXoCRC1aQ7uu5UhlAAAI4YQADs12+pU+12W+T9DcI9KVp98
+ 6p+4YcbDraR1eJ5H4YVZqUgONo0NleN85Zab98gu66I87IdjQ9pTjQWHAAlL+ti6
+ 8czPXy+kDYRcvPNEQom11tqM4i7MXV79qDLhFPXUZ2iqWxUcTV9YYobx9RxGsY6+
+ luDFYMMQZaBPRqkcf3qYvvjdp5HoRKa505kjfau7V3X1r1idn4vH3b5TrXuV1mKS
+ RBg9ldKwrHKawRUTIY936iO3p8dvx+jPsBmNqgZs6OKP8/NKzn7CvOPit73ntwJp
+ mL4hkONi6vizjF/uZJimBQYWJyQ4LtsUMV7tTJOfEKQyzvb1Af0HyzPZT5gIj7kj
+ xJDa77F2Ke+m9ZDkldcH8od23OW/KAhfHXSjXXFdphfnvjxmcFJ4oWlwAwbfWEIo
+ ESa06kN5+FYAxVmNZAacQ6XnKNydsW41x+Hq17SNdUuQUD3VtYEy29kI1FRA1ym8
+ qLWw7RV7LSoTCrrD0caSq5F1fsolNetvbIlMjuoKvvrO/uhRuVPd7L5fKEsSboE0
+ CigYURab23GQCmKTMC+6nN89IWphFRrPmPl7am/HmEzCEtZv4VXLagMrTt5j2WWq
+ Q2JpUlyIYcrGM2mu2Ho5ykXgMjkQHE72v/m67o7XKi6s3QQ8qyzuBRqer9hedTpS
+ TMS4ieAHhlGsrFe3+xlU
+ =LwJz
+ -----END PGP SIGNATURE-----
+ 
+
+feat(otel-collector): per-signal table TTL + reconcile on existing tables (#2709)
+
+Co-authored-by: Warren Lee <5959690+wrn14897@users.noreply.github.com>

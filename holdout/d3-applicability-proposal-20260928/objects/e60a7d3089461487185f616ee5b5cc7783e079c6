@@ -1,0 +1,23 @@
+tree fe49799e5961ca186813e685855097cb15285241
+parent 3ecf73c26ea804ac67a1eca576b1f6fa197eac1d
+author Jordan Simonovski <jordan.simonovski@gmail.com> 1787054358 +1000
+committer GitHub <noreply@github.com> 1787054358 +1000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhEkXCRC1aQ7uu5UhlAAAzlAQAJklAD/sJSym4OMjNI1pZDtH
+ uoSUJXV4UT7J6R3seDiXzHgq524EWmziUnyOB/hNA5Y7Qtonb1QMfXDK1owr9FY/
+ 03M9LG5ge1ERkoWLexwl0paQk1fIMlrzuWoaKcclu06RBDsyylqZ8wMnRWLQbnpx
+ 9MCYdZz15wozVcEqpQdF0ZH6ApwXBs+jPvpLAo09G0LtJAi34xX+lzj1xh+sgGsF
+ VmHFHLsLh4GSyK7/w6QDOobCC3FMoJFAujCfhQwfQMg9TMV39zNv3hSX1vTR+qua
+ uZWVGe4o5zpoNUlIxDMW1HS7HqMnQ7Jwgr/p9hPOM8K2TmRfdGUxVVuHjV/7i4ma
+ 5rZKR11lyIeyUiTWG/bkP0CuHO0i+1YnrQjPgTQ4e+h2dMQ8c9UJFdXCtUkdwUVa
+ X1t5IoTB/1AaDh4jvq/Yj+lANN8A4wY0fgjiVzJ+bli+0ZHt7eKiUx3/XyaQr6R1
+ lZaqW5XmYnze4Q/XI0x7DC6Qn9+kq4YVddYlLauvT7MQM95FdrYf7aImtl33UjdV
+ 59GqiLgS2iMJXMvOKAcXbQ7HGDv+Qy+pW0n5Yz+lHCm4jcewLvMduAzSZqG4+90F
+ 0a/5SE0x/aPQkO35/AUB1ZemBiUQ1NJDE8avm3QElfGRfK01ncC2RrC+wZRHyPja
+ D/2e6+NIz0CzMCJyc3V2
+ =S142
+ -----END PGP SIGNATURE-----
+ 
+
+fix(mcp): populate StatusMessage on failed tool calls (#2934)

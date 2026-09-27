@@ -1,0 +1,95 @@
+tree 43def5cf8daf236378278e86302c25c00ab3b41d
+parent f64d02df7f090720feb58c2cacd70de8de5393a0
+author Syed Ali Abbas Zaidi <88369802+Syed-Ali-Abbas-Zaidi@users.noreply.github.com> 1786655275 +0500
+committer GitHub <noreply@github.com> 1786655275 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqfjIrCRC1aQ7uu5UhlAAAAbEQAIWOGyYHd2UzjK8pUcrS5gns
+ RDefQg/Jjpks6l1A4rSpdDDsNruiWEDdkvLrj5nmcOMa6SofU6AdpxZZR/52AnIV
+ Jty4l8XYQoVprXgie5BM0wW+BZ/OCl/lSiKyJo0Hi8eOCFhM2uFEnhpQyztxe9Cj
+ hXVpFVJ8PEVbONidMoIizRcl+A+w39uk1OdDgF++HptdsP5K4KGUM5eM5X0vuGcJ
+ 3WZujfZLhHnN2Zu/iwJvJbUSkQukPdKLUz4C0acNHZA2jgmTqtF/+BC17/rfQtAg
+ xwDjqgupoKYXJXRQRSiDDX9u15JS7n2hJuVnTAWl2dTeaZe/3VoMGZKbTBc7eExK
+ 50wrh9uSo9VWtf5xfu0bv6ind6crl7ZaIF97MbLhAN6ifFF5PyNKHR9feuuZZIvX
+ VpUl+iNZNWIxD4/M0YUpBpAtCd5BiuTYtyEsmX7y0hlfJNZHCfy/1Vr7mxCpIKZL
+ c3sYw44/aw5QH4SyjU0p8qLXpf4FkIDpv5ryFSNA2TrgEIVxYpm2LGnGwjJSsvFa
+ QiaKLhjTWzXehg8EEGx0Mg6HE1eUhfgliGa1KmU5AFRJC6G5DTx8GCBjtJKMQQQV
+ ohoUgzZQa0YmNRhlnn+XaFgBdr1Wq/4AyF1sMTj9UoVUJaYTmNFBmJQfPhbl9XEq
+ vznnTRFOxhRzEWgppzhC
+ =AVLj
+ -----END PGP SIGNATURE-----
+ 
+
+feat(resume): add a deterministic ATS parseability check (#3314)
+
+* feat(resume): add a deterministic ATS parseability check
+
+Adds an offline ATS linter that reports whether a parser can read a
+resume, surfaced as an always-on panel in the builder.
+
+The existing Resume Analysis panel needs a configured AI provider, so
+users who never set one up get no feedback at all. These 22 rules run
+as a pure function over ResumeData with no provider, no network and no
+rendered PDF, so they work for everyone on every edit.
+
+Rules cover contact details, date parseability, sections that hold
+content but never render, column and sidebar placement, and typography
+thresholds. The catalog mirrors the Semantic CSS diagnostic catalog:
+stable codes carrying a severity, meaning and action, with no i18n
+dependency so the web layer translates by code. Each finding carries a
+JSON Pointer, which is what makes jump-to-field work.
+
+Deliberately no second score. Resume Analysis owns overallScore, so
+this reports "N of M checks passed" and counts by severity instead.
+
+* fix(resume): accept localized ongoing periods and reject bare ones
+
+Two period-parsing bugs found in review.
+
+The ongoing-token set was English-only, so a German resume reading
+"2020 - heute" was reported as unparseable and the panel told the user
+to rewrite a perfectly valid range. Rather than guess translations for
+55 locales, a range ending that carries no digits and is not a month
+name in the resume's locale is now read as ongoing. That keeps a
+genuinely incomplete ending such as "Jan 2020 - Feb" reported, since
+"Feb" resolves as a month.
+
+A bare "Present" also parsed as a valid period, so an experience entry
+with no start date passed the check. A standalone ongoing token is now
+rejected; ongoing tokens remain valid as the end of a range.
+
+* feat(web): scroll ATS findings to the item they belong to
+
+Findings for different items in one section all landed on the section
+header, so a date problem on the third role gave no more help than
+naming the section.
+
+getAtsFindingTarget now resolves the offending item from the finding's
+JSON Pointer against the resume, and SectionItem carries a matching DOM
+id. The panel scrolls to that item and falls back to the section header
+when the item is not mounted, which is what happens while its section
+is collapsed.
+
+* fix(resume): recognize ongoing periods by token, not by shape
+
+The previous heuristic read any short, digit-free range ending as an
+ongoing marker, so "2020 - unknown", "2020 - later" and "2020 - tbd"
+parsed cleanly and suppressed the finding they should have raised.
+
+Replaced with an explicit table of ongoing words keyed by language,
+covering the locales the app ships. Matching is exact, so unrecognized
+endings are reported again. A locale missing from the table falls back
+to the earlier behaviour of reporting its ongoing periods, which is a
+visible gap someone can close by adding a word rather than a silent
+hole in detection.
+
+Tests assert every listed token parses and that the table stays
+lowercase, since lookups normalize that way.
+
+* fix(ats): parse punctuated ongoing tokens
+
+* fix(ats): parse Unicode punctuated ongoing tokens
+
+---------
+
+Co-authored-by: Amruth Pillai <im.amruth@gmail.com>
