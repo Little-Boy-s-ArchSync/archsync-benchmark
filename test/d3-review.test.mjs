@@ -6,6 +6,7 @@ import { join, resolve } from 'node:path';
 import test from 'node:test';
 import { checkReview, collectCases, compareReviews, digest, encode, reviewTemplate, selectProposedCases, sourceLines, validateAcceptedScope, validateCases, validateMethod, validateReadyModuleContract } from '../scripts/d3-review/review.mjs';
 import { buildApplicabilityChecklist } from '../scripts/d3-review/applicability.mjs';
+import { summarizeRuleSourceCoverage } from '../scripts/d3-review/coverage.mjs';
 import { gitId, sha256 } from '../scripts/d3-source-review/files.mjs';
 
 // Controlled fixtures only. These names, dates, declarations and labels are NOT D3 evidence.
@@ -98,6 +99,37 @@ test('historical applicability preparation retains anchors but invents no rule d
   const missing = structuredClone(historical);
   missing.rows.pop();
   assert.throws(() => buildApplicabilityChecklist(bundle, contract, missing, selection, { contract_sha256: 'd'.repeat(64) }), /Missing undecided historical anchor/);
+});
+
+test('source-path preflight distinguishes an exact file from its directory and excludes test-only paths', () => {
+  const { bundle } = setup();
+  const paths = ['src/db/DB.ts', 'src/db/Pad.ts', 'src/db/DB.test.ts', 'src/api/router.ts'];
+  bundle.scope_proposal_sha256 = 'c'.repeat(64);
+  bundle.captured_case_count = 4;
+  bundle.context_only_cases = [];
+  bundle.cases.forEach((item, index) => {
+    item.repository = 'ether/etherpad';
+    item.changed_paths = [paths[index]];
+    item.files[0].path = paths[index];
+    item.scope_path_roles = [{ path: paths[index], role: 'primary-candidate' }];
+  });
+  const contract = { schema: 'd3-research-contract-proposal/1', transfer_sha256: bundle.transfer_sha256,
+    module_semantics: { test_path_regex: '\\.(test|spec)\\.[jt]sx?$', source_extensions: ['.ts'] },
+    repositories: [{ id: 'ether/etherpad', mapping: [
+      { component: 'database-adapter', path: 'src/db/DB.ts' },
+      { component: 'db-prefix', prefix: 'src/db/' },
+    ], rules: [
+      { id: 'EXACT', from: 'database-adapter' }, { id: 'PREFIX', from: 'db-prefix' },
+    ] }] };
+  const selection = { schema: 'd3-conditional-rule-selection/1', review_cases_sha256: digest(bundle),
+    active_candidate_rule_ids: ['EXACT', 'PREFIX'] };
+  const report = summarizeRuleSourceCoverage(bundle, contract, selection);
+  assert.equal(report.primary_cases, 4);
+  assert.deepEqual(report.repositories[0].rules.map((rule) => [rule.rule_id,
+    rule.cases_with_changed_mapped_source, rule.cases_with_changed_production_source]),
+  [['EXACT', 1, 1], ['PREFIX', 3, 2]]);
+  assert.equal(report.labels_created, false);
+  assert.equal(report.predictions_executed, false);
 });
 
 test('source-bound fixture review passes structural checks, not truth or identity', () => {

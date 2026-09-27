@@ -2,6 +2,8 @@
 
 Status: preparation is real and source-pinned; D3 evaluation is **not complete**. Do not report accuracy, external validity, independent labels or baseline superiority from these artifacts.
 
+Read `D3-HIEU-PREFLIGHT-20260928.md` before approving the scoring method. Its source-coverage audit shows that neither Etherpad rule has a changed `DB.ts` source file in the accepted 20 cases, so introduced-rule-violation accuracy alone would be a weak primary endpoint. The recommended module-edge recovery endpoint is a proposal requiring a versioned rubric/truth-inventory amendment; it is not silently adopted by the legacy four-label worksheet.
+
 ## Locked narrow decisions
 
 - Retained source transfer SHA-256: `0cb702b6df6e684b587f97cc39d64dc1cb7d535c92aff2896962b2d55c26f341`.
