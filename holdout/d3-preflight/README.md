@@ -6,6 +6,10 @@ its working choices as a coauthor. The original response is retained under
 `COAUTHOR-APPROVAL-20260928.md` records the subsequent conversational decision
 with the reviewed document and scope proposal hashes. It is not an approval by
 Hiếu or a claim that the D3 execution gate is open.
+`EXPOSURE-UPDATE-20260928.md` records Hoàng's subsequent confirmation that he
+has seen D3 source and prediction/trace/output. His worksheet cannot serve as
+a blind review. `LEAD-DECISIONS-REQUEST.md` lists the exact decisions still
+required from Hiếu before official annotation and freeze.
 
 The response proposes 322 primary snapshot files from an inventory of 434,
 and 56 primary change cases from an inventory of 60. Four test-only cases
@@ -15,7 +19,8 @@ exact path and case rows, including context rows, remain in
 
 `first-pass-blank/A-Hieu.csv` and `B-Hoang.csv` are separate, unfilled forms
 for the same 56 candidate cases. Every label, confidence, rule and evidence
-field is blank. `build-two-author-worksheets.py` regenerates them from the
+field is blank; the B form does not establish blind reviewer eligibility.
+`build-two-author-worksheets.py` regenerates them from the
 manifest-pinned response. The development-only `module-group-normalizer.mjs` checks an
 explicit file-to-group map for complete `archsync-static-esm` 0.1.1 graphs; its
 synthetic tests do not use D3 source or output.
