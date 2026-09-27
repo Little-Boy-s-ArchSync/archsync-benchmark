@@ -17,12 +17,84 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 199,
-    "passed": 199,
+    "total": 225,
+    "passed": 225,
     "failed": 0
   },
   "provenance": {
     "files": [
+      {
+        "file": "scripts/d3-review/contracts.mjs",
+        "sha256": "eac6028a8cc1306ff580a96464d65f433d1138b6305def4f8eba1a594adf90be"
+      },
+      {
+        "file": "test/d3-contracts.test.mjs",
+        "sha256": "a9bc23b5a5c33bccbcbb48ee8ad11f86f9aa85a9f20823ba19dad44a538de570"
+      },
+      {
+        "file": "holdout/contracts/v0.1.0/proposal.json",
+        "sha256": "ace17e11043efbf4bcff9728f2702b0d39725fcd8cda80d6cd1d99eae47c4ca6"
+      },
+      {
+        "file": "holdout/contracts/v0.1.0/README.md",
+        "sha256": "609d1352d45713398587b8cb199e1e34732ee3da0207408dedcea05a70892703"
+      },
+      {
+        "file": "scripts/d3-review/review.mjs",
+        "sha256": "371d62f4dbc9f359d353a9317ebc67e94e989bc338634629615d99f5ba6f493a"
+      },
+      {
+        "file": "scripts/d3-review/cli.mjs",
+        "sha256": "d5120b9ba84a42471f2053c5c6b7ffee2009057c485da4a1e3a8d07917d8124e"
+      },
+      {
+        "file": "scripts/d3-review/applicability.mjs",
+        "sha256": "81586a590e64464447c5a1dc3cf2f62df62d44561f5c91b0ea1501f052317251"
+      },
+      {
+        "file": "test/d3-review.test.mjs",
+        "sha256": "052a0e037286954498557c622c77cdfef69e50482e4c0bb38cac47a808fda1a2"
+      },
+      {
+        "file": "holdout/D3-TWO-AUTHOR-REVIEW.md",
+        "sha256": "f603c3dc2c892eb359c3d7bb26e55adb4945f8722ee1c13408b7a1bae02ac795"
+      },
+      {
+        "file": "holdout/D3-AUTHOR-ANNOTATION-AMENDMENT.md",
+        "sha256": "973b9d99f9dcdcd57cca0dc664d31ad16cbe14994490d350ae8ccc6ed818ead0"
+      },
+      {
+        "file": "holdout/D3-CASE-RUBRIC.v0.1.0.md",
+        "sha256": "44dcb4ec24a31e876fb3da0b0f0c528be1256b22f05813cb68650807fc9539a5"
+      },
+      {
+        "file": "holdout/D3-CASE-RUBRIC.v0.2.0.md",
+        "sha256": "6cbfcbf3b9f11ffda849304ecd38f754baaa0ea9635bf05eeb109bd0dc6d4040"
+      },
+      {
+        "file": "holdout/D3-ANALYSIS-PLAN.v0.1.0.md",
+        "sha256": "5acf712297daca102658f9704126aa7578fbe27bc36991bfcaa7ebabbcc9af2d"
+      },
+      {
+        "file": "holdout/D3-SCOPE-ACCEPTANCE-20260928.md",
+        "sha256": "d0e6bf5eb3937939268e6cf5f901185c3012560066962e1b96a3e6cd444cb47a"
+      },
+      {
+        "file": "holdout/D3-EVALUATION-UNIT-DECISION-20260928.md",
+        "sha256": "0afb812e1c59523202f5826124b6d5fb717d08508ffd6731a7d7ef1b92613baf"
+      },
+      {
+        "file": "holdout/D3-RULE-DECISION-20260928.md",
+        "sha256": "ed5952f2d6ac302e2e5e41c83ef976feef18157713611b091918047655ecd2ca"
+      },
+      {
+        "file": "holdout/D3-MODULE-CAPABILITY-AUDIT-20260928.md",
+        "sha256": "f8c102c97f9f4bc9962909414cb22c60bfa3a9bef0c1b213338ce98c4319e98d"
+      },
+      {
+        "file": "holdout/D3-NEXT-EXECUTION-RUNBOOK-20260928.md",
+        "sha256": "099e25d4f794ef936dc5550d934f1e23695525f4556aadd19257b8973a6229a3"
+      },
       {
         "file": "scripts/d3-source-review/files.mjs",
         "sha256": "89de8bd690c1ff3b164bfdea76e9d333279dc1d51b9cd8de0b8f0d3897a1c1d1"
@@ -121,7 +193,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "5c83e12113c6e0f2b96d6fdfaf3742926e96b6144628e6f949a378116372259f"
+        "sha256": "0294d88e38e5db879dd94c77b52074aeca76d6968600e0234bfc7246095dd960"
       },
       {
         "file": "scripts/validate-analysis-notebook.mjs",
@@ -217,7 +289,7 @@
       },
       {
         "file": "package.json",
-        "sha256": "6b0d7a1455781dbb0d442c3b563c3fd9a5ea4030be034cef21de08b784641456"
+        "sha256": "47fe614e3fca3abfd83f0cd01290a508fada6e549e3149f556cd6c662cbfe9aa"
       },
       {
         "file": "pnpm-lock.yaml",
@@ -244,6 +316,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "d1ccb3a8e7219013d173b10a216a83a682bba03960e03bf3f9ca30cbae4bba07"
+    "manifest_sha256": "765c4b52c396ce19e1c758f5e5a2475045ce22e78913fc0b9aa892a0774477f7"
   }
 }

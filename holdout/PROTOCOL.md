@@ -1,5 +1,7 @@
 # D3 independent holdout protocol
 
+Historical proposed **blind** route only. It does not describe the current Hiếu/Hoàng D3 plan: both disclosed prior output exposure and chose nonblind, AI-assisted exploratory review. The blind gate below remains strict and must not be passed using a false `saw_prediction=false` declaration. See `D3-AUTHOR-ANNOTATION-AMENDMENT.md` and `D3-CASE-RUBRIC.v0.2.0.md` for the separate proposal; neither route is frozen for official D3 execution.
+
 Status: **PROPOSED — blocked by EXP-102 and Lead approval**
 
 ## Objective and unit of analysis
