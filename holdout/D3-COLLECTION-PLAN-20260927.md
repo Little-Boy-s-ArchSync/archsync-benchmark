@@ -73,4 +73,3 @@ The original failure receipt remains immutable. This recovery does not change
 the repository selection, grant scientific execution approval, or pretend that
 the original regular-file capture format succeeded. Independent review of this
 new format is still needed before using it as a frozen experimental input.
-
