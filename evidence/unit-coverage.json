@@ -189,7 +189,7 @@
       },
       {
         "file": "holdout/D3-NEXT-EXECUTION-RUNBOOK-20260928.md",
-        "sha256": "d78e13090ce4034cfeefe1003561b91a24d0d2f30d525ce07d080e6d873a74e7"
+        "sha256": "62640b7126bc0c0e9d9db9cbee19cec0666ff519ae2e3caf44aa15f1bd97c62b"
       },
       {
         "file": "scripts/d3-source-review/files.mjs",
@@ -456,6 +456,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "1b96b9e7a3d5182c71b8ec1e04d2e64841df55ecfd74a778dbf3a33ee6140fad"
+    "manifest_sha256": "a9c6e7662b10ee10cc5b82410298ec7b39ba5e5a8f0eb43456b2924ee045f182"
   }
 }
