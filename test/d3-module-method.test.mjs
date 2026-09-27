@@ -48,6 +48,17 @@ function sealedReviewFixture() {
       development_involvement: 'controlled fixture only', ai_assistance_summary: 'none for controlled fixture' }, case_envelopes };
 }
 
+function boundCases(review) {
+  const cases = { cases: review.case_envelopes.map((e) => ({ repository: e.repository, id: e.case_id,
+    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }],
+    files: e.file_coverage.map((f) => ({ path: f.path, side: f.side, mode: f.tree_mode, git_blob: f.git_blob,
+      sha256: f.sha256, citable: true, text: "import './b.js';\n" })) })),
+  context_only_cases: [{}, {}, {}, {}] };
+  const raw = Buffer.from(`${JSON.stringify(cases)}\n`);
+  review.cases_sha256 = sha256(raw);
+  return { cases, raw };
+}
+
 test('blank scaffold carries no declaration, labels, outputs or acceptance', async () => {
   const review = JSON.parse(await readFile(join(root, 'holdout/d3-module-method/v0.2.0/review.template.json')));
   assert.deepEqual(validateModuleReview(review), { status: 'BLANK_PREPARATION_NOT_A_REVIEW', research_complete: false, cases: 0 });
@@ -128,37 +139,38 @@ test('each occurrence must match its reviewed regular source object and per-file
 
 test('case-bound review cannot add unselected source paths to its coverage', () => {
   const review = sealedReviewFixture();
-  const cases = { cases: review.case_envelopes.map((e) => ({ repository: e.repository, id: e.case_id,
-    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }],
-    files: e.file_coverage.map((f) => ({ path: f.path, side: f.side, mode: f.tree_mode, git_blob: f.git_blob,
-      sha256: f.sha256, citable: true, text: "import './b.js';\n" })) })),
-  context_only_cases: [{}, {}, {}, {}] };
-  assert.equal(validateModuleReview(review, cases).cases, 56);
+  const { raw } = boundCases(review);
+  assert.equal(validateModuleReview(review, raw).cases, 56);
   review.case_envelopes[0].file_coverage.push({ ...review.case_envelopes[0].file_coverage[0], path: 'src/extra.ts' });
-  assert.throws(() => validateModuleReview(review, cases), /differs from primary-candidate scope/);
+  assert.throws(() => validateModuleReview(review, raw), /differs from primary-candidate scope/);
 });
 
 test('case-bound review verifies pinned source bytes and exact occurrence position', () => {
   const review = sealedReviewFixture();
-  const cases = { cases: review.case_envelopes.map((e) => ({ repository: e.repository, id: e.case_id,
-    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }],
-    files: e.file_coverage.map((f) => ({ path: f.path, side: f.side, mode: f.tree_mode, git_blob: f.git_blob,
-      sha256: f.sha256, citable: true, text: "import './b.js';\n" })) })),
-  context_only_cases: [{}, {}, {}, {}] };
-  assert.equal(validateModuleReview(review, cases).cases, 56);
+  const { cases, raw } = boundCases(review);
+  assert.equal(validateModuleReview(review, raw).cases, 56);
+
+  assert.throws(() => validateModuleReview(review, cases), /requires original raw case bytes/);
+  const alteredRaw = Buffer.from(`${JSON.stringify(cases)} `);
+  assert.throws(() => validateModuleReview(review, alteredRaw), /raw SHA-256 differs from review pin/);
 
   const changedSource = structuredClone(cases);
   changedSource.cases[0].files[1].text = "import './different.js';\n";
-  assert.throws(() => validateModuleReview(review, changedSource), /source text differs from the pinned SHA-256/);
+  const changedRaw = Buffer.from(`${JSON.stringify(changedSource)}\n`);
+  review.cases_sha256 = sha256(changedRaw);
+  assert.throws(() => validateModuleReview(review, changedRaw), /source text differs from the pinned SHA-256/);
+  review.cases_sha256 = sha256(raw);
 
   const shiftedQuote = structuredClone(review);
   shiftedQuote.case_envelopes[0].occurrences[0].start_column = 2;
   shiftedQuote.case_envelopes[0].edges[0].occurrence_keys = [occurrenceKey(shiftedQuote.case_envelopes[0].occurrences[0])];
-  assert.throws(() => validateModuleReview(shiftedQuote, cases), /quote differs from the exact source position/);
+  assert.throws(() => validateModuleReview(shiftedQuote, raw), /quote differs from the exact source position/);
 
   const missingSource = structuredClone(cases);
   missingSource.cases[0].files.pop();
-  assert.throws(() => validateModuleReview(review, missingSource), /File-side source is missing/);
+  const missingRaw = Buffer.from(`${JSON.stringify(missingSource)}\n`);
+  review.cases_sha256 = sha256(missingRaw);
+  assert.throws(() => validateModuleReview(review, missingRaw), /File-side source is missing/);
 });
 
 test('freeze manifest binds the merged development receipt without pretending method acceptance', async () => {

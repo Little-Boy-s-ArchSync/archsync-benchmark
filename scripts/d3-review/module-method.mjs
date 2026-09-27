@@ -102,7 +102,7 @@ function validateOccurrence(row, envelope) {
 }
 
 /** Structural check only. It never establishes source truth, reviewer identity or acceptance. */
-export function validateModuleReview(review, cases = null) {
+export function validateModuleReview(review, casesRawBytes = null) {
   assert(!LEGACY_REVIEW_SCHEMAS.includes(review?.schema), 'Legacy four-label review cannot satisfy the module occurrence/edge endpoint');
   assert.equal(review?.schema, 'd3-module-inventory-review/2');
   assert(['blank-preparation', 'original-sealed', 'adjudicated'].includes(review.status));
@@ -176,7 +176,10 @@ export function validateModuleReview(review, cases = null) {
           : 'Non-resolved occurrence must not support a derived edge');
     }
   }
-  if (cases) {
+  if (casesRawBytes !== null) {
+    assert(Buffer.isBuffer(casesRawBytes), 'Case-bound review requires original raw case bytes');
+    assert.equal(sha256(casesRawBytes), review.cases_sha256, 'Selected case bundle raw SHA-256 differs from review pin');
+    const cases = JSON.parse(casesRawBytes.toString('utf8'));
     assert.equal(cases.cases.length, 56); assert.equal(cases.context_only_cases.length, 4);
     const expected = new Map(cases.cases.map((c) => [JSON.stringify([c.repository, c.id]), c]));
     assert.deepEqual(new Set(seenCases), new Set(expected.keys()), 'Review case population differs from selected 56-case scope');
