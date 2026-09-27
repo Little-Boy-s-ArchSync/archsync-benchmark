@@ -9,7 +9,7 @@
     "schema": { "const": "d3-module-method-freeze-manifest/2" },
     "version": { "const": "0.2.0" },
     "status": { "const": "proposal-not-accepted" },
-    "endpoint": { "const": "direct-module-occurrences-and-deduplicated-module-group-edges" },
+    "endpoint": { "const": "direct-module-occurrences-and-deduplicated-cross-group-file-edges" },
     "guardian_source_commit": { "const": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820" },
     "legacy_review_schemas_rejected": { "type": "array", "minItems": 2, "uniqueItems": true, "items": { "type": "string" } },
     "artifacts": {

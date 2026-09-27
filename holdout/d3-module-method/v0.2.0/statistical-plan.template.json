@@ -6,7 +6,7 @@
   "case_counts": ["captured", "primary-eligible", "attempted", "tool-completed", "unsupported", "failed", "truth-unknown", "scored"],
   "tasks": {
     "occurrence": { "preserve_multiplicity": true, "partition": "complete common-capability file-side", "comparative_scoring_supported": false, "reason": "The retained dependency-cruiser output has no physical source positions; preserve source-bound occurrences as audit evidence only until a separately validated position extractor is frozen." },
-    "module_edge": { "deduplicate_by": ["repository", "case_id", "side", "source_group", "dependency", "target_group"], "partition": "complete common-capability case-side" }
+    "module_edge": { "deduplicate_by": ["repository", "case_id", "side", "source_path", "dependency", "target_path"], "partition": "complete common-capability case-side", "group_aggregation": "secondary description only; source and target file identity are retained in the primary comparison" }
   },
   "matching": { "tp": "truth intersection prediction", "fp": "prediction minus truth", "fn": "truth minus prediction", "exact_keys_only": true },
   "metrics": {

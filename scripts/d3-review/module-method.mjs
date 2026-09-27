@@ -53,7 +53,7 @@ export function occurrenceKey(o) {
 }
 
 export function edgeKey(e) {
-  return [e.repository, e.case_id, e.side, e.source_group, e.dependency, e.target_group];
+  return [e.repository, e.case_id, e.side, e.source_path, e.dependency, e.target_path];
 }
 
 function validateCoverage(row, envelope) {
@@ -148,6 +148,8 @@ export function validateModuleReview(review, cases = null) {
       assert.equal(edge.repository, envelope.repository); assert.equal(edge.case_id, envelope.case_id);
       assert(['base', 'head'].includes(edge.side) && edge.commit === envelope[edge.side]);
       assert(edge.dependency === 'module-import' && [edge.source_group, edge.target_group].every(text));
+      assert(isSafeHoldoutPath(edge.source_path) && isSafeHoldoutPath(edge.target_path));
+      assert.notEqual(edge.source_group, edge.target_group, 'Only cross-group file edges are in the common comparison');
       const key = JSON.stringify(edgeKey(edge)); assert(!seenEdges.has(key), 'Duplicate module edge'); seenEdges.add(key);
       assert(Array.isArray(edge.occurrence_keys) && edge.occurrence_keys.length > 0);
       const edgeReferences = new Set();
@@ -159,6 +161,8 @@ export function validateModuleReview(review, cases = null) {
         assert.equal(occurrence.side, edge.side, 'Edge and occurrence side differ');
         assert.equal(occurrence.commit, edge.commit, 'Edge and occurrence commit differ');
         assert.equal(occurrence.disposition, 'resolved-in-scope', 'Only resolved-in-scope occurrences may support an edge');
+        assert.equal(occurrence.source_path, edge.source_path, 'Edge and occurrence source file differ');
+        assert.equal(occurrence.resolved_target_path, edge.target_path, 'Edge and occurrence target file differ');
         assert.equal(occurrence.source_group, edge.source_group, 'Edge and occurrence source group differ');
         assert.equal(occurrence.target_group, edge.target_group, 'Edge and occurrence target group differ');
         referenceCounts.set(occurrenceKeyString, (referenceCounts.get(occurrenceKeyString) ?? 0) + 1);
@@ -210,6 +214,7 @@ export function validateStatisticalPlan(plan) {
   assert.match(plan.metrics.precision, /null/u); assert.match(plan.metrics.recall, /null/u);
   assert.equal(plan.tasks.occurrence.comparative_scoring_supported, false);
   assert.match(plan.tasks.occurrence.reason, /no physical source positions/u);
+  assert.deepEqual(plan.tasks.module_edge.deduplicate_by, ['repository', 'case_id', 'side', 'source_path', 'dependency', 'target_path']);
   assert.match(plan.zero_positive_policy, /Never report 100% recall/u);
   assert.equal(plan.human_acceptance.hieu, null); assert.equal(plan.human_acceptance.hoang, null);
   return { accepted: false, primary_attempts: 56 };
@@ -250,7 +255,7 @@ export async function buildFreezeManifest(repoRoot = root) {
   }
   return {
     schema: 'd3-module-method-freeze-manifest/2', version: METHOD_VERSION, status: 'proposal-not-accepted',
-    endpoint: 'direct-module-occurrences-and-deduplicated-module-group-edges',
+    endpoint: 'direct-module-occurrences-and-deduplicated-cross-group-file-edges',
     guardian_source_commit: GUARDIAN_SOURCE_COMMIT,
     legacy_review_schemas_rejected: [...LEGACY_REVIEW_SCHEMAS], artifacts,
     scientific_claims: { labels_created: false, predictions_executed: false, results_computed: false, d3_complete: false },
@@ -261,6 +266,7 @@ export async function buildFreezeManifest(repoRoot = root) {
 export async function validateFreezeManifest(manifest, repoRoot = root) {
   assert.equal(manifest.schema, 'd3-module-method-freeze-manifest/2'); assert.equal(manifest.version, METHOD_VERSION);
   assert.equal(manifest.status, 'proposal-not-accepted'); assert.equal(manifest.guardian_source_commit, GUARDIAN_SOURCE_COMMIT);
+  assert.equal(manifest.endpoint, 'direct-module-occurrences-and-deduplicated-cross-group-file-edges');
   assert.deepEqual(manifest.legacy_review_schemas_rejected, [...LEGACY_REVIEW_SCHEMAS]);
   assert.deepEqual(manifest.artifacts.map((a) => a.path), [...METHOD_ARTIFACT_PATHS]);
   for (const artifact of manifest.artifacts) {

@@ -6,7 +6,7 @@ This directory defines the files that Hiếu and Hoàng must jointly freeze befo
 
 ## Endpoint
 
-The truth inventory retains source-bound direct module occurrences and derived, deduplicated module-group edges. The present comparative endpoint is **cross-group file edges only**: the retained comparator output lacks physical source positions, so occurrence-level comparative scoring is disabled until a separately validated position extractor is frozen. Every eligible changed file is represented on both base and head, including reviewed files containing zero occurrences. An occurrence binds repository, case, side, commit, source path, physical line/column, exact quote, source object hashes, syntax/specifier, resolver evidence, target and group mapping, disposition and AI provenance. The derived edge keeps every supporting occurrence key.
+The truth inventory retains source-bound direct module occurrences and derived, deduplicated cross-group **source-file** edges. The present comparative endpoint is the exact source-file/target-file pair: the retained comparator output lacks physical source positions, so occurrence-level comparative scoring is disabled until a separately validated position extractor is frozen. Group-level aggregation is secondary and must not hide wrong-file localization. Every eligible changed file is represented on both base and head, including reviewed files containing zero occurrences. An occurrence binds repository, case, side, commit, source path, physical line/column, exact quote, source object hashes, syntax/specifier, resolver evidence, target and group mapping, disposition and AI provenance. The derived file edge keeps every supporting occurrence key.
 
 The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets cannot satisfy this endpoint. They have no complete file-side coverage, occurrence location, resolver evidence or edge inventory. `validateModuleReview()` rejects those schemas explicitly. They remain historical preparation records and must not be converted into module truth by changing a schema name.
 
@@ -14,7 +14,7 @@ The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets 
 
 - `file-coverage.schema.json` records every file/side, including absence, symlink, exclusions, Unknown and a zero occurrence count.
 - `occurrence.schema.json` records each direct dependency occurrence and resolver/AI provenance.
-- `module-edge.schema.json` records the exact deduplicated group edge and its occurrence references.
+- `module-edge.schema.json` records the exact deduplicated cross-group source-file edge and its occurrence references.
 - `review.schema.json` composes the three inventories for all 56 primary cases.
 - `freeze-manifest.schema.json` defines the proposal manifest and keeps every scientific-completion claim false.
 - `review.template.json` is deliberately blank and contains no personal declaration, label or acceptance.

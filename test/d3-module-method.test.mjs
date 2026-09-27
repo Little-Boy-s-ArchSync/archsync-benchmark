@@ -38,7 +38,7 @@ function sealedReviewFixture() {
         { repository: 'fixture/repository', case_id, side: 'head', commit: head, path: 'src/a.ts', tree_mode: '100644', git_blob: sourceBlob,
           sha256: sourceSha, eligibility: 'eligible-production', review_status: 'reviewed', occurrence_count: 1, reason: 'Controlled occurrence side' },
       ], occurrences: [occurrence], edges: [{ repository: 'fixture/repository', case_id, side: 'head', commit: head,
-        source_group: 'group-a', dependency: 'module-import', target_group: 'group-b', occurrence_keys: [occurrenceKey(occurrence)] }],
+        source_path: 'src/a.ts', target_path: 'src/b.ts', source_group: 'group-a', dependency: 'module-import', target_group: 'group-b', occurrence_keys: [occurrenceKey(occurrence)] }],
     };
   });
   return { schema: 'd3-module-inventory-review/2', status: 'original-sealed', method_manifest_sha256: '1'.repeat(64), cases_sha256: '2'.repeat(64),
@@ -66,9 +66,10 @@ test('legacy four-label sheet is categorically incompatible with module endpoint
 test('occurrence and edge identities retain physical location and exact endpoint', () => {
   const occurrence = { repository: 'fixture/repo', case_id: 'F-1', side: 'head', source_path: 'src/a.ts', start_line: 3,
     start_column: 8, syntax: 'import', literal_specifier: './b.js', resolved_target_path: 'src/b.ts' };
-  const edge = { repository: 'fixture/repo', case_id: 'F-1', side: 'head', source_group: 'a', dependency: 'module-import', target_group: 'b' };
+  const edge = { repository: 'fixture/repo', case_id: 'F-1', side: 'head', source_path: 'src/a.ts', target_path: 'src/b.ts',
+    source_group: 'a', dependency: 'module-import', target_group: 'b' };
   assert.deepEqual(occurrenceKey(occurrence), ['fixture/repo', 'F-1', 'head', 'src/a.ts', 3, 8, 'import', './b.js', 'src/b.ts']);
-  assert.deepEqual(edgeKey(edge), ['fixture/repo', 'F-1', 'head', 'a', 'module-import', 'b']);
+  assert.deepEqual(edgeKey(edge), ['fixture/repo', 'F-1', 'head', 'src/a.ts', 'module-import', 'src/b.ts']);
 });
 
 test('sealed review requires an internally consistent occurrence-to-edge graph', () => {
@@ -80,6 +81,7 @@ test('review graph rejects wrong side, wrong groups, unresolved references and m
   const mutations = [
     { message: /side differ/, apply: (r) => { r.case_envelopes[0].edges[0].side = 'base'; r.case_envelopes[0].edges[0].commit = r.case_envelopes[0].base; } },
     { message: /source group differ/, apply: (r) => { r.case_envelopes[0].edges[0].source_group = 'wrong-group'; } },
+    { message: /target file differ/, apply: (r) => { r.case_envelopes[0].edges[0].target_path = 'src/wrong.ts'; } },
     { message: /Only resolved-in-scope/, apply: (r) => { const envelope = r.case_envelopes[0], o = envelope.occurrences[0];
       o.disposition = 'unresolved-target'; o.resolved_target_path = null; o.target_git_blob = null; o.target_sha256 = null;
       envelope.edges[0].occurrence_keys = [occurrenceKey(o)]; } },
@@ -136,6 +138,7 @@ test('case-bound review cannot add unselected source paths to its coverage', () 
 test('freeze manifest binds the merged development receipt without pretending method acceptance', async () => {
   const manifest = await buildFreezeManifest(root);
   assert.equal(manifest.guardian_source_commit, GUARDIAN_SOURCE_COMMIT);
+  assert.equal(manifest.endpoint, 'direct-module-occurrences-and-deduplicated-cross-group-file-edges');
   assert.deepEqual(manifest.artifacts.map((row) => row.path), [...METHOD_ARTIFACT_PATHS]);
   assert.deepEqual(manifest.human_acceptance, { hieu: null, hoang: null });
   const report = await validateFreezeManifest(manifest, root);

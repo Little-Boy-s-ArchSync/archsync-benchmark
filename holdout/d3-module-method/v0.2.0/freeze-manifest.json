@@ -2,7 +2,7 @@
   "schema": "d3-module-method-freeze-manifest/2",
   "version": "0.2.0",
   "status": "proposal-not-accepted",
-  "endpoint": "direct-module-occurrences-and-deduplicated-module-group-edges",
+  "endpoint": "direct-module-occurrences-and-deduplicated-cross-group-file-edges",
   "guardian_source_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
   "legacy_review_schemas_rejected": [
     "d3-author-review/1",
@@ -66,8 +66,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "4eb5bf9aceda965c0145ac43f790f6c6f09d8a122777abcc8e101d2e5023343b",
-      "bytes": 5230
+      "sha256": "06e7aad2dd6b78fc9370bd2bcd1d3e3f7f60a5f27ee6b1e7672c7fbcf3793d8b",
+      "bytes": 5355
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -81,13 +81,13 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/freeze-manifest.schema.json",
-      "sha256": "fb4a223c341bbf57e8c59d4437276ee686909f8038424fce78c2ae56530d4e10",
-      "bytes": 1698
+      "sha256": "56f4d636b57df267f66758d229f50590cfa0481350c67b623460ed6e4b5761f4",
+      "bytes": 1702
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/module-edge.schema.json",
-      "sha256": "dc85273c757e1be1243cf82802c98fdd2790e9259c54674694f19f27a2be0cab",
-      "bytes": 889
+      "sha256": "a52cc991335987d020216c39b1d2f0bf906a806f783ec2f1fe113191911242ea",
+      "bytes": 1044
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/occurrence.schema.json",
@@ -111,8 +111,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/statistical-plan.template.json",
-      "sha256": "ed889560e9aaf8c42db76dc240b805266a2c578ca90440f933cc431c04478631",
-      "bytes": 1956
+      "sha256": "13f49e214cbcd4ef664563f9e36957a88975310869041f3dd4f7c8997c657752",
+      "bytes": 2077
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
@@ -121,13 +121,13 @@
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "9d6fc594529cb463d1bf753d38c5c98719828f6bbea79ed09e9459688c363c32",
-      "bytes": 21756
+      "sha256": "e16a7b07aeace2fc44b1379291bfdabe252241155b99b7a454bcad164e92f2b2",
+      "bytes": 22432
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "0ae97dfdb24913adcbab5fa3c692e3763aee05a67b2628d9d575dae6c6187d91",
-      "bytes": 11369
+      "sha256": "c8eedecb3684318acd0987e467ef3937f658e7736a65a1cc25b436911eda5bc8",
+      "bytes": 11708
     }
   ],
   "scientific_claims": {
