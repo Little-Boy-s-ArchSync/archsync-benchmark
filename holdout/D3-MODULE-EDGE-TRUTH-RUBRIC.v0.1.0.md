@@ -1,5 +1,7 @@
 # D3 module-edge truth rubric
 
+**Preparation amendment:** Read [method packet v0.1.0](D3-METHOD-PACKET.v0.1.0.md) before labeling. It proposes the module occurrence/edge endpoint, explicit Unknown/scoring scope, resolver freeze and joint acceptance. Conflicting legacy case-classification instructions are historical; no method acceptance is asserted.
+
 Version 0.1.0, 2026-09-28. Status: **candidate method before official annotation and inference**. This narrows `D3-CASE-RUBRIC.v0.2.0.md`; it does not reclassify any existing review or authorize a tool run. Its case population is pinned by `cases.json` SHA-256 `44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35`.
 
 ## Unit and reading boundary

@@ -17,12 +17,40 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 242,
-    "passed": 242,
+    "total": 245,
+    "passed": 245,
     "failed": 0
   },
   "provenance": {
     "files": [
+      {
+        "file": "scripts/d3-review/method-packet.mjs",
+        "sha256": "4c3faeea8cb3c371918650db5b1d12bb2ff565b4d91fa459a8bad7934d820856"
+      },
+      {
+        "file": "test/d3-method-packet.test.mjs",
+        "sha256": "83b130caab5d37d6a35ee28d39bad96b7c3d0a54055c5a0ae6193aad0b252dd3"
+      },
+      {
+        "file": "holdout/D3-METHOD-PACKET.v0.1.0.md",
+        "sha256": "d6657a9968b034bd45c032fd15a87cba11fdbd495bde3001e75cdee91d1adb4c"
+      },
+      {
+        "file": "holdout/D3-APPLICABILITY-LEDGER.v0.1.0.md",
+        "sha256": "9e6c3e6d6455e8f3ded1fe14148c8c261d25681815f7d585be00ebcefc89d5fe"
+      },
+      {
+        "file": "holdout/D3-HIEU-PREFLIGHT-20260928.md",
+        "sha256": "c9c78ab44971b9033de384ef2b4ba658a7f3582bc63860508bb5a8af1548632f"
+      },
+      {
+        "file": "holdout/D3-MODULE-EDGE-TRUTH-RUBRIC.v0.1.0.md",
+        "sha256": "25613a3a9bdbb00e8c9974f9c8115ba4759010134a6537638da13f6fcca34a5d"
+      },
+      {
+        "file": "holdout/D3-RULE-DECISION-20260928.md",
+        "sha256": "d44f25eb058ffd8798ab4c80282b9fed3a658e717a8fd458494977397496977e"
+      },
       {
         "file": "scripts/d3-review/contracts.mjs",
         "sha256": "5bd8255e8738552e2a24156847eb99b0738db7b4155bc7a93130ee2b2fb123d4"
@@ -57,7 +85,7 @@
       },
       {
         "file": "holdout/D3-TWO-AUTHOR-REVIEW.md",
-        "sha256": "f603c3dc2c892eb359c3d7bb26e55adb4945f8722ee1c13408b7a1bae02ac795"
+        "sha256": "2da7db6714349543f257fde45e16d4aac49647839b475a1475668a57a8f2866a"
       },
       {
         "file": "holdout/D3-AUTHOR-ANNOTATION-AMENDMENT.md",
@@ -73,7 +101,7 @@
       },
       {
         "file": "holdout/D3-ANALYSIS-PLAN.v0.1.0.md",
-        "sha256": "5acf712297daca102658f9704126aa7578fbe27bc36991bfcaa7ebabbcc9af2d"
+        "sha256": "132e5ff8db194630d053b1c2a51d5e5a9cc0036b8683c3e90d49c11bbf834731"
       },
       {
         "file": "holdout/D3-SCOPE-ACCEPTANCE-20260928.md",
@@ -85,7 +113,7 @@
       },
       {
         "file": "holdout/D3-RULE-DECISION-20260928.md",
-        "sha256": "ed5952f2d6ac302e2e5e41c83ef976feef18157713611b091918047655ecd2ca"
+        "sha256": "d44f25eb058ffd8798ab4c80282b9fed3a658e717a8fd458494977397496977e"
       },
       {
         "file": "holdout/D3-MODULE-CAPABILITY-AUDIT-20260928.md",
@@ -93,7 +121,7 @@
       },
       {
         "file": "holdout/D3-NEXT-EXECUTION-RUNBOOK-20260928.md",
-        "sha256": "2553664f9e352f311eb34e300b8b9ea1854984507d2e75b26a21e0ab9337e9c4"
+        "sha256": "d78e13090ce4034cfeefe1003561b91a24d0d2f30d525ce07d080e6d873a74e7"
       },
       {
         "file": "scripts/d3-source-review/files.mjs",
@@ -193,7 +221,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "e226d04e334464632838182e6ee1bd48232706ed258701187d830b8113dfba4c"
+        "sha256": "5c998b5c2f3cb7844f23a4207dd497815563153223888c3305e06eb69753ae58"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -360,6 +388,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "35da15f6a46c5d4ddb1248c7c7ed354c62969209b13cd4697a7a903940ebb25d"
+    "manifest_sha256": "a1811ca5fcd667aee4c23deb9f4a5dfdd893760fc55d5d475f544f1ba315f836"
   }
 }

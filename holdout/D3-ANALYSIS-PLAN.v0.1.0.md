@@ -1,5 +1,7 @@
 # D3 descriptive analysis plan
 
+**Preparation amendment:** Read [method packet v0.1.0](D3-METHOD-PACKET.v0.1.0.md) before labeling. It proposes the module occurrence/edge endpoint, explicit Unknown/scoring scope, resolver freeze and joint acceptance. Conflicting legacy case-classification instructions are historical; no method acceptance is asserted.
+
 Version: 0.1.0. Status: proposed; tool outputs have not been inspected by this preparation workflow.
 
 ## Populations and estimands

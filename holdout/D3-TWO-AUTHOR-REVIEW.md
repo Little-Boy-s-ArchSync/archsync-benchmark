@@ -4,11 +4,28 @@ Phạm vi: chuẩn bị và kiểm tra đầu vào gán nhãn. Chưa phải D3 �
 
 ## Bước 1: chuẩn bị hồ sơ đọc source
 
-Dùng packet gốc và hai hash được nhận riêng. Lệnh không tải mạng, không chạy code của repository hoặc analyzer, không sửa packet gốc và không ghi đè thư mục đã tồn tại.
+Dùng packet gốc và hai hash được nhận riêng. Với phạm vi đã chốt ở [quyết định scope](D3-SCOPE-ACCEPTANCE-20260928.md), cần truyền thêm đường dẫn tuyệt đối tới `scope-proposal.json` đã giữ nguyên byte. Tham số cuối này là tùy chọn của CLI, nhưng bắt buộc cho bộ chuẩn bị hiện hành: bỏ nó sẽ tạo phiếu cho cả 60 case, thay vì 56 case chính và giữ bốn case context để audit.
+
+Đối chiếu SHA-256 của file scope trước khi chuẩn bị; thay đường dẫn ví dụ bằng đường dẫn tuyệt đối thực tế. Lệnh không tải mạng, không chạy code của repository hoặc analyzer, không sửa packet gốc và không ghi đè thư mục đã tồn tại.
 
 ```powershell
-pnpm d3:review prepare "D:\packet-goc" "D:\review-moi" TRANSFER_SHA data/d3-change-packets-20260927-01/change-summary.json SUMMARY_SHA
+$d3ScopeProposal = "D:\archsync-benchmark\holdout\d3-preflight\response-v0.2.0\scope-proposal.json"
+$d3ScopeSha = "85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3"
+if ((Get-FileHash -LiteralPath $d3ScopeProposal -Algorithm SHA256).Hash -ne $d3ScopeSha) {
+    throw "Scope proposal hash mismatch; stop preparation."
+}
+pnpm d3:review prepare "D:\packet-goc" "D:\review-moi" TRANSFER_SHA data/d3-change-packets-20260927-01/change-summary.json SUMMARY_SHA $d3ScopeProposal
 ```
+
+Chỉ dùng bộ chuẩn bị nếu lệnh kết thúc thành công và JSON đầu ra báo đúng:
+
+- `captured_cases: 60`, `proposed_primary_cases: 56`, `context_only_cases: 4`;
+- `scope_proposal_sha256` bằng `85ddc693a8ff82064e58788ff491b90b8cf50eb03732e675ea17d0ea276d09f3`;
+- `labels_created: 0`, `predictions_executed: 0`, `research_complete: false`.
+
+Kiểm tra thêm `cases.json`: `cases.length` bằng 56 và `context_only_cases.length` bằng 4; mỗi phiếu review trống có 56 dòng. Giữ bốn case context trong inventory audit, không tính là case đã review hoặc tự gán no-impact. Lưu riêng `cases_sha256` trả về để dùng cho các bước sau. Nếu hash hoặc số lượng lệch, giữ đầu ra để kiểm tra và chưa dùng làm bộ review hiện hành; không sửa packet gốc hoặc xóa case để ép số lượng.
+
+Tên trường `proposed_primary_cases` mô tả bước tạo kit; quyết định scope đã được ghi riêng, nhưng không đồng nghĩa phương pháp, nhãn hay thực nghiệm được duyệt. Lệnh không tạo acceptance và `method.json` vẫn là proposal.
 
 Đầu ra:
 
@@ -22,13 +39,15 @@ Tạo bản riêng cho mỗi người trước khi điền. Không dùng một t
 
 ## Bước 2: chốt phương pháp trước khi gán nhãn chính thức
 
+**Dừng trước khi gán nhãn:** [method packet v0.1.0](D3-METHOD-PACKET.v0.1.0.md) đề xuất occurrence/edge inventory, resolver, Unknown, mẫu số và ledger applicability152 dòng. Hiếu và Hoàng cần cùng chấp nhận version/hash thật. Các phiếu bốn nhãn và lệnh check/compare bên dưới là giao diện legacy, chưa kiểm chứng schema occurrence/edge; không dùng chúng để bắt đầu gán nhãn module hoặc vượt gate.
+
 Chuẩn bị và review năm artifact `rubric.md`, `contract.json`, `scope.json`, `tool-pins.json`, `analysis-plan.md`. Ghi hash byte của chúng vào method.json và ghi đúng chấp thuận có reference/thời điểm thật. Pin hash method vào hai phiếu. Đây là các đầu vào khoa học cần xác định theo source, không được công cụ tự giả lập.
 
 Đã có [rubric nonblind, AI-assisted đề xuất](D3-CASE-RUBRIC.v0.2.0.md) và [analysis plan mô tả đề xuất](D3-ANALYSIS-PLAN.v0.1.0.md) để review, không phải tự viết từ đầu. Rubric v0.1.0 chỉ là bản lịch sử của thiết kế blind đã bị khai báo tiếp xúc mới thay thế. Chúng chưa thay contract/mapping thực của từng repo hoặc thống kê suy luận STAT-101; không đổi trạng thái accepted khi các phần này chưa được chốt.
 
 Hai người làm chính có thể dùng AI rà soát toàn bộ source, đề xuất hoặc điền nhãn rồi tự kiểm tra, và giữ hai phiếu theo đúng mức độ thực tế. Mô tả là author-associated, nonblind, AI-assisted khi có dùng AI; không là external independent validation. Nếu cùng một đầu ra AI được chép sang hai phiếu, không gọi đó là hai nhãn người độc lập. Tham khảo [amendment đề xuất](D3-AUTHOR-ANNOTATION-AMENDMENT.md).
 
-## Bước 3: điền từng case
+## Bước 3: giao diện case legacy — chưa dùng cho endpoint module
 
 - `label`: `no-impact`, `violation`, `evolution` hoặc `unknown`, theo rubric đã chốt.
 - `rationale`: giải thích bằng source, không bằng kết quả của tool.
