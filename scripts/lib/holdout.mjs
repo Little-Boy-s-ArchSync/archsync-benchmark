@@ -80,19 +80,25 @@ export function validateHoldoutManifest(manifest) {
     issues.push("a frozen holdout requires 2-3 repositories");
   }
   const seen = new Set();
+  const repositoryUrls = new Set();
   repositories.forEach((repository, index) => {
     issues.push(...repositoryIssues(repository, index));
     if (object(repository) && nonEmpty(repository.id)) {
       if (seen.has(repository.id)) issues.push(`repositories[${index}].id must be unique`);
       seen.add(repository.id);
     }
+    if (object(repository) && isHoldoutRepositoryUrl(repository.url)) {
+      const url = repository.url.toLowerCase();
+      if (repositoryUrls.has(url)) issues.push(`repositories[${index}].url must identify a distinct repository`);
+      repositoryUrls.add(url);
+    }
   });
-  const tuning = new Set(Array.isArray(manifest.tuning_repository_urls) ? manifest.tuning_repository_urls : []);
+  const tuning = new Set((Array.isArray(manifest.tuning_repository_urls) ? manifest.tuning_repository_urls : []).filter(isHoldoutRepositoryUrl).map((url) => url.toLowerCase()));
   for (const repository of repositories) {
-    if (object(repository) && tuning.has(repository.url)) issues.push(`${repository.url} appears in the tuning set`);
+    if (object(repository) && isHoldoutRepositoryUrl(repository.url) && tuning.has(repository.url.toLowerCase())) issues.push(`${repository.url} appears in the tuning set`);
   }
   if (manifest.status === "frozen") {
-    if (!object(manifest.approval) || manifest.approval.actor_type !== "human" || !nonEmpty(manifest.approval.reviewer_id) || !nonEmpty(manifest.approval.approved_at)) {
+    if (!object(manifest.approval) || manifest.approval.actor_type !== "human" || !nonEmpty(manifest.approval.reviewer_id) || !isHoldoutTimestamp(manifest.approval.approved_at)) {
       issues.push("frozen manifest requires human Lead approval");
     }
     if (!/^[0-9a-f]{64}$/u.test(manifest.ground_truth_sha256 ?? "")) issues.push("frozen manifest requires ground_truth_sha256");
@@ -198,7 +204,7 @@ export function validateAdjudications(annotations, adjudications) {
     if (decision.agreement !== agreement) issues.push(`adjudication ${decision.item_id} has an incorrect agreement flag`);
     if (!labels.has(decision.final_label)) issues.push(`adjudication ${decision.item_id} requires a supported final label`);
     if (agreement && decision.final_label !== ordered[0].label) issues.push(`adjudication ${decision.item_id} cannot change an agreed label`);
-    if (decision.actor_type !== "human" || !nonEmpty(decision.adjudicator_id) || !nonEmpty(decision.rationale) || !nonEmpty(decision.decided_at)) {
+    if (decision.actor_type !== "human" || !nonEmpty(decision.adjudicator_id) || !nonEmpty(decision.rationale) || !isHoldoutTimestamp(decision.decided_at)) {
       issues.push(`adjudication ${decision.item_id} requires human sign-off, rationale, and time`);
     }
   });
