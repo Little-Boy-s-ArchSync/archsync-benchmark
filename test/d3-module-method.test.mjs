@@ -91,17 +91,63 @@ test('review graph rejects wrong side, wrong groups, unresolved references and m
   }
 });
 
+test('file-side modes and review status cannot turn absence or symlinks into reviewed negatives', () => {
+  for (const mutation of [
+    (row) => { row.tree_mode = 'absent'; row.git_blob = null; row.sha256 = null; },
+    (row) => { row.tree_mode = '120000'; row.sha256 = null; },
+  ]) {
+    const review = sealedReviewFixture();
+    mutation(review.case_envelopes[0].file_coverage[0]);
+    assert.throws(() => validateModuleReview(review), /cannot be an eligible/);
+  }
+});
+
+test('each occurrence must match its reviewed regular source object and per-file count', () => {
+  const mismatchedHash = sealedReviewFixture();
+  mismatchedHash.case_envelopes[0].occurrences[0].source_sha256 = '0'.repeat(64);
+  assert.throws(() => validateModuleReview(mismatchedHash), /source SHA-256 differs/);
+
+  const offsetCount = sealedReviewFixture();
+  const envelope = offsetCount.case_envelopes[0];
+  envelope.file_coverage[1].occurrence_count = 0;
+  envelope.file_coverage.push({ ...envelope.file_coverage[1], path: 'src/other.ts', occurrence_count: 1 });
+  assert.throws(() => validateModuleReview(offsetCount), /occurrence count differs/);
+
+  const excludedSource = sealedReviewFixture();
+  const excludedEnvelope = excludedSource.case_envelopes[0];
+  excludedEnvelope.file_coverage[1].eligibility = 'excluded-test';
+  excludedEnvelope.file_coverage[1].review_status = 'excluded';
+  excludedEnvelope.file_coverage[1].occurrence_count = null;
+  excludedEnvelope.file_coverage.push({ ...excludedEnvelope.file_coverage[0], side: 'head', commit: excludedEnvelope.head,
+    path: 'src/other.ts', review_status: 'reviewed', occurrence_count: 1 });
+  assert.throws(() => validateModuleReview(excludedSource), /source file-side was not reviewed/);
+});
+
+test('case-bound review cannot add unselected source paths to its coverage', () => {
+  const review = sealedReviewFixture();
+  const cases = { cases: review.case_envelopes.map((e) => ({ repository: e.repository, id: e.case_id,
+    base: e.base, head: e.head, scope_path_roles: [{ role: 'primary-candidate', path: 'src/a.ts' }] })),
+  context_only_cases: [{}, {}, {}, {}] };
+  assert.equal(validateModuleReview(review, cases).cases, 56);
+  review.case_envelopes[0].file_coverage.push({ ...review.case_envelopes[0].file_coverage[0], path: 'src/extra.ts' });
+  assert.throws(() => validateModuleReview(review, cases), /differs from primary-candidate scope/);
+});
+
 test('freeze manifest binds the merged development receipt without pretending method acceptance', async () => {
   const manifest = await buildFreezeManifest(root);
   assert.equal(manifest.guardian_source_commit, GUARDIAN_SOURCE_COMMIT);
   assert.deepEqual(manifest.artifacts.map((row) => row.path), [...METHOD_ARTIFACT_PATHS]);
   assert.deepEqual(manifest.human_acceptance, { hieu: null, hoang: null });
   const report = await validateFreezeManifest(manifest, root);
-  assert.equal(report.status, 'VERIFIED_PROPOSAL_BLOCKED_ON_HUMAN_ACCEPTANCE');
+  assert.equal(report.status, 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE');
   assert.equal(report.tools.guardian_source_pinned, true);
   assert.equal(report.tools.development_packet_bound, true);
   assert.equal(report.tools.occurrence_scoring_supported, false);
   assert.equal(report.tools.fixture_freeze_complete, false);
+  assert.deepEqual(report.tools.missing_package_pins,
+    ['guardian.package_version', 'guardian.package_sha256', 'guardian.configuration_sha256', 'dependency_cruiser.package_sha256']);
+  assert.equal(report.open_gates.reviewed_applicability_ledger_missing, true);
+  assert.equal(report.open_gates.development_fixture_not_research_freeze, true);
   assert.deepEqual(report.common_capability_receipt,
     { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
   assert(report.resolver.unresolved.includes('source_eligibility'));
@@ -128,5 +174,6 @@ test('statistical plan leaves zero-denominator recall unestimated', async () => 
   const plan = JSON.parse(planBytes);
   assert.match(plan.metrics.recall, /null with reason when denominator is zero/);
   assert.match(plan.zero_positive_policy, /Never report 100% recall/);
+  assert.equal(plan.tasks.occurrence.comparative_scoring_supported, false);
   assert.equal(sha256(planBytes).length, 64);
 });

@@ -65,6 +65,17 @@ function validateCoverage(row, envelope) {
   assert(row.tree_mode === '120000' ? row.sha256 === null : row.tree_mode === 'absent' || hex.test(row.sha256));
   assert(['eligible-production', 'excluded-test', 'excluded-generated', 'excluded-vendor', 'excluded-extension', 'symlink-not-followed', 'absent-at-side', 'unknown'].includes(row.eligibility));
   assert(['reviewed', 'excluded', 'missing', 'unknown'].includes(row.review_status));
+  if (row.tree_mode === 'absent') {
+    assert.equal(row.eligibility, 'absent-at-side', 'An absent side cannot be an eligible source file');
+    assert.equal(row.review_status, 'missing', 'An absent side cannot be source-reviewed');
+  } else if (row.tree_mode === '120000') {
+    assert.equal(row.eligibility, 'symlink-not-followed', 'A symlink cannot be an eligible regular source file');
+    assert.equal(row.review_status, 'excluded', 'A symlink cannot be source-reviewed');
+  } else {
+    assert(!['absent-at-side', 'symlink-not-followed'].includes(row.eligibility), 'A regular file cannot have absent/symlink eligibility');
+  }
+  if (row.review_status === 'reviewed') assert.equal(row.eligibility, 'eligible-production', 'Only eligible production files may be source-reviewed');
+  if (row.eligibility.startsWith('excluded-')) assert.equal(row.review_status, 'excluded', 'Excluded files cannot be source-reviewed');
   assert(row.review_status === 'reviewed' ? Number.isInteger(row.occurrence_count) && row.occurrence_count >= 0 : row.occurrence_count === null);
   assert(text(row.reason));
 }
@@ -113,19 +124,25 @@ export function validateModuleReview(review, cases = null) {
     const caseKey = JSON.stringify([envelope.repository, envelope.case_id]);
     assert(!seenCases.has(caseKey), 'Duplicate case envelope'); seenCases.add(caseKey);
     assert(Array.isArray(envelope.file_coverage) && Array.isArray(envelope.occurrences) && Array.isArray(envelope.edges));
-    const coverageKeys = new Set(), localOccurrences = new Map();
+    const coverageByKey = new Map(), localOccurrences = new Map(), occurrenceCounts = new Map();
     for (const row of envelope.file_coverage) {
       validateCoverage(row, envelope);
-      const key = JSON.stringify([row.side, row.path]); assert(!coverageKeys.has(key), 'Duplicate file-side coverage'); coverageKeys.add(key);
+      const key = JSON.stringify([row.side, row.path]); assert(!coverageByKey.has(key), 'Duplicate file-side coverage'); coverageByKey.set(key, row);
     }
-    let reviewedCount = 0;
     for (const row of envelope.occurrences) {
       validateOccurrence(row, envelope); const key = JSON.stringify(occurrenceKey(row));
-      assert(!occurrenceKeys.has(key), 'Duplicate occurrence key'); occurrenceKeys.add(key); localOccurrences.set(key, row); reviewedCount++;
-      assert(coverageKeys.has(JSON.stringify([row.side, row.source_path])), 'Occurrence lacks file-side coverage');
+      assert(!occurrenceKeys.has(key), 'Duplicate occurrence key'); occurrenceKeys.add(key); localOccurrences.set(key, row);
+      const coverageKey = JSON.stringify([row.side, row.source_path]);
+      const coverage = coverageByKey.get(coverageKey);
+      assert(coverage, 'Occurrence lacks file-side coverage');
+      assert.equal(coverage.review_status, 'reviewed', 'Occurrence source file-side was not reviewed');
+      assert.equal(coverage.eligibility, 'eligible-production', 'Occurrence source file-side is not eligible production');
+      assert.equal(row.source_git_blob, coverage.git_blob, 'Occurrence source Git blob differs from file-side coverage');
+      assert.equal(row.source_sha256, coverage.sha256, 'Occurrence source SHA-256 differs from file-side coverage');
+      occurrenceCounts.set(coverageKey, (occurrenceCounts.get(coverageKey) ?? 0) + 1);
     }
-    assert.equal(envelope.file_coverage.filter((r) => r.review_status === 'reviewed').reduce((n, r) => n + r.occurrence_count, 0), reviewedCount,
-      'Reviewed file occurrence counts must equal inventory length');
+    for (const [key, coverage] of coverageByKey) if (coverage.review_status === 'reviewed')
+      assert.equal(coverage.occurrence_count, occurrenceCounts.get(key) ?? 0, 'Reviewed file occurrence count differs from its inventory');
     const seenEdges = new Set(), referenceCounts = new Map();
     for (const edge of envelope.edges) {
       assert.equal(edge.repository, envelope.repository); assert.equal(edge.case_id, envelope.case_id);
@@ -163,8 +180,9 @@ export function validateModuleReview(review, cases = null) {
       const item = expected.get(JSON.stringify([envelope.repository, envelope.case_id]));
       assert.equal(envelope.base, item.base); assert.equal(envelope.head, item.head);
       const expectedPaths = item.scope_path_roles.filter((r) => r.role === 'primary-candidate').map((r) => r.path);
-      for (const side of ['base', 'head']) for (const path of expectedPaths)
-        assert(envelope.file_coverage.some((r) => r.side === side && r.path === path), `Missing file-side coverage: ${envelope.case_id}:${side}:${path}`);
+      const expectedCoverage = new Set(['base', 'head'].flatMap((side) => expectedPaths.map((path) => JSON.stringify([side, path]))));
+      assert.deepEqual(new Set(envelope.file_coverage.map((r) => JSON.stringify([r.side, r.path]))), expectedCoverage,
+        `File-side coverage differs from primary-candidate scope: ${envelope.case_id}`);
     }
   }
   return { status: 'STRUCTURALLY_VALID_NOT_SCIENTIFICALLY_VERIFIED', research_complete: false, cases: seenCases.size };
@@ -190,6 +208,8 @@ export function validateStatisticalPlan(plan) {
   assert.deepEqual(plan.population, { captured_cases: 60, primary_attempts: 56, context_only: 4,
     repositories: { 'hyperdxio/hyperdx': 19, 'amruthpillai/reactive-resume': 17, 'ether/etherpad': 20 } });
   assert.match(plan.metrics.precision, /null/u); assert.match(plan.metrics.recall, /null/u);
+  assert.equal(plan.tasks.occurrence.comparative_scoring_supported, false);
+  assert.match(plan.tasks.occurrence.reason, /no physical source positions/u);
   assert.match(plan.zero_positive_policy, /Never report 100% recall/u);
   assert.equal(plan.human_acceptance.hieu, null); assert.equal(plan.human_acceptance.hoang, null);
   return { accepted: false, primary_attempts: 56 };
@@ -212,8 +232,14 @@ export function validateToolPins(pins) {
   assert.equal(pins.common_capability_packet.d3_executed, false);
   assert.equal(pins.common_capability_packet.research_complete, false);
   assert.equal(pins.human_acceptance.hieu, null); assert.equal(pins.human_acceptance.hoang, null);
+  const missingPackagePins = [
+    ['guardian.package_version', pins.tools.guardian.package_version],
+    ['guardian.package_sha256', pins.tools.guardian.package_sha256],
+    ['guardian.configuration_sha256', pins.tools.guardian.configuration_sha256],
+    ['dependency_cruiser.package_sha256', pins.tools.dependency_cruiser.package_sha256],
+  ].filter(([, value]) => !text(value)).map(([name]) => name);
   return { guardian_source_pinned: true, development_packet_bound: true, occurrence_scoring_supported: false,
-    fixture_freeze_complete: false, accepted: false };
+    fixture_freeze_complete: false, missing_package_pins: missingPackagePins, accepted: false };
 }
 
 export async function buildFreezeManifest(repoRoot = root) {
@@ -252,8 +278,13 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   const capability = await verifyCommonCapabilityReceipt(join(repoRoot, 'development/common-module-capability'),
     join(repoRoot, 'development/common-module-capability/receipt'));
   assert.deepEqual(capability, { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
-  return { status: 'VERIFIED_PROPOSAL_BLOCKED_ON_HUMAN_ACCEPTANCE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
-    resolver: validatePolicyScaffold(policy), statistics: validateStatisticalPlan(plan), tools: validateToolPins(pins),
+  const resolver = validatePolicyScaffold(policy), statistics = validateStatisticalPlan(plan), tools = validateToolPins(pins);
+  return { status: 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
+    open_gates: { resolver_dimensions: resolver.unresolved, package_pins: tools.missing_package_pins,
+      development_fixture_not_research_freeze: !tools.fixture_freeze_complete,
+      reviewed_applicability_ledger_missing: true, source_review_inventories_missing: true,
+      human_acceptances_missing: ['hieu', 'hoang'], d3_predictions_not_executed: true },
+    resolver, statistics, tools,
     common_capability_receipt: capability, review: validateModuleReview(review) };
 }
 

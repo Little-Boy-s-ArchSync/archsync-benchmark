@@ -6,7 +6,7 @@ This directory defines the files that Hiếu and Hoàng must jointly freeze befo
 
 ## Endpoint
 
-The primary units are source-bound direct module occurrences and derived, deduplicated module-group edges. Every eligible changed file is represented on both base and head, including reviewed files containing zero occurrences. An occurrence binds repository, case, side, commit, source path, physical line/column, exact quote, source object hashes, syntax/specifier, resolver evidence, target and group mapping, disposition and AI provenance. The derived edge keeps every supporting occurrence key.
+The truth inventory retains source-bound direct module occurrences and derived, deduplicated module-group edges. The present comparative endpoint is **cross-group file edges only**: the retained comparator output lacks physical source positions, so occurrence-level comparative scoring is disabled until a separately validated position extractor is frozen. Every eligible changed file is represented on both base and head, including reviewed files containing zero occurrences. An occurrence binds repository, case, side, commit, source path, physical line/column, exact quote, source object hashes, syntax/specifier, resolver evidence, target and group mapping, disposition and AI provenance. The derived edge keeps every supporting occurrence key.
 
 The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets cannot satisfy this endpoint. They have no complete file-side coverage, occurrence location, resolver evidence or edge inventory. `validateModuleReview()` rejects those schemas explicitly. They remain historical preparation records and must not be converted into module truth by changing a schema name.
 
@@ -34,4 +34,4 @@ The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets 
 4. Resolve differences only after originals are sealed. Unresolved differences remain Unknown.
 5. Only then execute both frozen tools on identical eligible D3 trees and compute the declared per-repository metrics and coverage. Preserve failures, stdout/stderr, exit code, configuration and hashes.
 
-`node scripts/d3-review/module-method.mjs` verifies deterministic bytes and structural blockers; use `--write` only after intentionally changing a listed artifact. It never confirms scientific truth, identity, acceptance, labels, outputs or completion. `pnpm holdout:gate` remains closed until its separate requirements are met.
+`node scripts/d3-review/module-method.mjs` verifies deterministic bytes and reports all known open structural/method gates; use `--write` only after intentionally changing a listed artifact. Its status is not a readiness claim. It never confirms scientific truth, identity, acceptance, labels, outputs or completion. `pnpm holdout:gate` remains closed until its separate requirements are met.

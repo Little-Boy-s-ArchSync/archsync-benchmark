@@ -66,8 +66,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "8be2455cb0ac014bb1b5e46ef1e633a2fd0074bdfbd49a314bb00a0d82b07423",
-      "bytes": 4916
+      "sha256": "4eb5bf9aceda965c0145ac43f790f6c6f09d8a122777abcc8e101d2e5023343b",
+      "bytes": 5230
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -111,8 +111,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/statistical-plan.template.json",
-      "sha256": "e97edebdf43a03f94b99f334bd79c1c70fd7d42a4a5bc99bda360e63cefbe99c",
-      "bytes": 1714
+      "sha256": "ed889560e9aaf8c42db76dc240b805266a2c578ca90440f933cc431c04478631",
+      "bytes": 1956
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
@@ -121,13 +121,13 @@
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "251b42c206a73c2f678522ad683b5bce2e23bbbac5e21dcc77ee6470ad1eaf50",
-      "bytes": 19094
+      "sha256": "9d6fc594529cb463d1bf753d38c5c98719828f6bbea79ed09e9459688c363c32",
+      "bytes": 21756
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "fbfd45d5d16d68d63dadd4e88fb0875ec46ceb6c068a62476d868ca7cc0ae618",
-      "bytes": 8560
+      "sha256": "0ae97dfdb24913adcbab5fa3c692e3763aee05a67b2628d9d575dae6c6187d91",
+      "bytes": 11369
     }
   ],
   "scientific_claims": {
