@@ -17,6 +17,9 @@ export function buildApplicabilityChecklist(bundle, contract, historical, select
   assert(selection?.schema === 'd3-conditional-rule-selection/1');
   assert.equal(selection.status, 'accepted-conditional-pending-historical-applicability');
   assert.equal(selection.review_cases_sha256, digest(bundle));
+  assert.equal(selection.source_contract_sha256, sourceHashes.contract_sha256, 'Accepted rule selection must bind the source-backed contract');
+  assert.equal(contract.transfer_sha256, bundle.transfer_sha256, 'Rule contract and cases must share the original transfer');
+  assert.equal(historical.cases_sha256, contract.cases_sha256, 'Historical anchors and rule proposal must share the captured case population');
   assert.deepEqual([...selection.active_candidate_rule_ids].sort(), [...active].sort());
   assert.deepEqual([...selection.context_only_rule_ids].sort(), [...context].sort());
   assert.equal(selection.historical_applicability_complete, false);

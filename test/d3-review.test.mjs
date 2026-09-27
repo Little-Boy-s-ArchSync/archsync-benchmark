@@ -81,15 +81,15 @@ test('historical applicability preparation retains anchors but invents no rule d
   bundle.captured_case_count = 4;
   bundle.context_only_cases = [];
   const ids = ['D3-HDX-MOD-001', 'D3-RR-MOD-001', 'D3-EP-MOD-001', 'D3-EP-MOD-002'];
-  const contract = { schema: 'd3-research-contract-proposal/1', repositories: [...new Set(repositories)].map((id) => ({ id,
+  const contract = { schema: 'd3-research-contract-proposal/1', transfer_sha256: bundle.transfer_sha256, cases_sha256: 'e'.repeat(64), repositories: [...new Set(repositories)].map((id) => ({ id,
     rules: ids.filter((rule) => rule.startsWith(id === 'hyperdxio/hyperdx' ? 'D3-HDX' : id === 'amruthpillai/reactive-resume' ? 'D3-RR' : 'D3-EP'))
       .map((rule) => ({ id: rule, historical_anchor_paths: ['src/test.ts'] })) })) };
   contract.repositories[1].rules.push(...['D3-RR-MOD-002', 'D3-RR-MOD-003'].map((id) => ({ id, historical_anchor_paths: ['src/test.ts'] })));
-  const historical = { schema: 'd3-contract-historical-context/1', rows: bundle.cases.flatMap((item) => ['base', 'head'].map((side) => ({
+  const historical = { schema: 'd3-contract-historical-context/1', cases_sha256: contract.cases_sha256, rows: bundle.cases.flatMap((item) => ['base', 'head'].map((side) => ({
     case_id: item.id, repository: item.repository, side, commit: item[side], path: 'src/test.ts',
     status: 'different-from-reference', sha256: 'a'.repeat(64), git_blob: 'b'.repeat(40), rule_applicability: 'not-decided-by-this-check' }))) };
   const selection = { schema: 'd3-conditional-rule-selection/1', status: 'accepted-conditional-pending-historical-applicability',
-    review_cases_sha256: digest(bundle), active_candidate_rule_ids: ids,
+    review_cases_sha256: digest(bundle), source_contract_sha256: 'd'.repeat(64), active_candidate_rule_ids: ids,
     context_only_rule_ids: ['D3-RR-MOD-002', 'D3-RR-MOD-003'], historical_applicability_complete: false };
   const checklist = buildApplicabilityChecklist(bundle, contract, historical, selection, { contract_sha256: 'd'.repeat(64) });
   assert.equal(checklist.rows.length, 12);
@@ -97,7 +97,7 @@ test('historical applicability preparation retains anchors but invents no rule d
   assert.equal(checklist.decisions_created, 0);
   const missing = structuredClone(historical);
   missing.rows.pop();
-  assert.throws(() => buildApplicabilityChecklist(bundle, contract, missing, selection, {}), /Missing undecided historical anchor/);
+  assert.throws(() => buildApplicabilityChecklist(bundle, contract, missing, selection, { contract_sha256: 'd'.repeat(64) }), /Missing undecided historical anchor/);
 });
 
 test('source-bound fixture review passes structural checks, not truth or identity', () => {

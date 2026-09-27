@@ -49,11 +49,11 @@
       },
       {
         "file": "scripts/d3-review/applicability.mjs",
-        "sha256": "81586a590e64464447c5a1dc3cf2f62df62d44561f5c91b0ea1501f052317251"
+        "sha256": "73768e04e7f2b4e2ed313d6af07d5cb16c8557d7a4ccae651f437eaa2b016666"
       },
       {
         "file": "test/d3-review.test.mjs",
-        "sha256": "052a0e037286954498557c622c77cdfef69e50482e4c0bb38cac47a808fda1a2"
+        "sha256": "678b9475fed4ee9d162fa90a3a163839819af1522502cabe5228e279620478f1"
       },
       {
         "file": "holdout/D3-TWO-AUTHOR-REVIEW.md",
@@ -316,6 +316,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "765c4b52c396ce19e1c758f5e5a2475045ce22e78913fc0b9aa892a0774477f7"
+    "manifest_sha256": "972d5aa6b67e2722cea5bb8e97823708fe3d70144dc5394d7a832b5ca293da54"
   }
 }
