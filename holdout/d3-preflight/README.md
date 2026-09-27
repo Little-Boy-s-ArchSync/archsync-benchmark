@@ -6,10 +6,16 @@ its working choices as a coauthor. The original response is retained under
 `COAUTHOR-APPROVAL-20260928.md` records the subsequent conversational decision
 with the reviewed document and scope proposal hashes. It is not an approval by
 Hiếu or a claim that the D3 execution gate is open.
+`HIEU-DECISION-UPDATE-20260928.md` records Hiếu's later user-relayed decision
+that the 56+4 scope, module-only comparison, two nonblind author reviewers and
+four conditional rules are settled. Rule-at-commit evidence, rubric/Unknown
+details, provenance-preserving reviews, locking, execution and metrics remain
+open.
 `EXPOSURE-UPDATE-20260928.md` records Hoàng's subsequent confirmation that he
 has seen D3 source and prediction/trace/output. His worksheet cannot serve as
-a blind review. `LEAD-DECISIONS-REQUEST.md` lists the exact decisions still
-required from Hiếu before official annotation and freeze.
+a blind review. `LEAD-DECISIONS-REQUEST.md` preserves the detailed decision
+context and unresolved operational requirements; it no longer means the
+entire protocol awaits a Repository Lead decision.
 
 The response proposes 322 primary snapshot files from an inventory of 434,
 and 56 primary change cases from an inventory of 60. Four test-only cases
