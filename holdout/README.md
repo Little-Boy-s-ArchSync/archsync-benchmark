@@ -154,3 +154,12 @@ specified unique case population in the frozen analysis plan.
 The regression tests demonstrating these corrections use explicitly synthetic
 software fixtures. They are not D3 observations and do not improve or replace
 the paper's empirical results. Existing D1/D2/Phase 3 evidence stays unchanged.
+
+Until the Repository Lead and statistical-plan owner freeze an Unknown analysis
+policy, `calculateHoldoutMetrics` rejects rows whose truth or predicted label
+is `unknown`. This fail-closed guard prevents an unresolved Unknown/Unknown
+pair from being counted as correct classification or a false negative/true
+negative through a supplied Boolean `truth_positive`. Unknown rows remain in
+the raw execution/accounting population; an approved analysis adapter must
+separately report them and pass only the policy-defined scored population to
+this metric helper. The guard does not choose the final denominator rule.

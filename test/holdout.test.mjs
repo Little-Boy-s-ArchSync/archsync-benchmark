@@ -439,6 +439,16 @@ test("holdout metrics reject incomplete rows and duplicate IDs", () => {
   assert.doesNotThrow(() => calculateHoldoutMetrics([metricRow("failed", "a", "node", { prediction: "failed", predicted_label: null })]));
 });
 
+test("holdout metrics cannot count unresolved Unknown as correct or negative before a scoring policy is frozen", () => {
+  for (const row of [
+    metricRow("unknown-truth", "a", "edge", { truth_positive: false, prediction: "negative", truth_label: "unknown", predicted_label: "unknown" }),
+    metricRow("unknown-prediction", "a", "edge", { prediction: "negative", predicted_label: "unknown" }),
+    metricRow("unknown-failed", "a", "edge", { prediction: "failed", truth_label: "unknown", predicted_label: null }),
+    metricRow("unknown-casefolded", "a", "edge", { truth_positive: false, prediction: "negative", truth_label: " Unknown ", predicted_label: "NO-IMPACT" }),
+    metricRow("unknown-prediction-casefolded", "a", "edge", { prediction: "negative", predicted_label: " UNKNOWN " }),
+  ]) assert.throws(() => calculateHoldoutMetrics([row]), /HOLDOUT_UNKNOWN_SCORING_POLICY_REQUIRED/);
+});
+
 test("exact line evidence requires the correct file, and failed predictions cannot earn evidence credit", () => {
   const result = calculateHoldoutMetrics([
     metricRow("wrong-file-right-line", "alpha", "edge", { evidence_file_exact: false, evidence_line_exact: true }),
