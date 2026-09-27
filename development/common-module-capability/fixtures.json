@@ -1,0 +1,214 @@
+{
+  "schema": "non-d3-common-capability-fixtures/1",
+  "purpose": "developer-authored-software-fixtures-not-research-ground-truth",
+  "cases": [
+    {
+      "id": "value-syntax",
+      "description": "Value import, re-export, side effect, literal dynamic import and unshadowed require; type-only forms excluded.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "src/app/main.ts": "import { value } from '../lib/value';\nexport { exported } from '../lib/exported';\nimport '../lib/effect';\nvoid import('../lib/dynamic');\nrequire('../lib/commonjs');\nimport type { Shape } from '../lib/types';\nexport type { Shape } from '../lib/types';\nexport const used = value;\n",
+        "src/lib/value.ts": "export const value = 1;\n",
+        "src/lib/exported.ts": "export const exported = 1;\n",
+        "src/lib/effect.ts": "export const effect = 1;\n",
+        "src/lib/dynamic.ts": "export const dynamic = 1;\n",
+        "src/lib/commonjs.ts": "export const commonjs = 1;\n",
+        "src/lib/types.ts": "export type Shape = number;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [
+        [
+          "src/app/main.ts",
+          "src/lib/commonjs.ts"
+        ],
+        [
+          "src/app/main.ts",
+          "src/lib/dynamic.ts"
+        ],
+        [
+          "src/app/main.ts",
+          "src/lib/effect.ts"
+        ],
+        [
+          "src/app/main.ts",
+          "src/lib/exported.ts"
+        ],
+        [
+          "src/app/main.ts",
+          "src/lib/value.ts"
+        ]
+      ],
+      "classification": "common-candidate",
+      "expected_guardian_syntax": [
+        "dynamic-import",
+        "export",
+        "import",
+        "import",
+        "require"
+      ],
+      "expected_guardian_unresolved": [],
+      "expected_shared": true
+    },
+    {
+      "id": "alias",
+      "description": "Explicit tsconfig path mapping; internal same-group edge excluded by both normalizers.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "src/app/main.ts": "import { value } from '@lib/value';\nimport { helper } from './helper';\nexport const used = value + helper;\n",
+        "src/app/helper.ts": "export const helper = 1;\n",
+        "src/lib/value.ts": "export const value = 1;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [
+        [
+          "src/app/main.ts",
+          "src/lib/value.ts"
+        ]
+      ],
+      "classification": "common-candidate",
+      "expected_guardian_unresolved": [],
+      "expected_shared": true
+    },
+    {
+      "id": "self-package-export",
+      "description": "Package self-reference export to a regular internal source file.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "package.json": "{\n  \"name\": \"fixture-package\",\n  \"type\": \"module\",\n  \"exports\": {\n    \"./value\": \"./src/lib/value.ts\"\n  }\n}\n",
+        "src/app/main.ts": "import { value } from 'fixture-package/value';\nexport const used = value;\n",
+        "src/lib/value.ts": "export const value = 1;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [
+        [
+          "src/app/main.ts",
+          "src/lib/value.ts"
+        ]
+      ],
+      "classification": "common-candidate",
+      "expected_guardian_unresolved": [],
+      "expected_shared": false
+    },
+    {
+      "id": "unresolved",
+      "description": "Missing literal relative target retained as unresolved; never a successful empty graph.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "src/app/main.ts": "import { value } from '../lib/missing';\nexport const used = value;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [],
+      "classification": "unsupported-probe",
+      "expected_guardian_unresolved": [
+        "unresolved-local-target"
+      ]
+    },
+    {
+      "id": "computed-dynamic",
+      "description": "Computed dynamic target deliberately outside literal-only common capability.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "src/app/main.ts": "const target = '../lib/value';\nvoid import(target);\n",
+        "src/lib/value.ts": "export const value = 1;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [],
+      "classification": "unsupported-probe",
+      "expected_guardian_unresolved": []
+    },
+    {
+      "id": "shadowed-require",
+      "description": "Local function named require is not a CommonJS dependency; inspect comparator over-approximation separately.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "src/app/main.ts": "const require = (name: string) => name;\nrequire('../lib/value');\nexport {};\n",
+        "src/lib/value.ts": "export const value = 1;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [],
+      "classification": "unsupported-probe",
+      "expected_guardian_unresolved": []
+    },
+    {
+      "id": "symlink",
+      "description": "Internal target represented by symlink is excluded from Guardian verified regular-source tree.",
+      "files": {
+        "tsconfig.json": "{\n  \"compilerOptions\": {\n    \"target\": \"ES2022\",\n    \"module\": \"ESNext\",\n    \"moduleResolution\": \"Bundler\",\n    \"baseUrl\": \".\",\n    \"paths\": {\n      \"@lib/*\": [\n        \"src/lib/*\"\n      ]\n    },\n    \"verbatimModuleSyntax\": false\n  },\n  \"include\": [\n    \"src/**/*.ts\"\n  ]\n}\n",
+        "src/app/main.ts": "import { value } from '../lib/link';\nexport const used = value;\n",
+        "src/lib/value.ts": "export const value = 1;\n"
+      },
+      "mapping": [
+        {
+          "component": "app",
+          "prefix": "src/app/"
+        },
+        {
+          "component": "lib",
+          "prefix": "src/lib/"
+        }
+      ],
+      "expected_pairs": [],
+      "classification": "unsupported-probe",
+      "symlinks": {
+        "src/lib/link.ts": "value.ts"
+      },
+      "expected_guardian_unresolved": [
+        "resolved-outside-verified-tree"
+      ]
+    }
+  ]
+}

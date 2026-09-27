@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/Little-Boy-s-ArchSync/archsync-guardian",
+  "commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
+  "adapter": "archsync-module-dependencies",
+  "adapter_version": "0.1.0-development",
+  "files": {
+    "src/module-dependencies.ts": {
+      "retained_path": "tools/guardian/module-dependencies.ts",
+      "sha256": "4ae07fdee62156bdee108c55469aefc171fc99ae21c5cfea236ae81498a35aca"
+    },
+    "dist/module-dependencies.js": {
+      "retained_path": "tools/guardian/module-dependencies.js",
+      "sha256": "c76202d04ad29bcff5d003b7d9597d04cc220639f335b6d97f07304dc0b2b103"
+    }
+  },
+  "scope": "committed adapter source and compiled module, not a replacement Benchmark runtime package"
+}

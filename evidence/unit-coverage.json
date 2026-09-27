@@ -17,12 +17,48 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 245,
-    "passed": 245,
+    "total": 249,
+    "passed": 249,
     "failed": 0
   },
   "provenance": {
     "files": [
+      {
+        "file": "test/common-module-capability.test.mjs",
+        "sha256": "caeed5b39f4790b7319ae4ee2a8ee171930ba4fb1a664f8ee26825cee9194da1"
+      },
+      {
+        "file": "development/common-module-capability/README.md",
+        "sha256": "ac1b3069531f0a2900e20bfe3778815ac5a038d2ab1313aad57558ae3c9d765d"
+      },
+      {
+        "file": "development/common-module-capability/verify.mjs",
+        "sha256": "b3413b81b896bc688357e868ab030e8a48b0e315c72cb230c76ae08b541eed97"
+      },
+      {
+        "file": "development/common-module-capability/capture.mjs",
+        "sha256": "30c41c6422c51de6fcf558759792e5ea2c15ce17d35e1c7b12fce79ff7e794fa"
+      },
+      {
+        "file": "development/common-module-capability/fixtures.json",
+        "sha256": "0565e331ad813affd0e53c1bc6f44c54d25f8b79af941cf8fac061ba79db86a4"
+      },
+      {
+        "file": "development/common-module-capability/guardian-pin.json",
+        "sha256": "1d7a5e55adb19e1172a2c0d8e0a273c8885c1967c230e2e4edf5f5606ec1d6e4"
+      },
+      {
+        "file": "development/common-module-capability/dependency-cruiser.json",
+        "sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6"
+      },
+      {
+        "file": "development/common-module-capability/tools/package-lock.json",
+        "sha256": "a20c472442cfdf0fb1e710c39c3654125e3a89b7805728a0b14fe94243ac01fd"
+      },
+      {
+        "file": "development/common-module-capability/receipt/manifest.json",
+        "sha256": "d690f15ec0a81ddc7af4153133c1ac72425516c96047f3ea9862288f2bc8e6d5"
+      },
       {
         "file": "scripts/d3-review/method-packet.mjs",
         "sha256": "4c3faeea8cb3c371918650db5b1d12bb2ff565b4d91fa459a8bad7934d820856"
@@ -221,7 +257,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "5c998b5c2f3cb7844f23a4207dd497815563153223888c3305e06eb69753ae58"
+        "sha256": "400b1a538740ea4660bbe373cf6ea7bfa755828985b759f8c0295a8b9c1399b6"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -357,7 +393,7 @@
       },
       {
         "file": "package.json",
-        "sha256": "47fe614e3fca3abfd83f0cd01290a508fada6e549e3149f556cd6c662cbfe9aa"
+        "sha256": "2bd9580c22362508870c7acd9dff338a17eb098c5627c54707c1b0854a1ad48d"
       },
       {
         "file": "pnpm-lock.yaml",
@@ -388,6 +424,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "a1811ca5fcd667aee4c23deb9f4a5dfdd893760fc55d5d475f544f1ba315f836"
+    "manifest_sha256": "89d07edfb8674f4ff9799991ec4059549a9c78b7daa7abda70e96bab60f0157c"
   }
 }
