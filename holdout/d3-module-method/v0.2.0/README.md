@@ -1,0 +1,37 @@
+# D3 module method freeze scaffold — v0.2.0
+
+Status: **proposal only; not accepted, not runnable and not a D3 result**.
+
+This directory defines the files that Hiếu and Hoàng must jointly freeze before either tool is run on D3. It records the merged Guardian source commit `e32ef53eeb07bc8c904b6a1e6a8b897d16def820`, but package/configuration hashes and the dependency-cruiser pin remain empty until the common non-D3 fixture work is complete. Human acceptance and personal declaration fields intentionally remain `null`.
+
+## Endpoint
+
+The primary units are source-bound direct module occurrences and derived, deduplicated module-group edges. Every eligible changed file is represented on both base and head, including reviewed files containing zero occurrences. An occurrence binds repository, case, side, commit, source path, physical line/column, exact quote, source object hashes, syntax/specifier, resolver evidence, target and group mapping, disposition and AI provenance. The derived edge keeps every supporting occurrence key.
+
+The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets cannot satisfy this endpoint. They have no complete file-side coverage, occurrence location, resolver evidence or edge inventory. `validateModuleReview()` rejects those schemas explicitly. They remain historical preparation records and must not be converted into module truth by changing a schema name.
+
+## Files
+
+- `file-coverage.schema.json` records every file/side, including absence, symlink, exclusions, Unknown and a zero occurrence count.
+- `occurrence.schema.json` records each direct dependency occurrence and resolver/AI provenance.
+- `module-edge.schema.json` records the exact deduplicated group edge and its occurrence references.
+- `review.schema.json` composes the three inventories for all 56 primary cases.
+- `freeze-manifest.schema.json` defines the proposal manifest and keeps every scientific-completion claim false.
+- `review.template.json` is deliberately blank and contains no personal declaration, label or acceptance.
+- `resolver-policy.template.json` exposes every unresolved resolver/common-capability dimension.
+- Its `unknown_policy` freezes propagation from occurrences to file-sides, case-sides and change comparisons, while keeping tool failures in attempted coverage.
+- `statistical-plan.template.json` freezes denominators and zero-denominator behavior. Unsupported, failed and truth-Unknown attempts stay visible.
+- `tool-pins.template.json` records the merged Guardian source pin; package, configuration, fixture-output, runtime and dependency-cruiser pins remain pending.
+- `applicability-reviewed.template.json` is a blank destination shape only. The immutable 152-row checklist must be copied by the controlled builder and filled through actual source review; this file is not that review.
+- `freeze-manifest.json` hashes the raw bytes and sizes of the preceding artifacts. It does not hash itself. Archive its raw SHA-256 externally when both authors accept a completed version.
+- The manifest also pins `scripts/d3-review/module-method.mjs` and `test/d3-module-method.test.mjs`, so validator or deterministic-test changes invalidate the proposal hash.
+
+## Required sequence
+
+1. Run Guardian and dependency-cruiser against the same fixtures outside D3. Store input, expected output, raw output, exit code, version, configuration and hashes; decide the common supported constructs before viewing new D3 predictions.
+2. Complete the resolver policy and all 152 historical applicability rows with exact source evidence. Both authors accept one manifest version and raw hash.
+3. Generate two separate 56-case review files. Each must include complete file-side coverage, occurrences and edges plus the reviewer's actual development/output/AI declaration. Preserve each original file and raw hash before comparison.
+4. Resolve differences only after originals are sealed. Unresolved differences remain Unknown.
+5. Only then execute both frozen tools on identical eligible D3 trees and compute the declared per-repository metrics and coverage. Preserve failures, stdout/stderr, exit code, configuration and hashes.
+
+`node scripts/d3-review/module-method.mjs` verifies deterministic bytes and structural blockers; use `--write` only after intentionally changing a listed artifact. It never confirms scientific truth, identity, acceptance, labels, outputs or completion. `pnpm holdout:gate` remains closed until its separate requirements are met.

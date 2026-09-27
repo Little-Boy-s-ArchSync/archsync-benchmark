@@ -1,0 +1,88 @@
+{
+  "schema": "d3-module-method-freeze-manifest/2",
+  "version": "0.2.0",
+  "status": "proposal-not-accepted",
+  "endpoint": "direct-module-occurrences-and-deduplicated-module-group-edges",
+  "guardian_source_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
+  "legacy_review_schemas_rejected": [
+    "d3-author-review/1",
+    "d3-change-case-review/1"
+  ],
+  "artifacts": [
+    {
+      "path": "holdout/d3-module-method/v0.2.0/README.md",
+      "sha256": "de4ffd5985f939fabbfd8f0df7cdeb8931e2807f6b014ebd68e96f77bdbb7aef",
+      "bytes": 4498
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
+      "sha256": "96cb89920ba969750137e1c9bf49c689e3c7f3aa133dd4d0cfddefc1d1055f18",
+      "bytes": 121
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/file-coverage.schema.json",
+      "sha256": "3ced2e98ab86d6b0ec1f7b1cfb7e4b32f0dd6c0f25b7a01a42c3465efbbbe00a",
+      "bytes": 1435
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/freeze-manifest.schema.json",
+      "sha256": "fb4a223c341bbf57e8c59d4437276ee686909f8038424fce78c2ae56530d4e10",
+      "bytes": 1698
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/module-edge.schema.json",
+      "sha256": "dc85273c757e1be1243cf82802c98fdd2790e9259c54674694f19f27a2be0cab",
+      "bytes": 889
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/occurrence.schema.json",
+      "sha256": "3e734cc607473dec3cedfd71a005f0d600c793c30b3b61bd319a41f4cf83d1a8",
+      "bytes": 2718
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/resolver-policy.template.json",
+      "sha256": "65284114ffd54cabc180f85571546f8cebaa3c390296812d677549d84524f9b9",
+      "bytes": 1479
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/review.schema.json",
+      "sha256": "b6c199c236eec07c942da74c88153787a5e0ab439794a461844eff386aa916d4",
+      "bytes": 2280
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/review.template.json",
+      "sha256": "7fc7c51a8f3aa4e9ee9fdc692b53436dbf20336770d6d83919cc5862f0ab86aa",
+      "bytes": 422
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/statistical-plan.template.json",
+      "sha256": "e97edebdf43a03f94b99f334bd79c1c70fd7d42a4a5bc99bda360e63cefbe99c",
+      "bytes": 1714
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
+      "sha256": "f59caa764faadc1c076ab5af8f052d66747b2a57b17da69d2771f9702f985ed6",
+      "bytes": 800
+    },
+    {
+      "path": "scripts/d3-review/module-method.mjs",
+      "sha256": "6bef8d414796cf5574fe2194be6cad6711bb574af0abe8160c4017ecb4f89b95",
+      "bytes": 15056
+    },
+    {
+      "path": "test/d3-module-method.test.mjs",
+      "sha256": "8f0ab5e9c65256eab6ca62ae76fee422c3d9965788d29645fcf893cb391a5079",
+      "bytes": 4267
+    }
+  ],
+  "scientific_claims": {
+    "labels_created": false,
+    "predictions_executed": false,
+    "results_computed": false,
+    "d3_complete": false
+  },
+  "human_acceptance": {
+    "hieu": null,
+    "hoang": null
+  }
+}

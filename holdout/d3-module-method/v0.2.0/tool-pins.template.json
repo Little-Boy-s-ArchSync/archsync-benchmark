@@ -1,0 +1,26 @@
+{
+  "schema": "d3-module-tool-pins/2",
+  "version": "0.2.0",
+  "status": "source-pin-recorded-fixture-freeze-pending",
+  "tools": {
+    "guardian": {
+      "repository": "Little-Boy-s-ArchSync/archsync-guardian",
+      "source_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
+      "package_name": "@archsync/guardian",
+      "package_version": null,
+      "package_sha256": null,
+      "configuration_sha256": null,
+      "non_d3_fixture_output_sha256": null
+    },
+    "dependency_cruiser": {
+      "package_name": "dependency-cruiser",
+      "package_version": null,
+      "package_sha256": null,
+      "configuration_sha256": null,
+      "non_d3_fixture_output_sha256": null
+    }
+  },
+  "runtime_versions": {},
+  "repeat_count": null,
+  "human_acceptance": { "hieu": null, "hoang": null }
+}

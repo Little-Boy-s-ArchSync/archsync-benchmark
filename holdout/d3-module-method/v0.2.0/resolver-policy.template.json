@@ -1,0 +1,26 @@
+{
+  "schema": "d3-module-resolver-policy/2",
+  "version": "0.2.0",
+  "status": "proposal-not-accepted",
+  "decisions": {
+    "source_eligibility": null,
+    "esm_runtime_bindings": null,
+    "require_and_dynamic_import": null,
+    "relative_target_resolution": null,
+    "project_configuration": null,
+    "package_and_workspace_resolution": null,
+    "git_trees_and_symlinks": "Read pinned Git objects only; preserve mode 120000 and never follow symlink targets.",
+    "tool_normalization": null
+  },
+  "common_capability_fixture_ids": [],
+  "unsupported_in_either_tool": [],
+  "unknown_policy": {
+    "truth_dispositions": ["unresolved-target", "unsupported-syntax-or-resolver", "missing-or-conflicting-source"],
+    "file_side": "Any truth-Unknown occurrence, unread eligible path or missing resolver context makes the complete file-side unscorable for both tools.",
+    "case_side": "Any unknown file-side makes the containing case-side unscorable for deduplicated edge metrics.",
+    "case_change": "Both relevant sides must be complete; otherwise the change and corresponding rule comparison are Unknown.",
+    "tool_failure": "A crash, malformed output or unsupported response remains a failed attempted run and cannot remove a truth-eligible case from paired accounting.",
+    "adjudication": "Any disagreement not resolved from frozen source evidence remains Unknown; original reviews are never overwritten."
+  },
+  "human_acceptance": { "hieu": null, "hoang": null }
+}

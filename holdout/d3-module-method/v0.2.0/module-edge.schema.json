@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archsync.dev/schemas/d3/module-edge/2",
+  "title": "D3 deduplicated module-group edge",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["repository", "case_id", "side", "commit", "source_group", "dependency", "target_group", "occurrence_keys"],
+  "properties": {
+    "repository": { "type": "string", "minLength": 1 },
+    "case_id": { "type": "string", "minLength": 1 },
+    "side": { "enum": ["base", "head"] },
+    "commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "source_group": { "type": "string", "minLength": 1 },
+    "dependency": { "const": "module-import" },
+    "target_group": { "type": "string", "minLength": 1 },
+    "occurrence_keys": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "array", "minItems": 9, "maxItems": 9 } }
+  }
+}
