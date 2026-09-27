@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import { mkdtemp, mkdir, writeFile, rm } from 'node:fs/promises';
+import { mkdtemp, mkdir, writeFile, rm, realpath } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
@@ -9,7 +9,7 @@ import { reviewerLedger, verifyCapturedTree } from '../scripts/verify-d3-prepara
 
 const hash = (bytes, algorithm = 'sha256') => createHash(algorithm).update(bytes).digest('hex');
 async function fixture(t) {
-  const directory = await mkdtemp(join(tmpdir(), 'archsync-d3-preparation-test-'));
+  const directory = await realpath(await mkdtemp(join(tmpdir(), 'archsync-d3-preparation-test-')));
   t.after(() => rm(directory, { recursive: true, force: true }));
   await mkdir(join(directory, 'src'));
   const files = [{ path: 'LICENSE', content: Buffer.from('Controlled test fixture only') }, { path: 'src/app.ts', content: Buffer.from('export {};\n') }];

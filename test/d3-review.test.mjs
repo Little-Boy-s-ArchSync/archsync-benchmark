@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import test from 'node:test';
@@ -287,7 +287,7 @@ async function makePacket(root) {
 }
 
 test('collect pinned packet creates no labels, rejects transfer/hash or source mismatch', async (t) => {
-  const root = await mkdtemp(join(tmpdir(), 'd3-review-test-'));
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'd3-review-test-')));
   t.after(() => rm(root, { recursive: true, force: true }));
   const input = await makePacket(root);
   const bundle = await collectCases(input);
@@ -299,7 +299,7 @@ test('collect pinned packet creates no labels, rejects transfer/hash or source m
 });
 
 test('CLI prepares only new private kit and reports incomplete; refuses overwrite/tamper', async (t) => {
-  const root = await mkdtemp(join(tmpdir(), 'd3-review-cli-'));
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'd3-review-cli-')));
   t.after(() => rm(root, { recursive: true, force: true }));
   const packet = join(root, 'packet'); await mkdir(packet);
   const input = await makePacket(packet);
@@ -326,7 +326,7 @@ test('CLI prepares only new private kit and reports incomplete; refuses overwrit
 });
 
 test('CLI checks pinned method bytes and both raw review hashes before comparison', async (t) => {
-  const root = await mkdtemp(join(tmpdir(), 'd3-review-method-cli-'));
+  const root = await realpath(await mkdtemp(join(tmpdir(), 'd3-review-method-cli-')));
   t.after(() => rm(root, { recursive: true, force: true }));
   const { bundle, method, reviews } = setup();
   const artifactNames = { rubric_sha256: 'rubric.md', contract_sha256: 'contract.json', scope_sha256: 'scope.json', tool_pins_sha256: 'tool-pins.json', analysis_plan_sha256: 'analysis-plan.md' };

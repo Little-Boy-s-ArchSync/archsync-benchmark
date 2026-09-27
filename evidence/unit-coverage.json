@@ -53,7 +53,7 @@
       },
       {
         "file": "test/d3-review.test.mjs",
-        "sha256": "678b9475fed4ee9d162fa90a3a163839819af1522502cabe5228e279620478f1"
+        "sha256": "049e2a2e82ca9022838a2e85f75ec723179ea697b167562298e6c7ecca0bf8b7"
       },
       {
         "file": "holdout/D3-TWO-AUTHOR-REVIEW.md",
@@ -257,7 +257,7 @@
       },
       {
         "file": "test/d3-preparation.test.mjs",
-        "sha256": "e906e8343a0fe9fbda7c9cc4d5f3c87bd8cbd6220bb6af65f135b22f582657f8"
+        "sha256": "2ac0faa3f9e0f0c6bf4a7a2957bb335ad5de4e65007adb672b6c846d841840b2"
       },
       {
         "file": "test/d3-change-packets.test.mjs",
@@ -360,6 +360,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "ca475f037eb08f1f4d5c3efdde99249b05894ce7cd0cf2f47503b109c7833108"
+    "manifest_sha256": "f35c27e1099c0a185ca1ce92f1a8273580f26166f59d12930f130a5da3e48e07"
   }
 }
