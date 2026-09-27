@@ -1,0 +1,82 @@
+tree eca94cd3db39e6a80c7d749837b7ab72ec36abfe
+parent ae53d993e2c7771e56ba67263cf523d06c7d543c
+author Andrey (Andrii) Los <puha212@gmail.com> 1787351227 +0200
+committer GitHub <noreply@github.com> 1787351227 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiNC7CRC1aQ7uu5UhlAAAjwIQAJsSxwQMQGw8dwKLuxop5mZC
+ LLCqCRilm424KfF2Xhkz5jj/DiIX1d896viEISi0A+YREzXWwXehMp1lU4dJuXdD
+ DIFDFot01263Ef4CIYmMaB4Lg0OIjMSTPJcuKLnumDFaYcTgJXROcOOIFI3qUEq/
+ Dg5/n5J5AMxSkaj+CbwTep/o3V/SJFzhu2ZZzh9pC3AMQfKwKkyrpYdTmCrHXSHY
+ ZALgFUkk6PflYMnUsgL9XTG1mA0NkBlbSc2KRwG0Wd5ipXpyeVOPecxWEG/H8b7l
+ StFICTAQCLjNBtDYXTTUoBKmO7bDqg9NwjehThljHdzkNCPgYIly8RciZGBZLkR0
+ qJRgynGQ/gAtlIdJ5wKFsRkDKZ8LXwjaLcnZxdtZr7w9ykz6vrrrqtvMIL2jxpg9
+ ILvoDae05W6OnYub9KNn5zweHK/B1R57S8xFwcYwHC1kHybEBPLi2iH4E8LWCXJ8
+ k9LUhx7QhKQ1/dS0XzXTYZSS1LMWwKYops1whPMRQueOg7WJ3PLO+Fm/AGVQjOoI
+ qBTF9osBsaEKpgVh8ev7Zi3jhTJ4Uekk2xw+5OR0meAyLkZvdy42Idn1Lt3D88xR
+ 8aOkhA6lfflzLpsxKA4CfQrkZtQ9AlEeXHKeWVMXPbZpoI20pJ7RhUEN2/IXX6nb
+ rjkwiTmiau23sSVcPWpW
+ =s9qr
+ -----END PGP SIGNATURE-----
+ 
+
+fix(mcp): advertise quantile level as a string enum (#2971)
+
+Fixes the Gemini half of #2967. The tuple-`items` half is already handled by #2925 and ships in the next release, so this PR is only the non-string `enum`.
+
+## Why
+
+`enum` on a non-string type is valid JSON Schema, and every provider in the matrix on #2967 accepts it except Gemini, whose function declarations only allow `enum` alongside `type: "string"`. A client that forwards MCP tool schemas straight to the provider therefore gets its **entire** tool list rejected because of one field, and the user sees:
+
+```
+Error: NonRetriableError: Provider Error We're having trouble connecting to the model provider.
+This might be temporary - please try again in a moment.
+```
+
+That names neither the tool nor the property, and retrying never helps. Detaching the MCP server is the only workaround today. Same shape of failure as #2925, different construct and a different provider.
+
+`level` is the only offender:
+
+```ts
+z.union([z.literal(0.5), z.literal(0.9), z.literal(0.95), z.literal(0.99)])
+// -> { "type": "number", "enum": [0.5, 0.9, 0.95, 0.99] }
+```
+
+It reaches four tools through `mcpSelectItemSchema` and `mcpTileSelectItemSchema`: `clickstack_timeseries`, `clickstack_table`, `clickstack_save_dashboard`, `clickstack_patch_dashboard`.
+
+## What changed
+
+`mcpQuantileLevelSchema` in `mcp/tools/query/schemas.ts` advertises the string enum, and both MCP select-item schemas use it.
+
+**Only the advertised wire type changes.** The schema still accepts the numeric form, so a caller working from a cached schema keeps working; it coerces back to a number before any consumer sees it, so `level` stays a `number` downstream in both the `quantile(<level>)(...)` SQL synthesis in `table.ts` and the stored dashboard config; and out-of-set values are still rejected from either input form. If you would rather advertise strings only and reject numbers outright, say so and I will drop the `preprocess` — I included it because you mentioned server-side coercion and it makes the change invisible to existing callers.
+
+`externalQuantileLevelSchema` in `utils/zod.ts` is deliberately untouched. It is the external REST API's public contract, and all the existing numeric `level:` fixtures under `routers/external-api/` still exercise it unchanged.
+
+## Tests
+
+Two additions, per suggestion #2 on the issue.
+
+`mcp/__tests__/toolSchemas.test.ts` gets a sibling to the draft-2020-12 check: no advertised tool schema may carry a non-string `enum` or an array-form `items`. Reverting just the schema change makes it fail and name every offender by JSON pointer:
+
+```
+clickstack_timeseries/properties/select/items/properties/level: enum on a non-string type ([0.5,0.9,0.95,0.99])
+clickstack_table/properties/select/items/properties/level: ...
+clickstack_save_dashboard/properties/tiles/items/anyOf/0/properties/config/properties/select/items/properties/level: ...
+clickstack_patch_dashboard/properties/tile/anyOf/0/properties/config/properties/select/items/properties/level: ...
+```
+
+The array-form `items` assertion is redundant with the metaschema check on paper, since 2020-12 moved tuples to `prefixItems`. It is there because the metaschema failure surfaces as an Ajv compile error while this one points at the property, which is the difference between a five-minute fix and an afternoon. Worth noting the reverse too: the 2020-12 metaschema accepts a non-string `enum` happily, which is exactly why this survived #2925.
+
+`mcp/__tests__/query.test.ts` gets direct coverage of `mcpQuantileLevelSchema`: both input forms parse to the number, out-of-set and wrong-typed values are rejected, and `.optional()` does not swallow a bad value.
+
+Verified on this branch:
+
+- `yarn ci:unit` in `packages/api` — 45 suites, 747 tests, all passing before these additions; 749 with them
+- `yarn lint` — 302 warnings, exactly at the `--max-warnings 302` budget, so no new lint debt
+- `npx tsc --noEmit` — clean
+
+## Note on process
+
+I am not on the vouch list, so I expect the `needs-vouch` label. I opened #2967 and @brandon-pereira invited this PR there, so hopefully that covers the introduction, but happy to open a hello issue if you would rather do it by the book.
+
+Branch is prefixed `claude/` per the agent-generated convention in AGENTS.md. Written with Claude, reviewed and verified against a live Cursor session and the local suites by me. No `Co-Authored-By` trailer, per the same guide.

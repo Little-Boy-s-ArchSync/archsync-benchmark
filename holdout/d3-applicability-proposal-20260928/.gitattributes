@@ -1,0 +1,6 @@
+# Preserve raw evidence bytes and Git object identities on every platform.
+objects/* binary
+original-checklist.json -text
+evidence-ledger.json -text
+AI-ANALYSIS.md -text
+validation.json -text

@@ -1,0 +1,86 @@
+tree fdd38e03a70465f1ff101f46be0eee9aad6f6fff
+parent 9f640a6104ceedf704c1ef6c76bdcbcc84178dd8
+author Mike Shi <mike@hyperdx.io> 1787067745 +0800
+committer GitHub <noreply@github.com> 1787067745 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhH1hCRC1aQ7uu5UhlAAAaDoQADjBQuJPwe9pFUZrGvOmSCFi
+ rdtqCPisPcoCNp7zZpjiY3SB3EQGfwnhHgkWKigWTXPceDMDV48dlNBR8fVKXfqS
+ e+Ym7cy0CG96rH1pN7YR2l42k3hHLeuSgr31Fouj4BISOURMoGw+dBISj3yQobZU
+ EffTtttCmrne6nXx8de2WWO3Bzwq0FPTYrMHclNY8awkFQXy/JuytqGIhxoImMAT
+ RpPpdcz7hsmyrQ1x5sGb6LLCHJTrDAlz1EAEDvACEZbUO2wPO/yaBKPKo/Yr6XuM
+ sSEj/9/86uZVuATLBanuTjTVWValYPlavVXIeM2UfQtvESBchy6V5tnMlwX/COWs
+ 8VHUDP5+X1LstuwG/t6QAzweWCWZzSzF1vHFpui45tVNOCo5/mQgcW6AZd2xfc6p
+ 3xT0LwG+ocH655FxtZr9BpJTyj5jie/M7rmr2bqCAIUX2yfko3kDxv2kSmHEn3i5
+ rDNf3m7wzl5Mat1K/BNNwyrU3K6eUBdwKxasNPJBmZ+Z3405nikgfCkARhvrjIeQ
+ bNIxFotppAZjWYFqNbwy/ugiO9RW4Sha4qHVEK6CfQf5wSLLGwn7o4qZQOKKZ8V1
+ Do7Ue8qjGZZsXiV8smMtp76pccSvi6nA+CElELxO9UtFb257jgeDchr4RZgaSDDY
+ WA2Drkz741Q8OrD+hsPH
+ =tIzO
+ -----END PGP SIGNATURE-----
+ 
+
+fix: support service name expression and quick attribute filters in surrounding context (#2558)
+
+
+## Summary
+
+Fixes the Surrounding Context feature for non-OTEL schemas (HDX-4665) and redesigns the filter UX with a hybrid preset + pill approach.
+
+**Problem:** The old design had a segmented control (All/Service/Host/Custom) that only worked with OTel schema. Users with custom schemas saw only "All" and "Custom", losing the ability to quickly filter surrounding context.
+
+**Solution:** A unified preset + pill system:
+
+1. **"MATCH ON" presets** — Segmented control (Anything/Service/Host/Pod/Node/Custom) at natural width acts as shortcuts that auto-select groups of related filter pills.
+2. **Always-visible filter pills** — All event attributes shown as toggleable pills with checkmark + yellow border when selected, + icon + dashed border when available.
+3. **Smart mode switching** — Manual pill toggles automatically flip the preset to "Custom" to indicate a non-preset selection. "Anything" means no filters.
+4. **Service Name Expression support** — Uses `serviceNameExpression` from the source config, making the service filter work with non-OTEL schemas.
+5. **Review hardening** — Escapes resource/event attribute values, avoids duplicate service pills, skips unsafe Lucene keys, falls back safely for non-bare Lucene service expressions, resets stale custom search text on row change, and uses the custom input's active query language.
+6. **Test coverage** — Adds unit/component tests for filter extraction, preset behavior, WHERE clause composition, escaping, stale row resets, and Custom-mode input visibility.
+
+### Screenshots or video
+
+**Default state — "Anything" selected, pills visible:**
+[Default state](https://cursor.com/agents/bc-9ad856ad-3cab-46dc-b4c4-aee128a28b00/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fpolished_default_state.webp)
+
+**"Service" preset auto-selects service pills:**
+[Service preset](https://cursor.com/agents/bc-9ad856ad-3cab-46dc-b4c4-aee128a28b00/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fpolished_service_preset.webp)
+
+**Manual pill toggle flips to "Custom":**
+[Custom mode](https://cursor.com/agents/bc-9ad856ad-3cab-46dc-b4c4-aee128a28b00/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fpolished_custom_mode.webp)
+
+**Demo video:**
+[surrounding_context_polished_ux.mp4](https://cursor.com/agents/bc-9ad856ad-3cab-46dc-b4c4-aee128a28b00/artifacts?path=%2Fopt%2Fcursor%2Fartifacts%2Fsurrounding_context_polished_ux.mp4)
+
+### How to test on Vercel preview
+
+**Preview routes:** /search
+
+**Steps:**
+
+1. Navigate to /search and select a time range with log data
+2. Click any log entry to open the side panel
+3. Click the "Surrounding Context" tab
+4. Verify "MATCH ON" control shows at natural width with "Anything" as first option
+5. Verify time displays as plain "±15s" text (no border)
+6. Click "Service" — verify it auto-selects service pills and shows "Matching on N"
+7. Click "Anything" — verify all pills are cleared
+8. Manually click a pill — verify the preset control flips to "Custom" and the custom search input appears
+9. Click "Clear all" — verify it resets to "Anything"
+
+### References
+
+- Linear Issue: HDX-4665
+- Related PRs: None
+
+<sub>To show artifacts inline, <a href="https://cursor.com/dashboard/cloud-agents#team-pull-requests">enable</a> in settings.</sub>
+
+
+Linear Issue: [HDX-4665](https://linear.app/clickhouse/issue/HDX-4665/surrounding-logs-feature-doesnt-work-with-non-otel-schema)
+
+<div><a href="https://cursor.com/agents/bc-9ad856ad-3cab-46dc-b4c4-aee128a28b00"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cursor.com/assets/images/open-in-web-dark.png"><source media="(prefers-color-scheme: light)" srcset="https://cursor.com/assets/images/open-in-web-light.png"><img alt="Open in Web" width="114" height="28" src="https://cursor.com/assets/images/open-in-web-dark.png"></picture></a>&nbsp;<a href="https://cursor.com/background-agent?bcId=bc-9ad856ad-3cab-46dc-b4c4-aee128a28b00"><picture><source media="(prefers-color-scheme: dark)" srcset="https://cursor.com/assets/images/open-in-cursor-dark.png"><source media="(prefers-color-scheme: light)" srcset="https://cursor.com/assets/images/open-in-cursor-light.png"><img alt="Open in Cursor" width="131" height="28" src="https://cursor.com/assets/images/open-in-cursor-dark.png"></picture></a>&nbsp;</div>
+
+
+
+Co-authored-by: Cursor Agent <199161495+cursoragent@users.noreply.github.com>
+Co-authored-by: Drew Davis <6097246+pulpdrew@users.noreply.github.com>

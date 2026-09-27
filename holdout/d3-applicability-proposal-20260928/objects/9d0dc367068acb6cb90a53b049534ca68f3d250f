@@ -1,0 +1,17 @@
+tree 49d5246d9b31447e92a80311451289c02ee70555
+parent d0fa9ae8dab0ba34ff88edf3b2b8ce18078ae662
+author Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+
+feat(seo): render social card metadata for public resumes
+
+Public resume pages only produced their OpenGraph and Twitter tags client side,
+so a shared link had no card at all. The server now injects them into the shell
+and swaps in the resume's own title and description.
+
+The lookup is scoped to public, password-free resumes and deliberately avoids
+resumeService.getBySlug: that counts a view and would expose a protected
+resume's summary to an unauthenticated crawler. User-authored values are escaped
+before they reach the HTML, and any lookup failure falls back to the plain shell.
+
+getResumeSocialMeta is shared with the client route head so the two cannot drift.

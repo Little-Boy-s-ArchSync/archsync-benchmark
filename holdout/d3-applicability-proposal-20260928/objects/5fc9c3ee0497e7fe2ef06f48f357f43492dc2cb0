@@ -1,0 +1,46 @@
+tree e57b74b964682043d3edea23cb24fc1289c3e40b
+parent a8d1f5a68511c18e6557ed5d2e73fce0fc395903
+author Santhi Prakash <38608178+santhiprakash@users.noreply.github.com> 1786654258 +0530
+committer GitHub <noreply@github.com> 1786654258 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqfi4yCRC1aQ7uu5UhlAAAlNAQAFOrxX/1NVXp0TbYyicM2LNd
+ iJC4nxthPGTNRjbZk/YsROeHpIEoQq6ogTGQ2FAjS48sCe1FrBPRCt9XXUrM7L/F
+ aB4KIOXsuyiarz0nXFctpnO6q+3zu45teRphBND8GB72JUhDN4qUzhndh9cDWQem
+ 4iHkrRAYyB7vDtg148QTqqMxSHbin3vEbfxvwswJnPGDmUholchUWfaAE+SX6AXS
+ Bj4sZPBh/3H0alFSrp6NOG8FbHExz7JHzDvQL8H0b15YHNjNjcevhnNybW2Z7sh9
+ cQiUPc3nfVNi1u5XZTdV1RF0zR6upvHmGuvJIg5slMAe9PaDTHn8tXnKppkog3Qr
+ aSL+zbT6NOgDbs6wMJvszsB9Rj4VAksuq+0bY4+ZcCRPxV2K5q6P0/QDHoW/O3TB
+ SS7Am2nbc/7GDtOZIJEkwx5gS3QnDPBc8GXX+Yhx1FrWCBavwkxo6amY/pBUPhyG
+ xst4E2ejoGGkAjY4EMMRYa9V07Oq64/V0McKtv3yMwAjY4kFOk9X6hsSRszWiU2s
+ l1Fx40H9LEKcsARcWJnjVK85tQN7Lwstf259cRJ4mO7bF1GLpsLIqhaz1Ba+XRzD
+ bP2WoId9B8SkwQZRUahY94l5gIJ3z7Ohp8s/a8hXyE2tlZFTcG5YbXFsDOIcSHXX
+ bQ4oPRvqcE614mYs3HiN
+ =Qxi8
+ -----END PGP SIGNATURE-----
+ 
+
+fix(pdf): register Noto punctuation fallback for missing glyphs (#3294)
+
+* fix(pdf): register Noto punctuation fallback for missing glyphs
+
+- Problem: U+2022 bullet characters render as garbled glyphs when the body
+  font (e.g. IBM Plex Serif) lacks the glyph and no PDF fallback is registered.
+- Fix: append Noto Serif/Sans to the PDF fallback stack as a general-purpose
+  punctuation source covering General Punctuation (U+2000–U+206F).
+- Verification: pnpm --filter @reactive-resume/fonts test;
+  pnpm --filter @reactive-resume/pdf test src/hooks/use-register-fonts.test.ts
+
+* test(fonts): clarify zh-CN fallback test description
+
+- Problem: getPdfFallbackFontFamilies("Times-Roman", { locale: "zh-CN" }) now
+  returns ["Noto Serif SC", "Noto Serif"] (the general-purpose punctuation
+  fallback is appended), so the test description "returns only the Simplified
+  Chinese font for zh-CN (unchanged behavior)" is no longer accurate.
+- Fix: rename the test to describe that it uses the Simplified Chinese font
+  plus the punctuation fallback. The assertion is unchanged.
+- Verification: pnpm --filter @reactive-resume/fonts test -> 45/45 passing.
+
+---------
+
+Co-authored-by: Amruth Pillai <im.amruth@gmail.com>

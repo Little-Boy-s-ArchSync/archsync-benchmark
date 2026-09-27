@@ -1,0 +1,50 @@
+tree 332ff489d16aaeebeb5b8b42817ca3ede17a4ca6
+parent 2af7ab9218f60d55bfb813c2a25afd600b4093e1
+author John McLear <john@mclear.co.uk> 1785953921 +0100
+committer GitHub <noreply@github.com> 1785953921 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqc36BCRC1aQ7uu5UhlAAApRYQADCOa6eamQUmX1q1dHuqMFQO
+ 6d+b7X4XA7Gu+xrPYEDXq26nvfjTtkjsvLh5uXcyS6fllTo9KJw16+phJFjcKofL
+ qSDe+D8AmxkW/926OISOF8xXeoXfE0wjfYxZMrBKDBsHclr1w1vypQ0n7llAdzg8
+ tVM+xMHE8k6SfT/fVPL1wgq8DVa5DqMrjiEMTbYbnzmKim38h5ULEO3OxkRtxzp1
+ GAiXt1z+3Povxk4/nq/irGmVwBjF0M/m7WVskTX72Mgtcsja5hfqO5rf9+G2twXB
+ 4QJ1QGe0hmj3GXBDitfvnuLNmK3YCWiyZfRAsgOnrf67l3baPz7cl8q79OOtHQy3
+ rjiriSpZanpPJg9gcUSw3u6UEI7P6Y4ZxRV5MJCoksY1kNeiZ7vZ55XM6C/H1Y24
+ crvk4y1Z2fMyfd+NdWrJWBPTXhKSHEoofoSiNHm4+KA3xJKZVMM5ANFXaA9e4XpV
+ dJYp1mCynBpiF0ntAN+t3FDs2PIf+Rre/bMgb1l4nu8U/7RU0/6kT6G7pdwGDXhE
+ UNW2hVcxwdCic3XfzbSaKxGFRmUonCC/SNqE+n66p0YIYYZUdvtGHs97WUuehxM+
+ DrBrSalx+sfM66EQlH1jdCwWWzujEDq6hd1nLydLJDrZJ6bnRECfAgTVLCSWBNEo
+ I1Rbns8o2Xggc5AjCycP
+ =Q++V
+ -----END PGP SIGNATURE-----
+ 
+
+fix: don't log a missing-author error for the reserved system author (#8044) (#8090)
+
+Every pad created with non-empty initial text and no explicit authorId --
+which includes every pad that gets the default `settings.defaultPadText`
+welcome content since #7885 -- carries `a.etherpad-system` in its
+attribute pool forever. The system author is changeset bookkeeping, not a
+contributor, and deliberately has no `globalAuthor:` record, but
+CLIENT_READY resolved every pool author as if it were a real one and
+logged
+
+  [ERROR] message - There is no author for authorId: a.etherpad-system.
+
+on every single pad open, for new and pre-existing pads alike.
+
+Filter the system author out of the historicalAuthorData lookup, the same
+way `listAuthorsOfPad` already keeps it out of the public API. Nothing
+else changes: the id was never present in historicalAuthorData (the
+lookup failed), so clients see exactly what they saw before.
+
+While here, the id had been duplicated as a bare literal in five modules
+(each with a comment explaining that importing `Pad.SYSTEM_AUTHOR_ID`
+would be a circular require). Move the canonical definition into a leaf
+module, `src/node/utils/SystemAuthor.ts`, and import it everywhere;
+`Pad.SYSTEM_AUTHOR_ID` stays as a re-export for plugin compatibility.
+
+Adds a backend regression test that fails on the pre-fix code.
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

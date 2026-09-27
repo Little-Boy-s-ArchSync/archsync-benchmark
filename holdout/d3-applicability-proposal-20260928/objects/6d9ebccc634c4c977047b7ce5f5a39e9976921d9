@@ -1,0 +1,37 @@
+tree 5c73523e2c1c0bbe953d5951cbb87d0bf7dcb84a
+parent 45303fb46565b77fe6e18b73f39cf9dbbf2b6934
+author ignaciocarre <ignacio.carre@gmail.com> 1786655396 -0300
+committer GitHub <noreply@github.com> 1786655396 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqfjKkCRC1aQ7uu5UhlAAALFUQAGYUXKYBZnqXMeUjAKah5QLv
+ VXOGioQ0xtzEYL8NBXJcry1h0pcUAZxwtB4I+h2Rei3pNqmHUfXDOsIXp4JShQsS
+ RRxFfUMnWtkDTqJX/Z30ynqqGzDQnGzW55lpgNcgqFnkKBqbSc0DbZyhFHJ+OpIQ
+ 6+sRyW3DQiE2VInzoJ5HZgQ3XlYmc3yRVqauIQwryJXR8XDmzHHiznUjcY3F1rA5
+ aNxSdtnbHsF+w9z70IuLCowIsZo9tGySUAftGPQkHloZcpFbpQeMrO/b4A104MoO
+ Y4W332UI2O8qoDQQrEacl9To8HShDfp75tCskoyCJ3SdZNt5+MFeuia2sgli0WCZ
+ 7daN1ePTBy099drl5Brdr2V/7yIbhKb1JbMYaO8MJUDimFA4k7ltJV8FdHPeQa0I
+ 2msiLruZbEUYmYRtlgvVUI9cEEbdDwcGS+Uap7gkbhaD61+Vt9LQQ1ibfvgh0C0Y
+ Lc/i0cLv2TyOKBofaEQuttx/vdVqJfFndiXXwBVf5Xt9MX3Q6n/8pRIEhRPEp3hF
+ CgKQrhd8Kc2oE9XHAwbPjy0Wv6vMojpaI9toZ0MWXIVBvGOQxOJDmvGQPk0lEhcZ
+ UQOGZQ2OW5sY7iGkiTWEEe9garj7tx0JBwVg1Gzxq9Oa4ofzt21WCbnwuEt3ITYv
+ bKJo4r1Lyk3rPM/79Cgr
+ =02uU
+ -----END PGP SIGNATURE-----
+ 
+
+feat(mcp): add cover-letter PDF downloads (#3304)
+
+* feat(mcp): add cover-letter PDF downloads
+
+* fix(mcp): bind signed PDF targets
+
+* test(mcp): cover unavailable cover letters
+
+* fix(api): accept legacy PDF download targets
+
+* fix(server): limit legacy PDF tokens to resumes
+
+---------
+
+Co-authored-by: Amruth Pillai <im.amruth@gmail.com>

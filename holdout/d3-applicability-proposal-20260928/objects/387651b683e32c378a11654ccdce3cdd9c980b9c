@@ -1,0 +1,58 @@
+tree c8f3b446b90fbc30342aa7348f66194f922ec760
+parent c4c517ee41aeee82dff44b9ef8eb828b2e55d983
+author John McLear <john@mclear.co.uk> 1787321203 +0100
+committer GitHub <noreply@github.com> 1787321203 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiFtzCRC1aQ7uu5UhlAAADGcQAEpeFNmNEvfrnI5VXQUeLMU8
+ 5uKwCltIYvmHHl9ivGzKZC5agUvw2BioDPgf3w7xoFph0eA7oZJ3q54SLBH/MWnR
+ X6ZtTJjGbEGshe1ea4+FJ5zETb7S7aE9yVrJkbbvkEK9d1Dg6jR0peJkxUmANVHR
+ CIpKQBPgQzKKVyenBtZoD9gBMin8ydNtb3PZ3/I4jr50BIgsaNikLbuNlCYce6yp
+ FRbhEyigQjM4PwKNsfSyF125sULm8ZjSdZ+LIL3I++DQEhu8fm6nc/jnhnsvbNYy
+ q+zKygj0a0kJyLwrEuDoNFgLphFi0xP1rGuDhgAQQyghgcvfPnPMiXZGsslPZk4Q
+ ys2wP0oXzgzRyz17FkwX3nUy8izQUgrxOQ//v4o5WTcBNNozRfYCgXXptwU/5JSj
+ Ob8Y3hT2/BdZshUfmS7wIF2uEH3ML+0ANAlxHpCQFKonfPcnu/3kl8Fy4nm0zFct
+ RT4YqUyqcCncDr1rfN82Z3hmpsLLxixkjEYlzmgBc+r+0FHgAPewzYcKsfu/k3uA
+ oGE3QH8LyHT5V6nY7kaYgObKTKEZZ6PK2tkk2DOO4eEWL9NbXYenHuUUxgEy60ys
+ AI9FpduG+GLGRmpTrFw+epNJ90L4phhMoYTVxV39mhjAqTqyGm8EAZjhlp0GMfVq
+ UwA63DgMpKCnyIT0XFVp
+ =pyRf
+ -----END PGP SIGNATURE-----
+ 
+
+fix: copyPadWithoutHistory wrote an invalid changeset (#8140)
+
+pack() takes the TOTAL length of the new document, but the call passed
+`assem.getLengthChange()` -- a delta. The resulting revision 1 header
+disagreed with its own ops, with two consequences:
+
+  1. opsFromAText() skips the source document's final newline, so both
+     of the destination pad's rev-0 newlines survived and the copy came
+     out one newline longer than the source. It grew again on every
+     subsequent copy.
+  2. The copy's revision 1 failed checkRep(), so the copied pad failed
+     pad.check() from then on.
+
+(2) is the damaging one. deleteRevisions() -- `cleanup.keepRevisions`,
+and compactPad with a keep count -- calls pad.check() before it touches
+anything. compactPad's full-collapse mode goes through this function
+twice, so the feature meant to reclaim database space produced pads
+that could never be cleaned up again.
+
+Pass the total length, drop the surplus newline, and trim the char bank
+to the characters actually inserted.
+
+Also await dstPad.appendRevision(): an un-awaited rejection surfaced as
+an unhandled rejection rather than failing the copy, which is how the
+malformed changeset went unnoticed. Same for the `saveToDatabase()`
+that the comment above it calls "flush the source pad".
+
+The existing API test quantified the off-by-one without naming it: the
+direct getHTML test strips one trailing '<br>' while the copy test
+stripped '<br><br>'. It now strips one, like the source. The compactPad
+test's tolerance for "adjusted trailing whitespace" is likewise replaced
+with a byte-exact comparison plus a check() assertion.
+
+Found while investigating #8134.
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

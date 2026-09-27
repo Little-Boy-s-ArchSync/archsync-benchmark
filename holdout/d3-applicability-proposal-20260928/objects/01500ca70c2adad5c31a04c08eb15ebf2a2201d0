@@ -1,0 +1,93 @@
+tree 6fc9515c41427554835a117e6932dffd9a327e7b
+parent 7168f14f0a3f61c197d446450fd661bcfb953651
+author John McLear <john@mclear.co.uk> 1782118600 +0100
+committer GitHub <noreply@github.com> 1782118600 +0100
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqOPjICRC1aQ7uu5UhlAAAZC4QAH3V4LYnl8TzOkm5BZ8P1HUa
+ L7Ysr6pdmyQIS3ZopwGcWSd6DIQlxzeogU1jayuS1AiH5hle1suKIKg8qZMrJA/1
+ 9pZ4ZBWbqlrrb2kr81TFXEucMyHTkOIa6T9ffzcgW+eJU6U+mEcU5+FjMD4BeB/S
+ 1VRCwNh/X34ppiEY2l1m6jiB/Mcv3JA1GW+HPGdEsSMja62r+RUnJEaC9/AElzfu
+ rvDvqrZaT7Aw4lzxdcjCsObri716Nttco0UtLTWZSgRpFYli/z7FdGVqywJVAHxq
+ nnA7/g6K7ihyUJXAGLX4lfNdq9kBR3CIyUOJ3oxQnPcyTOy5KHazmSKmPK62j7vF
+ 9TR2ZSBfW45psnv8AJB7LmNOuoJNYbyL6V/jY16clppBnBdfd309PKklUMhmxi3W
+ U72jIimOFO989YqBwJmfpn15r5Lgh2aLL2ktTW2/wDxNTiNGh4U/2fEHrW6MZWu2
+ HjwDJmNoYU+L+0n24r8k1Ik/NYxAGDbot1vmWSdiap1IUDhalktWlzDXDd3tIjNq
+ FVo+dapkfcXyioUzioJaE+tUDrAxKKTzawbWahaiHTyJoUhwZbPq19WuaF2t/3JZ
+ XGgD/XTBkCIcWxNBV2VNKauKmDJGP9Lc2WP1A62Kn081dxrmcinrIW97TQ1BitBH
+ LCkG9ZW8Ddg7XhjZYSXh
+ =dDXs
+ -----END PGP SIGNATURE-----
+ 
+
+chore(deps): vendor the unmaintained `security` escaper into core (#7993)
+
+* chore(deps): vendor the unmaintained `security` escaper into core
+
+The `security` npm package (escapeHTML / escapeHTMLAttribute and the JS/CSS
+encoders) has had no release since 2012, yet it sits directly in Etherpad's
+client-side XSS-defense path (pad_utils, domline) and the server-side HTML
+export. Rather than keep a 14-year-old, single-maintainer dependency guarding
+output encoding, vendor its implementation into core.
+
+- static/js/security.ts now contains the escaping logic directly (reproduced
+  verbatim from security@1.0.0, MIT, Chad Weider — byte-identical output) and
+  no longer does `require('security')`. The full public API is preserved, so
+  plugins that `require('ep_etherpad-lite/static/js/security')` keep working
+  unchanged.
+- pad_utils.ts requires the local './security' module instead of the bare
+  'security' specifier (domline.ts and ExportHtml.ts already did).
+- Drop `security` from src/package.json dependencies and from Minify's
+  LIBRARY_WHITELIST (no bare specifier is served to the browser anymore).
+
+Added tests/backend/specs/security.ts locking the byte-for-byte escaping
+output so the vendored copy can never silently drift.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* fix: use ESM named exports so vitest can resolve the security module
+
+CI "Run the new vitest tests" failed with `Cannot find module './security'`
+from pad_utils.ts. vitest/vite's CJS require() shim doesn't add a `.ts`
+extension when resolving a relative specifier, so `require('./security')`
+couldn't locate security.ts. (The old bare `require('security')` resolved to
+a real .js in node_modules, which is why this only surfaced after vendoring.)
+
+- security.ts now uses ESM `export const` for the seven helpers instead of a
+  `module.exports = {...}` block.
+- pad_utils.ts imports it as `import * as Security from './security'`, which
+  goes through vite's resolver (knows .ts) and is also properly typed.
+
+CJS consumers (domline.ts, ExportHtml.ts, the backend spec) keep working via
+tsx/esbuild ESM->CJS interop. Verified: tsc clean, full vitest suite 721
+passing, and the mocha security/export/import specs 27 passing.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* ci: force fresh run (prior run used a stale merge ref after reopen)
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* fix: remove ReDoS in vendored JSON-string-literal regex
+
+CodeQL flagged a high-severity exponential-backtracking alert on the
+JSON-string-literal regex vendored from the `security` package:
+`/"(?:\\.|[^"])*"/`. The `[^"]` class also matches a backslash, so it overlaps
+with the `\\.` alternative and backtracks exponentially on adversarial input
+like `"\!\!\!...` (no closing quote). The original lived inside node_modules so
+it was never scanned; vendoring it surfaced the alert.
+
+Fix to the canonical linear form `/"(?:[^"\\]|\\.)*"/`, where the backslash is
+excluded from the character class so the two alternatives are mutually
+exclusive. It matches exactly the same well-formed JSON string literals (and
+encodeJavaScriptData only ever runs it over JSON.stringify output), so behaviour
+is unchanged for valid input.
+
+Added tests: encodeJavaScriptData output + a ReDoS guard that runs the regex
+over 50k adversarial chars and asserts it returns in well under a second.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

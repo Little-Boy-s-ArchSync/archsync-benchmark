@@ -1,0 +1,30 @@
+tree fe816fd05635e431dd373c26b2cd26db2beec300
+parent 186c400ab76cb4a020b29ac3807bfee6d6d156f3
+author Amruth Pillai <im.amruth@gmail.com> 1785452445 +0200
+committer GitHub <noreply@github.com> 1785452445 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqa9edCRC1aQ7uu5UhlAAAaJIQAHVZI3oyVUZuRKSh1uzyGYwC
+ yMpL9u22PlcURj5XqSIIzPU835/kxRV4M2+cHNARMaeKx547MejDnEQoVFAoZ+TX
+ nGDdeKpww7uFfc2WGoYT9KOFlQk6Bad2yGzjEvtvZiSeiwVixPbY2u6+GMlfBhCH
+ MTd3ZqOjgOvATvvGik2NjN3864XDzDsBNnn9UDDidLJX09nut0qEFT0h9TznCva2
+ FV/dPS4pvbhDQwbTeGXy32qTb5pqDXIqixVTpBUOMGon2RZNj4nV14LW29N1fxX6
+ Ee6Rc/gI64qgdBevuyjKkuCrIHM+Vra+mutV4zHlxDRpu+t3U2hkLAlSPigad+r1
+ 6oDicmnci+VHMlzy6osiYhwlR8YISrU05k+oHXozkHalsB9g5ahhdWR/N5U+Erzo
+ 5CzkNwycNSlsQyrcZk9qorJxTrS2G5K+hvwGJi++JKRsIQ4YLYhpNTD3e0wVnDQi
+ vHFAmyp3/z/3WbPML0HJPYzyM9oq7f6GBaXY8imNuF1relraNSHc6f82lebbdYej
+ LO9uYcfeKHpgQWxcRK/6//6qif6WwcMxZN6jU4DJs9Y/tv6OdtKofsxxGKAjRBLO
+ 1P4xXpGxwzrN3cmtaQYEhFIF5YSzxLGq9OOJ4a95HFptst/YuyMXSdh1CTh3kU4c
+ wDEe9p4Pp6/4yp5/1s/9
+ =vJ8h
+ -----END PGP SIGNATURE-----
+ 
+
+fix(web): stop custom styles from sticking on Checking (#3283)
+
+Concurrent compile requests from editor intelligence were rejecting
+in-flight edit compiles as stale, and the store swallowed that rejection
+without leaving compiling. Resolve all compile results and surface
+compile failures as an error status so styles can apply again.
+
+Co-authored-by: Cursor Agent <cursoragent@cursor.com>

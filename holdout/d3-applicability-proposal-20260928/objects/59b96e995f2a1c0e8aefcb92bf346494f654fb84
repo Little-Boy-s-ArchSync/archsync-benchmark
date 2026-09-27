@@ -1,0 +1,60 @@
+tree 08c132d957e17f7e54c9e493224da9767610575a
+parent adba65ab9438781ce497bd0c90e1a9cbb8a7a5e6
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787260574 -0700
+committer GitHub <noreply@github.com> 1787260574 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqh26eCRC1aQ7uu5UhlAAAblcQAAlN0dSYeHpcs6LdEWtdxQpr
+ ANehRx4vjZHqcsM3Ch+LQFra2gya1A0qbkutk1ThASPZHk5TWqcjFTo36YIfxIUd
+ s+THkAWV2sMcdwJcL308QT0ZgScfaSk7fMZy005AQrXFiZPSmK9s890jAjVGsa1q
+ gSizGaU62LZ4PIzBPENnf4omXNxmywMB3y+0k9J8XYepUa7uCjdTpZIBElxXuNBi
+ ix/5OF0gOv+f9EJDmI17fiC/lAXaGzys0zGtkQunNAs9Q1GrRwZWraIPVl656sZr
+ iZ1crqT0Sa+3CbBhRHY+1odjJ1MF1Mz7XGaDGAsyY6MfqGTUfYsTIN7+/6ujlN1H
+ RlSSiOdcFng66fQEJ3GkF7czX5G5C6VsB6ErxXEw2iVRS/XW4cc1vO3pYGh/KFGQ
+ GrjRr7gkAbxMZpPM3eyZDMu+a711hF10mTXOwk1e4ooKjj20qRqBjJ607+CUux1z
+ CsM9YurtjQSl6mP+B5ikd6MMtEFsFpiIpiRFYod5IoPIztDtCCITp38r+pSEn7jW
+ GMU8rO/T9vlJMvblgmzVRiO2l8v4xXPKlwvGqlz+DcowKRMgV7kYzeER9Ni+SIYv
+ N71paCeQzi2UL96/tAXBW2iGDtj4MAvALRhxXaQB9qVsihx/s3N6lPFX3w9Gzwxc
+ x1MczN0tVaPHuRl28R36
+ =R44u
+ -----END PGP SIGNATURE-----
+ 
+
+chore(app): bump session replay player rrweb 2.0.0-alpha.8 -> 2.1.1 (#2954)
+
+## Why
+
+Part 1 of addressing #2569 (session replays broken / frozen).
+
+The session replay player has been pinned to `rrweb@2.0.0-alpha.8` while current `@hyperdx/browser` (>= 0.25.x) recorders record with stable `rrweb@2.1.1` — the recorder/replayer version skew called out as **root cause A** in #2569. This bump aligns the replayer with the recorder and picks up years of upstream replayer fixes (style-sheet handling rewrite, `rr_split` CSS support, virtual DOM, adopted stylesheets).
+
+Note: this does **not** by itself fix the empty/unstyled replays reported in #2569 — that is the chunk-reassembly ordering bug (root cause B), which is version-independent and will be fixed in a follow-up PR. Landing the bump first keeps it separately revertable.
+
+## Compatibility audit
+
+The app's only rrweb usage is `Replayer` in `DOMPlayer.tsx`. Verified against the published 2.1.1 dist:
+
+- All touched APIs unchanged: constructor, `addEvent`, `play`/`pause`, `setConfig`, `getMetaData`, `getCurrentTime`, `enableInteract`, `on('event-cast')`, `destroy`, `service.state.matches()`
+- All constructor options used (`root`, `mouseTail`, `pauseAnimation`, `showWarning`, `skipInactive`, `speed`) still in `playerConfig`
+- CSS class names the app styles itself (`.replayer-wrapper`/`.replayer-mouse`/`.replayer-mouse-tail` in `app.scss`) unchanged
+- Types resolve via exports map (app uses `moduleResolution: bundler`); CJS build present for Jest
+- Only behavioral delta: `addEvent` now defers its state-machine send to a microtask (FIFO order preserved)
+
+## Replay-fidelity verification
+
+Ran a headless-browser probe that records a heavy page (~1.2MB full snapshot, 700KB inline same-origin CSS, ~2k DOM nodes, modal-triggered mutations, `maskTextSelector: '*'`) with **both** `rrweb@1.1.3` (legacy SDK <= 0.24.0 recordings) and `rrweb@2.1.1` (current SDK), then replays each through the 2.1.1 `Replayer` using the exact `DOMPlayer.tsx` call pattern (constructor with initial events + `addEvent` streaming + `pause` seek):
+
+| Check | 1.1.3 recording | 2.1.1 recording |
+|---|---|---|
+| DOM rebuilt to match source (1990 nodes) | PASS | PASS |
+| Inline CSS survived (~850KB) | PASS | PASS |
+| Layout applied (.board width parity) | PASS | PASS |
+| Incremental mutations applied (50 modal cards) | PASS | PASS |
+| Text masking intact | PASS | PASS |
+| No replayer console errors | PASS | PASS |
+
+## Testing
+
+- `tsc --noEmit` clean
+- `yarn ci:unit`: 181 suites / 3081 tests pass
+- Probe above (12/12 checks)

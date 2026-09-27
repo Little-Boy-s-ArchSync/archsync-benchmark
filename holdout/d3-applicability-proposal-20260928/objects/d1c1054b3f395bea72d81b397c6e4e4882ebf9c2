@@ -1,0 +1,59 @@
+tree d1fc5dab16a6ad8aae83f6c6275049e2fcf91d45
+parent de7fe6669fafbf093b668833949ecfc3c288278f
+author John McLear <john@mclear.co.uk> 1787321060 +0100
+committer GitHub <noreply@github.com> 1787321060 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiFrkCRC1aQ7uu5UhlAAAVqEQAFI3PX3aYy6Iq9/jmdnrfDPC
+ L6HbsrSEtA+Kh6zU7TwvnMv2i+UL7ldCJugwUna+HTDRDCSfbWWsTw2f5WGzYHgo
+ ard7ZAbwRugoyj826jSL0Lt4hmbMmzTkunbt/8teKhltAPA6g8wlADB2fKcWo8yd
+ 7DGnGL6j0bZgARLpjcAzukTs1zkhbfXjzuVAQfYWzRcSdmIhYynokl5oA4YMSAzt
+ spjo92bIQIZVf0X5xaQzsNmzkQaC0cxMLfSRnZsbV6cDH1mdjyHkkmSN4Hdt2h3h
+ bORq70uxtQMfcnL4c/JMXQI6DxqLVmYOVI3PuV9ZJQdhSWCGPOcSquKajtkN+SWm
+ wL8VHNvzyO/mw1EH9E3vBSFt6MnGeAO85yTspY4vuoSHL5eEYfnch7Kjn2LtPLHu
+ RTZXs+dPxa1EWXgHWIPDI4Y9KFL/BhmUkpVwpTq0gjHoIQedFg5odgRdhQnxUOAX
+ 40/wEfNCFpy36EA1g9lOB+b9wH2SHquaa7U1O79EvbMYS5GPS7SQzWdASF9kCK3P
+ OGkl25Q3sVdw/629gc+7tCNl8F67SqncIWIRDbZl1Z+gwkbmE5UxI+381TQlQlC6
+ ex3yyZmnyy13BmQdi8FXvJXVt1WRjzZAjUrusykfl61vtrJm/rLkbIskQ1RX/jQA
+ v0wZKV3bRhG8PKgIj26C
+ =ALIS
+ -----END PGP SIGNATURE-----
+ 
+
+fix: stop cleanup punching holes in the pad it is cleaning (#8146)
+
+deleteRevisions() removed every revision 0..head and only then wrote the
+replacements. Any failure in that window left the pad with holes -- or
+with no history at all -- while the pad record still claimed them.
+
+Worse, the cached Pad was only unloaded on the success path. A failed
+cleanup left an object carrying the pre-cleanup head, so one more edit
+through it appended at the OLD head and persisted a head far past the
+rebuilt history. Measured on develop: a cleanup that fails one write,
+plus a single subsequent edit, takes a 12-revision pad to head=13 with
+revisions 3..12 all missing. Ten holes, none of them recoverable, and
+the pad can then never be cleaned up again.
+
+Two changes:
+
+  - Reorder to write-then-swap-then-drop. The rebuilt revisions are
+    written first, then head is moved onto them, then the now-orphaned
+    revisions above the new head are removed. Overwriting revisions
+    0..keepRevisions in place is safe because everything needed to
+    rebuild them is already in memory; nothing is read back from those
+    keys. The final delete step touches only orphans, so failing there
+    wastes space without making the pad inconsistent.
+
+  - Unload the cached Pad in a finally, so a failed cleanup cannot leave
+    a stale object able to append past the rewritten head.
+
+ueberdb offers no transaction across the rewrite, so a failure part-way
+can still leave revisions 0..keepRevisions rebuilt while head has not
+moved onto them -- check() then fails on a content mismatch. That state
+is recoverable: full compaction rebuilds the history from the current
+text. Holes are not recoverable, which is why they are the thing worth
+eliminating.
+
+Refs #8134
+
+Co-authored-by: Claude Opus 5 (1M context) <noreply@anthropic.com>

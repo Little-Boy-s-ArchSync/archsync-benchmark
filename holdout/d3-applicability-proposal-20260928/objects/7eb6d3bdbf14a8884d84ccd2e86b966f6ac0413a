@@ -1,0 +1,51 @@
+tree 5e11eb74c57f5f833b1e336682df038e1d55beab
+parent 5fc9c3ee0497e7fe2ef06f48f357f43492dc2cb0
+author Santhi Prakash <38608178+santhiprakash@users.noreply.github.com> 1786654262 +0530
+committer GitHub <noreply@github.com> 1786654262 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqfi42CRC1aQ7uu5UhlAAAQ0YQAJjPBsA9xvmV+AuOl+HUv0Cj
+ 1TtjKIDR9+7hk6rLfmubABeZzGF3IjIEh58w5Qdn76/09R70LymxxL2co6QZk33d
+ rfvk3ssKn58KSVpNmqyuBinYZ4R6eY2eoLGq+IIXWx+QTryXYv3ndjUePmQcX7WS
+ wVr2nBJW4FGBN5W3uy+vGqyj6aWVFEd8U5JVpTgwK1EEI6yBC+6djqFP8sF4sZON
+ IMK/OTe7ObEuo8ETbYC5UHZjwv+PBCC6sWk7RlOA0NknqEQ9ObfQ4eIJQd0vr8CY
+ fXTmFX/5oQu0bDOl9MqAjb9vhXdE1DE8lFC+4NMwoF0CHhHRQhz08Zfo18QvIfPD
+ whEs4hefvwYTY/a/gDisZNAkxleja/JQedY+AEIuWiFZUVvY/+bdY4JI1SvvV3gq
+ uso7IdefpyWNNX9wOtlKvTPfJve/L8Y/zq5dav/Tzur3L+R+auRx7OXs638qzDVz
+ /hGYWHrT4luxjM3v3eak/VOxHRCUAUgFcAITydI+dxS8tSzoN3Vv3VSHt1JQassr
+ xCIxskTDHMRnBI7//EZyaeXgSvssseB4fROzWtI4qmMrN9hp8oy5GuHM/665d0oX
+ U7eEJ1C9L6IXeom5aQlXLvFfXSOh7efA928acn8UZOvBgydbcaM1rq+bO/zAwwi1
+ KnEKelZrwo4ILBQ3KDd8
+ =lvGm
+ -----END PGP SIGNATURE-----
+ 
+
+fix(auth): use loopback URL for MCP OAuth JWKS verification (#3297)
+
+* fix(auth): use loopback URL for MCP OAuth JWKS verification
+
+Fetch the JWKS endpoint over the internal loopback address instead of the public APP_URL, so token verification works under Docker port-mapping, reverse proxies, and other deployments where the public URL does not loop back to the Node process.
+
+Also log the specific MCP OAuth verification error instead of swallowing it with a bare catch.
+
+Fixes #3077
+
+* fix(auth): normalize internal JWKS URL and throttle MCP OAuth warnings
+
+ - Problem: default loopback JWKS URL used PORT in dev where the server
+   listens on SERVER_PORT (3001), and trailing-slash overrides produced
+   //api/auth/jwks; unthrottled warn logs could flood on bad bearer tokens.
+ - Fix: resolveInternalBaseUrl trims/normalizes BETTER_AUTH_INTERNAL_URL,
+   mirrors apps/server listen-port selection, and MCP OAuth warnings are
+   throttled to once per minute.
+ - Verification: pnpm exec biome check on changed files; pnpm typecheck.
+
+* fix(auth): declare BETTER_AUTH_INTERNAL_URL in turbo globalEnv
+
+- Problem: Turborepo strict env mode strips undeclared BETTER_AUTH_INTERNAL_URL under pnpm dev, so the JWKS override silently falls back to loopback.
+- Fix: add BETTER_AUTH_INTERNAL_URL to turbo.json globalEnv (required for any new env var per CLAUDE.md).
+- Verification: python3 JSON parse of turbo.json; confirmed var was absent from globalEnv before this change.
+
+---------
+
+Co-authored-by: Amruth Pillai <im.amruth@gmail.com>

@@ -1,0 +1,10 @@
+tree 6684c268de92b7dfd8c3c51e14620247b9f35f79
+parent 36c35c9bd509fc18495c3c9d39bb6244bdb8bcef
+author Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+committer Amruth Pillai <im.amruth@gmail.com> 1786997992 +0200
+
+fix(seo): declare Twitter card tags with name attributes
+
+X reads twitter:* meta tags from the name attribute, not property, so the card
+validator reported twitter:title and twitter:description as missing. Also adds
+the og:type tag the root head was never emitting.

@@ -1,0 +1,81 @@
+tree a8236c23158be9011eb5a842a200a697a8b22e83
+parent c349a5ddce5a1ac0f1d14eccb8065d35834f5b1b
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787225083 -0700
+committer GitHub <noreply@github.com> 1787225083 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhuP8CRC1aQ7uu5UhlAAAsoEQAJp7xItWJZsonUhMEy6I3gRe
+ zBjZKB8r5VPLteUNjt/h7mKAKfAkJNkJAPkcWcZ3E2RdvDvbz/44PX0YzjKuV/Ox
+ fe5OEBxTCNtLM60ShIwXZJAF60b7NUkIPRuGpXtasUoR9RwGYmUydaipf5tH/Cl+
+ emR+8tuq4PoIg8b6lZrbl3957fYaYIgo2vPsven2inwSgkK9/xMKV9j7rDTiNCSU
+ Z3xSXKpgjuAKxerIuNgoAUOXMWYowPdAc9xdQM3C0VKq6fsCD3p2ip48TyTqKECD
+ 7w9OrvAMPzzdhRkS/BzFrJTbIo/pMPkm/tjht4CHS0tmu1qkGQBHGFRVzZCElCGC
+ HnWicc2tSJXSQKtE43TShc5/728ehK1rPlGjbXsI44ErfFS9wXvIg+cDI7l4yEoa
+ CLTFs3zwZmnYcNMUl9e7SPYMw6VXLeJYK+a0qSzZ08XILEbihK7rKECDLVOaP/vj
+ cgPvAcKjtDzp/sbaNj1eW+Q39W2IaSt5eoZXrHJLCT6kveuE2Q83U7m09XvOl9ug
+ TeM5xjzslGtjbnrXZGUOsG7gNRrGEXaqnEX1Drtufdc8KDmu7ZnFvQ8MqFfvH6E9
+ 0xgWPqGYo0dM8X/bjPj0z0ebAM+TBnijk4Ultw/dcfhrSgXBfvtPv2uMWwoEnxV5
+ ebL4C8ywzOcyul07xB93
+ =mk0f
+ -----END PGP SIGNATURE-----
+ 
+
+[HDX-5080] Chart editor UI for metric formulas (#2909)
+
+## Summary
+
+Exposes metric formulas (HDX-5078's `formulas` config, rendered by HDX-5079) in the chart editor for metric sources, so a derived series like `A / (A + B + C) * 100` can be built, validated, saved, and reloaded from the UI.
+
+Rebased onto main now that #2908 (HDX-5079 rendering) has merged.
+
+### Editor
+
+- **Formula rows** (`ChartFormulaEditor`) on metric-source builder charts (time series / table / number): "Add Formula" appends a row with a monospace letter-ref expression input, an alias, a per-formula number format (reuses the per-series format drawer), and "Remove Formula".
+- **Inline validation** with the structured validator from HDX-5078 (`validateFormula`): malformed expressions, unknown series refs, constant-only expressions, etc. surface live under the input; `validateChartForm` blocks save/run with the same messages so an invalid expression can never reach ClickHouse.
+- **Letter badges** (`A`, `B`, `C`, ...) on metric series rows so formula refs are discoverable.
+- **"Show input series" toggle** drives `showOperandSeries` (formula + raw operand series vs formula column(s) only). Adding a formula on a Number tile defaults operands to hidden, since Number tiles render the first value column.
+- **Mutual exclusion with ratio**: the "As Ratio" switch is hidden while a formula exists, and "Add Formula" is hidden while ratio mode is on (formulas supersede ratio in the renderer).
+- The Number-tile series cap (1, or 2 for ratio) is lifted when formulas exist, so operand-only series like `A / (A + B + C)` can be built.
+- `normalizeChartConfig` strips `formulas`/`showOperandSeries` on save for non-metric sources and for display types the composed metric query does not render (pie/bar/heatmap/search/patterns), mirroring the existing `metricName`/`having` stripping. The form state keeps them, so switching back restores the rows.
+
+### Rendering consumers (positional value-column contract)
+
+The composed metric query projects operand columns (unless hidden) then formula columns, ahead of group-by passthrough columns. Updated the consumers that map columns positionally:
+
+- `useChartNumberFormats`: operand columns → `select[i].numberFormat`, formula columns → `formulas[j].numberFormat`, both falling back to the chart-wide format; chart-wide axis format prefers formula formats when operands are hidden.
+- New `getBuilderValueColumnCount` helper (formula/ratio-aware) used by `DBTableChart` for group-by column inference; per-column color mapping skips hidden-operand formula configs.
+- `DBTimeChart` drill-down skips the value-range filter when operands are hidden (formula columns don't map onto `select` expressions).
+- Legend/tooltip naming needs no changes — formula columns arrive as named result columns (`alias || expression`).
+
+Persistence needs no API changes: tiles validate against `SavedChartConfigSchema`, which already carries `formulas`/`showOperandSeries`, and `builderToRawSql` already rejects formula configs with a clear message on the Builder → SQL switch.
+
+### Alerts on formula tiles (`packages/api`)
+
+Contrary to #2908's "alerts work with no changes" claim, the alert task does **not** run the tile config as-is — `getChartConfigFromAlert` rebuilds it from an explicit field list that dropped `formulas`/`showOperandSeries`. An alert on a formula tile therefore queried only the raw operand series and compared the threshold against the **last operand's value** (e.g. `740442112.0 meets or exceeds 0.1` for a byte-valued operand), regardless of the tile's "Show input series" toggle. Fixed here:
+
+- `formulas` is passed through, and operand columns are always dropped from the alert query (`showOperandSeries: false`) so the formula is the value column `parseAlertData` picks — the alert evaluates exactly what the tile displays.
+- Drive-by with the same omission shape: `ratioMode` is now passed through, so grouped `share_of_total` ratio tile alerts no longer silently evaluate as `per_group`.
+- New integration tests (`make dev-int FILE=checkAlerts`, 168 passing): formula value drives the alert (fixture chosen so the formula result differs from both operands), toggle-independence, NULL formula (zero denominator) skipped without NaN history, and `share_of_total` honored (asserting the exact share value a `per_group` fallback couldn't produce).
+
+### Testing
+
+- `make ci-lint`, `make ci-unit` pass.
+- New unit tests:
+  - `DBEditTimeChartForm.test.tsx`: Add/Remove Formula, inline validation (malformed / unknown ref / clears when fixed), save round-trip, save blocked on invalid expression, ratio mutual exclusion, `showOperandSeries` toggle, non-metric sources show no formula controls.
+  - `ChartEditor/utils.test.ts`: `validateChartForm` formula rules (including the Number-tile cap lift) and normalization stripping/round-trip.
+  - `source.test.ts`: `useChartNumberFormats` formula-column mapping (operands shown/hidden, ratio precedence, chart-format fallbacks) and `getBuilderValueColumnCount`.
+- New dashboard E2E (`make dev-e2e FILE=dashboard GREP="Metric formulas"`, passing): creates a metric table tile with two gauge series + `A / (A + B) * 100`, asserts the inline error for an invalid ref, hides operands, saves, reloads the page, verifies the formula column renders with a finite value, and reopens the editor to verify the round-trip.
+
+### How to test on Vercel preview
+
+1. Open a dashboard → Add tile → select a metrics source.
+2. Add two series (note the `A`/`B` badges), click **Add Formula**, enter `A / (A + B) * 100`.
+3. Try `A / C` to see the inline error; toggle **Show input series**; save, reload, and confirm the tile renders the formula series.
+
+### References
+
+- Linear Issue: [HDX-5080](https://linear.app/clickhouse/issue/HDX-5080/chart-editor-ui-for-metric-formulas)
+- Related PRs: #2908 (HDX-5079 formula rendering, base branch), #2872 (HDX-5078 schema + parser)
+
+### Screenshots
+<img width="1676" height="725" alt="image" src="https://github.com/user-attachments/assets/f16478f7-ac82-496d-90f2-056cc1260c70" />

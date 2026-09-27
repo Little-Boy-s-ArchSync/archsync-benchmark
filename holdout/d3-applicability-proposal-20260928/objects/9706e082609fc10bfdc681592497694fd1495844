@@ -1,0 +1,85 @@
+tree fcfa7e75490d4fdf1709cdc9c81e6a8471e33091
+parent a0a56ad406f4c3eb5c715b2e272ad2cea2eca099
+author John McLear <john@mclear.co.uk> 1785177384 +0100
+committer GitHub <noreply@github.com> 1785177384 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqZ6UoCRC1aQ7uu5UhlAAALWEQAE0CGhd2suIMRFNC8JeYugjn
+ Ipi0eRZTMrCrR594va/zCVgn3f7Dj0w71vqhsXRonJQZJchBspVvzVWE/01K3EJv
+ 9DjCq12uY14lV0xLEjjm6YNg9jV5hr+R95WIgNoNMWm1+SMIQNq7iCjGCsKdF9b4
+ BlG8mGvspnYrmb8akq0rP80a4PEvwpVl7DJbQK4fD8DZQg5em8++rixFX47A1Vf6
+ kAOrmlmRicbhV45b4MxwVHfjLrbkMFkzUDgKZcXLTFi7QorjK//f4j/JdPzeymlD
+ Ppoj44cpE5vzraMbfXKkmkLKkuPNBFZVzdP6JfcE5hFsjIu1fWakvZgZgb4hFqT+
+ L9FXhkEEztDAP6v8qVA/b9zGKDH7q+MqvD3lqeMyFKxpvY6lWZF0eOIYtnpNX+s/
+ e8VhN9OidsryKf3YQRqclaxRael8lv6aoTH8+1D5JOmWoj64Z/9RtsgAfikzPgQl
+ Nv02Chi1SLtY9+ajvw3ZH2Wu70mD9LAmAuCQAaw01CT/Rl+8IBz4Va2rOV7qp3aJ
+ C5ajl0F/Z50rSxtJynHSnuLbePUBGC8AE7s+IW4ogH2icZxtphZRKeF+4Qve7uhk
+ uAceJcDCHA+HK0k0SjqK5NLWRI4Zt6FvhD/L1MzSOyT48MuxK68Tkbtc4lzneX1p
+ wCp5Q72WGOLmyukHYW+6
+ =vevC
+ -----END PGP SIGNATURE-----
+ 
+
+security(padid): reject ueberdb delimiter ':' in pad ids (copyPad/movePad injection) (#8073)
+
+* security(padid): reject ueberdb delimiter ':' in pad ids (copyPad/movePad injection)
+
+GHSA-wg58-mhwv-35pq. copyPad / movePad / copyPadWithoutHistory take their
+destination via the `destinationID` API field, which — unlike padID /
+padName — is never run through sanitizePadId. Because isValidPadId only
+forbade `$`, a destinationID like `victim:revs:0` survived into the
+engine: the embedded `:` (the ueberdb key-namespace delimiter) let it
+address another pad's internal `pad:<id>:revs:<n>` records. That both
+bypassed the force=false "destination already exists" guard (which checks
+only the top-level `atext`) and clobbered the victim pad's revision
+history.
+
+- isValidPadId now rejects `:` (never legal in a pad id; it's the DB
+  key delimiter). The name portion excludes `$` and `:`.
+- Pad.copy() and Pad.copyPadWithoutHistory() validate destinationID via
+  isValidPadId before any db write; movePad routes through copy(), so the
+  check runs before the source is removed.
+
+Adds isValidPadId unit cases and an integration test proving copyPad /
+copyPadWithoutHistory reject a `:`-bearing destinationID with force=false
+and leave the victim's rev-0 changeset untouched, while a normal copy
+still works. Reported privately (finder credited on the advisory).
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* security(padid): sanitize pad URL before validating so legacy ":" URLs still redirect
+
+Addresses Qodo review on #8073. Rejecting ":" in isValidPadId made
+padurlsanitize's validate-first ordering return 404 for a browser
+visiting a legacy `/p/<id with ":">` URL, instead of redirecting it to
+the sanitized `_` form.
+
+Reorder padurlsanitize to sanitize FIRST (sanitizePadId maps whitespace
+and ":" to "_"), then validate the sanitized id. `/p/foo:bar` now
+redirects to `/p/foo_bar` as before; an id that stays invalid after
+sanitizing (e.g. containing "$") is still forbidden. This restores the
+pre-fix redirect behavior while keeping ":" out of stored pad ids.
+
+Adds a regression test for the ":" redirect, the "$" 404, and a clean id.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* security(padid): keep existing pads with ":" reachable
+
+Rejecting ":" in isValidPadId also gates padManager.getPad(), so pads whose id
+contains a ":" — legal before GHSA-wg58-mhwv-35pq, which is why padIdTransforms
+maps ":" at all — became unopenable, not just uncreatable: sanitizePadId returns
+such an id unchanged once the pad exists, and getPad then threw.
+
+Refuse an invalid id only when no pad with that exact id exists (in getPad and in
+the pad-URL param). The injection primitive stays closed: doesPadExist() requires
+a top-level `atext`, which the `pad:<id>:revs:<n>` sub-records an injected
+destinationID addresses do not have. Copy destinations keep the strict check, so
+no new ":" id can be created.
+
+Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+Co-authored-by: SamTV12345 <40429738+samtv12345@users.noreply.github.com>

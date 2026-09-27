@@ -50,6 +50,14 @@ function sha256(value) {
 }
 
 const provenanceFiles = [
+  "scripts/d3-review/proposed-applicability.mjs",
+  "test/d3-proposed-applicability.test.mjs",
+  "holdout/D3-APPLICABILITY-AI-NOTES-20260928.md",
+  "holdout/d3-applicability-proposal-20260928/evidence-ledger.json",
+  "holdout/d3-applicability-proposal-20260928/original-checklist.json",
+  "holdout/d3-applicability-proposal-20260928/AI-ANALYSIS.md",
+  "holdout/d3-applicability-proposal-20260928/validation.json",
+  "holdout/d3-applicability-proposal-20260928/README.md",
   "scripts/d3-review/method-packet.mjs",
   "test/d3-method-packet.test.mjs",
   "holdout/D3-METHOD-PACKET.v0.1.0.md",

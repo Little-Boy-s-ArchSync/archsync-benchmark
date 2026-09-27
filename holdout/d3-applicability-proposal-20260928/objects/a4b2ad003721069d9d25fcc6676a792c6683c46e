@@ -1,0 +1,51 @@
+tree 205f5f11c3c2f295d5e4673bda6b9b531d80b1c5
+parent 7294944a32b03e8dbf8cefbaed4a58cfbb0e0aac
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787340898 -0700
+committer GitHub <noreply@github.com> 1787340898 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqiKhiCRC1aQ7uu5UhlAAAK90QAI/fn0ovygMqnRK57Z/LDY5l
+ Cy+M5I1sYsxretCoQvVkSrXxk5tOntxid+NK/EmF4y0qzBSg6vUOfjG0TzO7oIH+
+ r9mRSIOqPi2HAbu4GxwTEnx/V9VWidWEgiZJCUkk7l6Vg1dLQuqNf+ifta4L26C8
+ f75MUnrY5+RsZHBhsihqm84F7Hlznjvr8X51aOFjftFi7sq9uYIy/+1CHKvM+qsj
+ eKguhof1br3DiW1Ic34Ve2DnCHgB06KbO02pW/O0pifIARrhSc2R9ZrNquN7F73f
+ 3SPcJ5UNWizRCj3DKpvwMFlI9izg7POKYrcQTNOpdKLMEP4yKuclW/HeeRB5MgMK
+ bO1aS0xaWtbOP2xgwGqYiiH8dQcDFbmTV/CampkZWayE8vH5YypUzsr2SWEl38QO
+ HcRqWpC6z07xYxbadNzgfjAddSpPR0NL8dVbYab/pG9OFNBAWa8acYQjJ9fW84iY
+ 18y8oO3csV3zjAah1CkNUKLUmGsxsIwb9M7rbVzm/A0oGGuV+NnXrS6nFLpHsSjd
+ Vkedem+4m9oiEf490VGS81nY3IqDZSpmBDOWCzha1UdyCpot/5eqw12Y6dSgcwMw
+ sGYX59l5jkxSQJmJOHw8yTCWWLplswfikCw3SMxa/LRhOR4MWME+3yQdTZkV7Ljm
+ vh2YRXXzHaI2PafFgNhB
+ =0hMv
+ -----END PGP SIGNATURE-----
+ 
+
+fix(api): retry initial MongoDB connect and add Mongo-aware /ready endpoints (#2968)
+
+Fixes #2966
+
+## Why
+
+`GET /health` returns 200 unconditionally, and a failed *initial* MongoDB connect is never retried — the rejection from `server.start()` was logged and swallowed (`packages/api/src/index.ts`), leaving the process listening but permanently unable to serve. In the linked issue this produced a pod that stayed `1/1 Running` for 30 hours while every Mongo-backed request timed out, `/v1/opamp` returned 500, and the downstream OTel collector crash-looped (217 restarts) because it never received its remote config.
+
+Two distinct bugs, both fixed here:
+
+1. **Recovery (root cause):** mongoose only auto-reconnects after a *successful* initial connect; a failed first `mongoose.connect()` is terminal and nothing retried it.
+2. **Reporting:** `/health` on both the API and OpAMP servers checks nothing, so K8s probes (which the Helm chart wires to `/health`) can never see the failure.
+
+## What
+
+- **`connectDBWithRetry()`** (`models/index.ts`): retries the initial connect with capped exponential backoff (1s → 30s) until it succeeds. Config errors (missing `MONGO_URI`) are non-retryable and now cause `process.exit(1)` instead of a logged-and-ignored rejection, so orchestrators restart the pod. Retries are counted on the existing `hyperdx.mongodb.connection_events` metric (`event: initial_connect_retry`).
+- **`GET /ready`** on both the API server and the OpAMP server: returns 503 with `{ status: 'unavailable', mongo: <readyState> }` unless the mongoose connection is connected. Nearly every API route — and the entire OpAMP handler — is Mongo-backed.
+- **`/health` unchanged** on both servers: pure liveness. Restarting a pod does not fix a Mongo outage, so liveness deliberately checks no external dependencies; with the retry fix, a restart is no longer needed for recovery either.
+- Startup ordering (listen before connect) is kept intentionally: `/health` answers while connecting, `/ready` stays 503 until the connection succeeds.
+
+## Testing
+
+- Unit: `connectDBWithRetry` — first-attempt success, retry-until-success, `maxAttempts` exhaustion, non-retryable config error.
+- Integration: `/health` stays 200 and `/ready` flips 200 → 503 → 200 across a `mongoose.disconnect()` / reconnect cycle, on both the API and OpAMP apps.
+- `make ci-lint`-equivalent lint, full `yarn ci:unit` (720 tests), and `make dev-int FILE=health.int` all green.
+
+## Follow-up (separate repo)
+
+`hyperdxio/helm-charts`: point `readinessProbe` at `/ready` (leaving liveness on `/health`), and ideally expose the probe handler as a chart value so operators are not locked to a hard-coded path again. Until then, existing charts still gain the recovery fix from the image alone.

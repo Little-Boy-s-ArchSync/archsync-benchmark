@@ -1,0 +1,25 @@
+tree 0570cf75a4cd417c8b48fd2c529b35223da77e7a
+parent 4a8f87ab8f008e94528f461b066126c0ef4d6732
+author Amruth Pillai <im.amruth@gmail.com> 1785477474 +0200
+committer GitHub <noreply@github.com> 1785477474 +0200
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqbDliCRC1aQ7uu5UhlAAAvLoQABdk7Q2JmMGk9riDWe2AplZU
+ Mc1IQFSKlkOhuASa8/JeTU7jOXXA4NzFy8BYx76moupEowtt2CgS8aXzETSMSj5C
+ q1mquyLxDLTVpStH0lUtvDWCbfaOBWGA19Bznm/QggyHd4XaT51IAt+XvRHyE1Ku
+ TcoEk/8wY5P8QmuoUprHxByY4zfrpTykKZdvyapq2iGedc8KpeKtcqaRgSNs4Soz
+ D/y+Q4oda7BCA/NzKKeo3hM2d163n3gCTJjzNg1yQHFy/z5NLMmm3SkKDnNpxNn+
+ zggfYSw6TWgfn4RAQQPk8BZX3eyaovrTXK+NCMzLMVDTRuAba/AvAvTZFrfCCjNl
+ GrgX3N07xQ0Uh+xRWkLAB11/TXA3IZa1iIe0MqZr2bQadjHTLTg/CPpUF2lxz/kr
+ lcKW8EtIhmgikqnCXv7+zNVpyWInKuJJwsH5wIfbF7rXtq+Crsg7K0CaUVN10Ghi
+ D3duIUXamywYsJjKWVgd7F7FAuS12t9ykFB/BYcvT0+RUh51imcqDoBBSLEvC0Am
+ Z71PgsdEieo2NsrV/uHItyVkZypB9mfVi97ksUI9daBHcyULyUWnCnXQusY3HXWm
+ X3mDny+G7of3yvmwFz9KuDCrknoG2+aLk1iwXo1sEqmD/Cy1csg654tCmj2DtdMH
+ 1HAcezsvPDfMcrXFwAhS
+ =VGzC
+ -----END PGP SIGNATURE-----
+ 
+
+fix(stylesheet): harden PDF preflight and surface worker failures (#3284)
+
+Co-authored-by: Cursor Agent <cursoragent@cursor.com>

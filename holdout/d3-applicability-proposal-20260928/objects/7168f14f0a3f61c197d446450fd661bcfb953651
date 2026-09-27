@@ -1,0 +1,75 @@
+tree 67d758e0b2e66e6011fc68591c84910d58ca8076
+parent 01d0b08a4eb0e8a26a69320069e955d09ce93381
+author John McLear <john@mclear.co.uk> 1782118407 +0100
+committer GitHub <noreply@github.com> 1782118407 +0100
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqOPgHCRC1aQ7uu5UhlAAAjhQQAEtKkfRgDRFOizHz6zHcodMX
+ nsv1mUrGi/tttLXvOZICsR6yWuEMXtlL8CVXbhgVzzB4Lgc8D5nuIdqsknXW/hm7
+ KApZ6GuDUy5rRLTOboBAEJjCDQjTVDTUbP1kiy37vG5N2/KWlz8GSqlFtjxu1HEG
+ S1vGzLV6gQdkWpPw/666fSNMp1tdkX2W1SIzrp5/bQrzhuK3bxRkRNcLJt9k8jp0
+ eAWe0DOm4qptQkcSW4J2qEt/dMUKqy+JSQHcO7zownIXB6nbVfgtQu5Lw5NN1Fa3
+ R4V+KyDsuShI8dROf1kSJ+haf5+Ay6UxQ6zjLUf3YjpNsA5ADZod4rCiQz5e/v43
+ CjgOsur3Zu1uxW4NsG3xXZL2sWq33t1XLfE4HkaH85+4wP1yw1I227ALCBBQCbaT
+ e6rPRYTNwtIlC0zawQjG64ZzxsZJf4p6tquP++C12Ialk0ezGCQ+Eocxn7lefTIW
+ Fn7wlQHU0B6ZrdZBqVO3Y9SyhmbepduS5chbWQvWYPzAplF75QLWQjZ3V6XEcf3L
+ LjO/oYVWTVpp5u7fd5bx9084h6USeyVFcpMpRmyS1qdn4lS9hk80+9E+YEibIA5Q
+ d5/ViUVE2+pUUdpHjjRxYUsahD+FisZoVLuTTDIP0QzlKeYbOzdbK7AE9jnks8RH
+ i5+O980dZzsbGJP1Y27N
+ =40vD
+ -----END PGP SIGNATURE-----
+ 
+
+chore(deps): drop three unmaintained dependencies (unorm, find-root, jsonminify) (#7992)
+
+* chore(deps): drop three unmaintained dependencies from core
+
+Remove dependencies whose upstreams are effectively abandoned, replacing
+each with a maintained alternative or native API. No behaviour change for
+users; reduces the production dependency surface.
+
+- unorm (last publish 2019): replace `UNorm.nfc(s)` in contentcollector
+  with native `String.prototype.normalize('NFC')`, available in every
+  supported Node and browser. Also drop it from Minify's LIBRARY_WHITELIST.
+- find-root (last publish 2017): inline a ~10-line equivalent in
+  AbsolutePaths.findEtherpadRoot(), mirroring find-root's semantics
+  (closest ancestor containing package.json, throw if none).
+- jsonminify (last publish 2021): swap settings parsing to jsonc-parser
+  (already used by the admin workspace, actively maintained). The old
+  `jsonminify(str).replace(',]', ']').replace(',}', '}')` had two bugs that
+  jsonc-parser's allowTrailingComma fixes: String#replace only swapped the
+  FIRST trailing comma of each kind, and the blind replace corrupted ',]' /
+  ',}' byte sequences inside string values (e.g. URLs).
+
+Added a regression test in settings.ts covering multiple trailing commas
+and ',]'/',}' inside string values.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* fix: drop stale $unorm bundle entry from tar.json
+
+The unorm removal left `$unorm/lib/unorm.js` listed in the ace2_inner.js
+client bundle manifest. With unorm uninstalled, getTar() would point at a
+node_modules asset that no longer exists, producing 404s when loading that
+bundle. Nothing imports unorm anymore (contentcollector now uses native
+String.prototype.normalize), so the entry is dead and removed.
+
+Caught by Qodo review.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+* fix: update container loadSettings helper to jsonc-parser
+
+tests/container/loadSettings.js is a standalone helper (separate from
+node/utils/Settings.ts) that parsed settings.json.docker with jsonminify
+directly. Removing jsonminify from dependencies broke the container test
+suite with MODULE_NOT_FOUND. Switch it to jsonc-parser to match Settings.ts.
+
+Verified loadSettings() parses settings.json.docker and applies the
+container ip/port overrides.
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>
+
+---------
+
+Co-authored-by: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

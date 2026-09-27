@@ -1,0 +1,11 @@
+{
+  "status": "SOURCE_EVIDENCE_VERIFIED_NOT_ACCEPTED",
+  "rows": 152,
+  "citations": 532,
+  "final_decisions": 0,
+  "pending_human_rows": 152,
+  "proposed_applicable": 34,
+  "proposed_unresolved": 118,
+  "labels_created": false,
+  "predictions_executed": false
+}

@@ -1,0 +1,29 @@
+tree 65ff158af9182a901433e29cb2572946a5f324fb
+parent 75909ace4f7909b11d1111381b6a9aabd81895ea
+author Warren Lee <5959690+wrn14897@users.noreply.github.com> 1787069222 -0700
+committer GitHub <noreply@github.com> 1787069222 +0000
+gpgsig -----BEGIN PGP SIGNATURE-----
+ 
+ wsFcBAABCAAQBQJqhIMmCRC1aQ7uu5UhlAAA43YQAIl56UqHLnTT/y7lMSOJN338
+ JTA/xfJlQmMdrXE/w0u9QItg+kc01r0BzD+rhHYrusEsvoOjAGN1Rm5g7ssgbDMR
+ /lx6RIsqNoUaGoNa3p2jFBdMvoH5Sfrxuf0Aq3mMDq0UNyRdvdzF5YOualFYdJOC
+ NNM38dZIp4BvjnG9yRYNKU/JbmJGcF7vf3X47xIwEnIzU7K5MU8/bMyteAQuib6k
+ IO6nrmfHGME22yLOGu5j+NGtL5zGqPSJy+0L+qg3REfR+CrqlBbMuC9Cq08LQLS4
+ cMYp57YL36v3PrszT5IP3Q8a0cXM4Wbx6iSNVVEpB1yut9fRtBamNHEMZRe+o0t+
+ Gw58idffkOnjNmaJZq4/xskKzhXGeBtd0Fo7GWsA9qM5FEicR6pZ7d45Xod9vmRW
+ 0Orv9wjrvUYAM76h1+hWeThNkakjsvxKuI6CGOPkFuHMaSzPxsFGUqe+AYqOaWTF
+ prIZfDW3y936d9GtfzAxMoy3DY7mTLmAkXbt4u69Nulrr7qQ1b3+jO+bpGEacYzt
+ 6SoG8lfGtFEpNSimNVQn5Thx3+W6n2ELjN3nR3yWrhe8jSoApbxtqNn5CkVzz1ZE
+ V5r1eLEyx3wXbeR7K+mmDbhRsH32xBX9hgvuweXtX14FjVg0t3Tnb39iEooZd87P
+ c+S1vnv6Nyzsrbi5Mw4n
+ =uvej
+ -----END PGP SIGNATURE-----
+ 
+
+fix: align alert chart markers with the evaluated bucket start (#2928)
+
+On the alert details page, firing/recovery markers were drawn one bucket to the right of the data they belong to: the latest OK marker sat at 7:30 while both the plotted data point and the history table's Evaluation Window showed 7:29. Markers now land on the start of the newest evaluated bucket, lining up with the chart and the table.
+
+The transitions endpoint now emits `bucketStart` — the newest `lastValues.startTime` across the window's rows (including group-by rows), falling back to `createdAt − interval` for windows without `lastValues`, the same fallback the table uses. The client draws at `bucketStart ?? createdAt`, so older API responses keep working. Deriving the time server-side from `lastValues` (rather than shifting by the alert interval client-side) keeps markers correct when evaluations bucket finer than the interval. Dashboard tile alert annotations use the same endpoint, so they shift consistently.
+
+Validated with new integration tests (newest-bucket derivation, empty-`lastValues` fallback, group-by max, carry-in pin at range start) and unit tests for the annotation mapping; full unit suites and the `alertHistory` integration suite pass.
