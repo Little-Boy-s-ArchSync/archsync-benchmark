@@ -17,6 +17,36 @@ import { sha256 } from '../scripts/d3-source-review/files.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 
+function sealedReviewFixture() {
+  const base = 'a'.repeat(40), head = 'b'.repeat(40);
+  const sourceSha = 'c'.repeat(64), targetSha = 'd'.repeat(64);
+  const sourceBlob = 'e'.repeat(40), targetBlob = 'f'.repeat(40);
+  const case_envelopes = Array.from({ length: 56 }, (_, index) => {
+    const case_id = `FIXTURE-${String(index + 1).padStart(2, '0')}`;
+    const occurrence = {
+      repository: 'fixture/repository', case_id, side: 'head', commit: head,
+      source_path: 'src/a.ts', start_line: 1, start_column: 1, syntax: 'import',
+      quote: "import './b.js';", literal_specifier: './b.js', source_git_blob: sourceBlob, source_sha256: sourceSha,
+      resolved_target_path: 'src/b.ts', target_git_blob: targetBlob, target_sha256: targetSha,
+      source_group: 'group-a', target_group: 'group-b', disposition: 'resolved-in-scope', reason: 'Controlled fixture edge',
+      resolver_evidence_refs: ['fixture://resolver'], ai_provenance: { used: false, human_verification: 'full' },
+    };
+    return { repository: 'fixture/repository', case_id, base, head,
+      file_coverage: [
+        { repository: 'fixture/repository', case_id, side: 'base', commit: base, path: 'src/a.ts', tree_mode: '100644', git_blob: sourceBlob,
+          sha256: sourceSha, eligibility: 'eligible-production', review_status: 'reviewed', occurrence_count: 0, reason: 'Controlled zero-occurrence side' },
+        { repository: 'fixture/repository', case_id, side: 'head', commit: head, path: 'src/a.ts', tree_mode: '100644', git_blob: sourceBlob,
+          sha256: sourceSha, eligibility: 'eligible-production', review_status: 'reviewed', occurrence_count: 1, reason: 'Controlled occurrence side' },
+      ], occurrences: [occurrence], edges: [{ repository: 'fixture/repository', case_id, side: 'head', commit: head,
+        source_group: 'group-a', dependency: 'module-import', target_group: 'group-b', occurrence_keys: [occurrenceKey(occurrence)] }],
+    };
+  });
+  return { schema: 'd3-module-inventory-review/2', status: 'original-sealed', method_manifest_sha256: '1'.repeat(64), cases_sha256: '2'.repeat(64),
+    reviewer: { id: 'fixture-reviewer', relationship: 'development-associated-author', declaration_reference: 'fixture://declaration',
+      declared_at_utc: '2026-01-01T00:00:00.000Z', prior_output_exposure: 'controlled fixture only',
+      development_involvement: 'controlled fixture only', ai_assistance_summary: 'none for controlled fixture' }, case_envelopes };
+}
+
 test('blank scaffold carries no declaration, labels, outputs or acceptance', async () => {
   const review = JSON.parse(await readFile(join(root, 'holdout/d3-module-method/v0.2.0/review.template.json')));
   assert.deepEqual(validateModuleReview(review), { status: 'BLANK_PREPARATION_NOT_A_REVIEW', research_complete: false, cases: 0 });
@@ -39,6 +69,26 @@ test('occurrence and edge identities retain physical location and exact endpoint
   const edge = { repository: 'fixture/repo', case_id: 'F-1', side: 'head', source_group: 'a', dependency: 'module-import', target_group: 'b' };
   assert.deepEqual(occurrenceKey(occurrence), ['fixture/repo', 'F-1', 'head', 'src/a.ts', 3, 8, 'import', './b.js', 'src/b.ts']);
   assert.deepEqual(edgeKey(edge), ['fixture/repo', 'F-1', 'head', 'a', 'module-import', 'b']);
+});
+
+test('sealed review requires an internally consistent occurrence-to-edge graph', () => {
+  const review = sealedReviewFixture();
+  assert.deepEqual(validateModuleReview(review), { status: 'STRUCTURALLY_VALID_NOT_SCIENTIFICALLY_VERIFIED', research_complete: false, cases: 56 });
+});
+
+test('review graph rejects wrong side, wrong groups, unresolved references and missing derived edges', () => {
+  const mutations = [
+    { message: /side differ/, apply: (r) => { r.case_envelopes[0].edges[0].side = 'base'; r.case_envelopes[0].edges[0].commit = r.case_envelopes[0].base; } },
+    { message: /source group differ/, apply: (r) => { r.case_envelopes[0].edges[0].source_group = 'wrong-group'; } },
+    { message: /Only resolved-in-scope/, apply: (r) => { const envelope = r.case_envelopes[0], o = envelope.occurrences[0];
+      o.disposition = 'unresolved-target'; o.resolved_target_path = null; o.target_git_blob = null; o.target_sha256 = null;
+      envelope.edges[0].occurrence_keys = [occurrenceKey(o)]; } },
+    { message: /exactly one derived edge/, apply: (r) => { r.case_envelopes[0].edges = []; } },
+  ];
+  for (const mutation of mutations) {
+    const review = sealedReviewFixture(); mutation.apply(review);
+    assert.throws(() => validateModuleReview(review), mutation.message);
+  }
 });
 
 test('freeze manifest verifies raw bytes and pins merged Guardian source without pretending fixture freeze', async () => {

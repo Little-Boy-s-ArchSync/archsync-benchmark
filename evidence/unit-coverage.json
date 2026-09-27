@@ -17,12 +17,44 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 251,
-    "passed": 251,
+    "total": 256,
+    "passed": 256,
     "failed": 0
   },
   "provenance": {
     "files": [
+      {
+        "file": "scripts/d3-review/proposed-applicability.mjs",
+        "sha256": "2eec5baa196d0ad9e9845acf998227297e742d39381df8faf271d66aef568ffd"
+      },
+      {
+        "file": "test/d3-proposed-applicability.test.mjs",
+        "sha256": "efdbbfa3c5e93a569f08750f838900e715766a61b97fd620dddcd1f0b7c9c9d5"
+      },
+      {
+        "file": "holdout/D3-APPLICABILITY-AI-NOTES-20260928.md",
+        "sha256": "10aa0d331bb569d335223016815a6d021df51efef7516d4295cf2222d6631c58"
+      },
+      {
+        "file": "holdout/d3-applicability-proposal-20260928/evidence-ledger.json",
+        "sha256": "b9655af035700e12ada897db9c8be3a6d803d17a8a97642a57fca776f746a095"
+      },
+      {
+        "file": "holdout/d3-applicability-proposal-20260928/original-checklist.json",
+        "sha256": "2c20c4694b749e565ebce149385407b808e224ee0f5d5471f4aab1e37a1d979a"
+      },
+      {
+        "file": "holdout/d3-applicability-proposal-20260928/AI-ANALYSIS.md",
+        "sha256": "10aa0d331bb569d335223016815a6d021df51efef7516d4295cf2222d6631c58"
+      },
+      {
+        "file": "holdout/d3-applicability-proposal-20260928/validation.json",
+        "sha256": "d2c62d6b418ae54936e6c232d13396883260e9da2651992d59a374bc1fd527a5"
+      },
+      {
+        "file": "holdout/d3-applicability-proposal-20260928/README.md",
+        "sha256": "517c497f85fcd38aaaab608cecfe1ffc7964f51dde20d6fef53822da8395ac72"
+      },
       {
         "file": "scripts/d3-review/method-packet.mjs",
         "sha256": "4c3faeea8cb3c371918650db5b1d12bb2ff565b4d91fa459a8bad7934d820856"
@@ -37,7 +69,7 @@
       },
       {
         "file": "holdout/D3-APPLICABILITY-LEDGER.v0.1.0.md",
-        "sha256": "9e6c3e6d6455e8f3ded1fe14148c8c261d25681815f7d585be00ebcefc89d5fe"
+        "sha256": "ffb64cf39f0c03a1a52958dccd3e31c66639c95dc21bbfb428747fc488388433"
       },
       {
         "file": "holdout/D3-HIEU-PREFLIGHT-20260928.md",
@@ -221,7 +253,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "5c998b5c2f3cb7844f23a4207dd497815563153223888c3305e06eb69753ae58"
+        "sha256": "f9547d8ea829141ef0a612ddb6e26f9c5f4061aa15c5d5e20c040ded350849f5"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -388,6 +420,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "a1811ca5fcd667aee4c23deb9f4a5dfdd893760fc55d5d475f544f1ba315f836"
+    "manifest_sha256": "b389eed6ceb52b6c88c476da31631e3dacc67955ca2e9fafdf9dc8711bf11cee"
   }
 }

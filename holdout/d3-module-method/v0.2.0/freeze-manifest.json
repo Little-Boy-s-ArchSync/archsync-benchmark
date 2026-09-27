@@ -66,13 +66,13 @@
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "6bef8d414796cf5574fe2194be6cad6711bb574af0abe8160c4017ecb4f89b95",
-      "bytes": 15056
+      "sha256": "4ff53868a2c15f264575cb83c9f745c4d11160a0e5887c5c5ba72b065a8b7fda",
+      "bytes": 16436
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "8f0ab5e9c65256eab6ca62ae76fee422c3d9965788d29645fcf893cb391a5079",
-      "bytes": 4267
+      "sha256": "27a1b53f8f9b734cced262429d1f280f81043e27498dc24290207ceae52e3417",
+      "bytes": 8028
     }
   ],
   "scientific_claims": {

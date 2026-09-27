@@ -99,7 +99,7 @@ export function validateModuleReview(review, cases = null) {
     const caseKey = JSON.stringify([envelope.repository, envelope.case_id]);
     assert(!seenCases.has(caseKey), 'Duplicate case envelope'); seenCases.add(caseKey);
     assert(Array.isArray(envelope.file_coverage) && Array.isArray(envelope.occurrences) && Array.isArray(envelope.edges));
-    const coverageKeys = new Set(), localOccurrenceKeys = new Set();
+    const coverageKeys = new Set(), localOccurrences = new Map();
     for (const row of envelope.file_coverage) {
       validateCoverage(row, envelope);
       const key = JSON.stringify([row.side, row.path]); assert(!coverageKeys.has(key), 'Duplicate file-side coverage'); coverageKeys.add(key);
@@ -107,19 +107,38 @@ export function validateModuleReview(review, cases = null) {
     let reviewedCount = 0;
     for (const row of envelope.occurrences) {
       validateOccurrence(row, envelope); const key = JSON.stringify(occurrenceKey(row));
-      assert(!occurrenceKeys.has(key), 'Duplicate occurrence key'); occurrenceKeys.add(key); localOccurrenceKeys.add(key); reviewedCount++;
+      assert(!occurrenceKeys.has(key), 'Duplicate occurrence key'); occurrenceKeys.add(key); localOccurrences.set(key, row); reviewedCount++;
       assert(coverageKeys.has(JSON.stringify([row.side, row.source_path])), 'Occurrence lacks file-side coverage');
     }
     assert.equal(envelope.file_coverage.filter((r) => r.review_status === 'reviewed').reduce((n, r) => n + r.occurrence_count, 0), reviewedCount,
       'Reviewed file occurrence counts must equal inventory length');
-    const seenEdges = new Set();
+    const seenEdges = new Set(), referenceCounts = new Map();
     for (const edge of envelope.edges) {
       assert.equal(edge.repository, envelope.repository); assert.equal(edge.case_id, envelope.case_id);
       assert(['base', 'head'].includes(edge.side) && edge.commit === envelope[edge.side]);
       assert(edge.dependency === 'module-import' && [edge.source_group, edge.target_group].every(text));
       const key = JSON.stringify(edgeKey(edge)); assert(!seenEdges.has(key), 'Duplicate module edge'); seenEdges.add(key);
       assert(Array.isArray(edge.occurrence_keys) && edge.occurrence_keys.length > 0);
-      for (const occurrence of edge.occurrence_keys) assert(localOccurrenceKeys.has(JSON.stringify(occurrence)), 'Edge references an unknown occurrence in its case envelope');
+      const edgeReferences = new Set();
+      for (const occurrenceKeyValue of edge.occurrence_keys) {
+        const occurrenceKeyString = JSON.stringify(occurrenceKeyValue);
+        assert(!edgeReferences.has(occurrenceKeyString), 'Duplicate occurrence reference in module edge'); edgeReferences.add(occurrenceKeyString);
+        const occurrence = localOccurrences.get(occurrenceKeyString);
+        assert(occurrence, 'Edge references an unknown occurrence in its case envelope');
+        assert.equal(occurrence.side, edge.side, 'Edge and occurrence side differ');
+        assert.equal(occurrence.commit, edge.commit, 'Edge and occurrence commit differ');
+        assert.equal(occurrence.disposition, 'resolved-in-scope', 'Only resolved-in-scope occurrences may support an edge');
+        assert.equal(occurrence.source_group, edge.source_group, 'Edge and occurrence source group differ');
+        assert.equal(occurrence.target_group, edge.target_group, 'Edge and occurrence target group differ');
+        referenceCounts.set(occurrenceKeyString, (referenceCounts.get(occurrenceKeyString) ?? 0) + 1);
+      }
+    }
+    for (const [key, occurrence] of localOccurrences) {
+      const expected = occurrence.disposition === 'resolved-in-scope' ? 1 : 0;
+      assert.equal(referenceCounts.get(key) ?? 0, expected,
+        occurrence.disposition === 'resolved-in-scope'
+          ? 'Every resolved-in-scope occurrence must support exactly one derived edge'
+          : 'Non-resolved occurrence must not support a derived edge');
     }
   }
   if (cases) {
