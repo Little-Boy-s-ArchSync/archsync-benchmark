@@ -50,6 +50,11 @@ function sha256(value) {
 }
 
 const provenanceFiles = [
+  "scripts/d3-source-review/files.mjs",
+  "scripts/d3-source-review/transfer.mjs",
+  "scripts/d3-source-review/object-source.mjs",
+  "scripts/d3-source-review/cli.mjs",
+  "test/d3-portable-review.test.mjs",
   "scripts/lib/ablation-evidence.mjs",
   "scripts/lib/ai-evaluation.mjs",
   "scripts/lib/analysis-notebook.mjs",
