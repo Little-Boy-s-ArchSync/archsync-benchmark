@@ -1,0 +1,68 @@
+{
+  "schema": "d3-offline-source-audit/1",
+  "status": "source-provenance-only-not-d3-result",
+  "inputs": {
+    "upstream_receipt_sha256": "8356a69a4bf8c5c54dbcc092b245fc8e60cfc3996d0791e1a2defcd5049f6b60",
+    "file_side_inventory_sha256": "c629044a356c2a83a1a28eb85078f813b227862a088e64476674e1c54f06f68a",
+    "selected_cases_sha256": "44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35",
+    "proposed_anchor_ledger_sha256": "b9655af035700e12ada897db9c8be3a6d803d17a8a97642a57fca776f746a095"
+  },
+  "repositories": [
+    {
+      "repository": "hyperdxio/hyperdx",
+      "commits": 31,
+      "case_commit_tree_entries": 51589,
+      "unique_blobs_available_offline": 2003,
+      "symlink_entries_not_followed": 0,
+      "present_regular_file_sides_matched": 137,
+      "absent_file_sides_matched": 7,
+      "unique_file_side_blobs_rehashed": 117
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "commits": 32,
+      "case_commit_tree_entries": 43528,
+      "unique_blobs_available_offline": 2878,
+      "symlink_entries_not_followed": 32,
+      "present_regular_file_sides_matched": 71,
+      "absent_file_sides_matched": 9,
+      "unique_file_side_blobs_rehashed": 51
+    },
+    {
+      "repository": "ether/etherpad",
+      "commits": 30,
+      "case_commit_tree_entries": 33571,
+      "unique_blobs_available_offline": 1348,
+      "symlink_entries_not_followed": 0,
+      "present_regular_file_sides_matched": 73,
+      "absent_file_sides_matched": 3,
+      "unique_file_side_blobs_rehashed": 60
+    }
+  ],
+  "totals": {
+    "commits": 93,
+    "file_sides_matched": 300,
+    "present_regular_file_sides_matched": 281,
+    "absent_file_sides_matched": 19,
+    "symlink_entries_not_followed": 32
+  },
+  "claims": {
+    "selected_file_side_bytes_verified": true,
+    "historical_blob_objects_available_offline": true,
+    "project_code_executed": false,
+    "study_tool_predictions_executed": false,
+    "truth_labels_created": false,
+    "effective_project_configs_accepted": false,
+    "method_frozen": false,
+    "research_complete": false
+  },
+  "proposed_anchor_source_audit": {
+    "rows": 152,
+    "anchors_matched": 338,
+    "citations_matched": 532,
+    "unique_anchor_blobs_rehashed": 13,
+    "applicability_decisions_accepted": 0,
+    "labels_created": false,
+    "predictions_executed": false
+  }
+}
