@@ -1,0 +1,35 @@
+{
+  "schema": "d3-comparator-technical-pair/1",
+  "version": "0.2.1-candidate",
+  "status": "technical-pair-confirmed-not-method-freeze",
+  "parent_method_manifest_sha256": "d06f3c27505de127e06538abc92bc7250412be798b4d1676436ccbc596605ed7",
+  "selected": {
+    "configuration_path": "development/common-module-capability-modes-v3/dependency-cruiser.json",
+    "configuration_sha256": "422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333",
+    "receipt_manifest_path": "development/common-module-capability-modes-v3/receipt/manifest.json",
+    "receipt_manifest_sha256": "adcaf0af23caf126087906e55b8ed99784a641ddfeb6e46cfa77e4c0f7c3946f",
+    "profile_path": "development/common-module-capability-modes-v3/profile.json",
+    "profile_sha256": "c4ccf5d0f2c6b90da8509dcad49707dbd20166b83ea2f394a191edadf853aab6",
+    "capability": "deduplicated-cross-group-source-file-edge-only",
+    "probes": { "total": 7, "narrow_shared_candidates": 3, "unsupported": 4 }
+  },
+  "historical_diagnostic": {
+    "configuration_path": "development/common-module-capability/dependency-cruiser.json",
+    "configuration_sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6",
+    "receipt_manifest_path": "development/common-module-capability/receipt/manifest.json",
+    "receipt_manifest_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+    "probes": { "total": 7, "narrow_shared_candidates": 2, "failed_common_candidates": 1, "unsupported": 4 }
+  },
+  "open_gates": {
+    "effective_case_side_project_configurations": true,
+    "package_and_workspace_resolution": true,
+    "guardian_configuration_pin": true,
+    "independent_person_reproduction": true,
+    "historical_applicability_decisions": true,
+    "author_source_reviews": true,
+    "joint_final_method_acceptance": true
+  },
+  "human_final_method_acceptance": { "hieu": null, "hoang": null },
+  "d3_tool_runs_executed": false,
+  "d3_results_computed": false
+}
