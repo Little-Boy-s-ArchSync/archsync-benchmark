@@ -35,6 +35,9 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   `${methodDir}/tool-pins.template.json`,
   'holdout/d3-package-preflight/README.md',
   'holdout/d3-package-preflight/receipt.json',
+  'holdout/d3-package-archives/README.md',
+  'holdout/d3-package-archives/archsync-guardian-0.3.3.tgz',
+  'holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz',
   'development/common-module-capability/README.md',
   'development/common-module-capability/capture.mjs',
   'development/common-module-capability/dependency-cruiser.json',
@@ -48,6 +51,7 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   'development/common-module-capability/verify.mjs',
   'scripts/d3-review/module-method.mjs',
   'scripts/verify-d3-package-preflight.mjs',
+  'test/d3-archive-packet.test.mjs',
   'test/d3-module-method.test.mjs',
 ].sort());
 
@@ -301,12 +305,20 @@ export function validateToolPins(pins) {
   assert.equal(pins.package_preflight.independent_reproduction_complete, false);
   assert.equal(pins.package_preflight.d3_executed, false);
   assert.equal(pins.package_preflight.research_complete, false);
+  assert.equal(pins.archive_packet.status, 'candidate-archives-retained-not-independent-method-freeze');
+  assert.equal(pins.archive_packet.guardian_path, 'holdout/d3-package-archives/archsync-guardian-0.3.3.tgz');
+  assert.equal(pins.archive_packet.guardian_sha256, pins.tools.guardian.package_sha256);
+  assert.equal(pins.archive_packet.comparator_path, 'holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz');
+  assert.equal(pins.archive_packet.comparator_sha256, pins.tools.dependency_cruiser.package_sha256);
+  assert.equal(pins.archive_packet.bytes_retained, true);
+  assert.equal(pins.archive_packet.independent_person_reproduction_complete, false);
+  assert.equal(pins.archive_packet.d3_executed, false);
   assert.equal(pins.human_acceptance.hieu, null); assert.equal(pins.human_acceptance.hoang, null);
   const missingPackagePins = [
     ['guardian.configuration_sha256', pins.tools.guardian.configuration_sha256],
   ].filter(([, value]) => !text(value)).map(([name]) => name);
   return { guardian_source_pinned: true, development_packet_bound: true, occurrence_scoring_supported: false,
-    candidate_package_receipt_bound: true, package_archives_available: false, independent_package_reproduction_complete: false,
+    candidate_package_receipt_bound: true, package_archives_available: true, independent_package_reproduction_complete: false,
     fixture_freeze_complete: false, missing_package_pins: missingPackagePins, accepted: false };
 }
 
@@ -355,6 +367,12 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
     safe(artifact.path); const bytes = await readFile(join(repoRoot, artifact.path));
     assert.equal(artifact.sha256, sha256(bytes), `Method artifact changed: ${artifact.path}`);
     assert.equal(artifact.bytes, bytes.length, `Method artifact size changed: ${artifact.path}`);
+  }
+  const retainedPins = JSON.parse(await readFile(join(repoRoot, `${methodDir}/tool-pins.template.json`)));
+  for (const [path, hash] of [[retainedPins.archive_packet.guardian_path, retainedPins.archive_packet.guardian_sha256],
+    [retainedPins.archive_packet.comparator_path, retainedPins.archive_packet.comparator_sha256]]) {
+    assert.equal(manifest.artifacts.find((artifact) => artifact.path === path)?.sha256, hash,
+      `Retained archive differs from pinned package: ${path}`);
   }
   assert.deepEqual(manifest.scientific_claims, { labels_created: false, predictions_executed: false, results_computed: false, d3_complete: false });
   assert.equal(manifest.human_acceptance.hieu, null); assert.equal(manifest.human_acceptance.hoang, null);

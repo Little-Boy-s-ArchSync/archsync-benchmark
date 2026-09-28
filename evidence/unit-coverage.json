@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 269,
-    "passed": 269,
+    "total": 271,
+    "passed": 271,
     "failed": 0
   },
   "provenance": {
@@ -101,15 +101,31 @@
       },
       {
         "file": "scripts/d3-review/module-method.mjs",
-        "sha256": "29676a2c4e00a51be3f7fb9c34a8ee69ba958ff5e7f795ce9e076906221af321"
+        "sha256": "0465f2dd5519245eb9c87841786719539a871c94fa6dcb51d4c8cc3c6cbb29fc"
       },
       {
         "file": "test/d3-module-method.test.mjs",
-        "sha256": "1c92c1819ab87bc80557f1711c3899338e4716c0ad9ba8984ef2fc6f9c102c88"
+        "sha256": "a90664f2194cc883a2b70f1379a524cdca3ba9caca53f10f19266a8717c11dd1"
+      },
+      {
+        "file": "test/d3-archive-packet.test.mjs",
+        "sha256": "78ca72e48d8cae9606187a755ee3223e3a4a9928275fe085c578c22df7de0d75"
       },
       {
         "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
-        "sha256": "64d10f3c4c6286cee712b93455d0ed7804dd972ce34e34645f98841897cbc649"
+        "sha256": "73384a25d95afd8f792ec1de0230d7bd16d42075978786fd229e5459f9b87416"
+      },
+      {
+        "file": "holdout/d3-package-archives/README.md",
+        "sha256": "53bc1d411ad3e7fe0025e0135f460bacb6f9ba49904093963744c9fc4a5a93de"
+      },
+      {
+        "file": "holdout/d3-package-archives/archsync-guardian-0.3.3.tgz",
+        "sha256": "7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f"
+      },
+      {
+        "file": "holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz",
+        "sha256": "268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93"
       },
       {
         "file": "holdout/D3-METHOD-PACKET.v0.1.0.md",
@@ -305,7 +321,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "107652698f7d6df4db3d9cf938ff4d83bc18d8c1522143dcb6b5ff20a9aa7102"
+        "sha256": "4da9117dcb889246765ac7f7d5edad35773dda8b9d2e728284be17f57510fc99"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -472,6 +488,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "5affdfd5802edf47937c3680d6603e6065f0bfe2777524ef8e9b08a2cf67af23"
+    "manifest_sha256": "59e79e5b8bfd5a185b75f90fc6d3388832ecf3c3012385b134f9d549ca7ed414"
   }
 }

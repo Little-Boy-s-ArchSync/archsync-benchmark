@@ -197,12 +197,12 @@ test('freeze manifest binds the merged development receipt without pretending me
   assert.equal(report.tools.guardian_source_pinned, true);
   assert.equal(report.tools.development_packet_bound, true);
   assert.equal(report.tools.candidate_package_receipt_bound, true);
-  assert.equal(report.tools.package_archives_available, false);
+  assert.equal(report.tools.package_archives_available, true);
   assert.equal(report.tools.independent_package_reproduction_complete, false);
   assert.equal(report.tools.occurrence_scoring_supported, false);
   assert.equal(report.tools.fixture_freeze_complete, false);
   assert.deepEqual(report.tools.missing_package_pins, ['guardian.configuration_sha256']);
-  assert.equal(report.open_gates.package_archives_available, false);
+  assert.equal(report.open_gates.package_archives_available, true);
   assert.equal(report.open_gates.independent_package_reproduction_complete, false);
   assert.equal(report.open_gates.reviewed_applicability_ledger_missing, true);
   assert.equal(report.open_gates.development_fixture_not_research_freeze, true);

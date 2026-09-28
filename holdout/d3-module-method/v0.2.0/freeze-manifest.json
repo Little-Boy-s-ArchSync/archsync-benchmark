@@ -71,8 +71,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "acfc4d9562c999f1c6b90be86af668623ef2ee23d1d9b5ad712a979aed69ee62",
-      "bytes": 7598
+      "sha256": "9f468cdf616910ba9c1853ca2aed048e6eda6674b5be554972aabc2504dcab7e",
+      "bytes": 7630
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -121,13 +121,28 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
-      "sha256": "8adf6aa5f7edb9d92e5d37ce5ab8b8be68c2ffabd05bc60943135eb466049d7d",
-      "bytes": 2789
+      "sha256": "e8aaa6e902a353958db1850bd253782ae83cbc3cb0bae35133b695653a648266",
+      "bytes": 3347
+    },
+    {
+      "path": "holdout/d3-package-archives/README.md",
+      "sha256": "53bc1d411ad3e7fe0025e0135f460bacb6f9ba49904093963744c9fc4a5a93de",
+      "bytes": 2138
+    },
+    {
+      "path": "holdout/d3-package-archives/archsync-guardian-0.3.3.tgz",
+      "sha256": "7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f",
+      "bytes": 602166
+    },
+    {
+      "path": "holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz",
+      "sha256": "268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93",
+      "bytes": 210709
     },
     {
       "path": "holdout/d3-package-preflight/README.md",
-      "sha256": "70d07b1d4bdd56ff062c47a24757a4beb0e7899a04a2b6b1ad16af62de1acf14",
-      "bytes": 2895
+      "sha256": "b113e95d5d3b191fdb92c0c25fa3a7597cb4fd248ab1930dc4b92c51de0edbdd",
+      "bytes": 3221
     },
     {
       "path": "holdout/d3-package-preflight/receipt.json",
@@ -136,8 +151,8 @@
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "29676a2c4e00a51be3f7fb9c34a8ee69ba958ff5e7f795ce9e076906221af321",
-      "bytes": 29316
+      "sha256": "0465f2dd5519245eb9c87841786719539a871c94fa6dcb51d4c8cc3c6cbb29fc",
+      "bytes": 30727
     },
     {
       "path": "scripts/verify-d3-package-preflight.mjs",
@@ -145,9 +160,14 @@
       "bytes": 2981
     },
     {
+      "path": "test/d3-archive-packet.test.mjs",
+      "sha256": "78ca72e48d8cae9606187a755ee3223e3a4a9928275fe085c578c22df7de0d75",
+      "bytes": 1563
+    },
+    {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "1c92c1819ab87bc80557f1711c3899338e4716c0ad9ba8984ef2fc6f9c102c88",
-      "bytes": 15762
+      "sha256": "a90664f2194cc883a2b70f1379a524cdca3ba9caca53f10f19266a8717c11dd1",
+      "bytes": 15760
     }
   ],
   "scientific_claims": {

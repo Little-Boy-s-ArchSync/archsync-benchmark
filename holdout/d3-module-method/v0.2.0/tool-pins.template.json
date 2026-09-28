@@ -34,6 +34,16 @@
     "d3_executed": false,
     "research_complete": false
   },
+  "archive_packet": {
+    "status": "candidate-archives-retained-not-independent-method-freeze",
+    "guardian_path": "holdout/d3-package-archives/archsync-guardian-0.3.3.tgz",
+    "guardian_sha256": "7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f",
+    "comparator_path": "holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz",
+    "comparator_sha256": "268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93",
+    "bytes_retained": true,
+    "independent_person_reproduction_complete": false,
+    "d3_executed": false
+  },
   "common_capability_packet": {
     "merged_benchmark_commit": "efc1a14bc650056f98fd2093c79effb79ce7cc87",
     "receipt_manifest_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
