@@ -137,19 +137,19 @@
       },
       {
         "file": "scripts/d3-review/production-role-candidates.mjs",
-        "sha256": "737a8630dea51e1129cbcaf376dcf11adbf079d0d5ea25fa6554c091ef6ca946"
+        "sha256": "167d8b49eeec10f430c21aa28a1ffd3bc233bf34f4d81721f8eedebf1a91ec20"
       },
       {
         "file": "test/d3-production-role-candidates.test.mjs",
-        "sha256": "55d8c6df9a586556392d2cb1282348a42aa7b224950ce0eb011fcd665a69efe5"
+        "sha256": "e76a5d3c33b0d816fba8154b94eabe9fe08a54fc4ba72565da615d6676a7238b"
       },
       {
         "file": "holdout/d3-production-role-candidates-20260928/README.md",
-        "sha256": "939bd1e6cb61f9506e91030411a0820b8001002b954cd3044c77798799331a27"
+        "sha256": "8514fa04c7254838d0c11deb35604c05c0eba97fd80159d94a1ab6ffd6acfca1"
       },
       {
         "file": "holdout/d3-production-role-candidates-20260928/receipt.json",
-        "sha256": "d152272e2730cb12236292d3968d642552ab8b2368b4e9f2dbe76a75ea20110d"
+        "sha256": "a34ceb1fcad5d840d55ca1431eea2dd4b5d57aca2bd535f175ccb57c738af958"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -592,6 +592,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "0b50ca40a1105ecee8462f571633e9aa9642ece70d5160b2c11d5ec80814de66"
+    "manifest_sha256": "179216b2dbf7829e537537bc0f0abbfd66ea2e0f7207b99a3b00d22e8ab76096"
   }
 }

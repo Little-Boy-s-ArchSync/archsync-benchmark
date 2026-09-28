@@ -14,6 +14,8 @@ test('production candidate prefilter drops tests, unsupported extensions, and no
     { path: 'src/router.ts', git_blob: 'c'.repeat(40) },
     { path: 'src/router.json', git_blob: 'd'.repeat(40) },
     { path: 'src/router.test.js', git_blob: 'e'.repeat(40) },
+    { path: 'src/types.d.ts', git_blob: 'f'.repeat(40) },
+    { path: 'src/types.d.mts', git_blob: '1'.repeat(40) },
   ];
   assert.deepEqual(candidatePaths(entries, semantics), [entries[2]]);
 });

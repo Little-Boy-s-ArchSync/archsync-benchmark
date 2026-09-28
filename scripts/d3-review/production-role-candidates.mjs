@@ -13,8 +13,8 @@ const expected = Object.freeze({
 });
 
 function git(directory, args) {
-  const run = spawnSync('git', [`--git-dir=${directory}`, ...args], {
-    env: { ...process.env, GIT_NO_LAZY_FETCH: '1', GIT_TERMINAL_PROMPT: '0' },
+  const run = spawnSync('git', ['--no-replace-objects', `--git-dir=${directory}`, ...args], {
+    env: { ...process.env, GIT_NO_LAZY_FETCH: '1', GIT_ALLOW_PROTOCOL: '', GIT_TERMINAL_PROMPT: '0' },
     timeout: 30000, maxBuffer: 64 * 1024 * 1024, shell: false,
   });
   assert(!run.error && run.status === 0,
@@ -27,7 +27,7 @@ export function candidatePaths(entries, semantics) {
   const test = new RegExp(semantics.test_path_regex, 'u');
   const extensions = semantics.source_extensions;
   assert(Array.isArray(extensions) && extensions.length > 0);
-  return entries.filter(entry => !test.test(entry.path) &&
+  return entries.filter(entry => !test.test(entry.path) && !/\.d\.[cm]?ts$/u.test(entry.path) &&
     extensions.some(extension => entry.path.endsWith(extension)));
 }
 

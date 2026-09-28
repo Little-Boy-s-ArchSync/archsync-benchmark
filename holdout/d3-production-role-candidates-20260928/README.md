@@ -7,7 +7,8 @@ The earlier historical role census counts all regular mapped Git paths and
 chooses the first path alphabetically. For HyperDX, that exemplar is a test
 file under `__tests__`, so the 152/152 group-presence count must not be read
 as production-role evidence. This supplemental receipt applies the proposed
-contract's test-path regex and source-extension list to exact public Git trees.
+contract's test-path regex and source-extension list to exact public Git trees,
+excluding TypeScript declaration files that cannot supply runtime value imports.
 It retains one non-test source-path exemplar and Git blob per mapped role and
 case-side. It does not classify generated/vendor paths, prove the semantic role
 of the exemplar, resolve imports, or accept any study-defined rule.
@@ -16,7 +17,7 @@ All 152 rows have a candidate source and target path after this lexical filter
 (38 HyperDX, 34 Reactive Resume, 80 Etherpad rule-side rows). The result is
 still **zero verified roles and zero accepted applicability decisions**. The
 retained `receipt.json` SHA-256 is
-`d152272e2730cb12236292d3968d642552ab8b2368b4e9f2dbe76a75ea20110d`.
+`a34ceb1fcad5d840d55ca1431eea2dd4b5d57aca2bd535f175ccb57c738af958`.
 
 The retained `receipt.json` is reproducible offline from the pinned 152-row
 historical role census and proposed contract using the three complete public
