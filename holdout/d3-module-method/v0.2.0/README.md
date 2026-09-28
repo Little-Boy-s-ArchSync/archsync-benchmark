@@ -12,6 +12,7 @@ The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets 
 
 ## Files
 
+- `holdout/D3-ANALYSIS-PLAN.v0.2.0.md` states the proposed primary source-file-edge estimand, per-repository denominators, Unknown propagation, and bounded reporting; the manifest pins its raw bytes alongside the machine-readable statistical template.
 - `file-coverage.schema.json` records every file/side, including absence, symlink, exclusions, Unknown and a zero occurrence count.
 - `occurrence.schema.json` records each direct dependency occurrence and resolver/AI provenance.
 - `module-edge.schema.json` records the exact deduplicated cross-group source-file edge and its occurrence references.

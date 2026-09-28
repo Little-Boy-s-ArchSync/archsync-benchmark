@@ -100,6 +100,18 @@
         "sha256": "83b130caab5d37d6a35ee28d39bad96b7c3d0a54055c5a0ae6193aad0b252dd3"
       },
       {
+        "file": "scripts/d3-review/module-method.mjs",
+        "sha256": "29676a2c4e00a51be3f7fb9c34a8ee69ba958ff5e7f795ce9e076906221af321"
+      },
+      {
+        "file": "test/d3-module-method.test.mjs",
+        "sha256": "cc18a1d4007667af50e32c23a799b1c9eff6accd7c46a1e00aa6531684e1b399"
+      },
+      {
+        "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
+        "sha256": "4562a5338c832d28205b203ce9666a2287f6a64bd3ac22fe4471d1a60d9ae2d3"
+      },
+      {
         "file": "holdout/D3-METHOD-PACKET.v0.1.0.md",
         "sha256": "d6657a9968b034bd45c032fd15a87cba11fdbd495bde3001e75cdee91d1adb4c"
       },
@@ -173,7 +185,7 @@
       },
       {
         "file": "holdout/D3-ANALYSIS-PLAN.v0.2.0.md",
-        "sha256": "50961ae3f4e62fdeb51570b21eb1e161b2bd521638a064698b8a870b290d0af5"
+        "sha256": "2221219ab86cb2350a8a6cb3bef3b4cc5e85bb70e7eb24b8c70db465968ed926"
       },
       {
         "file": "holdout/D3-SCOPE-ACCEPTANCE-20260928.md",
@@ -293,7 +305,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "9dc23d79f1592d76b89afa3eb6c07b54f5b56dc1f70c5a90cc86449e8f3a0540"
+        "sha256": "107652698f7d6df4db3d9cf938ff4d83bc18d8c1522143dcb6b5ff20a9aa7102"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -460,6 +472,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "8c2f1666f159d40c9548270c642d9fce7f16d28f1c13e538e2cb44cc785cd509"
+    "manifest_sha256": "028e69cffd25ebafbe8070db90bb4550dfd1cb763e9a4122e64038d4c31ebc48"
   }
 }

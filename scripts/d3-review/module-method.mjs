@@ -21,6 +21,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const methodDir = `holdout/d3-module-method/v${METHOD_VERSION}`;
 
 export const METHOD_ARTIFACT_PATHS = Object.freeze([
+  'holdout/D3-ANALYSIS-PLAN.v0.2.0.md',
   `${methodDir}/README.md`,
   `${methodDir}/applicability-reviewed.template.json`,
   `${methodDir}/file-coverage.schema.json`,

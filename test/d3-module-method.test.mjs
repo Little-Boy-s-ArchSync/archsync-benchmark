@@ -190,6 +190,7 @@ test('freeze manifest binds the merged development receipt without pretending me
   assert.equal(manifest.guardian_source_commit, GUARDIAN_SOURCE_COMMIT);
   assert.equal(manifest.endpoint, 'direct-module-occurrences-and-deduplicated-cross-group-file-edges');
   assert.deepEqual(manifest.artifacts.map((row) => row.path), [...METHOD_ARTIFACT_PATHS]);
+  assert(METHOD_ARTIFACT_PATHS.includes('holdout/D3-ANALYSIS-PLAN.v0.2.0.md'));
   assert.deepEqual(manifest.human_acceptance, { hieu: null, hoang: null });
   const report = await validateFreezeManifest(manifest, root);
   assert.equal(report.status, 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE');
