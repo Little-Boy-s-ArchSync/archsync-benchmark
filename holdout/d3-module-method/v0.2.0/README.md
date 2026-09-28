@@ -2,6 +2,17 @@
 
 Status: **proposal only; not accepted, not runnable and not a D3 result**.
 
+The resolver template now records four conservative candidate decisions supported
+by the study contract and retained non-D3 v1 fixtures: source eligibility,
+runtime ES syntax, literal CommonJS/dynamic imports, and exact source-file-edge
+normalization. Relative resolution, per-side project configuration, and
+package/workspace resolution remain undecided. The merged exports-field v2
+development fixture demonstrates a candidate configuration that repairs the
+v1 self-package-export mismatch on synthetic source, but that v2 receipt and
+configuration are not bound by this v0.2.0 manifest. It cannot silently turn
+package exports into a supported D3 feature. Both authors must choose and bind
+an exact configuration or leave the feature unsupported before execution.
+
 This directory defines the files that Hiếu and Hoàng must jointly freeze before either tool is run on D3. It records the merged Guardian source commit `e32ef53eeb07bc8c904b6a1e6a8b897d16def820`, binds the development common-capability packet merged at Benchmark `efc1a14bc650056f98fd2093c79effb79ce7cc87`, and binds the candidate package-preflight receipt merged at Benchmark `ab0a93266601bc45cf817f1771fba8d37cb062c7`. The package receipt supplies candidate archive hashes and identities, but the archives are not committed and no independent reproduction is complete, so it is not a package or method freeze. The capability packet supports only the cross-group file-edge task: dependency-cruiser supplies no physical occurrence positions, so occurrence scoring remains unsupported. Exact configuration and scientific method acceptance remain pending. Human acceptance and personal declaration fields intentionally remain `null`.
 
 ## Endpoint

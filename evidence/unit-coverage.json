@@ -105,11 +105,11 @@
       },
       {
         "file": "test/d3-module-method.test.mjs",
-        "sha256": "cc18a1d4007667af50e32c23a799b1c9eff6accd7c46a1e00aa6531684e1b399"
+        "sha256": "063bc3dbd26132e786592d1d84255711317e8862e85d2f78b218dda856fad93f"
       },
       {
         "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
-        "sha256": "4562a5338c832d28205b203ce9666a2287f6a64bd3ac22fe4471d1a60d9ae2d3"
+        "sha256": "f6e8fb6bb57e6f64a5c8acb1ba144adeadb71adf6c03a0ef776eaba5563a929f"
       },
       {
         "file": "holdout/D3-METHOD-PACKET.v0.1.0.md",
@@ -472,6 +472,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "028e69cffd25ebafbe8070db90bb4550dfd1cb763e9a4122e64038d4c31ebc48"
+    "manifest_sha256": "3cedce3b2e17f432ece67e2df6bc468a6c226a866f65e271bcfd77974e606ea2"
   }
 }

@@ -71,8 +71,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "75bfe4709a511cdfa036a71b485718a16899e666a636e366ad498f771ba2fa28",
-      "bytes": 6696
+      "sha256": "c486746f2e95638693d8804e6b02a9b9da7cb8af0c5fdd84ed0b9f50d53f330c",
+      "bytes": 7464
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -101,8 +101,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/resolver-policy.template.json",
-      "sha256": "65284114ffd54cabc180f85571546f8cebaa3c390296812d677549d84524f9b9",
-      "bytes": 1479
+      "sha256": "997a1f3fb84f0c3a9a0713d63013da98c1862fc3e15354975d356a28f9f9e91a",
+      "bytes": 2969
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/review.schema.json",
@@ -146,8 +146,8 @@
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "cc18a1d4007667af50e32c23a799b1c9eff6accd7c46a1e00aa6531684e1b399",
-      "bytes": 15089
+      "sha256": "063bc3dbd26132e786592d1d84255711317e8862e85d2f78b218dda856fad93f",
+      "bytes": 15598
     }
   ],
   "scientific_claims": {

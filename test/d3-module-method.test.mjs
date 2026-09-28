@@ -212,7 +212,14 @@ test('freeze manifest binds the merged development receipt without pretending me
     { status: 'candidate_package_preflight_not_method_freeze', guardian_package: '@archsync/guardian@0.3.3',
       comparator_package: 'dependency-cruiser@18.3.0', archives_available: false, independently_reproduced: false,
       d3_executed: false, research_complete: false });
-  assert(report.resolver.unresolved.includes('source_eligibility'));
+  assert.deepEqual(report.resolver.unresolved,
+    ['relative_target_resolution', 'project_configuration', 'package_and_workspace_resolution']);
+  const policy = JSON.parse(await readFile(join(root,
+    'holdout/d3-module-method/v0.2.0/resolver-policy.template.json')));
+  assert.equal(policy.status, 'proposal-not-accepted');
+  assert.deepEqual(policy.common_capability_fixture_ids, ['value-syntax', 'alias']);
+  assert.deepEqual(policy.unsupported_in_either_tool,
+    ['computed-dynamic', 'shadowed-require', 'symlink', 'unresolved', 'self-package-export-v1-configuration']);
 });
 
 test('freeze manifest fails closed after a byte changes', async (t) => {
