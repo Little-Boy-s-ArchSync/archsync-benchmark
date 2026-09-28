@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
-import { dirname, join, resolve } from 'node:path';
+import { lstat, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gitId, sha256 } from '../d3-source-review/files.mjs';
 import { parseCommit, parseTreeListing } from './offline-source-audit.mjs';
@@ -74,7 +74,77 @@ export async function buildOfflineTree(record, gitDirectory, outputDirectory) {
   return receipt;
 }
 
+/** Verify retained bytes against an externally recorded receipt SHA-256, without following links. */
+export async function verifyOfflineTree(outputDirectory, expectedReceiptSha256) {
+  assert(/^[a-f0-9]{64}$/u.test(expectedReceiptSha256), 'Expected receipt SHA-256 is required');
+  const root = resolve(outputDirectory);
+  const rootInfo = await lstat(root);
+  assert(rootInfo.isDirectory() && !rootInfo.isSymbolicLink(), 'Output root must be a real directory');
+  const receiptInfo = await lstat(join(root, receiptName));
+  assert(receiptInfo.isFile() && !receiptInfo.isSymbolicLink() && receiptInfo.nlink === 1,
+    'Retained receipt must be a regular unlinked file');
+  const receiptBytes = await readFile(join(root, receiptName));
+  assert.equal(sha256(receiptBytes), expectedReceiptSha256, 'Retained receipt bytes changed');
+  const receipt = JSON.parse(receiptBytes);
+  assert.equal(receipt.schema, 'd3-offline-tree-build/1');
+  assert.equal(receipt.status, 'source-input-only-not-study-run');
+  assert.equal(receipt.source_receipt_sha256, sourceReceiptSha256);
+  assert(oid.test(receipt.commit) && oid.test(receipt.root_tree));
+  assert.equal(receipt.tools_executed, false);
+  assert.equal(receipt.labels_created, false);
+  assert(Array.isArray(receipt.files) && Array.isArray(receipt.symlinks_not_materialized));
+  assert.equal(receipt.files_written, receipt.files.length);
+  const expected = new Map(), tree = new Map(), directories = new Set();
+  for (const file of receipt.files) {
+    assert(typeof file.path === 'string' && Number.isSafeInteger(file.bytes) && file.bytes >= 0);
+    assert(/^[a-f0-9]{64}$/u.test(file.sha256) && !expected.has(file.path));
+    expected.set(file.path, file);
+    tree.set(file.path, { mode: file.mode, blob: file.git_blob });
+    const parts = file.path.split('/');
+    for (let index = 1; index < parts.length; index++) {
+      directories.add(parts.slice(0, index).join('/'));
+    }
+  }
+  for (const link of receipt.symlinks_not_materialized) {
+    assert(typeof link.path === 'string' && !tree.has(link.path));
+    tree.set(link.path, { mode: '120000', blob: link.git_blob });
+  }
+  validateMaterializableTree(tree);
+  const found = new Set(), stack = [root];
+  while (stack.length) {
+    const directory = stack.pop();
+    for (const name of await readdir(directory)) {
+      const candidate = join(directory, name);
+      const info = await lstat(candidate);
+      assert(!info.isSymbolicLink(), 'Materialized tree contains a symlink');
+      const path = relative(root, candidate).split(sep).join('/');
+      if (info.isDirectory()) {
+        assert(directories.has(path), `Unexpected directory: ${path}`);
+        stack.push(candidate);
+      } else {
+        assert(info.isFile() && info.nlink === 1, `Nonregular or linked file: ${path}`);
+        if (path === receiptName) continue;
+        const file = expected.get(path);
+        assert(file && !found.has(path), `Unexpected or duplicate file: ${path}`);
+        const bytes = await readFile(candidate);
+        assert.equal(bytes.length, file.bytes, `File length changed: ${path}`);
+        assert.equal(sha256(bytes), file.sha256, `File bytes changed: ${path}`);
+        found.add(path);
+      }
+    }
+  }
+  assert.equal(found.size, expected.size, 'Materialized source file is missing');
+  return { repository: receipt.repository, commit: receipt.commit,
+    verified_regular_files: found.size, symlinks_not_materialized: receipt.symlinks_not_materialized.length,
+    tools_executed: false, labels_created: false };
+}
+
 async function main(args) {
+  if (args[0] === 'verify') {
+    assert.equal(args.length, 3, 'Usage: offline-tree-builder.mjs verify OUTPUT_DIR RECEIPT_SHA256');
+    process.stdout.write(`${JSON.stringify(await verifyOfflineTree(args[1], args[2]))}\n`);
+    return;
+  }
   assert(args.length === 4,
     'Usage: offline-tree-builder.mjs REPOSITORY COMMIT BARE_GIT_DIR NEW_OUTPUT_DIR');
   const [repository, commit, gitDirectory, outputDirectory] = args;

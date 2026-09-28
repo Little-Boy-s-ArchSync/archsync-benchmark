@@ -5,7 +5,7 @@ import { mkdtemp, readFile, rm, writeFile, mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import { test } from 'node:test';
-import { buildOfflineTree, validateMaterializableTree } from '../scripts/d3-review/offline-tree-builder.mjs';
+import { buildOfflineTree, validateMaterializableTree, verifyOfflineTree } from '../scripts/d3-review/offline-tree-builder.mjs';
 
 test('builder refuses embedded Git metadata, file ancestors, and receipt collisions', () => {
   const entry = { mode: '100644', blob: 'a'.repeat(40) };
@@ -57,8 +57,22 @@ test('offline builder verifies pinned identities, writes exact regular bytes and
     assert.equal(receipt.labels_created, false);
     assert.deepEqual(await readFile(join(output, 'src', 'source.bin')), sourceBytes);
     await assert.rejects(readFile(join(output, 'not-followed')), { code: 'ENOENT' });
-    const retained = JSON.parse(await readFile(join(output, '.archsync-tree-receipt.json'), 'utf8'));
+    const receiptBytes = await readFile(join(output, '.archsync-tree-receipt.json'));
+    const receiptDigest = createHash('sha256').update(receiptBytes).digest('hex');
+    const retained = JSON.parse(receiptBytes);
     assert.deepEqual(retained, receipt);
+    assert.equal((await verifyOfflineTree(output, receiptDigest)).verified_regular_files, 1);
+    await assert.rejects(verifyOfflineTree(output, '0'.repeat(64)), /receipt bytes changed/u);
+    await writeFile(join(output, 'src', 'source.bin'), 'changed');
+    await assert.rejects(verifyOfflineTree(output, receiptDigest), /File length changed/u);
+    await writeFile(join(output, 'src', 'source.bin'), sourceBytes);
+    await writeFile(join(output, 'extra.txt'), 'extra');
+    await assert.rejects(verifyOfflineTree(output, receiptDigest), /Unexpected or duplicate file/u);
+    await rm(join(output, 'extra.txt'));
+    await mkdir(join(output, 'extra-dir'));
+    await assert.rejects(verifyOfflineTree(output, receiptDigest), /Unexpected directory/u);
+    await rm(join(output, 'extra-dir'), { recursive: true });
+    assert.equal((await verifyOfflineTree(output, receiptDigest)).verified_regular_files, 1);
     await assert.rejects(buildOfflineTree(record, bare, output), { code: 'EEXIST' });
     await assert.rejects(buildOfflineTree({ ...record, local_tree: '0'.repeat(40) }, bare,
       join(temporary, 'bad-tree')), /Root tree differs/u);
