@@ -1,0 +1,21 @@
+{
+  "analyzer": {
+    "id": "archsync-module-dependencies",
+    "version": "0.1.0-development"
+  },
+  "scanned_files": 2,
+  "edges": [],
+  "unresolved": [
+    {
+      "file": "src/app/main.ts",
+      "line": 1,
+      "column": 23,
+      "specifier": "../lib/link",
+      "reason": "resolved-outside-verified-tree"
+    }
+  ],
+  "limitations": [
+    "Development adapter only; package-export and alias resolution require repository-specific tests.",
+    "Unsupported and unresolved imports are not absence evidence; no D3 or baseline result is computed here."
+  ]
+}
