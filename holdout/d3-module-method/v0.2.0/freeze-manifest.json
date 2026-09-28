@@ -71,8 +71,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "9f468cdf616910ba9c1853ca2aed048e6eda6674b5be554972aabc2504dcab7e",
-      "bytes": 7630
+      "sha256": "88c0348e9db297071de5b4255a244548af705791aef8a9c4fce6dde2b2a79cae",
+      "bytes": 8278
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -150,9 +150,24 @@
       "bytes": 1310
     },
     {
+      "path": "holdout/d3-project-config-preparation/README.md",
+      "sha256": "4d2ffa98b8b2fd9a657f24031d4ff9aab4f848213256e5c89321e6756e395e52",
+      "bytes": 2364
+    },
+    {
+      "path": "holdout/d3-project-config-preparation/inventory.json",
+      "sha256": "fc2911d7357f547400551547c3fd4dc4fe40aaff3818a5b60db2e12677444709",
+      "bytes": 1053723
+    },
+    {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "0465f2dd5519245eb9c87841786719539a871c94fa6dcb51d4c8cc3c6cbb29fc",
-      "bytes": 30727
+      "sha256": "845877226df59d960263bfc9c3426740bf490f75fe5b464c4a49f58c10c39e14",
+      "bytes": 30941
+    },
+    {
+      "path": "scripts/d3-review/project-config-preparation.mjs",
+      "sha256": "9219f36f59338a9a7ff57439aa92f279dca69f118675e992759a0da4c7686b0f",
+      "bytes": 7234
     },
     {
       "path": "scripts/verify-d3-package-preflight.mjs",
@@ -168,6 +183,11 @@
       "path": "test/d3-module-method.test.mjs",
       "sha256": "a90664f2194cc883a2b70f1379a524cdca3ba9caca53f10f19266a8717c11dd1",
       "bytes": 15760
+    },
+    {
+      "path": "test/d3-project-config-preparation.test.mjs",
+      "sha256": "988f4888fdbaea6fcbd4a550c49ec45274bc3d811f8eb3294fbd028b22778c4e",
+      "bytes": 2531
     }
   ],
   "scientific_claims": {

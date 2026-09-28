@@ -15,6 +15,12 @@ configuration are not bound by this v0.2.0 manifest. It cannot silently turn
 package exports into a supported D3 feature. Both authors must choose and bind
 an exact configuration or leave the feature unsupported before execution.
 
+The separately retained historical project-configuration census pins 2,946
+commit/config candidate rows across 93 commits and 112 case-sides. It is
+source metadata, not evidence that any candidate was effective. Every
+`effective_project_config` remains `null`; both authors still need to review
+the governing project configuration and resolution semantics for each side.
+
 This directory defines the files that Hiếu and Hoàng must jointly freeze before either tool is run on D3. It records the merged Guardian source commit `e32ef53eeb07bc8c904b6a1e6a8b897d16def820`, binds the development common-capability packet merged at Benchmark `efc1a14bc650056f98fd2093c79effb79ce7cc87`, and binds the candidate package-preflight receipt merged at Benchmark `ab0a93266601bc45cf817f1771fba8d37cb062c7`. A later packet now retains the exact candidate archive bytes and a repeated technical build; operator/machine independence is not established. Independent person-level reproduction is still absent, so this is not a package or method freeze. The capability packet supports only the cross-group file-edge task: dependency-cruiser supplies no physical occurrence positions, so occurrence scoring remains unsupported. Exact configuration and scientific method acceptance remain pending. Human acceptance and personal declaration fields intentionally remain `null`.
 
 ## Endpoint
@@ -36,6 +42,7 @@ The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets 
 - Its `unknown_policy` freezes propagation from occurrences to file-sides, case-sides and change comparisons, while keeping tool failures in attempted coverage.
 - `statistical-plan.template.json` freezes denominators and zero-denominator behavior. Unsupported, failed and truth-Unknown attempts stay visible.
 - `tool-pins.template.json` binds the merged Guardian adapter source, dependency-cruiser 18.3.0 configuration/lockfile, merged non-D3 receipt and exact retained candidate archive bytes. Independent person-level reproduction, final configuration and joint method acceptance remain explicit blockers.
+- `holdout/d3-project-config-preparation/inventory.json` retains candidate configuration paths and blob hashes from the verified private Git-object packet; the pinned builder and regression test are also in the manifest. No effective configuration is accepted by this census.
 - `applicability-reviewed.template.json` is a blank destination shape only. The immutable 152-row checklist must be copied by the controlled builder and filled through actual source review; this file is not that review.
 - `freeze-manifest.json` hashes the raw bytes and sizes of the preceding artifacts. It does not hash itself. Archive its raw SHA-256 externally when both authors accept a completed version.
 - The manifest also pins `scripts/d3-review/module-method.mjs` and `test/d3-module-method.test.mjs`, so validator or deterministic-test changes invalidate the proposal hash.

@@ -38,6 +38,8 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   'holdout/d3-package-archives/README.md',
   'holdout/d3-package-archives/archsync-guardian-0.3.3.tgz',
   'holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz',
+  'holdout/d3-project-config-preparation/README.md',
+  'holdout/d3-project-config-preparation/inventory.json',
   'development/common-module-capability/README.md',
   'development/common-module-capability/capture.mjs',
   'development/common-module-capability/dependency-cruiser.json',
@@ -50,9 +52,11 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   'development/common-module-capability/tools/package.json',
   'development/common-module-capability/verify.mjs',
   'scripts/d3-review/module-method.mjs',
+  'scripts/d3-review/project-config-preparation.mjs',
   'scripts/verify-d3-package-preflight.mjs',
   'test/d3-archive-packet.test.mjs',
   'test/d3-module-method.test.mjs',
+  'test/d3-project-config-preparation.test.mjs',
 ].sort());
 
 function safe(path) {

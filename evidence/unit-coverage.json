@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 271,
-    "passed": 271,
+    "total": 274,
+    "passed": 274,
     "failed": 0
   },
   "provenance": {
@@ -101,7 +101,7 @@
       },
       {
         "file": "scripts/d3-review/module-method.mjs",
-        "sha256": "0465f2dd5519245eb9c87841786719539a871c94fa6dcb51d4c8cc3c6cbb29fc"
+        "sha256": "845877226df59d960263bfc9c3426740bf490f75fe5b464c4a49f58c10c39e14"
       },
       {
         "file": "test/d3-module-method.test.mjs",
@@ -112,8 +112,24 @@
         "sha256": "78ca72e48d8cae9606187a755ee3223e3a4a9928275fe085c578c22df7de0d75"
       },
       {
+        "file": "scripts/d3-review/project-config-preparation.mjs",
+        "sha256": "9219f36f59338a9a7ff57439aa92f279dca69f118675e992759a0da4c7686b0f"
+      },
+      {
+        "file": "test/d3-project-config-preparation.test.mjs",
+        "sha256": "988f4888fdbaea6fcbd4a550c49ec45274bc3d811f8eb3294fbd028b22778c4e"
+      },
+      {
+        "file": "holdout/d3-project-config-preparation/README.md",
+        "sha256": "4d2ffa98b8b2fd9a657f24031d4ff9aab4f848213256e5c89321e6756e395e52"
+      },
+      {
+        "file": "holdout/d3-project-config-preparation/inventory.json",
+        "sha256": "fc2911d7357f547400551547c3fd4dc4fe40aaff3818a5b60db2e12677444709"
+      },
+      {
         "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
-        "sha256": "73384a25d95afd8f792ec1de0230d7bd16d42075978786fd229e5459f9b87416"
+        "sha256": "75af8728f04cdeba1f91263dece953bc327a37bea5814094659f29a45b9aa3f6"
       },
       {
         "file": "holdout/d3-package-archives/README.md",
@@ -321,7 +337,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "4da9117dcb889246765ac7f7d5edad35773dda8b9d2e728284be17f57510fc99"
+        "sha256": "21b0c26e56fb88dfbb847c7a8e2d932d5c98adb1b00b8a30325d2bc520b340eb"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -488,6 +504,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "59e79e5b8bfd5a185b75f90fc6d3388832ecf3c3012385b134f9d549ca7ed414"
+    "manifest_sha256": "3743f41f3a655503caef9a2c84d409717a23f9d0376b24e302d972426f0a8000"
   }
 }
