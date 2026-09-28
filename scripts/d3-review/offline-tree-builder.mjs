@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { lstat, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { chmod, lstat, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { gitId, sha256 } from '../d3-source-review/files.mjs';
@@ -15,14 +15,15 @@ const oid = /^[a-f0-9]{40}$/u;
 export function validateMaterializableTree(entries) {
   const audit = auditPortableTree(entries);
   assert.equal(audit.incompatible_paths.length, 0, 'Tree contains unsafe or nonportable paths');
-  assert(!entries.has(receiptName), 'Source tree collides with the builder receipt');
   const foldedPrefixes = new Map();
+  const reservedReceipt = receiptName.normalize('NFC').toLowerCase();
   for (const path of entries.keys()) {
     const parts = path.split('/');
     assert(!parts.some(part => part.toLowerCase() === '.git'), 'Embedded Git metadata path is forbidden');
     for (let index = 1; index <= parts.length; index++) {
       const prefix = parts.slice(0, index).join('/');
       const key = prefix.normalize('NFC').toLowerCase();
+      assert(key !== reservedReceipt, 'Source tree collides with the builder receipt');
       const prior = foldedPrefixes.get(key);
       assert(!prior || prior === prefix, 'Case-folded directory or file path collision');
       foldedPrefixes.set(key, prefix);
@@ -59,6 +60,8 @@ export async function buildOfflineTree(record, gitDirectory, outputDirectory) {
   assert.deepEqual(commit.parents, record.local_parents, 'Ordered parents differ from the pinned receipt');
   const entries = parseTreeListing(git(gitDirectory, ['ls-tree', '-r', '-z', record.sha]));
   const audit = validateMaterializableTree(entries);
+  assert(process.platform !== 'win32' || ![...entries.values()].some(entry => entry.mode === '100755'),
+    'Executable Git mode cannot be verified on Windows');
   const root = resolve(outputDirectory);
   await mkdir(root); // Fails if the target already exists. Never overlays another checkout.
   const files = [];
@@ -68,8 +71,12 @@ export async function buildOfflineTree(record, gitDirectory, outputDirectory) {
     assert.equal(gitId('blob', bytes), entry.blob, `Blob identity changed: ${path}`);
     const destination = join(root, ...path.split('/'));
     await mkdir(dirname(destination), { recursive: true });
-    await writeFile(destination, bytes, { flag: 'wx', mode: entry.mode === '100755' ? 0o755 : 0o644 });
+    const expectedMode = entry.mode === '100755' ? 0o755 : 0o644;
+    await writeFile(destination, bytes, { flag: 'wx', mode: expectedMode });
+    await chmod(destination, expectedMode);
     assert.deepEqual(await readFile(destination), bytes, `Written bytes changed: ${path}`);
+    assert.equal((await lstat(destination)).mode & 0o111, expectedMode & 0o111,
+      `Written file executable mode differs: ${path}`);
     files.push({ path, mode: entry.mode, git_blob: entry.blob,
       sha256: sha256(bytes), bytes: bytes.length });
   }
@@ -134,6 +141,8 @@ export async function verifyOfflineTree(outputDirectory, expectedReceiptSha256) 
         if (path === receiptName) continue;
         const file = expected.get(path);
         assert(file && !found.has(path), `Unexpected or duplicate file: ${path}`);
+        assert.equal(info.mode & 0o111, file.mode === '100755' ? 0o111 : 0,
+          `File executable mode changed: ${path}`);
         const bytes = await readFile(candidate);
         assert.equal(bytes.length, file.bytes, `File length changed: ${path}`);
         assert.equal(sha256(bytes), file.sha256, `File bytes changed: ${path}`);

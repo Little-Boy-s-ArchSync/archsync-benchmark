@@ -185,15 +185,15 @@
       },
       {
         "file": "scripts/d3-review/offline-tree-builder.mjs",
-        "sha256": "60b484c8e1d3204438697726b87cf1c0cdd6831494e5004007d3a431dcbf6d0e"
+        "sha256": "913052b69742d646cee4e28d7ac60abcc995b6f0113bb894386b98071673c6aa"
       },
       {
         "file": "test/d3-offline-tree-builder.test.mjs",
-        "sha256": "da754ee862f338432336389aeb01b90d74500c9b1003e913de265104d00c0b43"
+        "sha256": "836c69a03ee266c254e074825c88f486712f0e132f301cdeb3922f52ec4a8330"
       },
       {
         "file": "holdout/d3-portable-tree-preflight-20260928/OFFLINE-BUILDER.md",
-        "sha256": "12c82c9c249ba3013cb467bdfcc2819e94574f0b5b670a8bf6d85c6f769b826f"
+        "sha256": "2bce9e936c1117c5b784af003dd80474e6dbce641001feb1eb9fe4041aa0f218"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -648,6 +648,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "ec888c097a09437d66d7e5e62c28e0044580a8bfad652ef52001f179535de28a"
+    "manifest_sha256": "dacb612248efd5c9886eae0a62eec8b1e8ac0ad5217fe5d9506570838acd8458"
   }
 }

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { mkdtemp, readFile, rm, writeFile, mkdir } from 'node:fs/promises';
+import { chmod, mkdtemp, readFile, rm, writeFile, mkdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import { test } from 'node:test';
@@ -15,6 +15,10 @@ test('builder refuses embedded Git metadata, file ancestors, and receipt collisi
     ['src', entry], ['src/index.ts', entry],
   ])), /file cannot be a path ancestor/u);
   assert.throws(() => validateMaterializableTree(new Map([['.archsync-tree-receipt.json', entry]])),
+    /collides with the builder receipt/u);
+  assert.throws(() => validateMaterializableTree(new Map([['.ARCHSYNC-TREE-RECEIPT.JSON', entry]])),
+    /collides with the builder receipt/u);
+  assert.throws(() => validateMaterializableTree(new Map([['.ARCHSYNC-TREE-RECEIPT.JSON/child', entry]])),
     /collides with the builder receipt/u);
   assert.throws(() => validateMaterializableTree(new Map([
     ['Source/a.ts', entry], ['source/b.ts', entry],
@@ -65,6 +69,12 @@ test('offline builder verifies pinned identities, writes exact regular bytes and
     const retained = JSON.parse(receiptBytes);
     assert.deepEqual(retained, receipt);
     assert.equal((await verifyOfflineTree(output, receiptDigest)).verified_regular_files, 1);
+    if (process.platform !== 'win32') {
+      await chmod(join(output, 'src', 'source.bin'), 0o755);
+      await assert.rejects(verifyOfflineTree(output, receiptDigest), /File executable mode changed/u);
+      await chmod(join(output, 'src', 'source.bin'), 0o644);
+      assert.equal((await verifyOfflineTree(output, receiptDigest)).verified_regular_files, 1);
+    }
     await assert.rejects(verifyOfflineTree(output, '0'.repeat(64)), /receipt bytes changed/u);
     await writeFile(join(output, 'src', 'source.bin'), 'changed');
     await assert.rejects(verifyOfflineTree(output, receiptDigest), /File length changed/u);
@@ -88,6 +98,34 @@ test('offline builder verifies pinned identities, writes exact regular bytes and
     for (const name of ['bad-tree', 'bad-commit', 'bad-parents', 'nonbare']) {
       await assert.rejects(readFile(join(temporary, name, '.archsync-tree-receipt.json')),
         { code: 'ENOENT' });
+    }
+    git(work, ['update-index', '--chmod=+x', 'src/source.bin']);
+    git(work, ['-c', 'user.name=Fixture', '-c', 'user.email=fixture@example.invalid',
+      'commit', '-qm', 'synthetic executable source']);
+    assert.match(git(work, ['ls-files', '--stage', 'src/source.bin']), /^100755 /u);
+    const executableCommit = git(work, ['rev-parse', 'HEAD']);
+    const executableTree = git(work, ['rev-parse', 'HEAD^{tree}']);
+    const executableCommitBytes = spawnSync('git', ['-C', work, 'cat-file', 'commit', executableCommit]).stdout;
+    const executableBare = join(temporary, 'source-executable.git');
+    const executableOutput = join(temporary, 'built-executable');
+    git(temporary, ['clone', '--bare', '-q', work, executableBare]);
+    const executableRecord = { ...record, sha: executableCommit, local_tree: executableTree,
+      local_parents: [commit],
+      local_commit_object_sha256: createHash('sha256').update(executableCommitBytes).digest('hex') };
+    if (process.platform === 'win32') {
+      await assert.rejects(buildOfflineTree(executableRecord, executableBare, executableOutput),
+        /Executable Git mode cannot be verified on Windows/u);
+      await assert.rejects(readFile(join(executableOutput, '.archsync-tree-receipt.json')),
+        { code: 'ENOENT' });
+    } else {
+      const executableReceipt = await buildOfflineTree(executableRecord, executableBare, executableOutput);
+      const executableReceiptBytes = await readFile(join(executableOutput, '.archsync-tree-receipt.json'));
+      const executableDigest = createHash('sha256').update(executableReceiptBytes).digest('hex');
+      assert.equal(executableReceipt.files[0].mode, '100755');
+      assert.equal((await verifyOfflineTree(executableOutput, executableDigest)).verified_regular_files, 1);
+      await chmod(join(executableOutput, 'src', 'source.bin'), 0o644);
+      await assert.rejects(verifyOfflineTree(executableOutput, executableDigest),
+        /File executable mode changed/u);
     }
   } finally {
     assert(resolve(temporary).startsWith(`${resolve(tmpdir())}${sep}`),
