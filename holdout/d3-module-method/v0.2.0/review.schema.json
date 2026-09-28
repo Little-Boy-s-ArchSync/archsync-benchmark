@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archsync.dev/schemas/d3/module-inventory-review/2",
+  "title": "D3 author module occurrence and edge inventory",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "status", "method_manifest_sha256", "cases_sha256", "reviewer", "case_envelopes"],
+  "properties": {
+    "schema": { "const": "d3-module-inventory-review/2" },
+    "status": { "enum": ["blank-preparation", "original-sealed", "adjudicated"] },
+    "method_manifest_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "cases_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "reviewer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "relationship", "declaration_reference", "declared_at_utc", "prior_output_exposure", "development_involvement", "ai_assistance_summary"],
+      "properties": {
+        "id": { "type": ["string", "null"] },
+        "relationship": { "const": "development-associated-author" },
+        "declaration_reference": { "type": ["string", "null"] },
+        "declared_at_utc": { "type": ["string", "null"], "format": "date-time" },
+        "prior_output_exposure": { "type": ["string", "null"] },
+        "development_involvement": { "type": ["string", "null"] },
+        "ai_assistance_summary": { "type": ["string", "null"] }
+      }
+    },
+    "case_envelopes": { "type": "array", "maxItems": 56, "items": { "$ref": "#/$defs/case" } }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repository", "case_id", "base", "head", "file_coverage", "occurrences", "edges"],
+      "properties": {
+        "repository": { "type": "string", "minLength": 1 },
+        "case_id": { "type": "string", "minLength": 1 },
+        "base": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "head": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+        "file_coverage": { "type": "array", "items": { "$ref": "file-coverage.schema.json" } },
+        "occurrences": { "type": "array", "items": { "$ref": "occurrence.schema.json" } },
+        "edges": { "type": "array", "items": { "$ref": "module-edge.schema.json" } }
+      }
+    }
+  }
+}

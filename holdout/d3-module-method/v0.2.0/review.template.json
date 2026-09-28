@@ -1,0 +1,16 @@
+{
+  "schema": "d3-module-inventory-review/2",
+  "status": "blank-preparation",
+  "method_manifest_sha256": null,
+  "cases_sha256": null,
+  "reviewer": {
+    "id": null,
+    "relationship": "development-associated-author",
+    "declaration_reference": null,
+    "declared_at_utc": null,
+    "prior_output_exposure": null,
+    "development_involvement": null,
+    "ai_assistance_summary": null
+  },
+  "case_envelopes": []
+}

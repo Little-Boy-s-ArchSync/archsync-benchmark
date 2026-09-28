@@ -1,0 +1,23 @@
+{
+  "schema": "d3-module-statistical-plan/2",
+  "version": "0.2.0",
+  "status": "proposal-not-accepted",
+  "population": { "captured_cases": 60, "primary_attempts": 56, "context_only": 4, "repositories": { "hyperdxio/hyperdx": 19, "amruthpillai/reactive-resume": 17, "ether/etherpad": 20 } },
+  "case_counts": ["captured", "primary-eligible", "attempted", "tool-completed", "unsupported", "failed", "truth-unknown", "scored"],
+  "tasks": {
+    "occurrence": { "preserve_multiplicity": true, "partition": "complete common-capability file-side", "comparative_scoring_supported": false, "reason": "The retained dependency-cruiser output has no physical source positions; preserve source-bound occurrences as audit evidence only until a separately validated position extractor is frozen." },
+    "module_edge": { "deduplicate_by": ["repository", "case_id", "side", "source_path", "dependency", "target_path"], "partition": "complete common-capability case-side", "group_aggregation": "secondary description only; source and target file identity are retained in the primary comparison" }
+  },
+  "matching": { "tp": "truth intersection prediction", "fp": "prediction minus truth", "fn": "truth minus prediction", "exact_keys_only": true },
+  "metrics": {
+    "precision": "TP/(TP+FP); null with reason when denominator is zero",
+    "recall": "TP/(TP+FN); null with reason when denominator is zero",
+    "f1": "null unless precision and recall are estimable; zero when both are estimable and P+R=0; otherwise 2PR/(P+R)",
+    "completion_coverage": "valid-output attempted cases/56",
+    "conservative_exact_case_success": "complete truth and valid exactly matching base/head edge sets/56"
+  },
+  "paired_policy": "Use the pre-output common-capability set; retain every unsupported, failed and truth-Unknown attempt in coverage.",
+  "zero_positive_policy": "Never report 100% recall when TP+FN is zero.",
+  "agreement": "Compare two sealed original inventories before adjudication; preserve unresolved differences as Unknown.",
+  "human_acceptance": { "hieu": null, "hoang": null }
+}
