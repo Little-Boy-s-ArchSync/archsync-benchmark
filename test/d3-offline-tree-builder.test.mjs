@@ -16,6 +16,9 @@ test('builder refuses embedded Git metadata, file ancestors, and receipt collisi
   ])), /file cannot be a path ancestor/u);
   assert.throws(() => validateMaterializableTree(new Map([['.archsync-tree-receipt.json', entry]])),
     /collides with the builder receipt/u);
+  assert.throws(() => validateMaterializableTree(new Map([
+    ['Source/a.ts', entry], ['source/b.ts', entry],
+  ])), /Case-folded directory or file path collision/u);
 });
 
 function git(directory, args, input) {

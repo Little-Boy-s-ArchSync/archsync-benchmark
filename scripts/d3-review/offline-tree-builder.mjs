@@ -16,11 +16,19 @@ export function validateMaterializableTree(entries) {
   const audit = auditPortableTree(entries);
   assert.equal(audit.incompatible_paths.length, 0, 'Tree contains unsafe or nonportable paths');
   assert(!entries.has(receiptName), 'Source tree collides with the builder receipt');
+  const foldedPrefixes = new Map();
   for (const path of entries.keys()) {
     const parts = path.split('/');
     assert(!parts.some(part => part.toLowerCase() === '.git'), 'Embedded Git metadata path is forbidden');
-    for (let index = 1; index < parts.length; index++) {
-      assert(!entries.has(parts.slice(0, index).join('/')), 'A file cannot be a path ancestor');
+    for (let index = 1; index <= parts.length; index++) {
+      const prefix = parts.slice(0, index).join('/');
+      const key = prefix.normalize('NFC').toLowerCase();
+      const prior = foldedPrefixes.get(key);
+      assert(!prior || prior === prefix, 'Case-folded directory or file path collision');
+      foldedPrefixes.set(key, prefix);
+      if (index < parts.length) {
+        assert(!entries.has(prefix), 'A file cannot be a path ancestor');
+      }
     }
   }
   return audit;

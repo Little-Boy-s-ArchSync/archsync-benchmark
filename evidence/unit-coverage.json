@@ -185,11 +185,11 @@
       },
       {
         "file": "scripts/d3-review/offline-tree-builder.mjs",
-        "sha256": "66b2963d2c17ca62017561d768b096779b9e7ff4e26786e970b4854e4f31920c"
+        "sha256": "60b484c8e1d3204438697726b87cf1c0cdd6831494e5004007d3a431dcbf6d0e"
       },
       {
         "file": "test/d3-offline-tree-builder.test.mjs",
-        "sha256": "fa1cc3ecfc7d14a4162c940c38e76d5bdc760bce07afd70cec529fb0a86af689"
+        "sha256": "da754ee862f338432336389aeb01b90d74500c9b1003e913de265104d00c0b43"
       },
       {
         "file": "holdout/d3-portable-tree-preflight-20260928/OFFLINE-BUILDER.md",
@@ -648,6 +648,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "b2c786bf9acfe52cf9f9f54373bc5ed016fc41093c9435d1b540e11a3d347ddb"
+    "manifest_sha256": "ec888c097a09437d66d7e5e62c28e0044580a8bfad652ef52001f179535de28a"
   }
 }
