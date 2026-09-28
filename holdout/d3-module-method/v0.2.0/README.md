@@ -2,11 +2,13 @@
 
 Status: **proposal only; not accepted, not runnable and not a D3 result**.
 
-The resolver template now records four conservative candidate decisions supported
+The resolver template now records five conservative candidate decisions supported
 by the study contract and retained non-D3 v1 fixtures: source eligibility,
-runtime ES syntax, literal CommonJS/dynamic imports, and exact source-file-edge
-normalization. Relative resolution, per-side project configuration, and
-package/workspace resolution remain undecided. The merged exports-field v2
+runtime ES syntax, literal CommonJS/dynamic imports, a narrowly conditioned
+relative-path resolution, and exact source-file-edge normalization. Relative
+resolution is only a candidate under a complete pinned case-side tree and
+captured configuration; per-side project configuration and package/workspace
+resolution remain undecided. The merged exports-field v2
 development fixture demonstrates a candidate configuration that repairs the
 v1 self-package-export mismatch on synthetic source, but that v2 receipt and
 configuration are not bound by this v0.2.0 manifest. It cannot silently turn
