@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve, sep } from 'node:path';
 import test from 'node:test';
-import { auditSources, parseCommit, parseTreeListing } from '../scripts/d3-review/offline-source-audit.mjs';
+import { auditAnchors, auditSources, parseCommit, parseTreeListing } from '../scripts/d3-review/offline-source-audit.mjs';
 import { gitId, sha256 } from '../scripts/d3-source-review/files.mjs';
 
 function git(args) {
@@ -69,6 +69,25 @@ test('offline audit matches pinned side bytes and fails closed on a changed sour
     const changedCommit = structuredClone(receipt);
     changedCommit.results[0].local_tree = '0'.repeat(40);
     assert.throws(() => auditSources(changedCommit, inventory, dirs), /Root tree differs/u);
+    const ledger = { schema: 'd3-proposed-applicability-evidence/1',
+      status: 'ai-proposed-not-human-verified', cases_sha256: receipt.kit_sha256,
+      labels_created: false, predictions_executed: false, human_acceptances: [],
+      rows: [{ repository: 'hyperdxio/hyperdx', case_id: 'H001', rule_id: 'R1', side: 'base',
+        commit, applicability: null, anchors: [{ path: 'src/a.ts', mode: '100644',
+          git_blob: blob, sha256: sha256(bytes),
+          citations: [{ start_line: 1, end_line: 1, quote: 'export const value = 1;' }] }] }] };
+    assert.deepEqual(auditAnchors(ledger, receipt, dirs), { rows: 1, anchors_matched: 1,
+      citations_matched: 1, unique_anchor_blobs_rehashed: 1,
+      applicability_decisions_accepted: 0, labels_created: false, predictions_executed: false });
+    const wrongQuote = structuredClone(ledger);
+    wrongQuote.rows[0].anchors[0].citations[0].quote = 'not in source';
+    assert.throws(() => auditAnchors(wrongQuote, receipt, dirs), /citation differs/u);
+    const wrongBlob = structuredClone(ledger);
+    wrongBlob.rows[0].anchors[0].git_blob = '0'.repeat(40);
+    assert.throws(() => auditAnchors(wrongBlob, receipt, dirs), /blob differs/u);
+    const prematureDecision = structuredClone(ledger);
+    prematureDecision.rows[0].applicability = 'applicable';
+    assert.throws(() => auditAnchors(prematureDecision, receipt, dirs), /cannot accept applicability/u);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

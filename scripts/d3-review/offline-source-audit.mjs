@@ -7,6 +7,7 @@ import { gitId, sha256 } from '../d3-source-review/files.mjs';
 
 const receiptPin = '8356a69a4bf8c5c54dbcc092b245fc8e60cfc3996d0791e1a2defcd5049f6b60';
 const inventoryPin = 'c629044a356c2a83a1a28eb85078f813b227862a088e64476674e1c54f06f68a';
+const anchorLedgerPin = 'b9655af035700e12ada897db9c8be3a6d803d17a8a97642a57fca776f746a095';
 const repositories = [
   'hyperdxio/hyperdx', 'amruthpillai/reactive-resume', 'ether/etherpad',
 ];
@@ -57,6 +58,67 @@ function checkBlobsOffline(directory, blobIds) {
       `Missing or non-blob Git object: ${ids[i]}`);
   }
   return ids.length;
+}
+
+/** Corroborate proposed citations from fresh public Git trees, without accepting applicability. */
+export function auditAnchors(ledger, receipt, gitDirectories) {
+  assert.equal(ledger.schema, 'd3-proposed-applicability-evidence/1');
+  assert.equal(ledger.status, 'ai-proposed-not-human-verified');
+  assert.equal(ledger.cases_sha256, receipt.kit_sha256);
+  assert.equal(ledger.labels_created, false);
+  assert.equal(ledger.predictions_executed, false);
+  assert.deepEqual(ledger.human_acceptances, []);
+  const commits = new Map(repositories.map(repository => [repository, new Set()]));
+  for (const record of receipt.results) {
+    assert(commits.has(record.repository) && oid(record.sha));
+    commits.get(record.repository).add(record.sha);
+  }
+  const trees = new Map(), blobs = new Map(), identities = new Set();
+  let anchors = 0, citations = 0;
+  for (const row of ledger.rows) {
+    assert(commits.get(row.repository)?.has(row.commit), 'Anchor commit not in pinned source set');
+    const identity = JSON.stringify([row.repository, row.case_id, row.rule_id, row.side, row.commit]);
+    assert(!identities.has(identity), 'Duplicate applicability row'); identities.add(identity);
+    assert.equal(row.applicability, null, 'Proposed source audit cannot accept applicability');
+    const directory = gitDirectories[row.repository];
+    assert(typeof directory === 'string' && directory);
+    const treeKey = `${row.repository}\0${row.commit}`;
+    if (!trees.has(treeKey)) trees.set(treeKey,
+      parseTreeListing(git(directory, ['ls-tree', '-r', '-z', row.commit])));
+    for (const anchor of row.anchors) {
+      assert(typeof anchor.path === 'string' && anchor.path &&
+        !anchor.path.startsWith('/') && !anchor.path.includes('\\') &&
+        anchor.path.split('/').every(part => part && part !== '.' && part !== '..'),
+      'Unsafe historical anchor path');
+      const entry = trees.get(treeKey).get(anchor.path);
+      assert(entry && ['100644', '100755'].includes(entry.mode), 'Historical anchor is absent or nonregular');
+      assert.equal(anchor.mode, entry.mode, 'Historical anchor mode differs from public Git');
+      assert.equal(anchor.git_blob, entry.blob, 'Historical anchor blob differs from public Git');
+      const blobKey = `${row.repository}\0${entry.blob}`;
+      if (!blobs.has(blobKey)) {
+        const bytes = git(directory, ['cat-file', 'blob', entry.blob]);
+        assert.equal(gitId('blob', bytes), entry.blob, 'Historical anchor object identity mismatch');
+        blobs.set(blobKey, { bytes, digest: sha256(bytes) });
+      }
+      const source = blobs.get(blobKey);
+      assert.equal(anchor.sha256, source.digest, 'Historical anchor SHA-256 differs from public Git');
+      const lines = new TextDecoder('utf-8', { fatal: true }).decode(source.bytes).split(/\r?\n/u);
+      if (lines.at(-1) === '') lines.pop();
+      assert(anchor.citations.length > 0);
+      for (const citation of anchor.citations) {
+        assert(Number.isInteger(citation.start_line) && Number.isInteger(citation.end_line) &&
+          citation.start_line >= 1 && citation.end_line >= citation.start_line &&
+          citation.end_line <= lines.length, 'Historical citation outside source');
+        assert.equal(citation.quote, lines.slice(citation.start_line - 1, citation.end_line).join('\n'),
+          'Historical citation differs from public Git source');
+        citations++;
+      }
+      anchors++;
+    }
+  }
+  return { rows: identities.size, anchors_matched: anchors, citations_matched: citations,
+    unique_anchor_blobs_rehashed: blobs.size, applicability_decisions_accepted: 0,
+    labels_created: false, predictions_executed: false };
 }
 
 /** Source provenance only. It never executes a project, analyzer or comparator. */
@@ -153,13 +215,23 @@ async function main(args) {
   const [mode, output, hyperdx, reactive, etherpad] = args;
   const receiptBytes = await readFile(resolve('holdout/d3-upstream-commit-audit-20260928/receipt.json'));
   const inventoryBytes = await readFile(resolve('holdout/d3-file-side-preparation/inventory.json'));
+  const anchorBytes = await readFile(resolve('holdout/d3-applicability-proposal-20260928/evidence-ledger.json'));
   assert.equal(sha256(receiptBytes), receiptPin, 'Upstream provenance receipt changed');
   assert.equal(sha256(inventoryBytes), inventoryPin, 'File-side inventory changed');
-  const report = auditSources(JSON.parse(receiptBytes), JSON.parse(inventoryBytes), {
+  assert.equal(sha256(anchorBytes), anchorLedgerPin, 'Proposed anchor ledger changed');
+  const directories = {
     'hyperdxio/hyperdx': hyperdx, 'amruthpillai/reactive-resume': reactive, 'ether/etherpad': etherpad,
-  }, { receipt: receiptPin, inventory: inventoryPin });
+  };
+  const receipt = JSON.parse(receiptBytes);
+  const report = auditSources(receipt, JSON.parse(inventoryBytes), directories,
+    { receipt: receiptPin, inventory: inventoryPin });
+  report.inputs.proposed_anchor_ledger_sha256 = anchorLedgerPin;
+  report.proposed_anchor_source_audit = auditAnchors(JSON.parse(anchorBytes), receipt, directories);
   assert.equal(report.totals.commits, 93);
   assert.equal(report.totals.file_sides_matched, 300);
+  assert.deepEqual(report.proposed_anchor_source_audit, { rows: 152, anchors_matched: 338,
+    citations_matched: 532, unique_anchor_blobs_rehashed: 13,
+    applicability_decisions_accepted: 0, labels_created: false, predictions_executed: false });
   const bytes = Buffer.from(`${JSON.stringify(report, null, 2)}\n`);
   if (mode === '--write') await writeFile(output, bytes, { flag: 'wx' });
   else assert.deepEqual(await readFile(output), bytes, 'Retained source audit changed');

@@ -6,6 +6,11 @@ root-tree and ordered-parent identities from the merged upstream receipt, then
 checks the complete tracked tree and offline availability of every referenced
 Git blob. The 300 selected file-sides are independently matched to the bare
 clones by path, mode, Git blob ID and source SHA-256. Absent sides remain absent.
+The separate 152-row **proposed**, unaccepted applicability ledger is also
+corroborated against the same public trees: 338 historical anchor occurrences,
+532 physical-line quotations and 13 distinct anchor blobs match. This proves
+source bytes and locations, not that the proposed interpretation of any rule
+is correct or accepted. All 152 final applicability decisions remain open.
 
 The source trees contain a Reactive Resume `CLAUDE.md` symlink on 32 selected
 commits. The audit counts its Git mode and blob but never dereferences or
@@ -27,7 +32,9 @@ node scripts/d3-review/offline-source-audit.mjs --check holdout/d3-offline-sourc
 
 `--write` can create a receipt at a **new** path and refuses to overwrite an
 existing file. The verifier pins the exact merged upstream receipt and
-file-side inventory hashes, compares every object offline, and emits a
+file-side inventory hashes plus the proposed ledger SHA-256
+`b9655af035700e12ada897db9c8be3a6d803d17a8a97642a57fca776f746a095`,
+compares source objects and quotations offline, and emits a
 deterministic summary without local paths or timestamps. The checked result
 therefore supports reproducibility without treating this public source audit
 as D3 experimental evidence.

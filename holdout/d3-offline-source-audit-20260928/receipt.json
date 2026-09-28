@@ -4,7 +4,8 @@
   "inputs": {
     "upstream_receipt_sha256": "8356a69a4bf8c5c54dbcc092b245fc8e60cfc3996d0791e1a2defcd5049f6b60",
     "file_side_inventory_sha256": "c629044a356c2a83a1a28eb85078f813b227862a088e64476674e1c54f06f68a",
-    "selected_cases_sha256": "44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35"
+    "selected_cases_sha256": "44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35",
+    "proposed_anchor_ledger_sha256": "b9655af035700e12ada897db9c8be3a6d803d17a8a97642a57fca776f746a095"
   },
   "repositories": [
     {
@@ -54,5 +55,14 @@
     "effective_project_configs_accepted": false,
     "method_frozen": false,
     "research_complete": false
+  },
+  "proposed_anchor_source_audit": {
+    "rows": 152,
+    "anchors_matched": 338,
+    "citations_matched": 532,
+    "unique_anchor_blobs_rehashed": 13,
+    "applicability_decisions_accepted": 0,
+    "labels_created": false,
+    "predictions_executed": false
   }
 }
