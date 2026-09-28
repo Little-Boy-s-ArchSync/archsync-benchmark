@@ -87,6 +87,7 @@ const provenanceFiles = [
   "holdout/D3-CASE-RUBRIC.v0.1.0.md",
   "holdout/D3-CASE-RUBRIC.v0.2.0.md",
   "holdout/D3-ANALYSIS-PLAN.v0.1.0.md",
+  "holdout/D3-ANALYSIS-PLAN.v0.2.0.md",
   "holdout/D3-SCOPE-ACCEPTANCE-20260928.md",
   "holdout/D3-EVALUATION-UNIT-DECISION-20260928.md",
   "holdout/D3-RULE-DECISION-20260928.md",

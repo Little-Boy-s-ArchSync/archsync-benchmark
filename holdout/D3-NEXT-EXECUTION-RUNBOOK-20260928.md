@@ -24,7 +24,7 @@ Do not fill an `applicable` decision solely from the reference snapshot, reposit
 
 ## Gate 2: method and reviews
 
-Approve and byte-pin the final rubric, accepted scope record, historical-applicability ledger, module-edge definition, rule set, tool packages/configuration, resolver policy and descriptive analysis plan. The current `method.json` is intentionally `proposed`, and `d3:review status` must report `D3_NOT_COMPLETE` until these gates are satisfied. The present contract wrapper is intentionally conditional and cannot pass the final-contract validator.
+Approve and byte-pin the final rubric, accepted scope record, historical-applicability ledger, module-edge definition, rule set, tool packages/configuration, resolver policy and descriptive analysis plan. `D3-ANALYSIS-PLAN.v0.2.0.md` is the module-edge analysis **candidate**; the earlier v0.1.0 case-classification plan remains historical. Neither is accepted without the method gate. The current `method.json` is intentionally `proposed`, and `d3:review status` must report `D3_NOT_COMPLETE` until these gates are satisfied. The present contract wrapper is intentionally conditional and cannot pass the final-contract validator.
 
 Then produce Hiếu's and Hoàng's separate source-bound 56-row review files with declared prior exposure and AI assistance. AI may inspect all source and suggest labels/evidence. Each reviewer must record actual input scope, retained AI output reference, human verification extent and whether suggestions were shared. Source quotations must match the pinned commit/path/line. Preserve original reviews and their raw byte hashes before comparison or discussion. If suggestions are shared, state that original agreement is dependent, not independent.
 
