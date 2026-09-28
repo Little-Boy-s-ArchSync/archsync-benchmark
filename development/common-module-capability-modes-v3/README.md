@@ -29,7 +29,10 @@ development qualification expectation to true and passed the existing
 seven-case receipt verifier. Both runs have the same normalized results;
 comparator raw stdout contains run-specific temporary paths, so its raw
 SHA-256 varies. `profile.json` pins both manifest hashes and the overlay
-fixture/configuration bytes. The local operator reran the tools twice; these
+fixture/configuration bytes. The verifier reconstructs the initial
+`expected_shared=false` input and checks its hash against the first manifest,
+then checks every retained raw channel and the unchanged normalized results.
+The local operator reran the tools twice; these
 are **not independent-person replicates**.
 
 To verify the retained receipts without running either tool:

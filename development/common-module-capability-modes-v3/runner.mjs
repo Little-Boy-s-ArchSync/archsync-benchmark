@@ -11,7 +11,8 @@ const here = resolve(import.meta.dirname);
 const defaultReceipt = join(here, 'receipt');
 const profileVersion = 'non-d3-common-capability-modes-v3';
 
-function fixtureOverlay(original) {
+function fixtureOverlay(original, sharedExpectation = true) {
+  assert.equal(typeof sharedExpectation, 'boolean');
   assert.equal(original.purpose, 'developer-authored-software-fixtures-not-research-ground-truth');
   assert.equal(original.cases.length, 7);
   const value = original.cases.find((item) => item.id === 'value-syntax');
@@ -29,8 +30,8 @@ function fixtureOverlay(original) {
   value.expected_pairs.push(['src/app/main.ts', 'src/lib/types.ts']);
   value.expected_pairs.sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b)));
   value.expected_guardian_syntax.push('import');
-  // First diagnostic capture rejected the false divergence hypothesis; see README.
-  value.expected_shared = true;
+  // Preserve the first false hypothesis as a reconstructible diagnostic input.
+  value.expected_shared = sharedExpectation;
 
   cjs.files['tsconfig.json'] = encode({ compilerOptions: {
     target: 'ES2022', module: 'CommonJS', moduleResolution: 'Node10',
@@ -49,9 +50,10 @@ function fixtureOverlay(original) {
   return original;
 }
 
-async function materialize() {
+async function materialize(sharedExpectation = true) {
   const scratch = await mkdtemp(join(tmpdir(), 'archsync-common-modes-v3-'));
-  const fixtures = fixtureOverlay(JSON.parse(await readFile(join(sourceRoot, 'fixtures.json'), 'utf8')));
+  const fixtures = fixtureOverlay(JSON.parse(await readFile(join(sourceRoot, 'fixtures.json'), 'utf8')),
+    sharedExpectation);
   const historicalConfig = JSON.parse(await readFile(join(sourceRoot, 'dependency-cruiser.json'), 'utf8'));
   const revisedConfig = JSON.parse(await readFile(join(here, 'dependency-cruiser.json'), 'utf8'));
   assert.deepEqual(revisedConfig, { ...historicalConfig, options: {
@@ -81,6 +83,14 @@ async function verifyHypothesisReceipt(profile, acceptedManifest) {
   assert.equal(initial.d3_executed, false);
   assert.equal(initial.research_complete, false);
   assert.equal(initial.cases.length, 7);
+  const scratch = await materialize(false);
+  try {
+    assert.deepEqual(initial.inputs.map((row) => row.path), inputNames);
+    for (const input of initial.inputs) {
+      assert.equal(hash(await readFile(join(scratch, input.path))), input.sha256,
+        `Initial diagnostic input changed: ${input.path}`);
+    }
+  } finally { await cleanup(scratch); }
   for (const [index, candidate] of initial.cases.entries()) {
     assert.equal(candidate.id, acceptedManifest.cases[index].id);
     assert.deepEqual(candidate.normalized, acceptedManifest.cases[index].normalized,

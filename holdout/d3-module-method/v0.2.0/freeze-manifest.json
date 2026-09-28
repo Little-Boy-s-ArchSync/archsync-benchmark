@@ -11,8 +11,8 @@
   "artifacts": [
     {
       "path": "development/common-module-capability-modes-v3/README.md",
-      "sha256": "d9e6dc1be8a8a9f5f9a9f01f2d917c3bf02f14328f2eb8d7420dfcf971fa26e6",
-      "bytes": 3291
+      "sha256": "f128431b9257aa2e9a19d0cccedf240806cdcd641b758ac7e2572a5b896eaa22",
+      "bytes": 3484
     },
     {
       "path": "development/common-module-capability-modes-v3/dependency-cruiser.json",
@@ -36,8 +36,8 @@
     },
     {
       "path": "development/common-module-capability-modes-v3/runner.mjs",
-      "sha256": "d3bd90ff2a35b1e8b1d43db8d352380ef3339b7fc3c1bced79ee875582141a38",
-      "bytes": 8149
+      "sha256": "c63bc498ff69e949cc00880409f30a88b440201d7c51ca66c71b84ab85fd82bc",
+      "bytes": 8639
     },
     {
       "path": "development/common-module-capability/README.md",
