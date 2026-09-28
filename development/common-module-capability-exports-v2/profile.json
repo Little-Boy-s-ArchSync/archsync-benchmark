@@ -1,0 +1,11 @@
+{
+  "schema": "non-d3-common-capability-profile/2",
+  "status": "candidate-development-fixture-not-d3-method-freeze",
+  "profile": "non-d3-common-capability-exports-v2",
+  "historical_v1_receipt_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+  "configuration_sha256": "04458c1dc1c0848b5ad9b3aeb75b2c26421247ac182f6f6de8f7881126a94ddf",
+  "overlay_fixtures_sha256": "26a5b5d65a6276e6b262894b322a881b660cc5247464c855280225fd623bf2bd",
+  "receipt_manifest_sha256": "a6b6d32602a6dfee66f17e577e3d4b8218f546e748e358b80aaf9bfcff854ca8",
+  "d3_executed": false,
+  "research_complete": false
+}
