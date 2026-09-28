@@ -1,0 +1,31 @@
+{
+  "schema_version": 1,
+  "status": "candidate_package_preflight_not_method_freeze",
+  "captured_at_utc_minute": "2026-09-27T22:49Z",
+  "environment": {
+    "os": "Windows",
+    "node": "22.16.0",
+    "pnpm": "11.16.0"
+  },
+  "guardian": {
+    "source_repository": "Little-Boy-s-ArchSync/archsync-guardian",
+    "source_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
+    "package_name": "@archsync/guardian",
+    "package_version": "0.3.3",
+    "archive_filename": "archsync-guardian-0.3.3.tgz",
+    "archive_bytes": 602166,
+    "archive_sha256": "7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f",
+    "package_content_sha256": "608e9213681f9172103463e63da8bafc46291e28f1b577e6744344c972c677be",
+    "module_analyzer_version": "0.1.0-development"
+  },
+  "comparator": {
+    "registry_package": "dependency-cruiser",
+    "package_version": "18.3.0",
+    "archive_filename": "dependency-cruiser-18.3.0.tgz",
+    "archive_bytes": 210709,
+    "archive_sha256": "268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93",
+    "archive_sha512_integrity": "sha512-LqZl/eyG/9zROxe02TLQfXujJIwcYj6HwIjDkeI11JzW3ADmO93hZ2zwjQHNnfeXKlYujq1hgU3O5TdeupO7zQ==",
+    "license": "MIT"
+  },
+  "selected_source_bundle_sha256": "44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35"
+}
