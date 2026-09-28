@@ -31,12 +31,27 @@ reading aid and uses the TypeScript ecosystem also used by Guardian. Both
 authors must disclose this shared aid and independently verify their actual
 source decisions; no agreement from this packet is independent evidence.
 
+`reading-workbook.csv` is a deterministic review **template** derived from the
+retained hints, not an annotation. Its SHA-256 is
+`c0c657d24a5b8f216cdafb6bce3b6cdedc2ed88a0d5da1418085b394754d67f3`.
+It has one coverage row for each of the 300 file-sides and one hint row for
+each of the 2,970 parser hints. All reviewer disposition, target, reason,
+evidence and verification-time cells are blank. The worksheet may omit real
+dependencies that the parser did not hint at; reviewers must add source-bound
+occurrences and explicitly inspect even no-hint files. Source-derived preview
+cells escape spreadsheet formula prefixes and control characters, so they are
+display aids, not exact source bytes; use the original source and hashes for
+evidence. Hiếu and Hoàng should fill separate copies and preserve both
+originals before any reconciliation. This CSV is not the final module-review
+JSON and cannot pass as accepted truth merely by filling its cells.
+
 Build or verify with Node 22.16.0 and the frozen pnpm lockfile:
 
 ```sh
 pnpm install --frozen-lockfile
 node scripts/d3-review/source-syntax-hints.mjs build /absolute/path/to/cases.json /absolute/new/hints.json
 node scripts/d3-review/source-syntax-hints.mjs verify /absolute/path/to/cases.json /absolute/new/hints.json
+node scripts/d3-review/source-reading-workbook.mjs verify holdout/d3-source-syntax-hints/hints.json holdout/d3-source-syntax-hints/reading-workbook.csv
 ```
 
 Hosted CI can check the retained packet and parser tests but cannot rerun

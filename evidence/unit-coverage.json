@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 277,
-    "passed": 277,
+    "total": 280,
+    "passed": 280,
     "failed": 0
   },
   "provenance": {
@@ -93,11 +93,23 @@
       },
       {
         "file": "holdout/d3-source-syntax-hints/README.md",
-        "sha256": "422088fcf4fe5963439a853ee617efb02250006d4adeabcaaefd5ceddf7a2d29"
+        "sha256": "96abfcf7f7bccce664b44a4b8961cb5ef57798fc541bdf69dcdaa7c1e4f00cab"
       },
       {
         "file": "holdout/d3-source-syntax-hints/hints.json",
         "sha256": "366a009e17be4fabd143b12963b9adb73dad31da946ca3e070ee95c578ab1c07"
+      },
+      {
+        "file": "scripts/d3-review/source-reading-workbook.mjs",
+        "sha256": "2caadb9f12e4fcda5a5eb4e2f17d489f2553c369bf433ec8f8fc507dbae12f04"
+      },
+      {
+        "file": "test/d3-source-reading-workbook.test.mjs",
+        "sha256": "d2b7c77fc06e2afc160b267ad2fd8e445d18ae895359aad93dac097e0c575aef"
+      },
+      {
+        "file": "holdout/d3-source-syntax-hints/reading-workbook.csv",
+        "sha256": "c0c657d24a5b8f216cdafb6bce3b6cdedc2ed88a0d5da1418085b394754d67f3"
       },
       {
         "file": "holdout/D3-APPLICABILITY-AI-NOTES-20260928.md",
@@ -321,7 +333,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "56e40e77d7230209339efd9ca98bf56782d0b021ccab5ce57dd94ac2c0781a79"
+        "sha256": "2d4bd39258f6dc5aa3b1f6cecb5e0e4fc9225b63a9a34c530af27403dbb45101"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -488,6 +500,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "801b6c68a4a0ea53f2be8684ee6d952e2b29bf4580a535a20f5ad46408bfba9a"
+    "manifest_sha256": "97fd0303f41eb0a60b0b93b751fd9973f3520054c427462ccd99531fb5834bc0"
   }
 }
