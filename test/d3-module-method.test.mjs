@@ -208,6 +208,8 @@ test('freeze manifest binds the merged development receipt without pretending me
   assert.equal(report.open_gates.development_fixture_not_research_freeze, true);
   assert.deepEqual(report.common_capability_receipt,
     { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
+  assert.deepEqual(report.mode_capability_receipt,
+    { cases: 7, common_fixture_passes: 3, failed_common_candidates: 0, unsupported_probes: 4, d3_executed: false });
   assert.deepEqual(report.package_preflight,
     { status: 'candidate_package_preflight_not_method_freeze', guardian_package: '@archsync/guardian@0.3.3',
       comparator_package: 'dependency-cruiser@18.3.0', archives_available: false, independently_reproduced: false,

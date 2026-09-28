@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 274,
-    "passed": 274,
+    "total": 275,
+    "passed": 275,
     "failed": 0
   },
   "provenance": {
@@ -101,11 +101,39 @@
       },
       {
         "file": "scripts/d3-review/module-method.mjs",
-        "sha256": "845877226df59d960263bfc9c3426740bf490f75fe5b464c4a49f58c10c39e14"
+        "sha256": "4ac441581678add87d53910824cce5608fc6715fbde9dc86455d33ac55684eb0"
       },
       {
         "file": "test/d3-module-method.test.mjs",
-        "sha256": "a90664f2194cc883a2b70f1379a524cdca3ba9caca53f10f19266a8717c11dd1"
+        "sha256": "016feb9e61aa2af837979e94c79d8401915871eb8acbe7c27555155114b3bf16"
+      },
+      {
+        "file": "test/d3-mode-qualification.test.mjs",
+        "sha256": "e40b02bb3d6e3f29894fd16bdfdce657b47b1ddb4f645c77168ec09ce2bf98c3"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/README.md",
+        "sha256": "d9e6dc1be8a8a9f5f9a9f01f2d917c3bf02f14328f2eb8d7420dfcf971fa26e6"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/dependency-cruiser.json",
+        "sha256": "422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/profile.json",
+        "sha256": "c4ccf5d0f2c6b90da8509dcad49707dbd20166b83ea2f394a191edadf853aab6"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/receipt-hypothesis/manifest.json",
+        "sha256": "8edcbf96cf005bf5899e225151859d916c62041f8f1258f65b47df46855a81de"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/receipt/manifest.json",
+        "sha256": "adcaf0af23caf126087906e55b8ed99784a641ddfeb6e46cfa77e4c0f7c3946f"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/runner.mjs",
+        "sha256": "d3bd90ff2a35b1e8b1d43db8d352380ef3339b7fc3c1bced79ee875582141a38"
       },
       {
         "file": "test/d3-archive-packet.test.mjs",
@@ -129,7 +157,7 @@
       },
       {
         "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
-        "sha256": "6c7138072ee427c1636308fb453ee1785ff52cd4564bf4e6ec554a4846884859"
+        "sha256": "bb860a335c92eb279316adbb58b45050ae222efb16a2da781a1b8834a6d9aa71"
       },
       {
         "file": "holdout/d3-package-archives/README.md",
@@ -337,7 +365,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "21b0c26e56fb88dfbb847c7a8e2d932d5c98adb1b00b8a30325d2bc520b340eb"
+        "sha256": "aa8a165d5df03be8d7071526897d4ebb4757e0431e975e88b3c5fe91fdd6a66e"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -504,6 +532,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "7192c2bcb43f2d0d715cbfd61c1a1030c970dcf42a66fc0691b11fca8bc303a0"
+    "manifest_sha256": "3a7f90b4a9e99ad7a4971d562025f7d69b61a5aa7c8439715502e4427f6fdc7a"
   }
 }

@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { gitId, sha256 } from '../d3-source-review/files.mjs';
 import { isSafeHoldoutPath } from '../lib/holdout.mjs';
 import { verifyReceipt as verifyCommonCapabilityReceipt } from '../../development/common-module-capability/verify.mjs';
+import { verifyV3 as verifyModeCapabilityReceipt } from '../../development/common-module-capability-modes-v3/runner.mjs';
 
 export const METHOD_VERSION = '0.2.0';
 export const GUARDIAN_SOURCE_COMMIT = 'e32ef53eeb07bc8c904b6a1e6a8b897d16def820';
@@ -51,11 +52,18 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   'development/common-module-capability/tools/package-lock.json',
   'development/common-module-capability/tools/package.json',
   'development/common-module-capability/verify.mjs',
+  'development/common-module-capability-modes-v3/README.md',
+  'development/common-module-capability-modes-v3/dependency-cruiser.json',
+  'development/common-module-capability-modes-v3/profile.json',
+  'development/common-module-capability-modes-v3/receipt-hypothesis/manifest.json',
+  'development/common-module-capability-modes-v3/receipt/manifest.json',
+  'development/common-module-capability-modes-v3/runner.mjs',
   'scripts/d3-review/module-method.mjs',
   'scripts/d3-review/project-config-preparation.mjs',
   'scripts/verify-d3-package-preflight.mjs',
   'test/d3-archive-packet.test.mjs',
   'test/d3-module-method.test.mjs',
+  'test/d3-mode-qualification.test.mjs',
   'test/d3-project-config-preparation.test.mjs',
 ].sort());
 
@@ -391,6 +399,9 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   const capability = await verifyCommonCapabilityReceipt(join(repoRoot, 'development/common-module-capability'),
     join(repoRoot, 'development/common-module-capability/receipt'));
   assert.deepEqual(capability, { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
+  const modeCapability = await verifyModeCapabilityReceipt();
+  assert.deepEqual(modeCapability, { cases: 7, common_fixture_passes: 3,
+    failed_common_candidates: 0, unsupported_probes: 4, d3_executed: false });
   const resolver = validatePolicyScaffold(policy), statistics = validateStatisticalPlan(plan), tools = validateToolPins(pins);
   return { status: 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
     open_gates: { resolver_dimensions: resolver.unresolved, package_pins: tools.missing_package_pins,
@@ -400,7 +411,8 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
       reviewed_applicability_ledger_missing: true, source_review_inventories_missing: true,
       human_acceptances_missing: ['hieu', 'hoang'], d3_predictions_not_executed: true },
     resolver, statistics, tools,
-    common_capability_receipt: capability, package_preflight: packagePreflight, review: validateModuleReview(review) };
+    common_capability_receipt: capability, mode_capability_receipt: modeCapability,
+    package_preflight: packagePreflight, review: validateModuleReview(review) };
 }
 
 async function main() {
