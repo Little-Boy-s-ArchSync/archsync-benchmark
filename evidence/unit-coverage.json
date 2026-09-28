@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 299,
-    "passed": 299,
+    "total": 301,
+    "passed": 301,
     "failed": 0
   },
   "provenance": {
@@ -134,6 +134,22 @@
       {
         "file": "holdout/d3-applicability-proposal-20260928/README.md",
         "sha256": "517c497f85fcd38aaaab608cecfe1ffc7964f51dde20d6fef53822da8395ac72"
+      },
+      {
+        "file": "scripts/d3-review/production-role-candidates.mjs",
+        "sha256": "737a8630dea51e1129cbcaf376dcf11adbf079d0d5ea25fa6554c091ef6ca946"
+      },
+      {
+        "file": "test/d3-production-role-candidates.test.mjs",
+        "sha256": "55d8c6df9a586556392d2cb1282348a42aa7b224950ce0eb011fcd665a69efe5"
+      },
+      {
+        "file": "holdout/d3-production-role-candidates-20260928/README.md",
+        "sha256": "939bd1e6cb61f9506e91030411a0820b8001002b954cd3044c77798799331a27"
+      },
+      {
+        "file": "holdout/d3-production-role-candidates-20260928/receipt.json",
+        "sha256": "d152272e2730cb12236292d3968d642552ab8b2368b4e9f2dbe76a75ea20110d"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -409,7 +425,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "f53a4cc02f86eb0218d1b8cd61900b91919f5fd59e830eddd86fc7284b3e9661"
+        "sha256": "483505050be56d6cc8bf313a83811260d383a104f028f1385831fac7a76fe0fc"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -576,6 +592,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "6615b29b014ae7067b2c03c36a8ca389ec2bdfe83ec277407b1dcdb18c3b1b52"
+    "manifest_sha256": "0b50ca40a1105ecee8462f571633e9aa9642ece70d5160b2c11d5ec80814de66"
   }
 }
