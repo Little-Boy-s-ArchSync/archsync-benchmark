@@ -5,6 +5,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { gitId, sha256 } from '../d3-source-review/files.mjs';
 import { isSafeHoldoutPath } from '../lib/holdout.mjs';
 import { verifyReceipt as verifyCommonCapabilityReceipt } from '../../development/common-module-capability/verify.mjs';
+import { verifyV3 as verifyModeCapabilityReceipt } from '../../development/common-module-capability-modes-v3/runner.mjs';
 
 export const METHOD_VERSION = '0.2.0';
 export const GUARDIAN_SOURCE_COMMIT = 'e32ef53eeb07bc8c904b6a1e6a8b897d16def820';
@@ -21,6 +22,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const methodDir = `holdout/d3-module-method/v${METHOD_VERSION}`;
 
 export const METHOD_ARTIFACT_PATHS = Object.freeze([
+  'holdout/D3-ANALYSIS-PLAN.v0.2.0.md',
   `${methodDir}/README.md`,
   `${methodDir}/applicability-reviewed.template.json`,
   `${methodDir}/file-coverage.schema.json`,
@@ -34,6 +36,11 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   `${methodDir}/tool-pins.template.json`,
   'holdout/d3-package-preflight/README.md',
   'holdout/d3-package-preflight/receipt.json',
+  'holdout/d3-package-archives/README.md',
+  'holdout/d3-package-archives/archsync-guardian-0.3.3.tgz',
+  'holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz',
+  'holdout/d3-project-config-preparation/README.md',
+  'holdout/d3-project-config-preparation/inventory.json',
   'development/common-module-capability/README.md',
   'development/common-module-capability/capture.mjs',
   'development/common-module-capability/dependency-cruiser.json',
@@ -45,9 +52,19 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   'development/common-module-capability/tools/package-lock.json',
   'development/common-module-capability/tools/package.json',
   'development/common-module-capability/verify.mjs',
+  'development/common-module-capability-modes-v3/README.md',
+  'development/common-module-capability-modes-v3/dependency-cruiser.json',
+  'development/common-module-capability-modes-v3/profile.json',
+  'development/common-module-capability-modes-v3/receipt-hypothesis/manifest.json',
+  'development/common-module-capability-modes-v3/receipt/manifest.json',
+  'development/common-module-capability-modes-v3/runner.mjs',
   'scripts/d3-review/module-method.mjs',
+  'scripts/d3-review/project-config-preparation.mjs',
   'scripts/verify-d3-package-preflight.mjs',
+  'test/d3-archive-packet.test.mjs',
   'test/d3-module-method.test.mjs',
+  'test/d3-mode-qualification.test.mjs',
+  'test/d3-project-config-preparation.test.mjs',
 ].sort());
 
 function safe(path) {
@@ -283,6 +300,21 @@ export function validateToolPins(pins) {
   assert.equal(pins.tools.dependency_cruiser.package_name, 'dependency-cruiser');
   assert.equal(pins.tools.dependency_cruiser.package_version, '18.3.0');
   assert.equal(pins.tools.dependency_cruiser.package_sha256, '268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93');
+  assert.equal(pins.tools.dependency_cruiser.configuration_sha256, null,
+    'No comparator configuration is selected before capability reconciliation');
+  assert.equal(pins.tools.dependency_cruiser.configuration_reconciliation_complete, false);
+  assert.deepEqual(pins.tools.dependency_cruiser.candidate_configurations, {
+    original_common_fixture: {
+      path: 'development/common-module-capability/dependency-cruiser.json',
+      sha256: '451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6',
+    },
+    compiler_mode_fixture: {
+      path: 'development/common-module-capability-modes-v3/dependency-cruiser.json',
+      sha256: '422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333',
+    },
+  });
+  assert.notEqual(pins.tools.dependency_cruiser.candidate_configurations.original_common_fixture.sha256,
+    pins.tools.dependency_cruiser.candidate_configurations.compiler_mode_fixture.sha256);
   assert.equal(pins.tools.guardian.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
   assert.equal(pins.tools.dependency_cruiser.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
   assert.equal(pins.common_capability_packet.merged_benchmark_commit, COMMON_CAPABILITY_MERGE_COMMIT);
@@ -300,13 +332,24 @@ export function validateToolPins(pins) {
   assert.equal(pins.package_preflight.independent_reproduction_complete, false);
   assert.equal(pins.package_preflight.d3_executed, false);
   assert.equal(pins.package_preflight.research_complete, false);
+  assert.equal(pins.archive_packet.status, 'candidate-archives-retained-not-independent-method-freeze');
+  assert.equal(pins.archive_packet.guardian_path, 'holdout/d3-package-archives/archsync-guardian-0.3.3.tgz');
+  assert.equal(pins.archive_packet.guardian_sha256, pins.tools.guardian.package_sha256);
+  assert.equal(pins.archive_packet.comparator_path, 'holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz');
+  assert.equal(pins.archive_packet.comparator_sha256, pins.tools.dependency_cruiser.package_sha256);
+  assert.equal(pins.archive_packet.bytes_retained, true);
+  assert.equal(pins.archive_packet.independent_person_reproduction_complete, false);
+  assert.equal(pins.archive_packet.d3_executed, false);
   assert.equal(pins.human_acceptance.hieu, null); assert.equal(pins.human_acceptance.hoang, null);
   const missingPackagePins = [
     ['guardian.configuration_sha256', pins.tools.guardian.configuration_sha256],
+    ['dependency_cruiser.configuration_sha256', pins.tools.dependency_cruiser.configuration_sha256],
   ].filter(([, value]) => !text(value)).map(([name]) => name);
   return { guardian_source_pinned: true, development_packet_bound: true, occurrence_scoring_supported: false,
-    candidate_package_receipt_bound: true, package_archives_available: false, independent_package_reproduction_complete: false,
-    fixture_freeze_complete: false, missing_package_pins: missingPackagePins, accepted: false };
+    candidate_package_receipt_bound: true, package_archives_available: true, independent_package_reproduction_complete: false,
+    fixture_freeze_complete: false, missing_package_pins: missingPackagePins,
+    comparator_configuration_candidates: pins.tools.dependency_cruiser.candidate_configurations,
+    comparator_configuration_reconciliation_complete: false, accepted: false };
 }
 
 function validatePackagePreflight(receipt) {
@@ -355,6 +398,12 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
     assert.equal(artifact.sha256, sha256(bytes), `Method artifact changed: ${artifact.path}`);
     assert.equal(artifact.bytes, bytes.length, `Method artifact size changed: ${artifact.path}`);
   }
+  const retainedPins = JSON.parse(await readFile(join(repoRoot, `${methodDir}/tool-pins.template.json`)));
+  for (const [path, hash] of [[retainedPins.archive_packet.guardian_path, retainedPins.archive_packet.guardian_sha256],
+    [retainedPins.archive_packet.comparator_path, retainedPins.archive_packet.comparator_sha256]]) {
+    assert.equal(manifest.artifacts.find((artifact) => artifact.path === path)?.sha256, hash,
+      `Retained archive differs from pinned package: ${path}`);
+  }
   assert.deepEqual(manifest.scientific_claims, { labels_created: false, predictions_executed: false, results_computed: false, d3_complete: false });
   assert.equal(manifest.human_acceptance.hieu, null); assert.equal(manifest.human_acceptance.hoang, null);
   const policy = JSON.parse(await readFile(join(repoRoot, `${methodDir}/resolver-policy.template.json`)));
@@ -368,16 +417,25 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   const capability = await verifyCommonCapabilityReceipt(join(repoRoot, 'development/common-module-capability'),
     join(repoRoot, 'development/common-module-capability/receipt'));
   assert.deepEqual(capability, { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
+  const modeCapability = await verifyModeCapabilityReceipt();
+  assert.deepEqual(modeCapability, { cases: 7, common_fixture_passes: 3,
+    failed_common_candidates: 0, unsupported_probes: 4, d3_executed: false });
   const resolver = validatePolicyScaffold(policy), statistics = validateStatisticalPlan(plan), tools = validateToolPins(pins);
+  for (const candidate of Object.values(tools.comparator_configuration_candidates)) {
+    assert.equal(sha256(await readFile(join(repoRoot, candidate.path))), candidate.sha256,
+      `Comparator candidate configuration changed: ${candidate.path}`);
+  }
   return { status: 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
     open_gates: { resolver_dimensions: resolver.unresolved, package_pins: tools.missing_package_pins,
+      comparator_configuration_reconciliation_required: !tools.comparator_configuration_reconciliation_complete,
       package_archives_available: tools.package_archives_available,
       independent_package_reproduction_complete: tools.independent_package_reproduction_complete,
       development_fixture_not_research_freeze: !tools.fixture_freeze_complete,
       reviewed_applicability_ledger_missing: true, source_review_inventories_missing: true,
       human_acceptances_missing: ['hieu', 'hoang'], d3_predictions_not_executed: true },
     resolver, statistics, tools,
-    common_capability_receipt: capability, package_preflight: packagePreflight, review: validateModuleReview(review) };
+    common_capability_receipt: capability, mode_capability_receipt: modeCapability,
+    package_preflight: packagePreflight, review: validateModuleReview(review) };
 }
 
 async function main() {

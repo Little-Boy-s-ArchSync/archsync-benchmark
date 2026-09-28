@@ -6,6 +6,11 @@ The local operator packed a clean Guardian source checkout at the commit in `rec
 
 The comparator archive is the npm registry tarball for `dependency-cruiser@18.3.0`. Its SHA-512 matches `development/common-module-capability/tools/package-lock.json`; its package metadata declares MIT and the archive retains `package/LICENSE`. Redistributing that archive requires retaining its license. The tarballs themselves are **not** committed here; a hash without an available artifact or an independently repeated pack is not complete provenance.
 
+The paragraph above describes the original preflight state. The later
+`holdout/d3-package-archives/` packet retains the exact candidate bytes and a
+repeated technical build of unestablished operator/machine independence. This does not retroactively change the
+historical receipt or establish independent person-level review.
+
 To check retained archives without executing their contents:
 
 ```text

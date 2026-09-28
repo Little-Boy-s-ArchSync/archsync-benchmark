@@ -3,17 +3,17 @@
   "version": "0.2.0",
   "status": "proposal-not-accepted",
   "decisions": {
-    "source_eligibility": null,
-    "esm_runtime_bindings": null,
-    "require_and_dynamic_import": null,
-    "relative_target_resolution": null,
+    "source_eligibility": "Candidate: enumerate every changed file on both pinned case sides, including absent, symlink and excluded paths. Only regular production .ts/.tsx/.js/.jsx/.mts/.cts/.mjs/.cjs source under the declared case scope may contribute an edge. Apply the contract's exact test-path regex; exclude declaration, generated and vendored source with a recorded reason. Do not infer zero imports from an unread eligible file.",
+    "esm_runtime_bindings": "Candidate: include value-bearing ES imports and re-exports, including side-effect imports; exclude explicit type-only forms. A compiler mode or syntax whose runtime meaning differs from the non-D3 fixture is unsupported until both tools are qualified on that mode.",
+    "require_and_dynamic_import": "Candidate: include unshadowed literal CommonJS require and literal dynamic import only. Computed specifiers and shadowed require remain unsupported, not negative observations. Preserve their source locations and reasons in the truth audit.",
+    "relative_target_resolution": "Candidate: for a literal relative specifier, resolve from the importing file with pinned TypeScript 5.9.3 and that case-side's captured project configuration against a complete reconstructed Git tree, not the live host checkout. Accept a target only when the resolver yields one repository-relative regular source file whose commit-side Git blob can be checked. Missing configuration/tree content, ambiguous or unresolved targets, symlink traversal and targets outside the supported production-source set remain explicit unsupported or Unknown outcomes; never guess an extension or turn them into a negative edge. The non-D3 value-syntax fixture qualifies relative paths only under its recorded synthetic tsconfig, not across historical D3 projects.",
     "project_configuration": null,
     "package_and_workspace_resolution": null,
     "git_trees_and_symlinks": "Read pinned Git objects only; preserve mode 120000 and never follow symlink targets.",
-    "tool_normalization": null
+    "tool_normalization": "Candidate: normalize only direct resolved cross-group module-import edges to exact repository-relative source and target file paths. Deduplicate by repository, case, side, source path, dependency type and target path. Preserve raw same-group and unmapped observations separately; never compare group-only edges or infer service HTTP/data/cache/message behavior. A prediction without a regular-file target or comparable path is unsupported, not an exact match."
   },
-  "common_capability_fixture_ids": [],
-  "unsupported_in_either_tool": [],
+  "common_capability_fixture_ids": ["value-syntax", "alias"],
+  "unsupported_in_either_tool": ["computed-dynamic", "shadowed-require", "symlink", "unresolved", "self-package-export-v1-configuration"],
   "unknown_policy": {
     "truth_dispositions": ["unresolved-target", "unsupported-syntax-or-resolver", "missing-or-conflicting-source"],
     "file_side": "Any truth-Unknown occurrence, unread eligible path or missing resolver context makes the complete file-side unscorable for both tools.",
