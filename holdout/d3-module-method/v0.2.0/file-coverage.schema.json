@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://archsync.dev/schemas/d3/module-file-coverage/2",
+  "title": "D3 module file-side coverage record",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["repository", "case_id", "side", "commit", "path", "tree_mode", "git_blob", "sha256", "eligibility", "review_status", "occurrence_count", "reason"],
+  "properties": {
+    "repository": { "type": "string", "minLength": 1 },
+    "case_id": { "type": "string", "minLength": 1 },
+    "side": { "enum": ["base", "head"] },
+    "commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "path": { "type": "string", "minLength": 1 },
+    "tree_mode": { "enum": ["100644", "100755", "120000", "absent"] },
+    "git_blob": { "type": ["string", "null"], "pattern": "^[a-f0-9]{40}$" },
+    "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "eligibility": { "enum": ["eligible-production", "excluded-test", "excluded-generated", "excluded-vendor", "excluded-extension", "symlink-not-followed", "absent-at-side", "unknown"] },
+    "review_status": { "enum": ["reviewed", "excluded", "missing", "unknown"] },
+    "occurrence_count": { "type": ["integer", "null"], "minimum": 0 },
+    "reason": { "type": "string", "minLength": 1 },
+    "resolver_context_refs": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true, "default": [] }
+  }
+}

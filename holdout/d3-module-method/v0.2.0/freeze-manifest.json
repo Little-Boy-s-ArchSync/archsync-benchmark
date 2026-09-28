@@ -1,0 +1,158 @@
+{
+  "schema": "d3-module-method-freeze-manifest/2",
+  "version": "0.2.0",
+  "status": "proposal-not-accepted",
+  "endpoint": "direct-module-occurrences-and-deduplicated-cross-group-file-edges",
+  "guardian_source_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
+  "legacy_review_schemas_rejected": [
+    "d3-author-review/1",
+    "d3-change-case-review/1"
+  ],
+  "artifacts": [
+    {
+      "path": "development/common-module-capability/README.md",
+      "sha256": "fad074d2fd2efe6c90048c4b20a19334b9d89b94ab5b72515b560d1852d3a607",
+      "bytes": 6441
+    },
+    {
+      "path": "development/common-module-capability/capture.mjs",
+      "sha256": "48c11fcc5d71678bcdbebb95fa483f0db88747d14b7b3d58989a4ab7cc2ab400",
+      "bytes": 4848
+    },
+    {
+      "path": "development/common-module-capability/dependency-cruiser.json",
+      "sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6",
+      "bytes": 403
+    },
+    {
+      "path": "development/common-module-capability/fixtures.json",
+      "sha256": "0565e331ad813affd0e53c1bc6f44c54d25f8b79af941cf8fac061ba79db86a4",
+      "bytes": 8790
+    },
+    {
+      "path": "development/common-module-capability/guardian-pin.json",
+      "sha256": "1d7a5e55adb19e1172a2c0d8e0a273c8885c1967c230e2e4edf5f5606ec1d6e4",
+      "bytes": 726
+    },
+    {
+      "path": "development/common-module-capability/receipt/manifest.json",
+      "sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
+      "bytes": 25965
+    },
+    {
+      "path": "development/common-module-capability/tools/guardian/module-dependencies.js",
+      "sha256": "c76202d04ad29bcff5d003b7d9597d04cc220639f335b6d97f07304dc0b2b103",
+      "bytes": 9366
+    },
+    {
+      "path": "development/common-module-capability/tools/guardian/module-dependencies.ts",
+      "sha256": "4ae07fdee62156bdee108c55469aefc171fc99ae21c5cfea236ae81498a35aca",
+      "bytes": 10364
+    },
+    {
+      "path": "development/common-module-capability/tools/package-lock.json",
+      "sha256": "a20c472442cfdf0fb1e710c39c3654125e3a89b7805728a0b14fe94243ac01fd",
+      "bytes": 19054
+    },
+    {
+      "path": "development/common-module-capability/tools/package.json",
+      "sha256": "63e2e81727c7242d4d024da77a00d632f12a9d706c1ba30b53d6bec55dd6e86a",
+      "bytes": 205
+    },
+    {
+      "path": "development/common-module-capability/verify.mjs",
+      "sha256": "ea2eb158df64e8c5f22278d6b850778c791ee273b0a32195cc99b0f881aa66a9",
+      "bytes": 10663
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/README.md",
+      "sha256": "a79642417895ed1f94bf59447922a510c6d15337fa39a830079a707e59114694",
+      "bytes": 6444
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
+      "sha256": "96cb89920ba969750137e1c9bf49c689e3c7f3aa133dd4d0cfddefc1d1055f18",
+      "bytes": 121
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/file-coverage.schema.json",
+      "sha256": "3ced2e98ab86d6b0ec1f7b1cfb7e4b32f0dd6c0f25b7a01a42c3465efbbbe00a",
+      "bytes": 1435
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/freeze-manifest.schema.json",
+      "sha256": "56f4d636b57df267f66758d229f50590cfa0481350c67b623460ed6e4b5761f4",
+      "bytes": 1702
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/module-edge.schema.json",
+      "sha256": "a52cc991335987d020216c39b1d2f0bf906a806f783ec2f1fe113191911242ea",
+      "bytes": 1044
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/occurrence.schema.json",
+      "sha256": "3e734cc607473dec3cedfd71a005f0d600c793c30b3b61bd319a41f4cf83d1a8",
+      "bytes": 2718
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/resolver-policy.template.json",
+      "sha256": "65284114ffd54cabc180f85571546f8cebaa3c390296812d677549d84524f9b9",
+      "bytes": 1479
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/review.schema.json",
+      "sha256": "b6c199c236eec07c942da74c88153787a5e0ab439794a461844eff386aa916d4",
+      "bytes": 2280
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/review.template.json",
+      "sha256": "7fc7c51a8f3aa4e9ee9fdc692b53436dbf20336770d6d83919cc5862f0ab86aa",
+      "bytes": 422
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/statistical-plan.template.json",
+      "sha256": "13f49e214cbcd4ef664563f9e36957a88975310869041f3dd4f7c8997c657752",
+      "bytes": 2077
+    },
+    {
+      "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
+      "sha256": "8adf6aa5f7edb9d92e5d37ce5ab8b8be68c2ffabd05bc60943135eb466049d7d",
+      "bytes": 2789
+    },
+    {
+      "path": "holdout/d3-package-preflight/README.md",
+      "sha256": "70d07b1d4bdd56ff062c47a24757a4beb0e7899a04a2b6b1ad16af62de1acf14",
+      "bytes": 2895
+    },
+    {
+      "path": "holdout/d3-package-preflight/receipt.json",
+      "sha256": "8babd058869f5c81027ba3e6091ccc3df0de460a43766c01c67d6c473e0276c5",
+      "bytes": 1310
+    },
+    {
+      "path": "scripts/d3-review/module-method.mjs",
+      "sha256": "600740d1f7220b0444bc1b6f59cfe1d69f6ccbf6eadc9a01a794dc983f56716d",
+      "bytes": 29276
+    },
+    {
+      "path": "scripts/verify-d3-package-preflight.mjs",
+      "sha256": "66bd725d50ca2733a2e66f6ed6d70649b90afc85aae84387ef58e05fd27d1c34",
+      "bytes": 2981
+    },
+    {
+      "path": "test/d3-module-method.test.mjs",
+      "sha256": "4b6dd4691560942762f600bccd5400b3a5949fbbe704b73d2415bf489715d96c",
+      "bytes": 15009
+    }
+  ],
+  "scientific_claims": {
+    "labels_created": false,
+    "predictions_executed": false,
+    "results_computed": false,
+    "d3_complete": false
+  },
+  "human_acceptance": {
+    "hieu": null,
+    "hoang": null
+  }
+}
