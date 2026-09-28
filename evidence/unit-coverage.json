@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 272,
-    "passed": 272,
+    "total": 279,
+    "passed": 279,
     "failed": 0
   },
   "provenance": {
@@ -100,6 +100,78 @@
         "sha256": "83b130caab5d37d6a35ee28d39bad96b7c3d0a54055c5a0ae6193aad0b252dd3"
       },
       {
+        "file": "scripts/d3-review/module-method.mjs",
+        "sha256": "13d484e7a7878afd7ae73dd33c2a951fa5be5c5a26c38fd375d24f3b162bc81d"
+      },
+      {
+        "file": "test/d3-module-method.test.mjs",
+        "sha256": "e3384e3ba31e58dcc8318eb54d62b1fc6541d0c32aefdbb53ff4b5a22266c16c"
+      },
+      {
+        "file": "test/d3-mode-qualification.test.mjs",
+        "sha256": "e40b02bb3d6e3f29894fd16bdfdce657b47b1ddb4f645c77168ec09ce2bf98c3"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/README.md",
+        "sha256": "f128431b9257aa2e9a19d0cccedf240806cdcd641b758ac7e2572a5b896eaa22"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/dependency-cruiser.json",
+        "sha256": "422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/profile.json",
+        "sha256": "c4ccf5d0f2c6b90da8509dcad49707dbd20166b83ea2f394a191edadf853aab6"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/receipt-hypothesis/manifest.json",
+        "sha256": "8edcbf96cf005bf5899e225151859d916c62041f8f1258f65b47df46855a81de"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/receipt/manifest.json",
+        "sha256": "adcaf0af23caf126087906e55b8ed99784a641ddfeb6e46cfa77e4c0f7c3946f"
+      },
+      {
+        "file": "development/common-module-capability-modes-v3/runner.mjs",
+        "sha256": "c63bc498ff69e949cc00880409f30a88b440201d7c51ca66c71b84ab85fd82bc"
+      },
+      {
+        "file": "test/d3-archive-packet.test.mjs",
+        "sha256": "78ca72e48d8cae9606187a755ee3223e3a4a9928275fe085c578c22df7de0d75"
+      },
+      {
+        "file": "scripts/d3-review/project-config-preparation.mjs",
+        "sha256": "9219f36f59338a9a7ff57439aa92f279dca69f118675e992759a0da4c7686b0f"
+      },
+      {
+        "file": "test/d3-project-config-preparation.test.mjs",
+        "sha256": "90d0d84a4c7fe7fa7d9cdd42d5392b579327d8dc4fd51af83d1970af0261a11a"
+      },
+      {
+        "file": "holdout/d3-project-config-preparation/README.md",
+        "sha256": "373897e83b61609fe074e5b7aa04c316f1994d8e722ecbf70e471d4ec5d6a5be"
+      },
+      {
+        "file": "holdout/d3-project-config-preparation/inventory.json",
+        "sha256": "fc2911d7357f547400551547c3fd4dc4fe40aaff3818a5b60db2e12677444709"
+      },
+      {
+        "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
+        "sha256": "d06f3c27505de127e06538abc92bc7250412be798b4d1676436ccbc596605ed7"
+      },
+      {
+        "file": "holdout/d3-package-archives/README.md",
+        "sha256": "53bc1d411ad3e7fe0025e0135f460bacb6f9ba49904093963744c9fc4a5a93de"
+      },
+      {
+        "file": "holdout/d3-package-archives/archsync-guardian-0.3.3.tgz",
+        "sha256": "7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f"
+      },
+      {
+        "file": "holdout/d3-package-archives/dependency-cruiser-18.3.0.tgz",
+        "sha256": "268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93"
+      },
+      {
         "file": "holdout/D3-METHOD-PACKET.v0.1.0.md",
         "sha256": "d6657a9968b034bd45c032fd15a87cba11fdbd495bde3001e75cdee91d1adb4c"
       },
@@ -172,6 +244,10 @@
         "sha256": "132e5ff8db194630d053b1c2a51d5e5a9cc0036b8683c3e90d49c11bbf834731"
       },
       {
+        "file": "holdout/D3-ANALYSIS-PLAN.v0.2.0.md",
+        "sha256": "2221219ab86cb2350a8a6cb3bef3b4cc5e85bb70e7eb24b8c70db465968ed926"
+      },
+      {
         "file": "holdout/D3-SCOPE-ACCEPTANCE-20260928.md",
         "sha256": "d0e6bf5eb3937939268e6cf5f901185c3012560066962e1b96a3e6cd444cb47a"
       },
@@ -189,7 +265,7 @@
       },
       {
         "file": "holdout/D3-NEXT-EXECUTION-RUNBOOK-20260928.md",
-        "sha256": "62640b7126bc0c0e9d9db9cbee19cec0666ff519ae2e3caf44aa15f1bd97c62b"
+        "sha256": "5538d22407e435d991632011e2ec8f82ad0afb6796f0ffd89662af058a0d2a2f"
       },
       {
         "file": "scripts/d3-source-review/files.mjs",
@@ -289,7 +365,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "8a33390bb5fd95b16f420183d3f1e482d2661f1d0085d2aa838b6c4868c8709f"
+        "sha256": "aa8a165d5df03be8d7071526897d4ebb4757e0431e975e88b3c5fe91fdd6a66e"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -456,6 +532,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "a9c6e7662b10ee10cc5b82410298ec7b39ba5e5a8f0eb43456b2924ee045f182"
+    "manifest_sha256": "40a7e62b220897449c2d2812b92d455d921e2ba801141d71c46e4859f461827f"
   }
 }
