@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 282,
-    "passed": 282,
+    "total": 293,
+    "passed": 293,
     "failed": 0
   },
   "provenance": {
@@ -66,6 +66,50 @@
       {
         "file": "test/d3-proposed-applicability.test.mjs",
         "sha256": "efdbbfa3c5e93a569f08750f838900e715766a61b97fd620dddcd1f0b7c9c9d5"
+      },
+      {
+        "file": "scripts/d3-review/file-side-preparation.mjs",
+        "sha256": "ca3ddd3e29ab8ae8e89e84c084d0d0b91fc9e50287a068bb7d273f69f26f0b24"
+      },
+      {
+        "file": "test/d3-file-side-preparation.test.mjs",
+        "sha256": "1f8f254ade549e7f9ea970e4d616c2aab31f2797c7bce6a40c27457837b50764"
+      },
+      {
+        "file": "holdout/d3-file-side-preparation/README.md",
+        "sha256": "24a25952f0aed156b0e313a57331b60a6e07e4e312e5080463fad77e3fabf78d"
+      },
+      {
+        "file": "holdout/d3-file-side-preparation/inventory.json",
+        "sha256": "c629044a356c2a83a1a28eb85078f813b227862a088e64476674e1c54f06f68a"
+      },
+      {
+        "file": "scripts/d3-review/source-syntax-hints.mjs",
+        "sha256": "c6c793c8c6416318b0b56432cee54fb8cdeb7e3ac441f64839148bdb5858f916"
+      },
+      {
+        "file": "test/d3-source-syntax-hints.test.mjs",
+        "sha256": "168436454a277a22b95d10e5f3befa16c34476e19a4c6953473c58aac071c024"
+      },
+      {
+        "file": "holdout/d3-source-syntax-hints/README.md",
+        "sha256": "96abfcf7f7bccce664b44a4b8961cb5ef57798fc541bdf69dcdaa7c1e4f00cab"
+      },
+      {
+        "file": "holdout/d3-source-syntax-hints/hints.json",
+        "sha256": "366a009e17be4fabd143b12963b9adb73dad31da946ca3e070ee95c578ab1c07"
+      },
+      {
+        "file": "scripts/d3-review/source-reading-workbook.mjs",
+        "sha256": "2caadb9f12e4fcda5a5eb4e2f17d489f2553c369bf433ec8f8fc507dbae12f04"
+      },
+      {
+        "file": "test/d3-source-reading-workbook.test.mjs",
+        "sha256": "d2b7c77fc06e2afc160b267ad2fd8e445d18ae895359aad93dac097e0c575aef"
+      },
+      {
+        "file": "holdout/d3-source-syntax-hints/reading-workbook.csv",
+        "sha256": "c0c657d24a5b8f216cdafb6bce3b6cdedc2ed88a0d5da1418085b394754d67f3"
       },
       {
         "file": "holdout/D3-APPLICABILITY-AI-NOTES-20260928.md",
@@ -365,7 +409,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "aa8a165d5df03be8d7071526897d4ebb4757e0431e975e88b3c5fe91fdd6a66e"
+        "sha256": "f53a4cc02f86eb0218d1b8cd61900b91919f5fd59e830eddd86fc7284b3e9661"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -532,6 +576,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "40a7e62b220897449c2d2812b92d455d921e2ba801141d71c46e4859f461827f"
+    "manifest_sha256": "6615b29b014ae7067b2c03c36a8ca389ec2bdfe83ec277407b1dcdb18c3b1b52"
   }
 }
