@@ -1,0 +1,61 @@
+{
+  "analyzer": {
+    "id": "archsync-module-dependencies",
+    "version": "0.1.0-development"
+  },
+  "scanned_files": 7,
+  "edges": [
+    {
+      "from": "app",
+      "to": "lib",
+      "type": "dependency",
+      "evidence": [
+        {
+          "file": "src/app/main.ts",
+          "line": 1,
+          "column": 23,
+          "specifier": "../lib/value",
+          "target_file": "src/lib/value.ts",
+          "syntax": "import"
+        },
+        {
+          "file": "src/app/main.ts",
+          "line": 2,
+          "column": 26,
+          "specifier": "../lib/exported",
+          "target_file": "src/lib/exported.ts",
+          "syntax": "export"
+        },
+        {
+          "file": "src/app/main.ts",
+          "line": 3,
+          "column": 8,
+          "specifier": "../lib/effect",
+          "target_file": "src/lib/effect.ts",
+          "syntax": "import"
+        },
+        {
+          "file": "src/app/main.ts",
+          "line": 4,
+          "column": 13,
+          "specifier": "../lib/dynamic",
+          "target_file": "src/lib/dynamic.ts",
+          "syntax": "dynamic-import"
+        },
+        {
+          "file": "src/app/main.ts",
+          "line": 5,
+          "column": 9,
+          "specifier": "../lib/commonjs",
+          "target_file": "src/lib/commonjs.ts",
+          "syntax": "require"
+        }
+      ]
+    }
+  ],
+  "unresolved": [],
+  "limitations": [
+    "Development adapter only; package-export and alias resolution require repository-specific tests.",
+    "Unsupported and unresolved imports are not absence evidence; no D3 or baseline result is computed here."
+  ]
+}

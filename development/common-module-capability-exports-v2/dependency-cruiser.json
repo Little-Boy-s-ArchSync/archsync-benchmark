@@ -1,0 +1,24 @@
+{
+  "forbidden": [],
+  "options": {
+    "moduleSystems": [
+      "es6",
+      "cjs"
+    ],
+    "tsPreCompilationDeps": false,
+    "tsConfig": {
+      "fileName": "tsconfig.json"
+    },
+    "enhancedResolveOptions": {
+      "exportsFields": [
+        "exports"
+      ]
+    },
+    "doNotFollow": {
+      "path": "node_modules"
+    },
+    "exclude": {
+      "path": "(?:^|/)(?:__tests__|tests?|fixtures|__fixtures__|__mocks__)(?:/|$)|\\.(?:test|spec)\\.[cm]?[jt]sx?$|\\.d\\.[cm]?ts$"
+    }
+  }
+}

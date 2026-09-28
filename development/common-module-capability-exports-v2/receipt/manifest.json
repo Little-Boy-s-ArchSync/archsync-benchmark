@@ -1,0 +1,632 @@
+{
+  "schema": "non-d3-common-capability-receipt/1",
+  "status": "development-only-proposed-research-tooling",
+  "started_at": "2026-09-28T00:37:21.653Z",
+  "finished_at": "2026-09-28T00:37:30.793Z",
+  "node": "v22.16.0",
+  "platform": "win32",
+  "capture_context": {
+    "node_executable": "C:\\Program Files\\nodejs\\node.exe",
+    "tools_root": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ",
+    "scratch_root": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r"
+  },
+  "arch": "x64",
+  "guardian_commit": "e32ef53eeb07bc8c904b6a1e6a8b897d16def820",
+  "versions": {
+    "dependency-cruiser": "18.3.0",
+    "typescript": "5.9.3"
+  },
+  "inputs": [
+    {
+      "path": "fixtures.json",
+      "sha256": "26a5b5d65a6276e6b262894b322a881b660cc5247464c855280225fd623bf2bd"
+    },
+    {
+      "path": "dependency-cruiser.json",
+      "sha256": "04458c1dc1c0848b5ad9b3aeb75b2c26421247ac182f6f6de8f7881126a94ddf"
+    },
+    {
+      "path": "guardian-pin.json",
+      "sha256": "1d7a5e55adb19e1172a2c0d8e0a273c8885c1967c230e2e4edf5f5606ec1d6e4"
+    },
+    {
+      "path": "capture.mjs",
+      "sha256": "48c11fcc5d71678bcdbebb95fa483f0db88747d14b7b3d58989a4ab7cc2ab400"
+    },
+    {
+      "path": "verify.mjs",
+      "sha256": "ea2eb158df64e8c5f22278d6b850778c791ee273b0a32195cc99b0f881aa66a9"
+    },
+    {
+      "path": "tools/guardian-run.mjs",
+      "sha256": "a8f2af5fbea0cfe128c8a2ccb8ebf29bde16afb9815edc6795e157c81038ef40"
+    },
+    {
+      "path": "tools/guardian/module-dependencies.js",
+      "sha256": "c76202d04ad29bcff5d003b7d9597d04cc220639f335b6d97f07304dc0b2b103"
+    },
+    {
+      "path": "tools/guardian/module-dependencies.ts",
+      "sha256": "4ae07fdee62156bdee108c55469aefc171fc99ae21c5cfea236ae81498a35aca"
+    },
+    {
+      "path": "tools/package.json",
+      "sha256": "63e2e81727c7242d4d024da77a00d632f12a9d706c1ba30b53d6bec55dd6e86a"
+    },
+    {
+      "path": "tools/package-lock.json",
+      "sha256": "a20c472442cfdf0fb1e710c39c3654125e3a89b7805728a0b14fe94243ac01fd"
+    }
+  ],
+  "cases": [
+    {
+      "id": "value-syntax",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\value-syntax",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\value-syntax\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\value-syntax",
+          "started_at": "2026-09-28T00:37:21.662Z",
+          "finished_at": "2026-09-28T00:37:22.388Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "ea61432d050832e964e333a8d696a8ec355f566af2a78a68d47510f23d81ae53",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\value-syntax",
+          "started_at": "2026-09-28T00:37:22.388Z",
+          "finished_at": "2026-09-28T00:37:22.993Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "afb9933faf78e802956e1fc42ca1af927b2d9c68198ec38ea9afe3390e8a8db5",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "value-syntax",
+        "classification": "common-candidate",
+        "guardian_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/commonjs.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/dynamic.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/effect.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/exported.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "comparator_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/commonjs.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/dynamic.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/effect.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/exported.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "expected_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/commonjs.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/dynamic.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/effect.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/exported.ts"
+          ],
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": true,
+        "guardian_unresolved": [],
+        "comparator_unresolved": [],
+        "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [
+          "dynamic-import",
+          "export",
+          "import",
+          "import",
+          "require"
+        ],
+        "shared_fixture_pass": true,
+        "meaning": "bounded-development-fixture-only",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    },
+    {
+      "id": "alias",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\alias",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\alias\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\alias",
+          "started_at": "2026-09-28T00:37:23.003Z",
+          "finished_at": "2026-09-28T00:37:23.704Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "b28190e88190319113deb3414cea0d8ee089ac9bf26698d3e07a4b47c81fe1ee",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\alias",
+          "started_at": "2026-09-28T00:37:23.704Z",
+          "finished_at": "2026-09-28T00:37:24.297Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "7cc06c5968ed9fdbc4f77733c3b477d458f080493043a1a954059a56cbc9378d",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "alias",
+        "classification": "common-candidate",
+        "guardian_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "comparator_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "expected_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": true,
+        "guardian_unresolved": [],
+        "comparator_unresolved": [],
+        "comparator_outside_comparison": [
+          {
+            "from": "src/app/main.ts",
+            "target": "src/app/helper.ts",
+            "reason": "same-group"
+          }
+        ],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [
+          "import"
+        ],
+        "shared_fixture_pass": true,
+        "meaning": "bounded-development-fixture-only",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    },
+    {
+      "id": "self-package-export",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\self-package-export",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\self-package-export\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\self-package-export",
+          "started_at": "2026-09-28T00:37:24.303Z",
+          "finished_at": "2026-09-28T00:37:25.003Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "81c0b52a6e8460179ca46c0664462bd7f55673a5ee8dd9615d9ac2666e02abd1",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\self-package-export",
+          "started_at": "2026-09-28T00:37:25.003Z",
+          "finished_at": "2026-09-28T00:37:25.597Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "d9167142b724ad90cbba5c2a5f596f29ac2434c016bd90c55ed38a7e432662b4",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "self-package-export",
+        "classification": "common-candidate",
+        "guardian_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "comparator_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "expected_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": true,
+        "guardian_unresolved": [],
+        "comparator_unresolved": [],
+        "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [
+          "import"
+        ],
+        "shared_fixture_pass": true,
+        "meaning": "bounded-development-fixture-only",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    },
+    {
+      "id": "unresolved",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\unresolved",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\unresolved\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\unresolved",
+          "started_at": "2026-09-28T00:37:25.600Z",
+          "finished_at": "2026-09-28T00:37:26.315Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "382cf3f54e119cd322d82d5977bc68afe9009a0290b6c25d2661ec1903b0adaa",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\unresolved",
+          "started_at": "2026-09-28T00:37:26.315Z",
+          "finished_at": "2026-09-28T00:37:26.903Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "84ec181feb7857596c415cc03c8edcf0579659cc7ddf61a9d14a2d3045a96668",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "unresolved",
+        "classification": "unsupported-probe",
+        "guardian_pairs": [],
+        "comparator_pairs": [],
+        "expected_pairs": [],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": true,
+        "guardian_unresolved": [
+          {
+            "file": "src/app/main.ts",
+            "line": 1,
+            "column": 23,
+            "specifier": "../lib/missing",
+            "reason": "unresolved-local-target"
+          }
+        ],
+        "comparator_unresolved": [
+          {
+            "from": "src/app/main.ts",
+            "target": "../lib/missing"
+          }
+        ],
+        "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [],
+        "shared_fixture_pass": false,
+        "meaning": "unsupported-probe-never-scored-as-common-success",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    },
+    {
+      "id": "computed-dynamic",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\computed-dynamic",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\computed-dynamic\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\computed-dynamic",
+          "started_at": "2026-09-28T00:37:26.907Z",
+          "finished_at": "2026-09-28T00:37:27.618Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "d345d6d8f91a4bceffae82bb07084d612d68c03290c61186e0acc46fb83b22d0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\computed-dynamic",
+          "started_at": "2026-09-28T00:37:27.618Z",
+          "finished_at": "2026-09-28T00:37:28.198Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "3108faaf333313ed0a975b2c5b9bafd811f5051784f4058282a56b013bff5c5e",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "computed-dynamic",
+        "classification": "unsupported-probe",
+        "guardian_pairs": [],
+        "comparator_pairs": [],
+        "expected_pairs": [],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": true,
+        "guardian_unresolved": [],
+        "comparator_unresolved": [],
+        "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [],
+        "shared_fixture_pass": false,
+        "meaning": "unsupported-probe-never-scored-as-common-success",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    },
+    {
+      "id": "shadowed-require",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\shadowed-require",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\shadowed-require\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\shadowed-require",
+          "started_at": "2026-09-28T00:37:28.202Z",
+          "finished_at": "2026-09-28T00:37:28.901Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "d345d6d8f91a4bceffae82bb07084d612d68c03290c61186e0acc46fb83b22d0",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\shadowed-require",
+          "started_at": "2026-09-28T00:37:28.901Z",
+          "finished_at": "2026-09-28T00:37:29.491Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "0324e0feefbfa9ecfd35a666faa670b3595cffd154ff88524ca541e1ac2293c8",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "shadowed-require",
+        "classification": "unsupported-probe",
+        "guardian_pairs": [],
+        "comparator_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "expected_pairs": [],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": false,
+        "guardian_unresolved": [],
+        "comparator_unresolved": [],
+        "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [],
+        "shared_fixture_pass": false,
+        "meaning": "unsupported-probe-never-scored-as-common-success",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    },
+    {
+      "id": "symlink",
+      "invocations": [
+        {
+          "tool": "guardian",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\guardian-run.mjs",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\symlink",
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\symlink\\mapping.json"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\symlink",
+          "started_at": "2026-09-28T00:37:29.496Z",
+          "finished_at": "2026-09-28T00:37:30.196Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "1017965e264ede205c4ddbfe8f39c5fd7904093d5c69d9f25a7548d06a81269d",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "tool": "comparator",
+          "executable": "C:\\Program Files\\nodejs\\node.exe",
+          "args": [
+            "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-common-exports-v2-Gl50gZ\\tools\\node_modules\\dependency-cruiser\\bin\\dependency-cruiser.mjs",
+            "--config",
+            "dependency-cruiser.json",
+            "--output-type",
+            "json",
+            "src"
+          ],
+          "cwd": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\archsync-non-d3-common-9asS0r\\symlink",
+          "started_at": "2026-09-28T00:37:30.196Z",
+          "finished_at": "2026-09-28T00:37:30.791Z",
+          "exit_code": 0,
+          "signal": null,
+          "stdout_sha256": "f49a51e6a23e491daec1ebc72c8fc75852bd4521ebaaf74ef038984ae9973705",
+          "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "normalized": {
+        "id": "symlink",
+        "classification": "unsupported-probe",
+        "guardian_pairs": [],
+        "comparator_pairs": [
+          [
+            "src/app/main.ts",
+            "src/lib/value.ts"
+          ]
+        ],
+        "expected_pairs": [],
+        "guardian_matches_developer_expectation": true,
+        "comparator_matches_developer_expectation": false,
+        "guardian_unresolved": [
+          {
+            "file": "src/app/main.ts",
+            "line": 1,
+            "column": 23,
+            "specifier": "../lib/link",
+            "reason": "resolved-outside-verified-tree"
+          }
+        ],
+        "comparator_unresolved": [],
+        "comparator_outside_comparison": [],
+        "comparator_normalization_errors": [],
+        "comparison_capability": "cross-group-file-edge-only",
+        "comparator_source_positions": "not-provided",
+        "occurrence_scoring_supported": false,
+        "guardian_syntax": [],
+        "shared_fixture_pass": false,
+        "meaning": "unsupported-probe-never-scored-as-common-success",
+        "d3_eligible": false,
+        "research_result": false
+      }
+    }
+  ],
+  "d3_executed": false,
+  "research_complete": false
+}
