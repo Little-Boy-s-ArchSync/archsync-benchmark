@@ -300,6 +300,21 @@ export function validateToolPins(pins) {
   assert.equal(pins.tools.dependency_cruiser.package_name, 'dependency-cruiser');
   assert.equal(pins.tools.dependency_cruiser.package_version, '18.3.0');
   assert.equal(pins.tools.dependency_cruiser.package_sha256, '268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93');
+  assert.equal(pins.tools.dependency_cruiser.configuration_sha256, null,
+    'No comparator configuration is selected before capability reconciliation');
+  assert.equal(pins.tools.dependency_cruiser.configuration_reconciliation_complete, false);
+  assert.deepEqual(pins.tools.dependency_cruiser.candidate_configurations, {
+    original_common_fixture: {
+      path: 'development/common-module-capability/dependency-cruiser.json',
+      sha256: '451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6',
+    },
+    compiler_mode_fixture: {
+      path: 'development/common-module-capability-modes-v3/dependency-cruiser.json',
+      sha256: '422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333',
+    },
+  });
+  assert.notEqual(pins.tools.dependency_cruiser.candidate_configurations.original_common_fixture.sha256,
+    pins.tools.dependency_cruiser.candidate_configurations.compiler_mode_fixture.sha256);
   assert.equal(pins.tools.guardian.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
   assert.equal(pins.tools.dependency_cruiser.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
   assert.equal(pins.common_capability_packet.merged_benchmark_commit, COMMON_CAPABILITY_MERGE_COMMIT);
@@ -328,10 +343,13 @@ export function validateToolPins(pins) {
   assert.equal(pins.human_acceptance.hieu, null); assert.equal(pins.human_acceptance.hoang, null);
   const missingPackagePins = [
     ['guardian.configuration_sha256', pins.tools.guardian.configuration_sha256],
+    ['dependency_cruiser.configuration_sha256', pins.tools.dependency_cruiser.configuration_sha256],
   ].filter(([, value]) => !text(value)).map(([name]) => name);
   return { guardian_source_pinned: true, development_packet_bound: true, occurrence_scoring_supported: false,
     candidate_package_receipt_bound: true, package_archives_available: true, independent_package_reproduction_complete: false,
-    fixture_freeze_complete: false, missing_package_pins: missingPackagePins, accepted: false };
+    fixture_freeze_complete: false, missing_package_pins: missingPackagePins,
+    comparator_configuration_candidates: pins.tools.dependency_cruiser.candidate_configurations,
+    comparator_configuration_reconciliation_complete: false, accepted: false };
 }
 
 function validatePackagePreflight(receipt) {
@@ -403,8 +421,13 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   assert.deepEqual(modeCapability, { cases: 7, common_fixture_passes: 3,
     failed_common_candidates: 0, unsupported_probes: 4, d3_executed: false });
   const resolver = validatePolicyScaffold(policy), statistics = validateStatisticalPlan(plan), tools = validateToolPins(pins);
+  for (const candidate of Object.values(tools.comparator_configuration_candidates)) {
+    assert.equal(sha256(await readFile(join(repoRoot, candidate.path))), candidate.sha256,
+      `Comparator candidate configuration changed: ${candidate.path}`);
+  }
   return { status: 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
     open_gates: { resolver_dimensions: resolver.unresolved, package_pins: tools.missing_package_pins,
+      comparator_configuration_reconciliation_required: !tools.comparator_configuration_reconciliation_complete,
       package_archives_available: tools.package_archives_available,
       independent_package_reproduction_complete: tools.independent_package_reproduction_complete,
       development_fixture_not_research_freeze: !tools.fixture_freeze_complete,

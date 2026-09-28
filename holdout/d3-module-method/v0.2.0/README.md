@@ -8,12 +8,17 @@ runtime ES syntax, literal CommonJS/dynamic imports, a narrowly conditioned
 relative-path resolution, and exact source-file-edge normalization. Relative
 resolution is only a candidate under a complete pinned case-side tree and
 captured configuration; per-side project configuration and package/workspace
-resolution remain undecided. The merged exports-field v2
-development fixture demonstrates a candidate configuration that repairs the
-v1 self-package-export mismatch on synthetic source, but that v2 receipt and
-configuration are not bound by this v0.2.0 manifest. It cannot silently turn
-package exports into a supported D3 feature. Both authors must choose and bind
-an exact configuration or leave the feature unsupported before execution.
+resolution remain undecided. The retained compiler-mode development fixture
+uses a different dependency-cruiser configuration from the original
+common-capability fixture:
+`422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333`
+versus `451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6`.
+Both candidate files and their diagnostic receipts are pinned here, but neither
+configuration is selected for D3. The explicit comparator-configuration and
+capability-reconciliation gate remains open. The newer synthetic receipt cannot
+silently turn package exports or historical compiler modes into supported D3
+features. Both authors must choose and bind one exact comparator configuration
+and capability set, or leave the affected feature unsupported, before execution.
 
 The separately retained historical project-configuration census pins 2,946
 commit/config candidate rows across 93 commits and 112 case-sides. It is
@@ -51,7 +56,7 @@ The legacy `d3-author-review/1` four-label sheets and CSV first-pass worksheets 
 - `resolver-policy.template.json` exposes every unresolved resolver/common-capability dimension.
 - Its `unknown_policy` freezes propagation from occurrences to file-sides, case-sides and change comparisons, while keeping tool failures in attempted coverage.
 - `statistical-plan.template.json` freezes denominators and zero-denominator behavior. Unsupported, failed and truth-Unknown attempts stay visible.
-- `tool-pins.template.json` binds the merged Guardian adapter source, dependency-cruiser 18.3.0 configuration/lockfile, merged non-D3 receipt and exact retained candidate archive bytes. Independent person-level reproduction, final configuration and joint method acceptance remain explicit blockers.
+- `tool-pins.template.json` binds the merged Guardian adapter source, dependency-cruiser 18.3.0 package/lockfile, both distinct non-D3 candidate configurations and receipts, and exact retained candidate archive bytes. It deliberately leaves the D3 comparator configuration null. Independent person-level reproduction, configuration/capability reconciliation and joint method acceptance remain explicit blockers.
 - `holdout/d3-project-config-preparation/inventory.json` retains candidate configuration paths and blob hashes from the verified private Git-object packet; the pinned builder and regression test are also in the manifest. No effective configuration is accepted by this census.
 - `development/common-module-capability-modes-v3/` retains raw non-D3 compiler-mode probes, both diagnostic receipts and their verifier. The packet narrows a development capability question only; it is not a D3 outcome.
 - `applicability-reviewed.template.json` is a blank destination shape only. The immutable 152-row checklist must be copied by the controlled builder and filled through actual source review; this file is not that review.

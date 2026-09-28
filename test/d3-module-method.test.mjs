@@ -14,6 +14,7 @@ import {
   validateAcceptedD3Review,
   validateFreezeManifest,
   validateModuleReview,
+  validateToolPins,
 } from '../scripts/d3-review/module-method.mjs';
 import { gitId, sha256 } from '../scripts/d3-source-review/files.mjs';
 
@@ -201,7 +202,12 @@ test('freeze manifest binds the merged development receipt without pretending me
   assert.equal(report.tools.independent_package_reproduction_complete, false);
   assert.equal(report.tools.occurrence_scoring_supported, false);
   assert.equal(report.tools.fixture_freeze_complete, false);
-  assert.deepEqual(report.tools.missing_package_pins, ['guardian.configuration_sha256']);
+  assert.deepEqual(report.tools.missing_package_pins,
+    ['guardian.configuration_sha256', 'dependency_cruiser.configuration_sha256']);
+  assert.equal(report.tools.comparator_configuration_reconciliation_complete, false);
+  assert.equal(report.open_gates.comparator_configuration_reconciliation_required, true);
+  assert.notEqual(report.tools.comparator_configuration_candidates.original_common_fixture.sha256,
+    report.tools.comparator_configuration_candidates.compiler_mode_fixture.sha256);
   assert.equal(report.open_gates.package_archives_available, true);
   assert.equal(report.open_gates.independent_package_reproduction_complete, false);
   assert.equal(report.open_gates.reviewed_applicability_ledger_missing, true);
@@ -224,6 +230,24 @@ test('freeze manifest binds the merged development receipt without pretending me
   assert.deepEqual(policy.common_capability_fixture_ids, ['value-syntax', 'alias']);
   assert.deepEqual(policy.unsupported_in_either_tool,
     ['computed-dynamic', 'shadowed-require', 'symlink', 'unresolved', 'self-package-export-v1-configuration']);
+});
+
+test('comparator cannot silently promote either development configuration to the D3 pin', async () => {
+  const pins = JSON.parse(await readFile(join(root,
+    'holdout/d3-module-method/v0.2.0/tool-pins.template.json')));
+  assert.equal(pins.tools.dependency_cruiser.configuration_sha256, null);
+  assert.equal(pins.tools.dependency_cruiser.configuration_reconciliation_complete, false);
+  const candidates = pins.tools.dependency_cruiser.candidate_configurations;
+  for (const candidate of Object.values(candidates)) {
+    assert.equal(sha256(await readFile(join(root, candidate.path))), candidate.sha256);
+  }
+  const selected = structuredClone(pins);
+  selected.tools.dependency_cruiser.configuration_sha256 = candidates.compiler_mode_fixture.sha256;
+  assert.throws(() => validateToolPins(selected), /No comparator configuration is selected/);
+  const misbound = structuredClone(pins);
+  misbound.tools.dependency_cruiser.candidate_configurations.compiler_mode_fixture.sha256 =
+    candidates.original_common_fixture.sha256;
+  assert.throws(() => validateToolPins(misbound));
 });
 
 test('freeze manifest fails closed after a byte changes', async (t) => {

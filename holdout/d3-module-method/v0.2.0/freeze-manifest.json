@@ -101,8 +101,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/README.md",
-      "sha256": "c786769909be85e60f5741011847e8e12eb1472e8a717d16347fc997c1bbd9ea",
-      "bytes": 9236
+      "sha256": "009f6435a03d366134b57491d6fb362957b0086f5f5f0cde5cd749e11d8fd8b3",
+      "bytes": 9695
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/applicability-reviewed.template.json",
@@ -151,8 +151,8 @@
     },
     {
       "path": "holdout/d3-module-method/v0.2.0/tool-pins.template.json",
-      "sha256": "e8aaa6e902a353958db1850bd253782ae83cbc3cb0bae35133b695653a648266",
-      "bytes": 3347
+      "sha256": "02014fe72e63730bafc0345aae5440cd40dfafb3fc375a24197979fbb7e172ef",
+      "bytes": 3824
     },
     {
       "path": "holdout/d3-package-archives/README.md",
@@ -191,8 +191,8 @@
     },
     {
       "path": "scripts/d3-review/module-method.mjs",
-      "sha256": "4ac441581678add87d53910824cce5608fc6715fbde9dc86455d33ac55684eb0",
-      "bytes": 31782
+      "sha256": "13d484e7a7878afd7ae73dd33c2a951fa5be5c5a26c38fd375d24f3b162bc81d",
+      "bytes": 33330
     },
     {
       "path": "scripts/d3-review/project-config-preparation.mjs",
@@ -216,8 +216,8 @@
     },
     {
       "path": "test/d3-module-method.test.mjs",
-      "sha256": "016feb9e61aa2af837979e94c79d8401915871eb8acbe7c27555155114b3bf16",
-      "bytes": 15928
+      "sha256": "e3384e3ba31e58dcc8318eb54d62b1fc6541d0c32aefdbb53ff4b5a22266c16c",
+      "bytes": 17439
     },
     {
       "path": "test/d3-project-config-preparation.test.mjs",

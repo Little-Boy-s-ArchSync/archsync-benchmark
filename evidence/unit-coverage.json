@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 275,
-    "passed": 275,
+    "total": 276,
+    "passed": 276,
     "failed": 0
   },
   "provenance": {
@@ -101,11 +101,11 @@
       },
       {
         "file": "scripts/d3-review/module-method.mjs",
-        "sha256": "4ac441581678add87d53910824cce5608fc6715fbde9dc86455d33ac55684eb0"
+        "sha256": "13d484e7a7878afd7ae73dd33c2a951fa5be5c5a26c38fd375d24f3b162bc81d"
       },
       {
         "file": "test/d3-module-method.test.mjs",
-        "sha256": "016feb9e61aa2af837979e94c79d8401915871eb8acbe7c27555155114b3bf16"
+        "sha256": "e3384e3ba31e58dcc8318eb54d62b1fc6541d0c32aefdbb53ff4b5a22266c16c"
       },
       {
         "file": "test/d3-mode-qualification.test.mjs",
@@ -157,7 +157,7 @@
       },
       {
         "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
-        "sha256": "2426fc1770634729404ecffa9379e1e914618ace06f129dc95c24f6ef620dd65"
+        "sha256": "d06f3c27505de127e06538abc92bc7250412be798b4d1676436ccbc596605ed7"
       },
       {
         "file": "holdout/d3-package-archives/README.md",
@@ -532,6 +532,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "925490d2170b7e69fbf49e21235e1521805748f27216360fe73b8ff8bc3f2027"
+    "manifest_sha256": "40a7e62b220897449c2d2812b92d455d921e2ba801141d71c46e4859f461827f"
   }
 }

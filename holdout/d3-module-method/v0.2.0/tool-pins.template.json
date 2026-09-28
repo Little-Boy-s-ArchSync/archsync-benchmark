@@ -20,7 +20,18 @@
       "package_name": "dependency-cruiser",
       "package_version": "18.3.0",
       "package_sha256": "268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93",
-      "configuration_sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6",
+      "configuration_sha256": null,
+      "configuration_reconciliation_complete": false,
+      "candidate_configurations": {
+        "original_common_fixture": {
+          "path": "development/common-module-capability/dependency-cruiser.json",
+          "sha256": "451b1ece50e08129425cc76c5fc314ae121be68571e01ce23ce7c0d8d38711b6"
+        },
+        "compiler_mode_fixture": {
+          "path": "development/common-module-capability-modes-v3/dependency-cruiser.json",
+          "sha256": "422d947bbb0c59321eaa3bf5b4e87c3efeb2107f4655bd168c2c7f5ed4ea6333"
+        }
+      },
       "non_d3_fixture_receipt_sha256": "83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9",
       "lockfile_sha256": "a20c472442cfdf0fb1e710c39c3654125e3a89b7805728a0b14fe94243ac01fd"
     }
