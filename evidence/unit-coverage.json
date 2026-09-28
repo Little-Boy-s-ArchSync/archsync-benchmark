@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 318,
-    "passed": 318,
+    "total": 320,
+    "passed": 320,
     "failed": 0
   },
   "provenance": {
@@ -182,6 +182,18 @@
       {
         "file": "holdout/d3-portable-tree-preflight-20260928/receipt.json",
         "sha256": "09c60fe18a12e5bd5292e360ec50c9a402afbd62378be9499e396a3e8c19bfee"
+      },
+      {
+        "file": "scripts/d3-review/offline-tree-builder.mjs",
+        "sha256": "913052b69742d646cee4e28d7ac60abcc995b6f0113bb894386b98071673c6aa"
+      },
+      {
+        "file": "test/d3-offline-tree-builder.test.mjs",
+        "sha256": "836c69a03ee266c254e074825c88f486712f0e132f301cdeb3922f52ec4a8330"
+      },
+      {
+        "file": "holdout/d3-portable-tree-preflight-20260928/OFFLINE-BUILDER.md",
+        "sha256": "2bce9e936c1117c5b784af003dd80474e6dbce641001feb1eb9fe4041aa0f218"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -469,7 +481,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "a59fe3ecb1dd7139241f87d026b64845419e011ddeafc047248d173463f06ce5"
+        "sha256": "356ef7171bffba193fdc2715134d2a2dd8d83597fe06e4ac3f2e7bda736e962c"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -636,6 +648,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "7e4d89ce151132c0491f4ad9c74889fe41cd5a6ad4fa37248102e725550286ad"
+    "manifest_sha256": "dacb612248efd5c9886eae0a62eec8b1e8ac0ad5217fe5d9506570838acd8458"
   }
 }
