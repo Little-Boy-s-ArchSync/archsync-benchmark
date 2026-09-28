@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 301,
-    "passed": 301,
+    "total": 309,
+    "passed": 309,
     "failed": 0
   },
   "provenance": {
@@ -166,6 +166,18 @@
       {
         "file": "test/d3-module-method.test.mjs",
         "sha256": "e3384e3ba31e58dcc8318eb54d62b1fc6541d0c32aefdbb53ff4b5a22266c16c"
+      },
+      {
+        "file": "scripts/d3-review/paired-edge-metrics.mjs",
+        "sha256": "56512c798d2dc4c9ab30ae878b75e8192382083d6103acd8f31c6abe7c6c4147"
+      },
+      {
+        "file": "test/d3-paired-edge-metrics.test.mjs",
+        "sha256": "a6839f7cb2a244288398be2f020453f48c2e7b771f5fd6ac4790d55709d21e8f"
+      },
+      {
+        "file": "development/d3-scoring-preflight/README.md",
+        "sha256": "40eb1de627d655a8b2e867d19f6fe3ab5ded8dcf78367b834a73da456acab434"
       },
       {
         "file": "test/d3-mode-qualification.test.mjs",
@@ -425,7 +437,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "483505050be56d6cc8bf313a83811260d383a104f028f1385831fac7a76fe0fc"
+        "sha256": "d76228ef49240362beb245d5a88571150dc2988399ce85b6ec7091d15272ec37"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -592,6 +604,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "179216b2dbf7829e537537bc0f0abbfd66ea2e0f7207b99a3b00d22e8ab76096"
+    "manifest_sha256": "c1dbe60e7090bb1844de90085780464c598c2608fc4b0a97abfe594c69b6a056"
   }
 }
