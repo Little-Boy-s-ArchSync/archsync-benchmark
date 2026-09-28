@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 274,
-    "passed": 274,
+    "total": 277,
+    "passed": 277,
     "failed": 0
   },
   "provenance": {
@@ -82,6 +82,22 @@
       {
         "file": "holdout/d3-file-side-preparation/inventory.json",
         "sha256": "c629044a356c2a83a1a28eb85078f813b227862a088e64476674e1c54f06f68a"
+      },
+      {
+        "file": "scripts/d3-review/source-syntax-hints.mjs",
+        "sha256": "c6c793c8c6416318b0b56432cee54fb8cdeb7e3ac441f64839148bdb5858f916"
+      },
+      {
+        "file": "test/d3-source-syntax-hints.test.mjs",
+        "sha256": "168436454a277a22b95d10e5f3befa16c34476e19a4c6953473c58aac071c024"
+      },
+      {
+        "file": "holdout/d3-source-syntax-hints/README.md",
+        "sha256": "422088fcf4fe5963439a853ee617efb02250006d4adeabcaaefd5ceddf7a2d29"
+      },
+      {
+        "file": "holdout/d3-source-syntax-hints/hints.json",
+        "sha256": "366a009e17be4fabd143b12963b9adb73dad31da946ca3e070ee95c578ab1c07"
       },
       {
         "file": "holdout/D3-APPLICABILITY-AI-NOTES-20260928.md",
@@ -305,7 +321,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "49595b2070ef2e2b01a499a9685c87a9fc20f3a48a43306b47f2ae0a34fe5231"
+        "sha256": "56e40e77d7230209339efd9ca98bf56782d0b021ccab5ce57dd94ac2c0781a79"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -472,6 +488,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "bbe821fd835a18eae176496a257b6af57e8a58026422bcbff2799bd715749ce2"
+    "manifest_sha256": "801b6c68a4a0ea53f2be8684ee6d952e2b29bf4580a535a20f5ad46408bfba9a"
   }
 }
