@@ -36,6 +36,16 @@ test('retained 93-commit census contains no accepted config, labels or predictio
     row.review_status === 'unreviewed' && row.ancestor_config_candidate_paths.length > 0));
   assert(inventory.commits.every((commit) => commit.config_candidates.every((row) =>
     row.source_status === 'regular-config-candidate' && /^[a-f0-9]{64}$/u.test(row.sha256))));
+  for (const [repository, caseSides, configPath, expectedSha256] of [
+    ['hyperdxio/hyperdx', 38, 'packages/api/tsconfig.json', '13921504e2378014f6d8de56036fa2b4161b78208c8b835f0d648c9f960622df'],
+    ['amruthpillai/reactive-resume', 34, 'apps/server/tsconfig.json', '25dd60bef158bfbfb1d00c9bb0054ff282429a6ec614ade1faab0fa6f28c68d3'],
+    ['ether/etherpad', 40, 'src/tsconfig.json', 'b99807418637bf287c4b4e6b806943b1977203ff71f007e55ce0be389209742d'],
+  ]) {
+    assert.equal(inventory.case_sides.filter((row) => row.repository === repository).length, caseSides);
+    const matching = inventory.commits.filter((row) => row.repository === repository)
+      .map((row) => row.config_candidates.find((candidate) => candidate.path === configPath));
+    assert(matching.length > 0 && matching.every((row) => row?.sha256 === expectedSha256));
+  }
   assert(!raw.includes(Buffer.from('"prediction"')));
   assert(!raw.includes(Buffer.from('"label"')));
 });

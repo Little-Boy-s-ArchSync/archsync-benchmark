@@ -117,11 +117,11 @@
       },
       {
         "file": "test/d3-project-config-preparation.test.mjs",
-        "sha256": "988f4888fdbaea6fcbd4a550c49ec45274bc3d811f8eb3294fbd028b22778c4e"
+        "sha256": "90d0d84a4c7fe7fa7d9cdd42d5392b579327d8dc4fd51af83d1970af0261a11a"
       },
       {
         "file": "holdout/d3-project-config-preparation/README.md",
-        "sha256": "4d2ffa98b8b2fd9a657f24031d4ff9aab4f848213256e5c89321e6756e395e52"
+        "sha256": "373897e83b61609fe074e5b7aa04c316f1994d8e722ecbf70e471d4ec5d6a5be"
       },
       {
         "file": "holdout/d3-project-config-preparation/inventory.json",
@@ -129,7 +129,7 @@
       },
       {
         "file": "holdout/d3-module-method/v0.2.0/freeze-manifest.json",
-        "sha256": "75af8728f04cdeba1f91263dece953bc327a37bea5814094659f29a45b9aa3f6"
+        "sha256": "6c7138072ee427c1636308fb453ee1785ff52cd4564bf4e6ec554a4846884859"
       },
       {
         "file": "holdout/d3-package-archives/README.md",
@@ -504,6 +504,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "3743f41f3a655503caef9a2c84d409717a23f9d0376b24e302d972426f0a8000"
+    "manifest_sha256": "7192c2bcb43f2d0d715cbfd61c1a1030c970dcf42a66fc0691b11fca8bc303a0"
   }
 }

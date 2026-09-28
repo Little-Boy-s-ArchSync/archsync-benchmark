@@ -20,6 +20,10 @@ commit/config candidate rows across 93 commits and 112 case-sides. It is
 source metadata, not evidence that any candidate was effective. Every
 `effective_project_config` remains `null`; both authors still need to review
 the governing project configuration and resolution semantics for each side.
+The source-only review queue identifies a Reactive Resume workspace config
+that declares `verbatimModuleSyntax: true` and an Etherpad config declaring
+`module: CommonJS`; the current non-D3 common fixture does not qualify those
+historical modes. No D3 comparison may silently inherit fixture behavior.
 
 This directory defines the files that Hiếu and Hoàng must jointly freeze before either tool is run on D3. It records the merged Guardian source commit `e32ef53eeb07bc8c904b6a1e6a8b897d16def820`, binds the development common-capability packet merged at Benchmark `efc1a14bc650056f98fd2093c79effb79ce7cc87`, and binds the candidate package-preflight receipt merged at Benchmark `ab0a93266601bc45cf817f1771fba8d37cb062c7`. A later packet now retains the exact candidate archive bytes and a repeated technical build; operator/machine independence is not established. Independent person-level reproduction is still absent, so this is not a package or method freeze. The capability packet supports only the cross-group file-edge task: dependency-cruiser supplies no physical occurrence positions, so occurrence scoring remains unsupported. Exact configuration and scientific method acceptance remain pending. Human acceptance and personal declaration fields intentionally remain `null`.
 

@@ -22,6 +22,26 @@ does not prove it governed the build, and no `extends`, package export map,
 workspace resolution, compiler mode, or target dependency has been accepted.
 `effective_project_config` remains `null` on every case-side.
 
+## Source-backed review priorities
+
+The retained blobs show one variant of each nearest `tsconfig.json` across
+the selected sides for a given repository, but they do not establish that the
+same file governed every upstream build or either study tool. Review these
+source chains before accepting a resolver policy:
+
+| Repository | Case-sides | Source configuration chain observed in the pinned Git objects | Capability question |
+| --- | ---: | --- | --- |
+| HyperDX | 38 | `packages/api/tsconfig.json` extends `tsconfig.base.json`; the base declares `module` and `moduleResolution` as `NodeNext`. | Confirm which of the API `tsconfig`, build and Vercel variants governs each tool invocation. |
+| Reactive Resume | 34 | `apps/server/tsconfig.json` extends `@reactive-resume/config/tsconfig.base.json`; `packages/config/package.json` names that workspace package and its base config declares `moduleResolution: bundler` and `verbatimModuleSyntax: true`. | Qualify both tools on this compiler mode without D3 source before treating the current fixture (which used `verbatimModuleSyntax: false`) as transferable. Confirm package/workspace resolution. |
+| Etherpad | 40 | `src/tsconfig.json` declares `module: CommonJS`. | Qualify the runtime-value and `require` interpretation under this mode before scoring. |
+
+These are source observations and questions, not accepted effective-config
+decisions. The corresponding Git blob hashes and commit-to-commit variants are
+in `inventory.json`; no source file was executed. In Reactive Resume, the
+referenced workspace base config and package manifest occur in all 32 selected
+commit identities with one byte variant each. The listed ancestor-config
+candidate paths do not themselves resolve `extends`.
+
 The exact filename filter is `tsconfig*.json`, `jsconfig*.json`,
 `package.json`, `pnpm-workspace.yaml`, `lerna.json`, `nx.json`, and `turbo.json`.
 It is an initial candidate census, not a complete discovery of arbitrary
