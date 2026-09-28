@@ -1,0 +1,1792 @@
+{
+  "schema": "d3-historical-anchor-review-matrix/1",
+  "status": "byte-equivalence-review-aid-not-applicability",
+  "inputs": {
+    "source_evidence_ledger_sha256": "b9655af035700e12ada897db9c8be3a6d803d17a8a97642a57fca776f746a095",
+    "production_candidates_sha256": "a34ceb1fcad5d840d55ca1431eea2dd4b5d57aca2bd535f175ccb57c738af958"
+  },
+  "summary": {
+    "source_rows": 152,
+    "anchor_groups": 10,
+    "distinct_anchor_blobs": 13,
+    "author_decisions": 0,
+    "truth_labels": 0,
+    "tool_predictions": 0
+  },
+  "groups": [
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "rule_id": "D3-RR-MOD-001",
+      "anchor_set_sha256": "a2a263f943583bacfca601fae4d888cb3aeb298f0509bfe177c6679616ef8dcc",
+      "anchors": [
+        {
+          "path": "apps/server/src/rpc/handler.ts",
+          "mode": "100644",
+          "git_blob": "0707a30d5430b075de5579f443d273f34da98563",
+          "sha256": "dd4569d4a9c4fc663236cc25024e95b5ad51ecbc07002b9ef25b6adf645c2ef5"
+        },
+        {
+          "path": "docs/adr/0001-workspace-boundaries.md",
+          "mode": "100644",
+          "git_blob": "511773d7be716ade821a5feb67adea4317f9d662",
+          "sha256": "b3c0878e05f642f2f08629f9abb2f1e48d56e300ac38c62a37eef590dccaff55"
+        },
+        {
+          "path": "docs/contributing/architecture.mdx",
+          "mode": "100644",
+          "git_blob": "0da83d072de4b482b353aceda7a879a865e2c7ce",
+          "sha256": "d3bf0e9d793253da4563fa99380758e36e5bb58ba10e0306e46e343788866d21"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "amruthpillai--reactive-resume-H001",
+          "side": "base",
+          "commit": "dbbab6fd7610cf1472d0e0377fc0e966faf7acda",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H001",
+          "side": "head",
+          "commit": "c8081ac2fe1c761de14d4c4c319af48b9eced3c8",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 276,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H003",
+          "side": "base",
+          "commit": "d0fa9ae8dab0ba34ff88edf3b2b8ce18078ae662",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H003",
+          "side": "head",
+          "commit": "9d0dc367068acb6cb90a53b049534ca68f3d250f",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H004",
+          "side": "base",
+          "commit": "1e23a453a0db53bb17827d9789fc2ccc1886dd98",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H004",
+          "side": "head",
+          "commit": "d0fa9ae8dab0ba34ff88edf3b2b8ce18078ae662",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H005",
+          "side": "base",
+          "commit": "0c7c3ac4c4f399b90356d4cb40c8ce9f656b4260",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H005",
+          "side": "head",
+          "commit": "36c35c9bd509fc18495c3c9d39bb6244bdb8bcef",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H006",
+          "side": "head",
+          "commit": "9509b5bc2ec133a12cd49e725f3445d0c7eaf77a",
+          "source_candidate_paths": 22,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-01"
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "rule_id": "D3-RR-MOD-001",
+      "anchor_set_sha256": "cb1f43bc89e95e318dc1be3add488b4c10edd7b6a5c825618463a5b6b21dc416",
+      "anchors": [
+        {
+          "path": "apps/server/src/rpc/handler.ts",
+          "mode": "100644",
+          "git_blob": "bdb351c98a2ff5877b8006f14a32d51770ce57c3",
+          "sha256": "0d6d887e91d45aab56b9a4a2c4f5332f89b28ea67348fa855acd21771fe38d1b"
+        },
+        {
+          "path": "docs/adr/0001-workspace-boundaries.md",
+          "mode": "100644",
+          "git_blob": "511773d7be716ade821a5feb67adea4317f9d662",
+          "sha256": "b3c0878e05f642f2f08629f9abb2f1e48d56e300ac38c62a37eef590dccaff55"
+        },
+        {
+          "path": "docs/contributing/architecture.mdx",
+          "mode": "100644",
+          "git_blob": "176a933c65f35a0be5d1074a891ebc3640a3282b",
+          "sha256": "4b8e4bceccfa0cf94dbccfc44bcaae79057155904d0150b751d9e9d41eb5620c"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "amruthpillai--reactive-resume-H013",
+          "side": "base",
+          "commit": "4ac19f81b3d290dd063764ff6b0fa3dd94d34632",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H014",
+          "side": "base",
+          "commit": "fb8c73be76cec5cdd8c2e6b6fb35f24c2cce515b",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H014",
+          "side": "head",
+          "commit": "50f50b2672cd1cbbf5a1ac41f8d4a768058632bc",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H015",
+          "side": "base",
+          "commit": "a2901bfb2e32b36082d79e3c6c82a4b312e06b35",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H015",
+          "side": "head",
+          "commit": "dd0531091bea1862302897e843d5a1c87ef1bdf5",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H016",
+          "side": "base",
+          "commit": "12407d473d9b9782a8686f5bfcf59ea5931022d6",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H016",
+          "side": "head",
+          "commit": "418c7887eefeecdc06dcd4dabd205799621239b1",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H017",
+          "side": "base",
+          "commit": "bb1fb3a7d6c733fc02fedcb100a41584228bb2bd",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 258,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H017",
+          "side": "head",
+          "commit": "9110e86997281bf3006d54e47efb08c69b33adb8",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 259,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H019",
+          "side": "base",
+          "commit": "90105cb1480f636899ae50687ece102c2689f66a",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 258,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H019",
+          "side": "head",
+          "commit": "1124d3dfda062dc0518479e0e6fa36b73b350e31",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 258,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H020",
+          "side": "base",
+          "commit": "73daf22b2f8df55f0041c48c2e119fa215064cc0",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 258,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H020",
+          "side": "head",
+          "commit": "90105cb1480f636899ae50687ece102c2689f66a",
+          "source_candidate_paths": 19,
+          "target_candidate_paths": 258,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-02"
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "rule_id": "D3-RR-MOD-001",
+      "anchor_set_sha256": "da9ab34f63f6161d4cec0b8c5fb52728de131fdf6d92c9d43cac6e48ac77c7a3",
+      "anchors": [
+        {
+          "path": "apps/server/src/rpc/handler.ts",
+          "mode": "100644",
+          "git_blob": "6438537af7f181ccbf3db9f94e4cfac2e3de3135",
+          "sha256": "9debe3e07bd4466c0e4fbb1299ba894de9f85c3ac85fbae2808e125db6ca90a4"
+        },
+        {
+          "path": "docs/adr/0001-workspace-boundaries.md",
+          "mode": "100644",
+          "git_blob": "511773d7be716ade821a5feb67adea4317f9d662",
+          "sha256": "b3c0878e05f642f2f08629f9abb2f1e48d56e300ac38c62a37eef590dccaff55"
+        },
+        {
+          "path": "docs/contributing/architecture.mdx",
+          "mode": "100644",
+          "git_blob": "176a933c65f35a0be5d1074a891ebc3640a3282b",
+          "sha256": "4b8e4bceccfa0cf94dbccfc44bcaae79057155904d0150b751d9e9d41eb5620c"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "amruthpillai--reactive-resume-H009",
+          "side": "base",
+          "commit": "04100aa9efd3ef4332fec9ed9052686fdf3bbeb6",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H009",
+          "side": "head",
+          "commit": "efd950bd9394975201655fefb8c47f0edb44d273",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H010",
+          "side": "base",
+          "commit": "88a19619daf5fd0fc09c73f5b19fa23860dbd230",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H010",
+          "side": "head",
+          "commit": "e6a31aab9722ed4ac924b0be79ec7553e1d8b37f",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H011",
+          "side": "base",
+          "commit": "4a8f87ab8f008e94528f461b066126c0ef4d6732",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H011",
+          "side": "head",
+          "commit": "ba8e1be2ab5206095a7b08c4e26fd9307e2e0ee3",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H013",
+          "side": "head",
+          "commit": "d2ffbf9618d0afce6a6570a2d2c34d1be9e599a6",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 274,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-03"
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "rule_id": "D3-RR-MOD-001",
+      "anchor_set_sha256": "fd82d96a233b520b7a205ef8da7d050b1d266f1faae5eaf1fdd1bdbd82bbab21",
+      "anchors": [
+        {
+          "path": "apps/server/src/rpc/handler.ts",
+          "mode": "100644",
+          "git_blob": "6438537af7f181ccbf3db9f94e4cfac2e3de3135",
+          "sha256": "9debe3e07bd4466c0e4fbb1299ba894de9f85c3ac85fbae2808e125db6ca90a4"
+        },
+        {
+          "path": "docs/adr/0001-workspace-boundaries.md",
+          "mode": "100644",
+          "git_blob": "511773d7be716ade821a5feb67adea4317f9d662",
+          "sha256": "b3c0878e05f642f2f08629f9abb2f1e48d56e300ac38c62a37eef590dccaff55"
+        },
+        {
+          "path": "docs/contributing/architecture.mdx",
+          "mode": "100644",
+          "git_blob": "0da83d072de4b482b353aceda7a879a865e2c7ce",
+          "sha256": "d3bf0e9d793253da4563fa99380758e36e5bb58ba10e0306e46e343788866d21"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "amruthpillai--reactive-resume-H006",
+          "side": "base",
+          "commit": "f848e57436a7dc5e535ae71f79a15888af6daba2",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 277,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H007",
+          "side": "base",
+          "commit": "45303fb46565b77fe6e18b73f39cf9dbbf2b6934",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 277,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H007",
+          "side": "head",
+          "commit": "6d9ebccc634c4c977047b7ce5f5a39e9976921d9",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 277,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H008",
+          "side": "base",
+          "commit": "5fc9c3ee0497e7fe2ef06f48f357f43492dc2cb0",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 273,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "amruthpillai--reactive-resume-H008",
+          "side": "head",
+          "commit": "7eb6d3bdbf14a8884d84ccd2e86b966f6ac0413a",
+          "source_candidate_paths": 25,
+          "target_candidate_paths": 273,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-04"
+    },
+    {
+      "repository": "ether/etherpad",
+      "rule_id": "D3-EP-MOD-001",
+      "anchor_set_sha256": "8630b1af0870e9873bd29d0311932a79ae4e413914e26ce54f920082ca01a1c0",
+      "anchors": [
+        {
+          "path": "src/node/db/DB.ts",
+          "mode": "100644",
+          "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5",
+          "sha256": "5d9b483d38f66378c4ed59e51700538c374b7252f01fdcece80ae75fcd4cb951"
+        },
+        {
+          "path": "src/node/server.ts",
+          "mode": "100755",
+          "git_blob": "2ab4fcf24d6368f7baf32317d4a0481fd4b85525",
+          "sha256": "f6b51a32f01a50c9cde25b66a621c9b4b86784ce485af87523bf1f5f463676fe"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "ether--etherpad-H001",
+          "side": "base",
+          "commit": "f973a801370542b052c049bd41a5c76ff15a8964",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H001",
+          "side": "head",
+          "commit": "70b1790319fa031859a4ab5857f9d26c73bc8849",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H002",
+          "side": "base",
+          "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H002",
+          "side": "head",
+          "commit": "0eaae1186da5447081db25d428196e87c47892a6",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H003",
+          "side": "base",
+          "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H003",
+          "side": "head",
+          "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H004",
+          "side": "base",
+          "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H004",
+          "side": "head",
+          "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H005",
+          "side": "base",
+          "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H005",
+          "side": "head",
+          "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H006",
+          "side": "base",
+          "commit": "de7fe6669fafbf093b668833949ecfc3c288278f",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H006",
+          "side": "head",
+          "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H007",
+          "side": "base",
+          "commit": "c751759d8e0edb754135643591f10cdff511f297",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H007",
+          "side": "head",
+          "commit": "719bed2419a8ee26020f369cdca1afc98d6a5fad",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H008",
+          "side": "base",
+          "commit": "2af7ab9218f60d55bfb813c2a25afd600b4093e1",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H008",
+          "side": "head",
+          "commit": "a7324ff1185027cdcd3b4ab134e0d67a29fe8b8c",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H009",
+          "side": "base",
+          "commit": "f8686dda1043b4003efe0d06afce2aea68d814aa",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H009",
+          "side": "head",
+          "commit": "9c8d16d50e2fdfd9693ab35c43280410cb4db2fc",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H010",
+          "side": "base",
+          "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H010",
+          "side": "head",
+          "commit": "e1c2fcd1f1a8bb9e3bbdc0db503172635d1177ff",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H011",
+          "side": "base",
+          "commit": "0aee6a7d7da2e9451aa30364425b874d12a9470b",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H011",
+          "side": "head",
+          "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H012",
+          "side": "base",
+          "commit": "9706e082609fc10bfdc681592497694fd1495844",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H012",
+          "side": "head",
+          "commit": "682cb65625c710792623159175c8d129644e2423",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H013",
+          "side": "base",
+          "commit": "a0a56ad406f4c3eb5c715b2e272ad2cea2eca099",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H013",
+          "side": "head",
+          "commit": "9706e082609fc10bfdc681592497694fd1495844",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H014",
+          "side": "base",
+          "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H014",
+          "side": "head",
+          "commit": "492b158d93ddbe71013b3ee994cfc1fc3f3180ea",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H015",
+          "side": "base",
+          "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H015",
+          "side": "head",
+          "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H016",
+          "side": "base",
+          "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H016",
+          "side": "head",
+          "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H017",
+          "side": "base",
+          "commit": "87a8b2a5c26041ede3692e84fab33f2094459861",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H017",
+          "side": "head",
+          "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H018",
+          "side": "base",
+          "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H018",
+          "side": "head",
+          "commit": "01500ca70c2adad5c31a04c08eb15ebf2a2201d0",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H019",
+          "side": "base",
+          "commit": "01d0b08a4eb0e8a26a69320069e955d09ce93381",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H019",
+          "side": "head",
+          "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H020",
+          "side": "base",
+          "commit": "d67aa3ebd3eb6a9e6ededf45e52a4f27e25e4a50",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H020",
+          "side": "head",
+          "commit": "ce038b0b0f4d12926650181f6a001912ae9769ff",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 7,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-05"
+    },
+    {
+      "repository": "ether/etherpad",
+      "rule_id": "D3-EP-MOD-002",
+      "anchor_set_sha256": "8630b1af0870e9873bd29d0311932a79ae4e413914e26ce54f920082ca01a1c0",
+      "anchors": [
+        {
+          "path": "src/node/db/DB.ts",
+          "mode": "100644",
+          "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5",
+          "sha256": "5d9b483d38f66378c4ed59e51700538c374b7252f01fdcece80ae75fcd4cb951"
+        },
+        {
+          "path": "src/node/server.ts",
+          "mode": "100755",
+          "git_blob": "2ab4fcf24d6368f7baf32317d4a0481fd4b85525",
+          "sha256": "f6b51a32f01a50c9cde25b66a621c9b4b86784ce485af87523bf1f5f463676fe"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "ether--etherpad-H001",
+          "side": "base",
+          "commit": "f973a801370542b052c049bd41a5c76ff15a8964",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H001",
+          "side": "head",
+          "commit": "70b1790319fa031859a4ab5857f9d26c73bc8849",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H002",
+          "side": "base",
+          "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H002",
+          "side": "head",
+          "commit": "0eaae1186da5447081db25d428196e87c47892a6",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H003",
+          "side": "base",
+          "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H003",
+          "side": "head",
+          "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H004",
+          "side": "base",
+          "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H004",
+          "side": "head",
+          "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H005",
+          "side": "base",
+          "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H005",
+          "side": "head",
+          "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H006",
+          "side": "base",
+          "commit": "de7fe6669fafbf093b668833949ecfc3c288278f",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H006",
+          "side": "head",
+          "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H007",
+          "side": "base",
+          "commit": "c751759d8e0edb754135643591f10cdff511f297",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H007",
+          "side": "head",
+          "commit": "719bed2419a8ee26020f369cdca1afc98d6a5fad",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H008",
+          "side": "base",
+          "commit": "2af7ab9218f60d55bfb813c2a25afd600b4093e1",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H008",
+          "side": "head",
+          "commit": "a7324ff1185027cdcd3b4ab134e0d67a29fe8b8c",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H009",
+          "side": "base",
+          "commit": "f8686dda1043b4003efe0d06afce2aea68d814aa",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H009",
+          "side": "head",
+          "commit": "9c8d16d50e2fdfd9693ab35c43280410cb4db2fc",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H010",
+          "side": "base",
+          "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H010",
+          "side": "head",
+          "commit": "e1c2fcd1f1a8bb9e3bbdc0db503172635d1177ff",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H011",
+          "side": "base",
+          "commit": "0aee6a7d7da2e9451aa30364425b874d12a9470b",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H011",
+          "side": "head",
+          "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H012",
+          "side": "base",
+          "commit": "9706e082609fc10bfdc681592497694fd1495844",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H012",
+          "side": "head",
+          "commit": "682cb65625c710792623159175c8d129644e2423",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H013",
+          "side": "base",
+          "commit": "a0a56ad406f4c3eb5c715b2e272ad2cea2eca099",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H013",
+          "side": "head",
+          "commit": "9706e082609fc10bfdc681592497694fd1495844",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H014",
+          "side": "base",
+          "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H014",
+          "side": "head",
+          "commit": "492b158d93ddbe71013b3ee994cfc1fc3f3180ea",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H015",
+          "side": "base",
+          "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H015",
+          "side": "head",
+          "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H016",
+          "side": "base",
+          "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H016",
+          "side": "head",
+          "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H017",
+          "side": "base",
+          "commit": "87a8b2a5c26041ede3692e84fab33f2094459861",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H017",
+          "side": "head",
+          "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H018",
+          "side": "base",
+          "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H018",
+          "side": "head",
+          "commit": "01500ca70c2adad5c31a04c08eb15ebf2a2201d0",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H019",
+          "side": "base",
+          "commit": "01d0b08a4eb0e8a26a69320069e955d09ce93381",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H019",
+          "side": "head",
+          "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H020",
+          "side": "base",
+          "commit": "d67aa3ebd3eb6a9e6ededf45e52a4f27e25e4a50",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "ether--etherpad-H020",
+          "side": "head",
+          "commit": "ce038b0b0f4d12926650181f6a001912ae9769ff",
+          "source_candidate_paths": 1,
+          "target_candidate_paths": 18,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-06"
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "rule_id": "D3-HDX-MOD-001",
+      "anchor_set_sha256": "42766703b172f27ae634a3cd09cabcac8be6b83a254e2c16b001e9ce21a3f050",
+      "anchors": [
+        {
+          "path": "packages/api/src/models/index.ts",
+          "mode": "100644",
+          "git_blob": "1779e3dc4136ccc27ef9474be1c4aaefb712d4ce",
+          "sha256": "b8a6e7b3b0d52ab8c2d7b226b5bfd58207cbd142bf28a71e02fdbe8566bbec58"
+        },
+        {
+          "path": "packages/api/src/routers/api/alerts.ts",
+          "mode": "100644",
+          "git_blob": "a44603c5a077f37213010c4d1346dc97afeaea9c",
+          "sha256": "309fee187c2dc23a1c670d3b2981eaf481a054dfe6379b0bd0ecf99f44380212"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "hyperdxio--hyperdx-H020",
+          "side": "base",
+          "commit": "e60a7d3089461487185f616ee5b5cc7783e079c6",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-07"
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "rule_id": "D3-HDX-MOD-001",
+      "anchor_set_sha256": "66879031a1aaa1295e9a297842d16c27d17c9dedf28ddb2c4c69c5924df28506",
+      "anchors": [
+        {
+          "path": "packages/api/src/models/index.ts",
+          "mode": "100644",
+          "git_blob": "1779e3dc4136ccc27ef9474be1c4aaefb712d4ce",
+          "sha256": "b8a6e7b3b0d52ab8c2d7b226b5bfd58207cbd142bf28a71e02fdbe8566bbec58"
+        },
+        {
+          "path": "packages/api/src/routers/api/alerts.ts",
+          "mode": "100644",
+          "git_blob": "44cf925ce961f2128355050e8df2adf52be4ff58",
+          "sha256": "641226743237ffe875e55936fac63abbd19eda04d80d81d8583c6f9ac802b482"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "hyperdxio--hyperdx-H008",
+          "side": "base",
+          "commit": "be26530f7f6bdf1eee2c9bfa356b4df95acf2df6",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H009",
+          "side": "base",
+          "commit": "c602cbb388df53c67131a2beca0ea5a822285aa5",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H009",
+          "side": "head",
+          "commit": "be26530f7f6bdf1eee2c9bfa356b4df95acf2df6",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H010",
+          "side": "base",
+          "commit": "59b96e995f2a1c0e8aefcb92bf346494f654fb84",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H010",
+          "side": "head",
+          "commit": "c602cbb388df53c67131a2beca0ea5a822285aa5",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H011",
+          "side": "base",
+          "commit": "d205a776d26ce64d59ff8630eb0a5b4fbbd12b0b",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H011",
+          "side": "head",
+          "commit": "1ce61c0c06e1222659d599731dd3f7e58a3ed9a4",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H012",
+          "side": "base",
+          "commit": "8be68100febd1e7f309db0538787a5ef2f45f92c",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H012",
+          "side": "head",
+          "commit": "d205a776d26ce64d59ff8630eb0a5b4fbbd12b0b",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H013",
+          "side": "base",
+          "commit": "c349a5ddce5a1ac0f1d14eccb8065d35834f5b1b",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H013",
+          "side": "head",
+          "commit": "e153f46d6fce89c4a00556e9d3d9194f8c88d98f",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H014",
+          "side": "base",
+          "commit": "68d2ed20f33e8cf9149ee4cbbf94fc6a6b6dcd29",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H014",
+          "side": "head",
+          "commit": "08e5b62fd81f5129556e13ff9b0a548446a9ab48",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H015",
+          "side": "base",
+          "commit": "a94d6da87560e587fa2a5cfe5eff14688eda054c",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H015",
+          "side": "head",
+          "commit": "40ec0858ce2a06d909ec73850ef999b8b6d22fa4",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H017",
+          "side": "base",
+          "commit": "75909ace4f7909b11d1111381b6a9aabd81895ea",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H017",
+          "side": "head",
+          "commit": "b0b13806665e2c747d1a81e5f53117b5e93798a5",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H018",
+          "side": "base",
+          "commit": "a8317c2153f0daeb9780edbe70003b8f8121b679",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H018",
+          "side": "head",
+          "commit": "9f640a6104ceedf704c1ef6c76bdcbcc84178dd8",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H019",
+          "side": "base",
+          "commit": "43f68566ff9805122e7fb40034cc4e6d4db133a5",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H019",
+          "side": "head",
+          "commit": "a8317c2153f0daeb9780edbe70003b8f8121b679",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H020",
+          "side": "head",
+          "commit": "43f68566ff9805122e7fb40034cc4e6d4db133a5",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-08"
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "rule_id": "D3-HDX-MOD-001",
+      "anchor_set_sha256": "7769cbb85f67fbf0ab288bf1bf65b4f5def18e9a80c41f530719a8cdadb09e7e",
+      "anchors": [
+        {
+          "path": "packages/api/src/models/index.ts",
+          "mode": "100644",
+          "git_blob": "04605ff4e44ffac1a1b224e0b0fea294a5ebdd91",
+          "sha256": "92ac3d828b5644cd5d5745ee45dd42d104b02c3511b8516f1729e75edf750ad7"
+        },
+        {
+          "path": "packages/api/src/routers/api/alerts.ts",
+          "mode": "100644",
+          "git_blob": "8fd8c551a1a493a570b3cb13aed31a6cc13a41a1",
+          "sha256": "c1b78003beae6aeace43bf4cae3f3373c31945aa1d2e97f19e360adcfead38bd"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "hyperdxio--hyperdx-H001",
+          "side": "base",
+          "commit": "7f3878bcb2d6b2766b86eebb729ce37d5b73f462",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H001",
+          "side": "head",
+          "commit": "3c81bb96dd983520c0b6894e662e11b183bbce83",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H002",
+          "side": "base",
+          "commit": "ae53d993e2c7771e56ba67263cf523d06c7d543c",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H002",
+          "side": "head",
+          "commit": "b52a6fa83a1a8f6d1cc70e8b676103ade6a1b207",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H003",
+          "side": "head",
+          "commit": "a4b2ad003721069d9d25fcc6676a792c6683c46e",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-09"
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "rule_id": "D3-HDX-MOD-001",
+      "anchor_set_sha256": "fde8348466ecf0fa0076baf36a23baeabd53dcbe6a7a195007200eb7792c0a63",
+      "anchors": [
+        {
+          "path": "packages/api/src/models/index.ts",
+          "mode": "100644",
+          "git_blob": "1779e3dc4136ccc27ef9474be1c4aaefb712d4ce",
+          "sha256": "b8a6e7b3b0d52ab8c2d7b226b5bfd58207cbd142bf28a71e02fdbe8566bbec58"
+        },
+        {
+          "path": "packages/api/src/routers/api/alerts.ts",
+          "mode": "100644",
+          "git_blob": "8fd8c551a1a493a570b3cb13aed31a6cc13a41a1",
+          "sha256": "c1b78003beae6aeace43bf4cae3f3373c31945aa1d2e97f19e360adcfead38bd"
+        }
+      ],
+      "members": [
+        {
+          "case_id": "hyperdxio--hyperdx-H003",
+          "side": "base",
+          "commit": "7294944a32b03e8dbf8cefbaed4a58cfbb0e0aac",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H004",
+          "side": "base",
+          "commit": "395ae8d6ec2b9efc02d2ad260cc83909a95a74cf",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H004",
+          "side": "head",
+          "commit": "7294944a32b03e8dbf8cefbaed4a58cfbb0e0aac",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H005",
+          "side": "base",
+          "commit": "b1d8dc147d75166d4b516d130e77ee2993baf335",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H005",
+          "side": "head",
+          "commit": "dc29d57f37cf985814f011d10cf05115880d64c8",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H006",
+          "side": "base",
+          "commit": "f3e07a789662092cde5e4abc8ef41f34e5253eea",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H006",
+          "side": "head",
+          "commit": "828b27785129e29c2f2ec41f57ba4a0c65efe732",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H007",
+          "side": "base",
+          "commit": "8723d7af130d6cc4600d9f813a71f9ae41eb8916",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H007",
+          "side": "head",
+          "commit": "d11f8579312c91b8d1eb1afaeb5a4398b7b9c488",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        },
+        {
+          "case_id": "hyperdxio--hyperdx-H008",
+          "side": "head",
+          "commit": "8723d7af130d6cc4600d9f813a71f9ae41eb8916",
+          "source_candidate_paths": 14,
+          "target_candidate_paths": 28,
+          "applicability": null,
+          "truth_label": null,
+          "tool_prediction": null
+        }
+      ],
+      "group_review_status": "unreviewed-not-a-row-decision",
+      "group_id": "ANCHOR-10"
+    }
+  ]
+}

@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 309,
-    "passed": 309,
+    "total": 312,
+    "passed": 312,
     "failed": 0
   },
   "provenance": {
@@ -150,6 +150,22 @@
       {
         "file": "holdout/d3-production-role-candidates-20260928/receipt.json",
         "sha256": "a34ceb1fcad5d840d55ca1431eea2dd4b5d57aca2bd535f175ccb57c738af958"
+      },
+      {
+        "file": "scripts/d3-review/anchor-review-matrix.mjs",
+        "sha256": "3620b89a875926062388e0761c61d1b49596cda245769500656f073ffc1f8664"
+      },
+      {
+        "file": "test/d3-anchor-review-matrix.test.mjs",
+        "sha256": "d198b2ea30bb88cf6d25d6955e4253c9afb391a994cbfc6ad4a32ac8a98ea207"
+      },
+      {
+        "file": "holdout/d3-anchor-review-matrix-20260928/README.md",
+        "sha256": "c2f2f01696881cd695c25e963fb3e832d70b1ad210c19f5b02ac41ecea40436c"
+      },
+      {
+        "file": "holdout/d3-anchor-review-matrix-20260928/matrix.json",
+        "sha256": "e3d1877cc6d70c2a0bf36ca7ef0aa0e63d6788d40244bbcb7d77f698a08377ef"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -437,7 +453,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "d76228ef49240362beb245d5a88571150dc2988399ce85b6ec7091d15272ec37"
+        "sha256": "a856a3e4fdca23bf9a06f5cd956ec6c255a131fa3f98c75a00661dfb962c50bd"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -604,6 +620,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "c1dbe60e7090bb1844de90085780464c598c2608fc4b0a97abfe594c69b6a056"
+    "manifest_sha256": "439b0859e30470cd2d959b3c91f5be494a26e30a1f6badc97ea737cf379d5b68"
   }
 }
