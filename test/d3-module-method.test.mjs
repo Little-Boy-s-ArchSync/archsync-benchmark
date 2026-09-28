@@ -195,14 +195,22 @@ test('freeze manifest binds the merged development receipt without pretending me
   assert.equal(report.status, 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE');
   assert.equal(report.tools.guardian_source_pinned, true);
   assert.equal(report.tools.development_packet_bound, true);
+  assert.equal(report.tools.candidate_package_receipt_bound, true);
+  assert.equal(report.tools.package_archives_available, false);
+  assert.equal(report.tools.independent_package_reproduction_complete, false);
   assert.equal(report.tools.occurrence_scoring_supported, false);
   assert.equal(report.tools.fixture_freeze_complete, false);
-  assert.deepEqual(report.tools.missing_package_pins,
-    ['guardian.package_version', 'guardian.package_sha256', 'guardian.configuration_sha256', 'dependency_cruiser.package_sha256']);
+  assert.deepEqual(report.tools.missing_package_pins, ['guardian.configuration_sha256']);
+  assert.equal(report.open_gates.package_archives_available, false);
+  assert.equal(report.open_gates.independent_package_reproduction_complete, false);
   assert.equal(report.open_gates.reviewed_applicability_ledger_missing, true);
   assert.equal(report.open_gates.development_fixture_not_research_freeze, true);
   assert.deepEqual(report.common_capability_receipt,
     { cases: 7, common_fixture_passes: 2, failed_common_candidates: 1, unsupported_probes: 4, d3_executed: false });
+  assert.deepEqual(report.package_preflight,
+    { status: 'candidate_package_preflight_not_method_freeze', guardian_package: '@archsync/guardian@0.3.3',
+      comparator_package: 'dependency-cruiser@18.3.0', archives_available: false, independently_reproduced: false,
+      d3_executed: false, research_complete: false });
   assert(report.resolver.unresolved.includes('source_eligibility'));
 });
 

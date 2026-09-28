@@ -10,6 +10,8 @@ export const METHOD_VERSION = '0.2.0';
 export const GUARDIAN_SOURCE_COMMIT = 'e32ef53eeb07bc8c904b6a1e6a8b897d16def820';
 export const COMMON_CAPABILITY_MERGE_COMMIT = 'efc1a14bc650056f98fd2093c79effb79ce7cc87';
 export const COMMON_CAPABILITY_RECEIPT_SHA256 = '83962338666783d771469c5bc36092857be46987cbc14729326abe7cc6c8d4a9';
+export const PACKAGE_PREFLIGHT_MERGE_COMMIT = 'ab0a93266601bc45cf817f1771fba8d37cb062c7';
+export const PACKAGE_PREFLIGHT_RECEIPT_SHA256 = '8babd058869f5c81027ba3e6091ccc3df0de460a43766c01c67d6c473e0276c5';
 export const ACCEPTED_SELECTED_CASES_SHA256 = '44cc064a3555c90cc20d2a38ab61d67c6af598c1825bf5290cca2269ec801d35';
 export const LEGACY_REVIEW_SCHEMAS = Object.freeze(['d3-author-review/1', 'd3-change-case-review/1']);
 const hex = /^[a-f0-9]{64}$/u;
@@ -30,6 +32,8 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   `${methodDir}/review.template.json`,
   `${methodDir}/statistical-plan.template.json`,
   `${methodDir}/tool-pins.template.json`,
+  'holdout/d3-package-preflight/README.md',
+  'holdout/d3-package-preflight/receipt.json',
   'development/common-module-capability/README.md',
   'development/common-module-capability/capture.mjs',
   'development/common-module-capability/dependency-cruiser.json',
@@ -42,6 +46,7 @@ export const METHOD_ARTIFACT_PATHS = Object.freeze([
   'development/common-module-capability/tools/package.json',
   'development/common-module-capability/verify.mjs',
   'scripts/d3-review/module-method.mjs',
+  'scripts/verify-d3-package-preflight.mjs',
   'test/d3-module-method.test.mjs',
 ].sort());
 
@@ -272,8 +277,12 @@ export function validateToolPins(pins) {
   assert.equal(pins.schema, 'd3-module-tool-pins/2'); assert.equal(pins.version, METHOD_VERSION);
   assert.equal(pins.tools.guardian.source_commit, GUARDIAN_SOURCE_COMMIT);
   assert.equal(pins.tools.guardian.repository, 'Little-Boy-s-ArchSync/archsync-guardian');
+  assert.equal(pins.tools.guardian.package_version, '0.3.3');
+  assert.equal(pins.tools.guardian.package_sha256, '7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f');
+  assert.equal(pins.tools.guardian.package_content_sha256, '608e9213681f9172103463e63da8bafc46291e28f1b577e6744344c972c677be');
   assert.equal(pins.tools.dependency_cruiser.package_name, 'dependency-cruiser');
   assert.equal(pins.tools.dependency_cruiser.package_version, '18.3.0');
+  assert.equal(pins.tools.dependency_cruiser.package_sha256, '268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93');
   assert.equal(pins.tools.guardian.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
   assert.equal(pins.tools.dependency_cruiser.non_d3_fixture_receipt_sha256, COMMON_CAPABILITY_RECEIPT_SHA256);
   assert.equal(pins.common_capability_packet.merged_benchmark_commit, COMMON_CAPABILITY_MERGE_COMMIT);
@@ -284,15 +293,39 @@ export function validateToolPins(pins) {
     pins.common_capability_packet.failed_common_candidates, pins.common_capability_packet.unsupported_probes], [7, 2, 1, 4]);
   assert.equal(pins.common_capability_packet.d3_executed, false);
   assert.equal(pins.common_capability_packet.research_complete, false);
+  assert.equal(pins.package_preflight.merged_benchmark_commit, PACKAGE_PREFLIGHT_MERGE_COMMIT);
+  assert.equal(pins.package_preflight.receipt_sha256, PACKAGE_PREFLIGHT_RECEIPT_SHA256);
+  assert.equal(pins.package_preflight.status, 'candidate_package_preflight_not_method_freeze');
+  assert.equal(pins.package_preflight.archives_committed, false);
+  assert.equal(pins.package_preflight.independent_reproduction_complete, false);
+  assert.equal(pins.package_preflight.d3_executed, false);
+  assert.equal(pins.package_preflight.research_complete, false);
   assert.equal(pins.human_acceptance.hieu, null); assert.equal(pins.human_acceptance.hoang, null);
   const missingPackagePins = [
-    ['guardian.package_version', pins.tools.guardian.package_version],
-    ['guardian.package_sha256', pins.tools.guardian.package_sha256],
     ['guardian.configuration_sha256', pins.tools.guardian.configuration_sha256],
-    ['dependency_cruiser.package_sha256', pins.tools.dependency_cruiser.package_sha256],
   ].filter(([, value]) => !text(value)).map(([name]) => name);
   return { guardian_source_pinned: true, development_packet_bound: true, occurrence_scoring_supported: false,
+    candidate_package_receipt_bound: true, package_archives_available: false, independent_package_reproduction_complete: false,
     fixture_freeze_complete: false, missing_package_pins: missingPackagePins, accepted: false };
+}
+
+function validatePackagePreflight(receipt) {
+  assert.equal(receipt.schema_version, 1);
+  assert.equal(receipt.status, 'candidate_package_preflight_not_method_freeze');
+  assert.deepEqual(receipt.environment, { os: 'Windows', node: '22.16.0', pnpm: '11.16.0' });
+  assert.equal(receipt.guardian.source_repository, 'Little-Boy-s-ArchSync/archsync-guardian');
+  assert.equal(receipt.guardian.source_commit, GUARDIAN_SOURCE_COMMIT);
+  assert.equal(receipt.guardian.package_name, '@archsync/guardian');
+  assert.equal(receipt.guardian.package_version, '0.3.3');
+  assert.equal(receipt.guardian.archive_sha256, '7e87d932b0da6b930de9da229f3da439ca1b9ee826d40566fb320692c03b217f');
+  assert.equal(receipt.guardian.package_content_sha256, '608e9213681f9172103463e63da8bafc46291e28f1b577e6744344c972c677be');
+  assert.equal(receipt.guardian.module_analyzer_version, '0.1.0-development');
+  assert.equal(receipt.comparator.registry_package, 'dependency-cruiser');
+  assert.equal(receipt.comparator.package_version, '18.3.0');
+  assert.equal(receipt.comparator.archive_sha256, '268d21e1e4060717289db373a7f9fcc2c912e6ef9720d8b34575fe1cd965da93');
+  assert.equal(receipt.selected_source_bundle_sha256, ACCEPTED_SELECTED_CASES_SHA256);
+  return { status: receipt.status, guardian_package: '@archsync/guardian@0.3.3', comparator_package: 'dependency-cruiser@18.3.0',
+    archives_available: false, independently_reproduced: false, d3_executed: false, research_complete: false };
 }
 
 export async function buildFreezeManifest(repoRoot = root) {
@@ -328,6 +361,9 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   const plan = JSON.parse(await readFile(join(repoRoot, `${methodDir}/statistical-plan.template.json`)));
   const pins = JSON.parse(await readFile(join(repoRoot, `${methodDir}/tool-pins.template.json`)));
   const review = JSON.parse(await readFile(join(repoRoot, `${methodDir}/review.template.json`)));
+  const packageReceiptBytes = await readFile(join(repoRoot, 'holdout/d3-package-preflight/receipt.json'));
+  assert.equal(sha256(packageReceiptBytes), PACKAGE_PREFLIGHT_RECEIPT_SHA256);
+  const packagePreflight = validatePackagePreflight(JSON.parse(packageReceiptBytes));
   assert.equal(sha256(await readFile(join(repoRoot, 'development/common-module-capability/receipt/manifest.json'))), COMMON_CAPABILITY_RECEIPT_SHA256);
   const capability = await verifyCommonCapabilityReceipt(join(repoRoot, 'development/common-module-capability'),
     join(repoRoot, 'development/common-module-capability/receipt'));
@@ -335,11 +371,13 @@ export async function validateFreezeManifest(manifest, repoRoot = root) {
   const resolver = validatePolicyScaffold(policy), statistics = validateStatisticalPlan(plan), tools = validateToolPins(pins);
   return { status: 'VERIFIED_PROPOSAL_NOT_READY_TO_FREEZE', method_sha256: sha256(Buffer.from(`${JSON.stringify(manifest)}\n`)),
     open_gates: { resolver_dimensions: resolver.unresolved, package_pins: tools.missing_package_pins,
+      package_archives_available: tools.package_archives_available,
+      independent_package_reproduction_complete: tools.independent_package_reproduction_complete,
       development_fixture_not_research_freeze: !tools.fixture_freeze_complete,
       reviewed_applicability_ledger_missing: true, source_review_inventories_missing: true,
       human_acceptances_missing: ['hieu', 'hoang'], d3_predictions_not_executed: true },
     resolver, statistics, tools,
-    common_capability_receipt: capability, review: validateModuleReview(review) };
+    common_capability_receipt: capability, package_preflight: packagePreflight, review: validateModuleReview(review) };
 }
 
 async function main() {
