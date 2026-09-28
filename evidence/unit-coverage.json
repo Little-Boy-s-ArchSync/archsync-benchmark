@@ -17,8 +17,8 @@
     "functions_percent": 100
   },
   "tests": {
-    "total": 307,
-    "passed": 307,
+    "total": 309,
+    "passed": 309,
     "failed": 0
   },
   "provenance": {
@@ -134,6 +134,22 @@
       {
         "file": "holdout/d3-applicability-proposal-20260928/README.md",
         "sha256": "517c497f85fcd38aaaab608cecfe1ffc7964f51dde20d6fef53822da8395ac72"
+      },
+      {
+        "file": "scripts/d3-review/production-role-candidates.mjs",
+        "sha256": "167d8b49eeec10f430c21aa28a1ffd3bc233bf34f4d81721f8eedebf1a91ec20"
+      },
+      {
+        "file": "test/d3-production-role-candidates.test.mjs",
+        "sha256": "e76a5d3c33b0d816fba8154b94eabe9fe08a54fc4ba72565da615d6676a7238b"
+      },
+      {
+        "file": "holdout/d3-production-role-candidates-20260928/README.md",
+        "sha256": "8514fa04c7254838d0c11deb35604c05c0eba97fd80159d94a1ab6ffd6acfca1"
+      },
+      {
+        "file": "holdout/d3-production-role-candidates-20260928/receipt.json",
+        "sha256": "a34ceb1fcad5d840d55ca1431eea2dd4b5d57aca2bd535f175ccb57c738af958"
       },
       {
         "file": "scripts/d3-review/method-packet.mjs",
@@ -421,7 +437,7 @@
       },
       {
         "file": "scripts/unit-coverage-evidence.mjs",
-        "sha256": "b7fe204c8291e4fac175d8990c2bea56124c92336ce6a1c6b6e4df7472accf7b"
+        "sha256": "d76228ef49240362beb245d5a88571150dc2988399ce85b6ec7091d15272ec37"
       },
       {
         "file": "scripts/prepare-d3-sources.mjs",
@@ -588,6 +604,6 @@
         "sha256": "ae4a0b7c000ebb068e37502f0434c53ad3ac761876c6546d37cc58e2a24e5b08"
       }
     ],
-    "manifest_sha256": "0dc4d3685658f28ce07c9a5f7bc51b619621de0f3b2ecb11382c0c98fde26714"
+    "manifest_sha256": "c1dbe60e7090bb1844de90085780464c598c2608fc4b0a97abfe594c69b6a056"
   }
 }

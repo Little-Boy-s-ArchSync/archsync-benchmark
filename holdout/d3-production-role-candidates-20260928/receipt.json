@@ -1,0 +1,3820 @@
+{
+  "schema": "d3-historical-production-role-candidates/1",
+  "status": "lexical-path-filter-only-not-applicability",
+  "inputs": {
+    "historical_census_sha256": "369c4d5a39e021acf5424df2c51de33a736b9058d132d460fc2423a1c4e431a7",
+    "proposed_contract_sha256": "ace17e11043efbf4bcff9728f2702b0d39725fcd8cda80d6cd1d99eae47c4ca6"
+  },
+  "rows": [
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H001",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "7f3878bcb2d6b2766b86eebb729ce37d5b73f462",
+      "commit_tree": "7f7bf4f3abb9d446121fde4249cf3c64caa056af",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H001",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "3c81bb96dd983520c0b6894e662e11b183bbce83",
+      "commit_tree": "d4518a553133dc3dd5ce981b6af320291dc3f3d5",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H002",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "ae53d993e2c7771e56ba67263cf523d06c7d543c",
+      "commit_tree": "e19d5e765540460f8daf1d5cc73f8f724d4bae67",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H002",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "b52a6fa83a1a8f6d1cc70e8b676103ade6a1b207",
+      "commit_tree": "eca94cd3db39e6a80c7d749837b7ab72ec36abfe",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H003",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "7294944a32b03e8dbf8cefbaed4a58cfbb0e0aac",
+      "commit_tree": "88536e8c1d21adb2d5a919ef8995c461dd427ab9",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H003",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "a4b2ad003721069d9d25fcc6676a792c6683c46e",
+      "commit_tree": "205f5f11c3c2f295d5e4673bda6b9b531d80b1c5",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H004",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "395ae8d6ec2b9efc02d2ad260cc83909a95a74cf",
+      "commit_tree": "b575199e8b17d2e52d67e27d20d6b49e684d4ccc",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H004",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "7294944a32b03e8dbf8cefbaed4a58cfbb0e0aac",
+      "commit_tree": "88536e8c1d21adb2d5a919ef8995c461dd427ab9",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H005",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "b1d8dc147d75166d4b516d130e77ee2993baf335",
+      "commit_tree": "7e19eee52f823ffe802ac236df17cb76f329d1fc",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H005",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "dc29d57f37cf985814f011d10cf05115880d64c8",
+      "commit_tree": "486bf579569c04c70ddafad6739d0e7c18372e34",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H006",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "f3e07a789662092cde5e4abc8ef41f34e5253eea",
+      "commit_tree": "e8bcefb176b07048bf87fc443fdac9508bd5d180",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H006",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "828b27785129e29c2f2ec41f57ba4a0c65efe732",
+      "commit_tree": "513a07f4cb66e0e608bd28df9f865096c0770adf",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H007",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "8723d7af130d6cc4600d9f813a71f9ae41eb8916",
+      "commit_tree": "e94e1be70b267e0ec0338384c0545098aa504774",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H007",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "d11f8579312c91b8d1eb1afaeb5a4398b7b9c488",
+      "commit_tree": "7d2fd82f25c01fd73816f642d62c3c517560349b",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H008",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "be26530f7f6bdf1eee2c9bfa356b4df95acf2df6",
+      "commit_tree": "1d2bd33c31d1a41ca0fb136f351483fb0e5f7c79",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H008",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "8723d7af130d6cc4600d9f813a71f9ae41eb8916",
+      "commit_tree": "e94e1be70b267e0ec0338384c0545098aa504774",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H009",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "c602cbb388df53c67131a2beca0ea5a822285aa5",
+      "commit_tree": "9cca2ec49752207ea53b502e6cf68e22e555336f",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H009",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "be26530f7f6bdf1eee2c9bfa356b4df95acf2df6",
+      "commit_tree": "1d2bd33c31d1a41ca0fb136f351483fb0e5f7c79",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "3937f290e3ecaf9f5af8a0714cc1a1d571ca6f7f"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H010",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "59b96e995f2a1c0e8aefcb92bf346494f654fb84",
+      "commit_tree": "08c132d957e17f7e54c9e493224da9767610575a",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H010",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "c602cbb388df53c67131a2beca0ea5a822285aa5",
+      "commit_tree": "9cca2ec49752207ea53b502e6cf68e22e555336f",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H011",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "d205a776d26ce64d59ff8630eb0a5b4fbbd12b0b",
+      "commit_tree": "4ca1be139a17f3f26b1c582f13d116f1c646ae7c",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H011",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "1ce61c0c06e1222659d599731dd3f7e58a3ed9a4",
+      "commit_tree": "492b3d656acadd0f7582d89ac4579ad4d79497e5",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H012",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "8be68100febd1e7f309db0538787a5ef2f45f92c",
+      "commit_tree": "038be0a286acd1f5c6eb47d49ff7720fbdde4b29",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H012",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "d205a776d26ce64d59ff8630eb0a5b4fbbd12b0b",
+      "commit_tree": "4ca1be139a17f3f26b1c582f13d116f1c646ae7c",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H013",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "c349a5ddce5a1ac0f1d14eccb8065d35834f5b1b",
+      "commit_tree": "473408a31a848af6bd24879060c2480e3a5989e2",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H013",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "e153f46d6fce89c4a00556e9d3d9194f8c88d98f",
+      "commit_tree": "a8236c23158be9011eb5a842a200a697a8b22e83",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H014",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "68d2ed20f33e8cf9149ee4cbbf94fc6a6b6dcd29",
+      "commit_tree": "ccd80c955726e9068f89065908279a4db5c680f3",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H014",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "08e5b62fd81f5129556e13ff9b0a548446a9ab48",
+      "commit_tree": "44e912008b5657dfd1be5aff9faa776bd56a4da2",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H015",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "a94d6da87560e587fa2a5cfe5eff14688eda054c",
+      "commit_tree": "524018d68ddb1556fcd6dd2ba7dfefdfbb23c2d7",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H015",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "40ec0858ce2a06d909ec73850ef999b8b6d22fa4",
+      "commit_tree": "3d607678371ee9c36c7ab801e85d6391bf7aa3a2",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H017",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "75909ace4f7909b11d1111381b6a9aabd81895ea",
+      "commit_tree": "fdd38e03a70465f1ff101f46be0eee9aad6f6fff",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H017",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "b0b13806665e2c747d1a81e5f53117b5e93798a5",
+      "commit_tree": "65ff158af9182a901433e29cb2572946a5f324fb",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H018",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "a8317c2153f0daeb9780edbe70003b8f8121b679",
+      "commit_tree": "b0f7b1f38aa92086b6af9512fb16ed7f817ce752",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H018",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "9f640a6104ceedf704c1ef6c76bdcbcc84178dd8",
+      "commit_tree": "47cad81ba07a53dc9c8da3a06cec5850d6796b9f",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H019",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "43f68566ff9805122e7fb40034cc4e6d4db133a5",
+      "commit_tree": "4ea6378f4ecb18459e84a08a28b740879fc944b3",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H019",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "a8317c2153f0daeb9780edbe70003b8f8121b679",
+      "commit_tree": "b0f7b1f38aa92086b6af9512fb16ed7f817ce752",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H020",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "base",
+      "commit": "e60a7d3089461487185f616ee5b5cc7783e079c6",
+      "commit_tree": "fe49799e5961ca186813e685855097cb15285241",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "hyperdxio/hyperdx",
+      "case_id": "hyperdxio--hyperdx-H020",
+      "rule_id": "D3-HDX-MOD-001",
+      "side": "head",
+      "commit": "43f68566ff9805122e7fb40034cc4e6d4db133a5",
+      "commit_tree": "4ea6378f4ecb18459e84a08a28b740879fc944b3",
+      "source_candidate_paths": 14,
+      "source_example": {
+        "path": "packages/api/src/models/alert.ts",
+        "mode": "100644",
+        "git_blob": "fd5e1df9e203be3a3fb882c50fc855a5f2eec34b"
+      },
+      "target_candidate_paths": 28,
+      "target_example": {
+        "path": "packages/api/src/routers/api/ai.ts",
+        "mode": "100644",
+        "git_blob": "6288d3171b85a2e05d4f28e908ddc3f0f8859610"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H001",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "dbbab6fd7610cf1472d0e0377fc0e966faf7acda",
+      "commit_tree": "55a82dde343492ecb31105dd81da367cb5491fee",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H001",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "c8081ac2fe1c761de14d4c4c319af48b9eced3c8",
+      "commit_tree": "e4656424da27b0886cf8781385a6d1b501012a46",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 276,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H003",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "d0fa9ae8dab0ba34ff88edf3b2b8ce18078ae662",
+      "commit_tree": "742e4a51114288c266db9c3da5c0c52676ecd7bb",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H003",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "9d0dc367068acb6cb90a53b049534ca68f3d250f",
+      "commit_tree": "49d5246d9b31447e92a80311451289c02ee70555",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H004",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "1e23a453a0db53bb17827d9789fc2ccc1886dd98",
+      "commit_tree": "6684c268de92b7dfd8c3c51e14620247b9f35f79",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H004",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "d0fa9ae8dab0ba34ff88edf3b2b8ce18078ae662",
+      "commit_tree": "742e4a51114288c266db9c3da5c0c52676ecd7bb",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H005",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "0c7c3ac4c4f399b90356d4cb40c8ce9f656b4260",
+      "commit_tree": "698c00065048a6fa85b9242858b95b07a80c8325",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H005",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "36c35c9bd509fc18495c3c9d39bb6244bdb8bcef",
+      "commit_tree": "49a40d54629b14edbe2a4c130b421946b316c44c",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H006",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "f848e57436a7dc5e535ae71f79a15888af6daba2",
+      "commit_tree": "972980d495190516281924b0d9352a7ed5a0902a",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 277,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H006",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "9509b5bc2ec133a12cd49e725f3445d0c7eaf77a",
+      "commit_tree": "e8fb8a70d8094d03ede1a4d8dbea2b8cf54f1a05",
+      "source_candidate_paths": 22,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H007",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "45303fb46565b77fe6e18b73f39cf9dbbf2b6934",
+      "commit_tree": "43def5cf8daf236378278e86302c25c00ab3b41d",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 277,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H007",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "6d9ebccc634c4c977047b7ce5f5a39e9976921d9",
+      "commit_tree": "5c73523e2c1c0bbe953d5951cbb87d0bf7dcb84a",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 277,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H008",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "5fc9c3ee0497e7fe2ef06f48f357f43492dc2cb0",
+      "commit_tree": "e57b74b964682043d3edea23cb24fc1289c3e40b",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 273,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H008",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "7eb6d3bdbf14a8884d84ccd2e86b966f6ac0413a",
+      "commit_tree": "5e11eb74c57f5f833b1e336682df038e1d55beab",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 273,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H009",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "04100aa9efd3ef4332fec9ed9052686fdf3bbeb6",
+      "commit_tree": "7216b45415f524d88c181dc4167139309ecbd7a4",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H009",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "efd950bd9394975201655fefb8c47f0edb44d273",
+      "commit_tree": "2c62ba8035ee2424ec6aa25ae63401eb691a86ef",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H010",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "88a19619daf5fd0fc09c73f5b19fa23860dbd230",
+      "commit_tree": "18e9773d53cd74d2b569de0906385dcc7198429a",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H010",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "e6a31aab9722ed4ac924b0be79ec7553e1d8b37f",
+      "commit_tree": "9b05aed5ca44f7454d1886d70dc6ab38d4dcf96d",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H011",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "4a8f87ab8f008e94528f461b066126c0ef4d6732",
+      "commit_tree": "fe816fd05635e431dd373c26b2cd26db2beec300",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H011",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "ba8e1be2ab5206095a7b08c4e26fd9307e2e0ee3",
+      "commit_tree": "0570cf75a4cd417c8b48fd2c529b35223da77e7a",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H013",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "4ac19f81b3d290dd063764ff6b0fa3dd94d34632",
+      "commit_tree": "8b5aaa6e9234ca8a7f5073fda4e31326ba0bae89",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H013",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "d2ffbf9618d0afce6a6570a2d2c34d1be9e599a6",
+      "commit_tree": "a71281d963c7567504581b05c8ff1df0856886ce",
+      "source_candidate_paths": 25,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 274,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H014",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "fb8c73be76cec5cdd8c2e6b6fb35f24c2cce515b",
+      "commit_tree": "86faab1561b653ec3a96b5c130a15bacbd5c08c9",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H014",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "50f50b2672cd1cbbf5a1ac41f8d4a768058632bc",
+      "commit_tree": "90f9cc941a37bb49f6b6bd3598ced22a4582e93e",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H015",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "a2901bfb2e32b36082d79e3c6c82a4b312e06b35",
+      "commit_tree": "f8bd362ccbecfad119ab939455d1edbf327614a8",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H015",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "dd0531091bea1862302897e843d5a1c87ef1bdf5",
+      "commit_tree": "82e3510434b44b03a7e6471226fc3ea1c67e8983",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H016",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "12407d473d9b9782a8686f5bfcf59ea5931022d6",
+      "commit_tree": "3411dc0b26364321282f56c89b5479b0813fcc61",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H016",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "418c7887eefeecdc06dcd4dabd205799621239b1",
+      "commit_tree": "7ffbc46dcf6f06a639bcef9943a2def52644f70c",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H017",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "bb1fb3a7d6c733fc02fedcb100a41584228bb2bd",
+      "commit_tree": "4063a9f453c27bb7d4fd00039cc3a3c0a321379d",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 258,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H017",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "9110e86997281bf3006d54e47efb08c69b33adb8",
+      "commit_tree": "78775db20c6199b33076c6f8b54d6488ff4fa1df",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 259,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H019",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "90105cb1480f636899ae50687ece102c2689f66a",
+      "commit_tree": "24c89b81509e6dbee0b5bd1f0098cfc05d734cdf",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 258,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H019",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "1124d3dfda062dc0518479e0e6fa36b73b350e31",
+      "commit_tree": "d7c8620fa482372dd1ae36051d12982fea1a8592",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 258,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H020",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "base",
+      "commit": "73daf22b2f8df55f0041c48c2e119fa215064cc0",
+      "commit_tree": "7e2ef92d488ef6bf9361cb6c974f020359b3c7a0",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 258,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "amruthpillai/reactive-resume",
+      "case_id": "amruthpillai--reactive-resume-H020",
+      "rule_id": "D3-RR-MOD-001",
+      "side": "head",
+      "commit": "90105cb1480f636899ae50687ece102c2689f66a",
+      "commit_tree": "24c89b81509e6dbee0b5bd1f0098cfc05d734cdf",
+      "source_candidate_paths": 19,
+      "source_example": {
+        "path": "apps/server/src/app-version.ts",
+        "mode": "100644",
+        "git_blob": "375c5bb8e929fa944e41cfe06d1153d89fa4d74a"
+      },
+      "target_candidate_paths": 258,
+      "target_example": {
+        "path": "apps/web/src/components/animation/comet-card.tsx",
+        "mode": "100644",
+        "git_blob": "5a0e844c3b9a306217ee4f79c7ee61ccbbeae43b"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H001",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "f973a801370542b052c049bd41a5c76ff15a8964",
+      "commit_tree": "e7f8b07364a9bc29461d2ccb32b529ded87fd5b9",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H001",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "70b1790319fa031859a4ab5857f9d26c73bc8849",
+      "commit_tree": "5132a720e5e9298974303219f5f69bea0f7a0325",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H001",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "f973a801370542b052c049bd41a5c76ff15a8964",
+      "commit_tree": "e7f8b07364a9bc29461d2ccb32b529ded87fd5b9",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H001",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "70b1790319fa031859a4ab5857f9d26c73bc8849",
+      "commit_tree": "5132a720e5e9298974303219f5f69bea0f7a0325",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H002",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+      "commit_tree": "c8f3b446b90fbc30342aa7348f66194f922ec760",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H002",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "0eaae1186da5447081db25d428196e87c47892a6",
+      "commit_tree": "777fc32c312bfd3c3d3ea739348d87c2cdd0a80a",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H002",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+      "commit_tree": "c8f3b446b90fbc30342aa7348f66194f922ec760",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H002",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "0eaae1186da5447081db25d428196e87c47892a6",
+      "commit_tree": "777fc32c312bfd3c3d3ea739348d87c2cdd0a80a",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H003",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+      "commit_tree": "91228e542ce81082d1cca3c63924eb5cd3877961",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H003",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+      "commit_tree": "c8f3b446b90fbc30342aa7348f66194f922ec760",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H003",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+      "commit_tree": "91228e542ce81082d1cca3c63924eb5cd3877961",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H003",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "387651b683e32c378a11654ccdce3cdd9c980b9c",
+      "commit_tree": "c8f3b446b90fbc30342aa7348f66194f922ec760",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H004",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+      "commit_tree": "9eb982dbd0f0157a542f10e4ffe13b3007bffbcd",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H004",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+      "commit_tree": "91228e542ce81082d1cca3c63924eb5cd3877961",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H004",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+      "commit_tree": "9eb982dbd0f0157a542f10e4ffe13b3007bffbcd",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H004",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "c4c517ee41aeee82dff44b9ef8eb828b2e55d983",
+      "commit_tree": "91228e542ce81082d1cca3c63924eb5cd3877961",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H005",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+      "commit_tree": "d1fc5dab16a6ad8aae83f6c6275049e2fcf91d45",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H005",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+      "commit_tree": "9eb982dbd0f0157a542f10e4ffe13b3007bffbcd",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H005",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+      "commit_tree": "d1fc5dab16a6ad8aae83f6c6275049e2fcf91d45",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H005",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "6808516b1433160794394c3bc89cf8b377fce229",
+      "commit_tree": "9eb982dbd0f0157a542f10e4ffe13b3007bffbcd",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H006",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "de7fe6669fafbf093b668833949ecfc3c288278f",
+      "commit_tree": "1148cb01c8b7b05b6eda87aafa0b25970e0e62fa",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H006",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+      "commit_tree": "d1fc5dab16a6ad8aae83f6c6275049e2fcf91d45",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H006",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "de7fe6669fafbf093b668833949ecfc3c288278f",
+      "commit_tree": "1148cb01c8b7b05b6eda87aafa0b25970e0e62fa",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H006",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "d1c1054b3f395bea72d81b397c6e4e4882ebf9c2",
+      "commit_tree": "d1fc5dab16a6ad8aae83f6c6275049e2fcf91d45",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H007",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "c751759d8e0edb754135643591f10cdff511f297",
+      "commit_tree": "d99096e378a77ec2fca3ec33e5bb917c1cef798a",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H007",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "719bed2419a8ee26020f369cdca1afc98d6a5fad",
+      "commit_tree": "48ecee89a848b9d4aae3bb586d633ec3a98bc6db",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H007",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "c751759d8e0edb754135643591f10cdff511f297",
+      "commit_tree": "d99096e378a77ec2fca3ec33e5bb917c1cef798a",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H007",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "719bed2419a8ee26020f369cdca1afc98d6a5fad",
+      "commit_tree": "48ecee89a848b9d4aae3bb586d633ec3a98bc6db",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H008",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "2af7ab9218f60d55bfb813c2a25afd600b4093e1",
+      "commit_tree": "587988a5e1e5ef4dbcdda52c20dec77638ecbdc5",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H008",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "a7324ff1185027cdcd3b4ab134e0d67a29fe8b8c",
+      "commit_tree": "332ff489d16aaeebeb5b8b42817ca3ede17a4ca6",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H008",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "2af7ab9218f60d55bfb813c2a25afd600b4093e1",
+      "commit_tree": "587988a5e1e5ef4dbcdda52c20dec77638ecbdc5",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H008",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "a7324ff1185027cdcd3b4ab134e0d67a29fe8b8c",
+      "commit_tree": "332ff489d16aaeebeb5b8b42817ca3ede17a4ca6",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H009",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "f8686dda1043b4003efe0d06afce2aea68d814aa",
+      "commit_tree": "b66065953d551403df1e40e5cff7034b839ecc24",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H009",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "9c8d16d50e2fdfd9693ab35c43280410cb4db2fc",
+      "commit_tree": "4be979d9861843f4ae205611d2fbc23cfdd0b046",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H009",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "f8686dda1043b4003efe0d06afce2aea68d814aa",
+      "commit_tree": "b66065953d551403df1e40e5cff7034b839ecc24",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H009",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "9c8d16d50e2fdfd9693ab35c43280410cb4db2fc",
+      "commit_tree": "4be979d9861843f4ae205611d2fbc23cfdd0b046",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H010",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+      "commit_tree": "1849e4e9dbc18b4caaa51baa3bcff79c1a51bdf1",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H010",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "e1c2fcd1f1a8bb9e3bbdc0db503172635d1177ff",
+      "commit_tree": "e090931948c71b585446f11c733aadeb931e3921",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H010",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+      "commit_tree": "1849e4e9dbc18b4caaa51baa3bcff79c1a51bdf1",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H010",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "e1c2fcd1f1a8bb9e3bbdc0db503172635d1177ff",
+      "commit_tree": "e090931948c71b585446f11c733aadeb931e3921",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H011",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "0aee6a7d7da2e9451aa30364425b874d12a9470b",
+      "commit_tree": "6925920fc1aadc3d0c52eea2a9f8eef26a062c11",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H011",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+      "commit_tree": "1849e4e9dbc18b4caaa51baa3bcff79c1a51bdf1",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H011",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "0aee6a7d7da2e9451aa30364425b874d12a9470b",
+      "commit_tree": "6925920fc1aadc3d0c52eea2a9f8eef26a062c11",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H011",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "63f95d602905aa3f5b105c49d60ec706b37da6c3",
+      "commit_tree": "1849e4e9dbc18b4caaa51baa3bcff79c1a51bdf1",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H012",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "9706e082609fc10bfdc681592497694fd1495844",
+      "commit_tree": "fcfa7e75490d4fdf1709cdc9c81e6a8471e33091",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H012",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "682cb65625c710792623159175c8d129644e2423",
+      "commit_tree": "d94191669ea3c5994216b884846140ab704014f3",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H012",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "9706e082609fc10bfdc681592497694fd1495844",
+      "commit_tree": "fcfa7e75490d4fdf1709cdc9c81e6a8471e33091",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H012",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "682cb65625c710792623159175c8d129644e2423",
+      "commit_tree": "d94191669ea3c5994216b884846140ab704014f3",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H013",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "a0a56ad406f4c3eb5c715b2e272ad2cea2eca099",
+      "commit_tree": "084bfc8d3e102071f8b61f78de506b7926fd58cb",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H013",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "9706e082609fc10bfdc681592497694fd1495844",
+      "commit_tree": "fcfa7e75490d4fdf1709cdc9c81e6a8471e33091",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H013",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "a0a56ad406f4c3eb5c715b2e272ad2cea2eca099",
+      "commit_tree": "084bfc8d3e102071f8b61f78de506b7926fd58cb",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H013",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "9706e082609fc10bfdc681592497694fd1495844",
+      "commit_tree": "fcfa7e75490d4fdf1709cdc9c81e6a8471e33091",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H014",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+      "commit_tree": "d4d474b2bf99b387316c5edbf4fb945950898c92",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H014",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "492b158d93ddbe71013b3ee994cfc1fc3f3180ea",
+      "commit_tree": "6024a94680e6d4ccf824f32b625fb66bb1b3497d",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H014",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+      "commit_tree": "d4d474b2bf99b387316c5edbf4fb945950898c92",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H014",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "492b158d93ddbe71013b3ee994cfc1fc3f3180ea",
+      "commit_tree": "6024a94680e6d4ccf824f32b625fb66bb1b3497d",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H015",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+      "commit_tree": "61bac0977eae973db97c954b1e483320994462ba",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H015",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+      "commit_tree": "d4d474b2bf99b387316c5edbf4fb945950898c92",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H015",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+      "commit_tree": "61bac0977eae973db97c954b1e483320994462ba",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H015",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "f3ccc6c718194c74d7412d307fb32a3163dbf8f9",
+      "commit_tree": "d4d474b2bf99b387316c5edbf4fb945950898c92",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H016",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+      "commit_tree": "13209cb1fd503bb0efadd5c39eaae760289bf65e",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H016",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+      "commit_tree": "61bac0977eae973db97c954b1e483320994462ba",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H016",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+      "commit_tree": "13209cb1fd503bb0efadd5c39eaae760289bf65e",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H016",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "fa6df9a9ff68920c1d11d4c3cfce60b88e9a7828",
+      "commit_tree": "61bac0977eae973db97c954b1e483320994462ba",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H017",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "87a8b2a5c26041ede3692e84fab33f2094459861",
+      "commit_tree": "0f60fc39f7f5a6b8574e1ddaa189d7554852bdf8",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H017",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+      "commit_tree": "13209cb1fd503bb0efadd5c39eaae760289bf65e",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H017",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "87a8b2a5c26041ede3692e84fab33f2094459861",
+      "commit_tree": "0f60fc39f7f5a6b8574e1ddaa189d7554852bdf8",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H017",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "4d95a12845d42ce4cbc1f5cda5460a44269c2574",
+      "commit_tree": "13209cb1fd503bb0efadd5c39eaae760289bf65e",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H018",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+      "commit_tree": "67d758e0b2e66e6011fc68591c84910d58ca8076",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H018",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "01500ca70c2adad5c31a04c08eb15ebf2a2201d0",
+      "commit_tree": "6fc9515c41427554835a117e6932dffd9a327e7b",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H018",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+      "commit_tree": "67d758e0b2e66e6011fc68591c84910d58ca8076",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H018",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "01500ca70c2adad5c31a04c08eb15ebf2a2201d0",
+      "commit_tree": "6fc9515c41427554835a117e6932dffd9a327e7b",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H019",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "01d0b08a4eb0e8a26a69320069e955d09ce93381",
+      "commit_tree": "c27e799af0aa01b9e4599ecbc80d176fe2168944",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H019",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+      "commit_tree": "67d758e0b2e66e6011fc68591c84910d58ca8076",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H019",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "01d0b08a4eb0e8a26a69320069e955d09ce93381",
+      "commit_tree": "c27e799af0aa01b9e4599ecbc80d176fe2168944",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H019",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "7168f14f0a3f61c197d446450fd661bcfb953651",
+      "commit_tree": "67d758e0b2e66e6011fc68591c84910d58ca8076",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H020",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "base",
+      "commit": "d67aa3ebd3eb6a9e6ededf45e52a4f27e25e4a50",
+      "commit_tree": "0d63db086779ad29e08000d24f8d7665d9c23dca",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H020",
+      "rule_id": "D3-EP-MOD-001",
+      "side": "head",
+      "commit": "ce038b0b0f4d12926650181f6a001912ae9769ff",
+      "commit_tree": "50fbd876c87e3fbaae5e7267f9907641e2d26984",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 7,
+      "target_example": {
+        "path": "src/node/handler/APIHandler.ts",
+        "mode": "100644",
+        "git_blob": "f8abf9c34ecdc7a450befcc1429c68130de9f4e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H020",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "base",
+      "commit": "d67aa3ebd3eb6a9e6ededf45e52a4f27e25e4a50",
+      "commit_tree": "0d63db086779ad29e08000d24f8d7665d9c23dca",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    },
+    {
+      "repository": "ether/etherpad",
+      "case_id": "ether--etherpad-H020",
+      "rule_id": "D3-EP-MOD-002",
+      "side": "head",
+      "commit": "ce038b0b0f4d12926650181f6a001912ae9769ff",
+      "commit_tree": "50fbd876c87e3fbaae5e7267f9907641e2d26984",
+      "source_candidate_paths": 1,
+      "source_example": {
+        "path": "src/node/db/DB.ts",
+        "mode": "100644",
+        "git_blob": "ce9468ff86285bc594178af61ca0e5b4c48ae8a5"
+      },
+      "target_candidate_paths": 18,
+      "target_example": {
+        "path": "src/node/hooks/express.ts",
+        "mode": "100644",
+        "git_blob": "8e6f5b87970e9a63c845f41ea1b37353cb2d59e3"
+      },
+      "candidate_presence": "both-candidate-paths",
+      "historical_role_verified": false,
+      "rule_applicability": null,
+      "truth_label": null,
+      "tool_prediction": null
+    }
+  ],
+  "summary": {
+    "rows": 152,
+    "distinct_commit_trees": 93,
+    "both_candidate_paths": 152,
+    "candidate_path_missing": 0,
+    "historical_roles_verified": 0,
+    "applicability_decisions_accepted": 0,
+    "truth_labels_created": 0,
+    "tool_predictions_executed": 0
+  }
+}
